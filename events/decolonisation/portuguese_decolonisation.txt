@@ -1,0 +1,982 @@
+namespace = portuguese_decolonisation
+
+#Angola (INDEPENDENCE)
+portuguese_decolonisation.1 = {
+    type = country_event
+	placement = scope:colonial_state
+
+    title = portuguese_angola.indy.t 					# Title of the event; ADD LOCALISATION
+    desc = portuguese_angola.indy.d 					# Description of the event; ADD LOCALISATION
+    #flavor = portuguese_angola.indy.f 					# Flavor for event; ADD LOCALISATION, IF REQUIRED
+
+    event_image = { video = "gfx/event_pictures/unspecific_signed_contract.bk2" }
+
+    icon = "gfx/interface/icons/event_icons/waving_flag.dds" 	# Icon that shows on the map or the outliner
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear" 	# Sound effect if needed
+
+    duration = 1 # Duration to fire if triggers are met
+	
+	trigger = {													# What triggers the event, if using other events or journal entries leave empty
+		
+		#Overlord conditions
+		exists = c:POR this = c:POR											# Change TAG of the overlord ****
+		game_date >= 1974.4.25									# START DATE: Date colony became self governing ****
+		game_date < 1984.4.25									# END DATE: All historical events must not fire 10 years after the START DATE ****
+		
+		is_a_republican_democracy = yes							# Correct gov types
+		is_sufficiently_independent = yes						# is_vassal = no		
+		is_at_war = no											# war = no
+		
+		#Colony conditions
+		NOT = { 												# Colony to be released must not already exist on the map
+			exists = c:ANG										# Change TAG of the colony ****
+		}
+		any_scope_state = { 									# Overlord owns the states of the colony to be released
+			state_region = { is_homeland = cu:angolan }			# Change homeland identity to match colony to be released ****
+			#is_incorporated = no								# State is a colony
+			#owner = THIS										# Overlord must own the state to be released
+		}
+		
+		# Event has not been fired before
+		NOT = { has_variable = portuguese_angola_indy }			# CHANGE ****
+		
+    }
+	
+	immediate = {
+	
+		# Generate list of provinces to be released				# DO NOT TOUCH THIS SECTION
+		every_scope_state = {
+			limit = {
+				state_region = { is_homeland = cu:angolan }		# Change homeland identity to match colony to be released ****
+				#is_incorporated = no							# State is a colony
+				#contains_capital_of = c:ANG					# State is the capital of colony ****
+			}
+			save_scope_as = colonial_state
+		}
+		
+	}
+    
+    option = {
+        name = portuguese_decolonisation.option.1				#Grant them self-government
+        default_option = yes highlighted_option = yes
+		
+		#Release country
+		create_country = {
+			tag = ANG										# Change TAG of country being released ****
+			origin = THIS									# TAG where the created country takes tech from
+			state = scope:colonial_state
+			
+			on_created = {									# Set government laws & rulers here
+				
+				# SET laws for colony ****
+				effect_starting_politics_communist_republic = yes
+				effect_starting_politics_dictatorship = yes
+				effect_starting_politics_constitutional_unitary_state = yes
+				effect_starting_politics_war_policy_anti_military = yes
+				effect_starting_politics_economic_policy_interventionism = yes
+				effect_starting_politics_trade_policy_protectionism = yes
+				effect_starting_politics_anti_nuclear_policy = yes
+				
+				# CREATE leader for colony ****
+				create_character = {
+					first_name = "guy_incognito_first_name"		# CHANGE
+					last_name = "guy_incognito_last_name"		# CHANGE
+					ruler = yes
+					#birth_date = 1910.1.1						# CHANGE
+					interest_group = ig_rural_folk				# CHANGE
+					ideology = ideology_democratic				# CHANGE
+					traits = {
+						charismatic								# CHANGE
+						persistent								# CHANGE
+						meticulous								# CHANGE
+					}
+				}
+				
+				# Set diplomatic recognition
+				set_country_type = unrecognized
+			}
+		}
+		if = {
+			limit = { exists = c:ANG }
+			every_scope_state = {
+				limit = {
+					state_region = { is_homeland = cu:angolan }		# Change homeland identity to match colony to be released ****
+					#is_incorporated = no							# State is a colony
+				}
+				set_state_owner = c:ANG								# Change TAG to colony ****
+			}
+			if = {
+				limit = { p:x406070.state.owner = { THIS = ROOT } }
+				s:STATE_CONGO = {
+					set_owner_of_provinces = {
+						country = c:ANG
+						provinces = { x406070 }
+					}
+				}
+			}
+		}
+		
+		# Fire only once
+		set_variable = portuguese_angola_indy						# Change variable ****
+		
+		ai_chance = { 
+			base = 90 
+		}
+		
+    }
+	
+	option = {
+        name = portuguese_decolonisation.option.2					# REFUSE
+		
+		# Natives are angry!
+		every_scope_state = {
+			limit = {
+		 		state_region = { is_homeland = cu:angolan }			# Change homeland identity to match colony to be released ****
+		 	}
+			add_radicals_in_state = {
+				culture = cu:angolan								# Change culture ****
+				value = large_radicals
+			}
+			add_modifier = { name = nationalist_agitation months = 60 is_decaying = yes } 
+		}
+		
+		# Fire only once
+		set_variable = portuguese_angola_indy						# Change variable ****
+		
+		ai_chance = { 
+			base = 10 modifier = { trigger = { has_global_variable = historical_railroading_active } add = -100 } 
+		}
+		
+    }
+
+}
+
+#Mozambique (INDEPENDENCE)
+portuguese_decolonisation.2 = {
+    type = country_event
+	placement = scope:colonial_state
+
+    title = portuguese_mozambique.indy.t 					# Title of the event; ADD LOCALISATION
+    desc = portuguese_mozambique.indy.d 					# Description of the event; ADD LOCALISATION
+    #flavor = portuguese_mozambique.indy.f 					# Flavor for event; ADD LOCALISATION, IF REQUIRED
+
+    event_image = { video = "gfx/event_pictures/unspecific_signed_contract.bk2" }
+
+    icon = "gfx/interface/icons/event_icons/waving_flag.dds" 	# Icon that shows on the map or the outliner
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear" 	# Sound effect if needed
+
+    duration = 1 # Duration to fire if triggers are met
+	
+	trigger = {													# What triggers the event, if using other events or journal entries leave empty
+		
+		#Overlord conditions
+		exists = c:POR this = c:POR											# Change TAG of the overlord ****
+		game_date >= 1974.4.25									# START DATE: Date colony became self governing ****
+		game_date < 1984.4.25									# END DATE: All historical events must not fire 10 years after the START DATE ****
+		
+		is_a_republican_democracy = yes							# Correct gov types
+		is_sufficiently_independent = yes						# is_vassal = no		
+		is_at_war = no											# war = no
+		
+		#Colony conditions
+		NOT = { 												# Colony to be released must not already exist on the map
+			exists = c:MOZ										# Change TAG of the colony ****
+		}
+		any_scope_state = { 									# Overlord owns the states of the colony to be released
+			state_region = { is_homeland = cu:mozambican }		# Change homeland identity to match colony to be released ****
+			#is_incorporated = no								# State is a colony
+			#owner = THIS										# Overlord must own the state to be released
+		}
+		
+		# Event has not been fired before
+		NOT = { has_variable = portuguese_mozambique_indy }			# CHANGE ****
+		
+    }
+	
+	immediate = {
+	
+		# Generate list of provinces to be released				# DO NOT TOUCH THIS SECTION
+		every_scope_state = {
+			limit = {
+				state_region = { is_homeland = cu:mozambican }	# Change homeland identity to match colony to be released ****
+				#is_incorporated = no							# State is a colony
+				#contains_capital_of = c:MOZ					# State is the capital of colony ****
+			}
+			save_scope_as = colonial_state
+		}
+		
+	}
+    
+    option = {
+        name = portuguese_decolonisation.option.1				#Grant them self-government
+        default_option = yes highlighted_option = yes
+		
+		#Release country
+		create_country = {
+			tag = MOZ											# Change TAG of country being released ****
+			origin = THIS										# TAG where the created country takes tech from
+			state = scope:colonial_state
+			
+			on_created = {										# Set government laws & rulers here
+				
+				# SET laws for colony ****
+				effect_starting_politics_communist_republic = yes
+				effect_starting_politics_dictatorship = yes
+				effect_starting_politics_constitutional_unitary_state = yes
+				effect_starting_politics_war_policy_anti_military = yes
+				effect_starting_politics_economic_policy_interventionism = yes
+				effect_starting_politics_trade_policy_protectionism = yes
+				effect_starting_politics_anti_nuclear_policy = yes
+				
+				# CREATE leader for colony ****
+				create_character = {
+					first_name = "guy_incognito_first_name"		# CHANGE
+					last_name = "guy_incognito_last_name"		# CHANGE
+					ruler = yes
+					#birth_date = 1910.1.1						# CHANGE
+					interest_group = ig_rural_folk				# CHANGE
+					ideology = ideology_democratic				# CHANGE
+					traits = {
+						charismatic								# CHANGE
+						persistent								# CHANGE
+						meticulous								# CHANGE
+					}
+				}
+				
+				# Set diplomatic recognition
+				set_country_type = unrecognized
+			}
+		}
+		if = {
+			limit = { exists = c:MOZ }
+			every_scope_state = {
+				limit = {
+					state_region = { is_homeland = cu:mozambican }	# Change homeland identity to match colony to be released ****
+					#is_incorporated = no							# State is a colony
+				}
+				set_state_owner = c:MOZ								# Change TAG to colony ****
+			}
+		}
+		
+		# Fire only once
+		set_variable = portuguese_mozambique_indy				# Change variable ****
+		
+		ai_chance = { 
+			base = 90 
+		}
+		
+    }
+	
+	option = {
+        name = portuguese_decolonisation.option.2				# REFUSE
+		
+		# Natives are angry!
+		every_scope_state = {
+			limit = {
+		 		state_region = { is_homeland = cu:mozambican }	# Change homeland identity to match colony to be released ****
+		 	}
+			add_radicals_in_state = {
+				culture = cu:mozambican							# Change culture ****
+				value = large_radicals
+			}
+			add_modifier = { name = nationalist_agitation months = 60 is_decaying = yes } 
+		}
+		
+		# Fire only once
+		set_variable = portuguese_mozambique_indy				# Change variable ****
+		
+		ai_chance = { 
+			base = 10 modifier = { trigger = { has_global_variable = historical_railroading_active } add = -100 } 
+		}
+		
+    }
+
+}
+
+#Guinea Bissau (INDEPENDENCE)
+portuguese_decolonisation.3 = {
+    type = country_event
+	placement = scope:colonial_state
+
+    title = portuguese_guinea_bissau.indy.t 					# Title of the event; ADD LOCALISATION
+    desc = portuguese_guinea_bissau.indy.d 						# Description of the event; ADD LOCALISATION
+    #flavor = portuguese_guinea_bissau.indy.f 					# Flavor for event; ADD LOCALISATION, IF REQUIRED
+
+    event_image = { video = "gfx/event_pictures/unspecific_signed_contract.bk2" }
+
+    icon = "gfx/interface/icons/event_icons/waving_flag.dds" 	# Icon that shows on the map or the outliner
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear" 	# Sound effect if needed
+
+    duration = 1 # Duration to fire if triggers are met
+	
+	trigger = {													# What triggers the event, if using other events or journal entries leave empty
+		
+		#Overlord conditions
+		exists = c:POR this = c:POR											# Change TAG of the overlord ****
+		game_date >= 1974.4.25									# START DATE: Date colony became self governing ****
+		game_date < 1984.4.25									# END DATE: All historical events must not fire 10 years after the START DATE ****
+		
+		is_a_republican_democracy = yes							# Correct gov types
+		is_sufficiently_independent = yes						# is_vassal = no		
+		is_at_war = no											# war = no
+		
+		#Colony conditions
+		NOT = { 												# Colony to be released must not already exist on the map
+			exists = c:GNB										# Change TAG of the colony ****
+		}
+		any_scope_state = { 									# Overlord owns the states of the colony to be released
+			state_region = { is_homeland = cu:bissau_guinean }	# Change homeland identity to match colony to be released ****
+			#is_incorporated = no								# State is a colony
+			#owner = THIS										# Overlord must own the state to be released
+		}
+		
+		# Event has not been fired before
+		NOT = { has_variable = portuguese_guinea_bissau_indy }	# CHANGE ****
+		
+    }
+	
+	immediate = {
+	
+		# Generate list of provinces to be released				# DO NOT TOUCH THIS SECTION
+		every_scope_state = {
+			limit = {
+				state_region = { is_homeland = cu:bissau_guinean }	# Change homeland identity to match colony to be released ****
+				#is_incorporated = no								# State is a colony
+				#contains_capital_of = c:GNB						# State is the capital of colony ****
+			}
+			save_scope_as = colonial_state
+		}
+		
+	}
+    
+    option = {
+        name = portuguese_decolonisation.option.1				#Grant them self-government
+        default_option = yes highlighted_option = yes
+		
+		#Release country
+		create_country = {
+			tag = GNB										# Change TAG of country being released ****
+			origin = THIS									# TAG where the created country takes tech from
+			state = scope:colonial_state
+			
+			on_created = {									# Set government laws & rulers here
+				
+				# SET laws for colony ****
+				effect_starting_politics_communist_republic = yes
+				effect_starting_politics_dictatorship = yes
+				effect_starting_politics_constitutional_unitary_state = yes
+				effect_starting_politics_war_policy_anti_military = yes
+				effect_starting_politics_economic_policy_interventionism = yes
+				effect_starting_politics_trade_policy_protectionism = yes
+				effect_starting_politics_anti_nuclear_policy = yes
+				
+				# CREATE leader for colony ****
+				create_character = {
+					first_name = "guy_incognito_first_name"		# CHANGE
+					last_name = "guy_incognito_last_name"		# CHANGE
+					ruler = yes
+					#birth_date = 1910.1.1						# CHANGE
+					interest_group = ig_rural_folk				# CHANGE
+					ideology = ideology_democratic				# CHANGE
+					traits = {
+						charismatic								# CHANGE
+						persistent								# CHANGE
+						meticulous								# CHANGE
+					}
+				}
+				
+				# Set diplomatic recognition
+				set_country_type = unrecognized
+			}
+		}
+		if = {
+			limit = { exists = c:GNB }
+			every_scope_state = {
+				limit = {
+					state_region = { is_homeland = cu:bissau_guinean }	# Change homeland identity to match colony to be released ****
+					#is_incorporated = no							# State is a colony
+				}
+				set_state_owner = c:GNB								# Change TAG to colony ****
+			}
+		}
+		
+		# Fire only once
+		set_variable = portuguese_guinea_bissau_indy						# Change variable ****
+		
+		ai_chance = { 
+			base = 90 
+		}
+		
+    }
+	
+	option = {
+        name = portuguese_decolonisation.option.2					# REFUSE
+		
+		# Natives are angry!
+		every_scope_state = {
+			limit = {
+		 		state_region = { is_homeland = cu:bissau_guinean }	# Change homeland identity to match colony to be released ****
+		 	}
+			add_radicals_in_state = {
+				culture = cu:bissau_guinean							# Change culture ****
+				value = large_radicals
+			}
+			add_modifier = { name = nationalist_agitation months = 60 is_decaying = yes } 
+		}
+		
+		# Fire only once
+		set_variable = portuguese_guinea_bissau_indy						# Change variable ****
+		
+		ai_chance = { 
+			base = 10 modifier = { trigger = { has_global_variable = historical_railroading_active } add = -100 } 
+		}
+		
+    }
+
+}
+
+#Cape Verde (INDEPENDENCE)
+portuguese_decolonisation.4 = {
+    type = country_event
+	placement = scope:colonial_state
+
+    title = portuguese_cape_verde.indy.t 					# Title of the event; ADD LOCALISATION
+    desc = portuguese_cape_verde.indy.d 					# Description of the event; ADD LOCALISATION
+    #flavor = portuguese_cape_verde.indy.f 					# Flavor for event; ADD LOCALISATION, IF REQUIRED
+
+    event_image = { video = "gfx/event_pictures/unspecific_signed_contract.bk2" }
+
+    icon = "gfx/interface/icons/event_icons/waving_flag.dds" 	# Icon that shows on the map or the outliner
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear" 	# Sound effect if needed
+
+    duration = 1 # Duration to fire if triggers are met
+	
+	trigger = {													# What triggers the event, if using other events or journal entries leave empty
+		
+		#Overlord conditions
+		exists = c:POR this = c:POR											# Change TAG of the overlord ****
+		game_date >= 1975.7.5									# START DATE: Date colony became self governing ****
+		game_date < 1985.7.5									# END DATE: All historical events must not fire 10 years after the START DATE ****
+		
+		is_a_republican_democracy = yes							# Correct gov types
+		is_sufficiently_independent = yes						# is_vassal = no		
+		is_at_war = no											# war = no
+		
+		#Colony conditions
+		NOT = { 												# Colony to be released must not already exist on the map
+			exists = c:CPV										# Change TAG of the colony ****
+		}
+		any_scope_state = { 									# Overlord owns the states of the colony to be released
+			state_region = { is_homeland = cu:cabo_verdean }	# Change homeland identity to match colony to be released ****
+			#is_incorporated = no								# State is a colony
+			#owner = THIS										# Overlord must own the state to be released
+		}
+		
+		# Event has not been fired before
+		NOT = { has_variable = portuguese_cape_verde_indy }		# CHANGE ****
+		
+    }
+	
+	immediate = {
+	
+		# Generate list of provinces to be released					# DO NOT TOUCH THIS SECTION
+		every_scope_state = {
+			limit = {
+				state_region = { is_homeland = cu:cabo_verdean }	# Change homeland identity to match colony to be released ****
+				#is_incorporated = no								# State is a colony
+				#contains_capital_of = c:CPV						# State is the capital of colony ****
+			}
+			save_scope_as = colonial_state
+		}
+		
+	}
+    
+    option = {
+        name = portuguese_decolonisation.option.1				#Grant them self-government
+        default_option = yes highlighted_option = yes
+		
+		#Release country
+		create_country = {
+			tag = CPV										# Change TAG of country being released ****
+			origin = THIS									# TAG where the created country takes tech from
+			state = scope:colonial_state
+			
+			on_created = {									# Set government laws & rulers here
+				
+				# SET laws for colony ****
+				effect_starting_politics_communist_republic = yes
+				effect_starting_politics_dictatorship = yes
+				effect_starting_politics_constitutional_unitary_state = yes
+				effect_starting_politics_war_policy_anti_military = yes
+				effect_starting_politics_economic_policy_interventionism = yes
+				effect_starting_politics_trade_policy_protectionism = yes
+				effect_starting_politics_anti_nuclear_policy = yes
+				
+				# CREATE leader for colony ****
+				create_character = {
+					first_name = "guy_incognito_first_name"		# CHANGE
+					last_name = "guy_incognito_last_name"		# CHANGE
+					ruler = yes
+					#birth_date = 1910.1.1						# CHANGE
+					interest_group = ig_rural_folk				# CHANGE
+					ideology = ideology_democratic				# CHANGE
+					traits = {
+						charismatic								# CHANGE
+						persistent								# CHANGE
+						meticulous								# CHANGE
+					}
+				}
+				
+				# Set diplomatic recognition
+				set_country_type = unrecognized
+			}
+		}
+		if = {
+			limit = { exists = c:CPV }
+			every_scope_state = {
+				limit = {
+					state_region = { is_homeland = cu:cabo_verdean }	# Change homeland identity to match colony to be released ****
+					#is_incorporated = no								# State is a colony
+				}
+				set_state_owner = c:CPV									# Change TAG to colony ****
+			}
+		}
+		
+		# Fire only once
+		set_variable = portuguese_cape_verde_indy					# Change variable ****
+		
+		ai_chance = { 
+			base = 90 
+		}
+		
+    }
+	
+	option = {
+        name = portuguese_decolonisation.option.2					# REFUSE
+		
+		# Natives are angry!
+		every_scope_state = {
+			limit = {
+		 		state_region = { is_homeland = cu:cabo_verdean }	# Change homeland identity to match colony to be released ****
+		 	}
+			add_radicals_in_state = {
+				culture = cu:cabo_verdean							# Change culture ****
+				value = large_radicals
+			}
+			add_modifier = { name = nationalist_agitation months = 60 is_decaying = yes } 
+		}
+		
+		# Fire only once
+		set_variable = portuguese_cape_verde_indy						# Change variable ****
+		
+		ai_chance = { 
+			base = 10 modifier = { trigger = { has_global_variable = historical_railroading_active } add = -100 } 
+		}
+		
+    }
+
+}
+
+#Sao Tome and Principe (INDEPENDENCE)
+portuguese_decolonisation.5 = {
+    type = country_event
+	placement = scope:colonial_state
+
+    title = portuguese_sao_tome.indy.t 					# Title of the event; ADD LOCALISATION
+    desc = portuguese_sao_tome.indy.d 					# Description of the event; ADD LOCALISATION
+    #flavor = portuguese_sao_tome.indy.f 				# Flavor for event; ADD LOCALISATION, IF REQUIRED
+
+    event_image = { video = "gfx/event_pictures/unspecific_signed_contract.bk2" }
+
+    icon = "gfx/interface/icons/event_icons/waving_flag.dds" 	# Icon that shows on the map or the outliner
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear" 	# Sound effect if needed
+
+    duration = 1 # Duration to fire if triggers are met
+	
+	trigger = {													# What triggers the event, if using other events or journal entries leave empty
+		
+		#Overlord conditions
+		exists = c:POR this = c:POR											# Change TAG of the overlord ****
+		game_date >= 1975.7.12									# START DATE: Date colony became self governing ****
+		game_date < 1985.7.12									# END DATE: All historical events must not fire 10 years after the START DATE ****
+		
+		is_a_republican_democracy = yes							# Correct gov types
+		is_sufficiently_independent = yes						# is_vassal = no		
+		is_at_war = no											# war = no
+		
+		#Colony conditions
+		NOT = { 												# Colony to be released must not already exist on the map
+			exists = c:STP										# Change TAG of the colony ****
+		}
+		any_scope_state = { 									# Overlord owns the states of the colony to be released
+			state_region = { is_homeland = cu:santomean }		# Change homeland identity to match colony to be released ****
+			#is_incorporated = no								# State is a colony
+			#owner = THIS										# Overlord must own the state to be released
+		}
+		
+		# Event has not been fired before
+		NOT = { has_variable = portuguese_sao_tome_indy }			# CHANGE ****
+		
+    }
+	
+	immediate = {
+	
+		# Generate list of provinces to be released				# DO NOT TOUCH THIS SECTION
+		every_scope_state = {
+			limit = {
+				state_region = { is_homeland = cu:santomean }	# Change homeland identity to match colony to be released ****
+				#is_incorporated = no							# State is a colony
+				#contains_capital_of = c:STP					# State is the capital of colony ****
+			}
+			save_scope_as = colonial_state
+		}
+		
+	}
+    
+    option = {
+        name = portuguese_decolonisation.option.1				#Grant them self-government
+        default_option = yes highlighted_option = yes
+		
+		#Release country
+		create_country = {
+			tag = STP										# Change TAG of country being released ****
+			origin = THIS									# TAG where the created country takes tech from
+			state = scope:colonial_state
+			
+			on_created = {									# Set government laws & rulers here
+				
+				# SET laws for colony ****
+				effect_starting_politics_communist_republic = yes
+				effect_starting_politics_dictatorship = yes
+				effect_starting_politics_constitutional_unitary_state = yes
+				effect_starting_politics_war_policy_anti_military = yes
+				effect_starting_politics_economic_policy_interventionism = yes
+				effect_starting_politics_trade_policy_protectionism = yes
+				effect_starting_politics_anti_nuclear_policy = yes
+				
+				# CREATE leader for colony ****
+				create_character = {
+					first_name = "guy_incognito_first_name"		# CHANGE
+					last_name = "guy_incognito_last_name"		# CHANGE
+					ruler = yes
+					#birth_date = 1910.1.1						# CHANGE
+					interest_group = ig_rural_folk				# CHANGE
+					ideology = ideology_democratic				# CHANGE
+					traits = {
+						charismatic								# CHANGE
+						persistent								# CHANGE
+						meticulous								# CHANGE
+					}
+				}
+				
+				# Set diplomatic recognition
+				set_country_type = unrecognized
+			}
+		}
+		if = {
+			limit = { exists = c:STP }
+			every_scope_state = {
+				limit = {
+					state_region = { is_homeland = cu:santomean }	# Change homeland identity to match colony to be released ****
+					#is_incorporated = no							# State is a colony
+				}
+				set_state_owner = c:STP								# Change TAG to colony ****
+			}
+		}
+		
+		# Fire only once
+		set_variable = portuguese_sao_tome_indy						# Change variable ****
+		
+		ai_chance = { 
+			base = 90 
+		}
+		
+    }
+	
+	option = {
+        name = portuguese_decolonisation.option.2					# REFUSE
+		
+		# Natives are angry!
+		every_scope_state = {
+			limit = {
+		 		state_region = { is_homeland = cu:santomean }	# Change homeland identity to match colony to be released ****
+		 	}
+			add_radicals_in_state = {
+				culture = cu:santomean							# Change culture ****
+				value = large_radicals
+			}
+			add_modifier = { name = nationalist_agitation months = 60 is_decaying = yes } 
+		}
+		
+		# Fire only once
+		set_variable = portuguese_sao_tome_indy						# Change variable ****
+		
+		ai_chance = { 
+			base = 10 modifier = { trigger = { has_global_variable = historical_railroading_active } add = -100 } 
+		}
+		
+    }
+
+}
+
+#East Timor (INDEPENDENCE)
+portuguese_decolonisation.6 = {
+    type = country_event
+	placement = scope:colonial_state
+
+    title = portuguese_timor.indy.t 				# Title of the event; ADD LOCALISATION
+    desc = portuguese_timor.indy.d 					# Description of the event; ADD LOCALISATION
+    #flavor = portuguese_timor.indy.f 				# Flavor for event; ADD LOCALISATION, IF REQUIRED
+
+    event_image = { video = "gfx/event_pictures/unspecific_signed_contract.bk2" }
+
+    icon = "gfx/interface/icons/event_icons/waving_flag.dds" 	# Icon that shows on the map or the outliner
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear" 	# Sound effect if needed
+
+    duration = 1 # Duration to fire if triggers are met
+	
+	trigger = {													# What triggers the event, if using other events or journal entries leave empty
+		
+		#Overlord conditions
+		exists = c:POR this = c:POR								# Change TAG of the overlord ****
+		game_date >= 1975.11.28									# START DATE: Date colony became self governing ****
+		game_date < 1985.11.28									# END DATE: All historical events must not fire 10 years after the START DATE ****
+		
+		is_a_republican_democracy = yes							# Correct gov types
+		is_sufficiently_independent = yes						# is_vassal = no		
+		is_at_war = no											# war = no
+		
+		#Colony conditions
+		NOT = { 												# Colony to be released must not already exist on the map
+			exists = c:ETM										# Change TAG of the colony ****
+		}
+		any_scope_state = { 									# Overlord owns the states of the colony to be released
+			state_region = { is_homeland = cu:timorese }		# Change homeland identity to match colony to be released ****
+			#is_incorporated = no								# State is a colony
+			#owner = THIS										# Overlord must own the state to be released
+		}
+		
+		# Event has not been fired before
+		NOT = { has_variable = portuguese_timor_indy }			# CHANGE ****
+		
+    }
+	
+	immediate = {
+	
+		# Generate list of provinces to be released				# DO NOT TOUCH THIS SECTION
+		every_scope_state = {
+			limit = {
+				state_region = { is_homeland = cu:timorese }	# Change homeland identity to match colony to be released ****
+				#is_incorporated = no							# State is a colony
+				#contains_capital_of = c:ETM					# State is the capital of colony ****
+			}
+			save_scope_as = colonial_state
+		}
+		
+	}
+    
+    option = {
+        name = portuguese_decolonisation.option.1				#Grant them self-government
+        default_option = yes highlighted_option = yes
+		
+		#Release country
+		create_country = {
+			tag = ETM										# Change TAG of country being released ****
+			origin = THIS									# TAG where the created country takes tech from
+			state = scope:colonial_state
+			
+			on_created = {									# Set government laws & rulers here
+				
+				# SET laws for colony ****
+				effect_starting_politics_communist_republic = yes
+				effect_starting_politics_dictatorship = yes
+				effect_starting_politics_constitutional_unitary_state = yes
+				effect_starting_politics_war_policy_anti_military = yes
+				effect_starting_politics_economic_policy_interventionism = yes
+				effect_starting_politics_trade_policy_protectionism = yes
+				effect_starting_politics_anti_nuclear_policy = yes
+				
+				# CREATE leader for colony ****
+				create_character = {
+					first_name = "guy_incognito_first_name"		# CHANGE
+					last_name = "guy_incognito_last_name"		# CHANGE
+					ruler = yes
+					#birth_date = 1910.1.1						# CHANGE
+					interest_group = ig_rural_folk				# CHANGE
+					ideology = ideology_democratic				# CHANGE
+					traits = {
+						charismatic								# CHANGE
+						persistent								# CHANGE
+						meticulous								# CHANGE
+					}
+				}
+				
+				# Set diplomatic recognition
+				set_country_type = unrecognized
+			}
+		}
+		if = {
+			limit = { exists = c:ETM }
+			every_scope_state = {
+				limit = {
+					state_region = { is_homeland = cu:timorese }	# Change homeland identity to match colony to be released ****
+					#is_incorporated = no							# State is a colony
+				}
+				set_state_owner = c:ETM								# Change TAG to colony ****
+			}
+		}
+		
+		# Fire only once
+		set_variable = portuguese_timor_indy						# Change variable ****
+		
+		ai_chance = { 
+			base = 90 
+		}
+		
+    }
+	
+	option = {
+        name = portuguese_decolonisation.option.2					# REFUSE
+		
+		# Natives are angry!
+		every_scope_state = {
+			limit = {
+		 		state_region = { is_homeland = cu:timorese }	# Change homeland identity to match colony to be released ****
+		 	}
+			add_radicals_in_state = {
+				culture = cu:timorese							# Change culture ****
+				value = large_radicals
+			}
+			add_modifier = { name = nationalist_agitation months = 60 is_decaying = yes } 
+		}
+		
+		# Fire only once
+		set_variable = portuguese_timor_indy						# Change variable ****
+		
+		ai_chance = { 
+			base = 10 modifier = { trigger = { has_global_variable = historical_railroading_active } add = -100 } 
+		}
+		
+    }
+
+}
+
+#Macau
+portuguese_decolonisation.7 = {
+    type = country_event
+	placement = scope:colonial_state
+	
+    title = portuguese_macau.sgc.t 				# Title of the event; ADD LOCALISATION
+    desc = portuguese_macau.sgc.d 				# Description of the event; ADD LOCALISATION
+    #flavor = portuguese_macau.sgc.f 			# Flavor for event; ADD LOCALISATION, IF REQUIRED
+
+    event_image = { video = "gfx/event_pictures/unspecific_signed_contract.bk2" }
+
+    icon = "gfx/interface/icons/event_icons/waving_flag.dds" 		# Icon that shows on the map or the outliner
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear" 	# Sound effect if needed
+
+    duration = 1 # Duration to fire if triggers are met
+	
+	trigger = {													# What triggers the event, if using other events or journal entries leave empty
+		
+		#Overlord conditions
+		exists = c:POR this = c:POR								# Change TAG of the overlord ****
+		game_date >= 1976.2.1									# START DATE: Date colony became self governing ****
+		game_date < 1986.2.1									# END DATE: All historical events must not fire 10 years after the START DATE ****
+		
+		is_a_democracy = yes									# Correct gov types
+		is_sufficiently_independent = yes						# is_vassal = no		
+		is_at_war = no											# war = no
+		
+		#Colony conditions
+		NOT = { 												# Colony to be released must not already exist on the map
+			exists = c:MCA										# Change TAG of the colony ****
+		}
+		p:xB031E0.state.owner = {
+			THIS = ROOT
+		}
+		
+		#China
+		OR = {
+			exists = c:CHI
+			exists = c:PRC
+			exists = c:ROC
+		}
+		
+		# Event has not been fired before
+		NOT = { has_variable = portuguese_macau_sgc }			# CHANGE ****
+		
+    }
+	
+	immediate = {
+		
+		p:xB031E0.state = {
+			save_scope_as = colonial_state
+		}
+		
+		# Fire only once
+		set_variable = portuguese_macau_sgc						# Change variable ****
+		
+	}
+    
+    option = {
+        name = portuguese_decolonisation.option.1				#Grant them self-government
+        default_option = yes highlighted_option = yes
+		
+		#Release country
+		create_country = {
+			tag = MCA											# Change TAG of country being released ****
+			origin = ROOT										# TAG where the created country takes tech from
+			province = p:xB031E0
+			
+			on_created = {										# Set government laws & rulers here
+				
+				# SET laws for colony ****
+				effect_starting_politics_constitutional_monarchy = yes
+				effect_starting_politics_democratic = yes
+				effect_starting_politics_constitutional_unitary_state = yes
+				effect_starting_politics_war_policy_anti_military = yes
+				effect_starting_politics_economic_policy_laissez_faire = yes
+				effect_starting_politics_trade_policy_free_trade = yes
+				effect_starting_politics_anti_nuclear_policy = yes
+				
+				# Set diplomatic recognition
+				set_country_type = unrecognized
+			}
+		}
+		
+		# Overlord create self governing colony pact with colony
+		if = { 
+			limit = { exists = c:MCA }
+			create_diplomatic_pact = {
+				country = c:MCA									# Change TAG ****
+				type = semi_autonomous_colony
+			}
+			create_decolonisation_pacts = yes
+		}
+		
+		ai_chance = { 
+			base = 90 
+		}
+		
+    }
+	
+	option = {
+        name = portuguese_decolonisation.option.2				# REFUSE
+		
+		# Natives are angry!
+		scope:colonial_state = {
+			add_radicals_in_state = {
+				value = large_radicals
+			}
+		}
+		
+		change_infamy = 10
+		
+		ai_chance = { 
+			base = 10 
+		}
+		
+    }
+
+}

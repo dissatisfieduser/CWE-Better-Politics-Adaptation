@@ -1,0 +1,29 @@
+1.0
+-release
+
+1.1
+-fixed typos
+-updated flavour text for left radicals
+-prevented ahistorical events from firing
+-fixed broken journal entries
+
+1.2
+-new leader ideologies
+-fixed broken triggers
+-fixed more broken journal entries
+
+1.3
+-updated to be compatible with BPM 2.1
+
+1.4
+-changed to become a CWE compatible variant of BPM, eliminating need for BPM to be in load order
+-compatible with BPM 2.1 [1.7] and CWE [1.7]
+
+1.5
+-updated to work with CWE 1.4.2 and BPM 2.3.10
+-anarchists are now also Maoists
+
+1.6
+-updated to 1.8.6 and latest CWE and BPM compatible
+-overhauled historical events
+-bug where cultural discrimination law group didn't show up fixed

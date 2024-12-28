@@ -1,0 +1,40 @@
+#### Mandatory Governments ####
+gov_mandate_administration_dictatorial_japan = {
+	transfer_of_power = hereditary
+
+	male_ruler = "RULER_TITLE_EMPEROR"
+	female_ruler = "RULER_TITLE_EMPEROR"
+	
+	possible = {
+		
+		#Applies to all dictatorial mandates
+		is_subject_type = subject_type_mandate
+		AND = { exists = c:JAP c:JAP = ROOT }
+		
+	}
+	
+	on_government_type_change = {
+		change_to_hereditary = yes
+	}
+	
+}
+
+
+gov_mandate_administration_dictatorial = {
+	transfer_of_power = dictatorial
+
+	male_ruler = "RULER_TITLE_GOVERNOR_GENERAL"
+	female_ruler = "RULER_TITLE_GOVERNOR_GENERAL"
+	
+	possible = {
+		
+		#Applies to all dictatorial mandates
+		is_subject_type = subject_type_mandate
+		
+	}
+	
+	on_government_type_change = {
+		change_to_dictatorial = yes
+	}
+	
+}

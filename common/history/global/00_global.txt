@@ -1,0 +1,326 @@
+﻿# This is executed last among all history
+GLOBAL = {
+	
+	#Event Variables
+	
+	set_global_variable = {
+		name = number_of_mega_earthquakes
+		value = 0
+	}
+
+	set_global_variable = {
+		name = number_of_mega_floods
+		value = 0
+	}
+	
+	set_global_variable = {
+		name = number_of_mega_eruptions
+		value = 0
+	}
+	
+	#Nuclear War system
+	set_global_variable = { 
+		name = nuclear_strike_power_global
+		value = 0
+	}
+	set_global_variable = { 
+		name = nuclear_strike_defence_global
+		value = 0
+	}
+	
+	#Strategic Bombardment system
+	set_global_variable = { 
+		name = strategic_bombardment_strike_power_global
+		value = 0
+	}
+	set_global_variable = { 
+		name = strategic_bombardment_strike_defence_global
+		value = 0
+	}
+	
+	#Economic Cycles
+	set_global_variable = { 
+		name = economic_strength_global_var
+		value = 0
+	}
+	set_global_variable = { 
+		name = economic_strength_country_count_var
+		value = 0
+	}
+	
+	#USA states
+	s:STATE_DISTRICT_OF_COLUMBIA = {	
+		set_variable = {
+            name = usa_state_flag_block
+            value = yes
+        }
+
+        set_variable = {
+            name = district_of_columbia
+            value = yes
+        }
+	}
+	
+	#Chinese Civil War devastation
+	c:PRC = {
+		every_scope_state = {
+			limit = {
+				OR = {
+					region = sr:region_south_china
+					region = sr:region_north_china
+					region = sr:region_manchuria
+				}
+			}
+			state_region = {
+				add_devastation = 25
+			}
+		}
+	}
+	
+	#Historical Railroading is enabled by default
+	if = {
+		limit = { 
+			NOT = { has_game_rule = no_historical_ai_railroading } 
+		}
+		set_global_variable = historical_railroading_active
+	}
+	
+	#Prune excess buildings
+	every_country = {
+		limit = { 
+			NOR = { 
+				c:LUX ?= this
+				c:SAR ?= this
+				c:MLT ?= this
+			} 
+		}
+		effect_prune_excess_buildings = yes
+	}
+	
+	#Post WW2 peace
+	every_country = {
+		limit = { NOT = { has_modifier = longing_for_peace } }
+		add_modifier = { name = longing_for_peace years = 10 is_decaying = yes }
+	}
+	
+	#UN Headquarters
+	s:STATE_NEW_YORK = {
+		region_state:USA = {
+			add_modifier = { name = un_headquarters }
+		}
+	}
+	
+	#Force set literacy
+	force_set_literacy_rate = yes
+	
+	#Demilitarisation
+	every_country = {
+		limit = { has_law = law_type:law_peasant_levies }
+		every_scope_state = {
+			if = {
+				limit = {
+					has_building = building_barracks
+				}
+				remove_building = building_barracks
+			}
+		}
+	}
+	
+	#Olympics
+	if = {
+		limit = { game_date >= 1950.1.1 }
+		set_global_variable = {
+			name = olympic_games_year
+			value = 1952
+		}
+		c:FIN = {
+			set_variable = { 
+				name = olympic_games_host_country
+				years = 6
+			}
+			add_journal_entry = { type = je_olympic_games }
+		}
+	}
+	
+	#Fix recognised status
+	every_country = {
+		limit = { 
+			is_not_sufficiently_independent = yes 
+			NOR = { 
+				has_modifier = unga_member 
+				has_modifier = unsc_permanent_member
+			}
+		}
+		set_country_type = unrecognized
+	}
+	
+	#Guantanamo Bay
+	c:USA = {
+		create_diplomatic_pact = {
+			country = c:CUB
+			type = military_cooperation_agreement
+		}
+		set_variable = sovereign_military_bases_CYP
+	}
+	c:CUB = {
+		set_variable = sovereign_military_bases_CYP
+	}
+	
+	#Set corruption level
+	every_country = {
+		if = {
+			limit = { is_a_democracy = yes }
+			activate_law = law_type:law_high_anti_corruption
+		}
+		else_if = {
+			limit = { is_some_kind_of_democracy = yes }
+			activate_law = law_type:law_medium_anti_corruption
+		}
+		else = {
+			activate_law = law_type:law_very_low_anti_corruption
+		}
+	}
+	
+	#Set State Atheism
+	every_country = {
+		limit = { has_law = law_type:law_state_atheism }
+		every_scope_state = {
+			limit = {
+				is_incorporated = yes
+			}
+			convert_population = {
+				target = rel:atheist
+				value = 0.01
+			}
+		}
+	}
+	
+	#Set dynamic state names
+	every_country = {
+		every_scope_state = {
+			assign_state_hub_dynamic_names = yes
+		}
+	}
+	
+	#Post War economic boom
+	every_country = {
+		add_modifier = { 
+			name = population_boom 
+			years = 10
+			is_decaying = yes
+		}
+	}
+	
+	#Set caste
+	every_country = {
+		limit = {
+		
+			#Can change social hierarchy
+			has_social_hierarchy = default_social_hierarchy
+			
+			#Conditions
+			OR = {
+			
+				#feudalist_social_hierarchy
+				AND = { 
+					has_law = law_type:law_monarchy
+					is_a_regime_monarchy = yes
+				}
+			
+				#theocratic_social_hierarchy
+				AND = {
+					has_law = law_type:law_theocacy
+					is_a_dictatorship = yes
+				}
+				
+				#nationalist_social_hierarchy
+				AND = { 
+					OR = {
+						has_law = law_type:law_presidential_republic
+						has_law = law_type:law_parliamentary_republic
+					}
+					is_a_dictatorship = yes
+				}
+				
+				#communist_social_hierarchy
+				AND = {
+					has_law = law_type:law_coucil_republic
+					is_a_dictatorship = yes
+				}
+			
+			}
+		}
+		
+		#Set specific social caste
+		if = {
+			limit = { 
+				AND = { 
+					country_has_state_religion = rel:hindu
+					has_law = law_type:law_state_religion
+				}
+			}
+			set_social_hierarchy = british_indian_caste_system
+			activate_law = law_type:law_hindu_caste_not_enforced
+		}
+		else_if = {
+			limit = {
+				#feudalist_social_hierarchy
+				has_law = law_type:law_monarchy
+			}
+			set_social_hierarchy = feudalist_social_hierarchy
+			activate_law = law_type:law_social_hierarchy_1_not_enforced
+		}
+		else_if = {
+			limit = {
+				#theocratic_social_hierarchy
+				has_law = law_type:law_theocracy
+			}
+			set_social_hierarchy = theocratic_social_hierarchy
+			activate_law = law_type:law_social_hierarchy_2_not_enforced
+		}
+		else_if = {
+			limit = {
+				#nationalist_social_hierarchy
+				OR = {
+					has_law = law_type:law_presidential_republic
+					has_law = law_type:law_parliamentary_republic
+				}
+			}
+			set_social_hierarchy = nationalist_social_hierarchy
+			activate_law = law_type:law_social_hierarchy_3_not_enforced
+		}
+		else_if = {
+			limit = {
+				#communist_social_hierarchy
+				has_law = law_type:law_council_rpeublic
+			}
+			set_social_hierarchy = communist_social_hierarchy
+			activate_law = law_type:law_social_hierarchy_4_not_enforced
+		}
+		else_if = {
+			limit = {
+				#oligarchic_social_hierarchy
+				AND = { 
+					OR = {
+						has_law = law_type:law_presidential_republic
+						has_law = law_type:law_parliamentary_republic
+					}
+					OR = {
+						has_law = law_type:law_laissez_faire
+						AND = {
+							is_a_capitalistic_economy = yes
+							is_a_dictatorship = yes
+						}
+					}
+				}
+			}
+			set_social_hierarchy = oligarchic_social_hierarchy
+			activate_law = law_type:law_social_hierarchy_5_not_enforced
+		}
+		else = {
+			activate_law = law_type:law_social_hierarchy_0_not_enforced
+		}
+	
+	}
+
+}

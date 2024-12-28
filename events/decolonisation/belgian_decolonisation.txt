@@ -1,0 +1,340 @@
+namespace = belgian_decolonisation
+
+#Congo (INDEPENDENCE)
+belgian_decolonisation.1 = {
+    type = country_event
+	placement = scope:colonial_state
+
+    title = belgian_congo.indy.t 					# Title of the event; ADD LOCALISATION
+    desc = belgian_congo.indy.d 					# Description of the event; ADD LOCALISATION
+    #flavor = belgian_congo.indy.f 					# Flavor for event; ADD LOCALISATION, IF REQUIRED
+
+    event_image = { video = "gfx/event_pictures/unspecific_signed_contract.bk2" }
+
+    icon = "gfx/interface/icons/event_icons/waving_flag.dds" 	# Icon that shows on the map or the outliner
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear" 	# Sound effect if needed
+
+    duration = 1 # Duration to fire if triggers are met
+	
+	trigger = {													# What triggers the event, if using other events or journal entries leave empty
+		
+		#Overlord conditions
+		exists = c:BEL this = c:BEL											# Change TAG of the overlord ****
+		game_date >= 1960.6.30									# START DATE: Date colony became self governing ****
+		game_date < 1970.6.30									# END DATE: All historical events must not fire 10 years after the START DATE ****
+		
+		is_a_democracy = yes									# Correct gov types
+		is_sufficiently_independent = yes						# is_vassal = no		
+		is_at_war = no											# war = no
+		
+		#Colony conditions
+		NOT = { 												# Colony to be released must not already exist on the map
+			exists = c:CNG										# Change TAG of the colony ****
+		}
+		any_scope_state = { 									# Overlord owns the states of the colony to be released
+			state_region = { is_homeland = cu:congolese }		# Change homeland identity to match colony to be released ****
+			#is_incorporated = no								# State is a colony
+			#owner = THIS										# Overlord must own the state to be released
+		}
+		
+		# Event has not been fired before
+		NOT = { has_variable = belgian_congo_indy }			# CHANGE ****
+		
+    }
+	
+	immediate = {
+	
+		# Generate list of provinces to be released				# DO NOT TOUCH THIS SECTION
+		every_scope_state = {
+			limit = {
+				state_region = { is_homeland = cu:congolese }	# Change homeland identity to match colony to be released ****
+				#is_incorporated = no							# State is a colony
+				#contains_capital_of = c:CNG					# State is the capital of colony ****
+			}
+			save_scope_as = colonial_state
+		}
+		
+	}
+    
+    option = {
+        name = british_decolonisation.option.1				#Grant them self-government
+        default_option = yes highlighted_option = yes
+		
+		#Release country
+		create_country = {
+			tag = CNG										# Change TAG of country being released ****
+			origin = THIS									# TAG where the created country takes tech from
+			state = scope:colonial_state
+			
+			on_created = {									# Set government laws & rulers here
+				
+				# SET laws for colony ****
+				effect_starting_politics_parliamentary_republic = yes
+				effect_starting_politics_democratic = yes
+				effect_starting_politics_constitutional_unitary_state = yes
+				effect_starting_politics_war_policy_anti_military = yes
+				effect_starting_politics_economic_policy_interventionism = yes
+				effect_starting_politics_trade_policy_protectionism = yes
+				effect_starting_politics_anti_nuclear_policy = yes
+				
+				# CREATE leader for colony ****
+				create_character = {
+					first_name = "Patrice_Lumumba_first_name"
+					last_name = "Patrice_Lumumba_last_name"
+					ruler = yes ig_leader = yes historical = yes
+					birth_date = 1925.7.2
+					interest_group = ig_rural_folk
+					ideology = ideology_democratic
+					traits = {
+						charismatic
+						pious
+						persistent
+					}
+				}
+				
+				# Set diplomatic recognition
+				set_country_type = unrecognized
+			}
+		}
+		every_scope_state = {
+			limit = {
+		 		state_region = { is_homeland = cu:congolese }	# Change homeland identity to match colony to be released ****
+				#is_incorporated = no							# State is a colony
+		 	}
+			set_state_owner = c:CNG								# Change TAG to colony ****
+		}
+		
+		# Overlord create client state pact with colony
+		#create_diplomatic_pact = {
+		#	country = c:CNG										# Change TAG ****
+		#	type = protectorate
+		#}
+		
+		# Fire only once
+		set_variable = belgian_congo_indy						# Change variable ****
+		
+		ai_chance = { 
+			base = 90 
+		}
+		
+    }
+	
+	option = {
+        name = british_decolonisation.option.2					# REFUSE
+		
+		# Natives are angry!
+		every_scope_state = {
+			limit = {
+		 		state_region = { is_homeland = cu:congolese }	# Change homeland identity to match colony to be released ****
+		 	}
+			add_radicals_in_state = {
+				culture = cu:congolese							# Change culture ****
+				value = large_radicals
+			}
+			add_modifier = { name = nationalist_agitation months = 60 is_decaying = yes } 
+		}
+		
+		# Fire only once
+		set_variable = belgian_congo_indy						# Change variable ****
+		
+		ai_chance = { 
+			base = 10 modifier = { trigger = { has_global_variable = historical_railroading_active } add = -100 } 
+		}
+		
+    }
+
+}
+
+#Rwanda Brundi (INDEPENDENCE)
+belgian_decolonisation.2 = {
+    type = country_event
+	placement = scope:colonial_state
+
+    title = belgian_rwanda_burundi.indy.t 					# Title of the event; ADD LOCALISATION
+    desc = belgian_rwanda_burundi.indy.d 					# Description of the event; ADD LOCALISATION
+    #flavor = belgian_rwanda_burundi.indy.f 					# Flavor for event; ADD LOCALISATION, IF REQUIRED
+
+    event_image = { video = "gfx/event_pictures/unspecific_signed_contract.bk2" }
+
+    icon = "gfx/interface/icons/event_icons/waving_flag.dds" 	# Icon that shows on the map or the outliner
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear" 	# Sound effect if needed
+
+    duration = 1 # Duration to fire if triggers are met
+	
+	trigger = {													# What triggers the event, if using other events or journal entries leave empty
+		
+		#Overlord conditions
+		exists = c:BEL this = c:BEL											# Change TAG of the overlord ****
+		game_date >= 1962.7.1									# START DATE: Date colony became self governing ****
+		game_date < 1972.7.1									# END DATE: All historical events must not fire 10 years after the START DATE ****
+		
+		is_a_democracy = yes									# Correct gov types
+		is_sufficiently_independent = yes						# is_vassal = no		
+		is_at_war = no											# war = no
+		
+		#Colony conditions
+		NOT = { 												# Colony to be released must not already exist on the map
+			exists = c:RBK										# Change TAG of the colony ****
+		}
+		any_scope_state = { 									# Overlord owns the states of the colony to be released
+			state_region = { OR = { is_homeland = cu:ruanda is_homeland = cu:rundi } }			# Change homeland identity to match colony to be released ****
+			#is_incorporated = no								# State is a colony
+			#owner = THIS										# Overlord must own the state to be released
+		}
+		
+		# Event has not been fired before
+		NOT = { has_variable = belgian_rwanda_burundi_indy }			# CHANGE ****
+		
+    }
+	
+	immediate = {
+	
+		# Generate list of provinces to be released				# DO NOT TOUCH THIS SECTION
+		every_scope_state = {
+			limit = {
+				state_region = { OR = { is_homeland = cu:ruanda is_homeland = cu:rundi } }	# Change homeland identity to match colony to be released ****
+				#is_incorporated = no							# State is a colony
+				#contains_capital_of = c:RBK					# State is the capital of colony ****
+			}
+			save_scope_as = colonial_state
+		}
+		
+	}
+    
+    option = {
+        name = british_decolonisation.option.1				#Grant them self-government
+        default_option = yes highlighted_option = yes
+		
+		#Release country
+		create_country = {
+			tag = RWA										# Change TAG of country being released ****
+			origin = THIS									# TAG where the created country takes tech from
+			province = p:x662B31 
+			province = p:x5954AA 
+			province = p:x34EFF0 
+			province = p:x80DF50
+			
+			on_created = {									# Set government laws & rulers here
+				
+				# SET laws for colony ****
+				effect_starting_politics_semi_presidential_republic = yes
+				effect_starting_politics_regime = yes
+				effect_starting_politics_constitutional_unitary_state = yes
+				effect_starting_politics_war_policy_anti_military = yes
+				effect_starting_politics_economic_policy_interventionism = yes
+				effect_starting_politics_trade_policy_protectionism = yes
+				effect_starting_politics_anti_nuclear_policy = yes
+				
+				activate_law = law_type:law_ethnostate
+				
+				# CREATE leader for colony ****
+				create_character = {
+					first_name = "Gregoire_Kayibanda_first_name"		# CHANGE
+					last_name = "Gregoire_Kayibanda_last_name"			# CHANGE
+					birth_date = 1924.5.1
+					ruler = yes ig_leader = yes historical = yes
+					interest_group = ig_rural_folk
+					ideology = ideology_autocratic
+					culture = cu:ruanda
+					religion = rel:catholic
+					traits = {
+						bigoted
+						pious
+						persistent
+					}
+				}
+				create_character = {
+					first_name = "Kigeli_V_Ndahindurwa_first_name"		# CHANGE
+					last_name = "Kigeli_V_Ndahindurwa_last_name"		# CHANGE
+					birth_date = 1936.6.29
+					ig_leader = yes historical = yes
+					interest_group = ig_landowners
+					ideology = ideology_elitist
+					traits = {
+						reserved
+						pious
+						romantic
+					}
+				}
+				
+				# Set diplomatic recognition
+				set_country_type = unrecognized
+			}
+		}
+		
+		#Release country
+		create_country = {
+			tag = BRD										# Change TAG of country being released ****
+			origin = THIS									# TAG where the created country takes tech from
+			province = p:x5093DF 
+			province = p:x16915A 
+			province = p:xD8B2ED
+			
+			on_created = {									# Set government laws & rulers here
+				
+				# SET laws for colony ****
+				effect_starting_politics_semi_constitutional_monarchy = yes
+				effect_starting_politics_regime = yes
+				effect_starting_politics_constitutional_unitary_state = yes
+				effect_starting_politics_war_policy_anti_military = yes
+				effect_starting_politics_economic_policy_interventionism = yes
+				effect_starting_politics_trade_policy_protectionism = yes
+				effect_starting_politics_anti_nuclear_policy = yes
+				
+				# CREATE leader for colony ****
+				create_character = {
+					first_name = "Ntare_V_Ndizeye_first_name"		# CHANGE
+					last_name = "Ntare_V_Ndizeye_last_name"			# CHANGE
+					birth_date = 1947.12.2
+					ruler = yes ig_leader = yes historical = yes
+					interest_group = ig_landowners
+					ideology = ideology_elitist
+					traits = {
+						reserved
+						pious
+						romantic
+					}
+				}
+				
+				# Set diplomatic recognition
+				set_country_type = unrecognized
+			}
+		}
+		
+		# Fire only once
+		set_variable = belgian_rwanda_burundi_indy						# Change variable ****
+		
+		ai_chance = { 
+			base = 90 
+		}
+		
+    }
+	
+	option = {
+        name = british_decolonisation.option.2					# REFUSE
+		
+		# Natives are angry!
+		every_scope_state = {
+			limit = {
+		 		state_region = { OR = { is_homeland = cu:ruanda is_homeland = cu:rundi } }	# Change homeland identity to match colony to be released ****
+		 	}
+			add_radicals_in_state = {
+				culture = cu:ruanda							# Change culture ****
+				value = large_radicals
+			}
+			add_modifier = { name = nationalist_agitation months = 60 is_decaying = yes } 
+		}
+		
+		# Add Infamy because doing this is against international law
+		change_infamy = 10
+		
+		# Fire only once
+		set_variable = belgian_rwanda_burundi_indy						# Change variable ****
+		
+		ai_chance = { 
+			base = 10 modifier = { trigger = { has_global_variable = historical_railroading_active } add = -100 } 
+		}
+		
+    }
+
+}

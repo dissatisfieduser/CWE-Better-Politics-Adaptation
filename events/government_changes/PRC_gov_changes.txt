@@ -1,0 +1,791 @@
+namespace = PRC_gov_changes
+
+# The Cultural Revolution
+PRC_gov_changes.1 = {
+    type = country_event
+
+    title = PRC_1966_revolution.t 							# Title of the event; ADD LOCALISATION
+    desc = PRC_1966_revolution.d 							# Description of the event; ADD LOCALISATION
+    #flavor = PRC_1966_revolution.f 						# Flavor for event; ADD LOCALISATION, IF REQUIRED
+
+    event_image = { video = "gfx/event_pictures/europenorthamerica_political_extremism.bk2" }
+
+    icon = "gfx/interface/icons/event_icons/event_protest.dds" 		# Icon that shows on the map or the outliner
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear" 	# Sound effect if needed
+
+    duration = 1 # Duration to fire if triggers are met
+	
+	trigger = {													# What triggers the event, if using other events or journal entries leave empty
+		
+		#Overlord conditions
+		OR = { c:PRC ?= this c:CHI ?= this }
+		game_date >= 1966.5.16									# START DATE: Date colony became self governing ****
+		game_date < 1976.5.16									# END DATE: All historical events must not fire 10 years after the START DATE ****
+		
+		is_a_communist_government = yes							# Correct gov types
+		is_sufficiently_independent = yes						# is_vassal = no		
+		is_at_war = no											# war = no
+		
+		#Mao is ruler
+		exists = ruler
+		ruler = { interest_group = { is_interest_group_type = ig_trade_unions } is_historical = yes }
+		
+		# Event has not been fired before
+		NOT = { has_variable = PRC_1966_hgc }					# CHANGE ****
+		
+    }
+	
+	immediate = {
+	
+		# Fire only once
+		set_variable = PRC_1966_hgc								# Change variable ****
+		
+	}
+    
+	
+	option = {
+        name = PRC_1966_revolution.option.1						# Accept
+		highlighted_option = yes
+
+		activate_law = law_type:law_state_atheism
+		activate_law = law_type:law_outlawed_dissent
+		
+		#Gain loyalty of lower class
+		add_loyalists = {
+			value = large_radicals
+			interest_group = ig:ig_trade_unions
+		}
+		add_loyalists = {
+			value = large_radicals
+			interest_group = ig:ig_revolutionist_socialists
+		}
+		add_loyalists = {
+			value = large_radicals
+			interest_group = ig:ig_anarchists
+		}
+		add_loyalists = {
+			value = large_radicals
+			interest_group = ig:ig_agrarian_populists
+		}
+		add_loyalists = {
+			value = large_radicals
+			interest_group = ig:ig_socialists
+		}
+		add_loyalists = {
+			value = large_radicals
+			interest_group = ig:ig_rural_folk
+		}
+		
+		#Kill dissidents
+		kill_population_percent = {
+			percent = 0.01
+			interest_group = ig:ig_landowners
+		}
+		kill_population_percent = {
+			percent = 0.01
+			interest_group = ig:ig_devout
+		}
+		kill_population_percent = {
+			percent = 0.01
+			interest_group = ig:ig_industrialists
+		}
+		kill_population_percent = {
+			percent = 0.01
+			interest_group = ig:ig_petty_bourgeoisie
+		}
+		
+		ai_chance = { 
+			base = 90 
+		}
+		
+    }
+	
+    option = {
+        name = PRC_1966_revolution.option.2						# Reject
+        default_option = yes
+		
+		#Enact new regime
+		effect_starting_politics_regime = yes
+		
+		#Major discontent
+		add_loyalists = {
+			value = large_radicals
+			interest_group = ig:ig_trade_unions
+		}
+		add_radicals = {
+			value = large_radicals
+			interest_group = ig:ig_rural_folk
+		}
+		add_modifier = { 
+			name = stirrings_of_revolution
+			months = 60 
+			is_decaying = yes 
+		}
+		
+		ai_chance = { 
+			base = 10 modifier = { trigger = { has_global_variable = historical_railroading_active } add = -100 } 
+		}
+		
+    }
+
+}
+
+# Mao's Successor
+PRC_gov_changes.2 = {
+    type = country_event
+
+    title = PRC_mao_succession.t 						# Title of the event; ADD LOCALISATION
+    desc = PRC_mao_succession.d 						# Description of the event; ADD LOCALISATION
+    #flavor = PRC_mao_succession.f 						# Flavor for event; ADD LOCALISATION, IF REQUIRED
+
+    event_image = { video = "gfx/event_pictures/unspecific_politicians_arguing.bk2" }
+
+    icon = "gfx/interface/icons/event_icons/event_portrait.dds" 	# Icon that shows on the map or the outliner
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear" 	# Sound effect if needed
+
+    duration = 1 # Duration to fire if triggers are met
+	
+	trigger = {													# What triggers the event, if using other events or journal entries leave empty
+		
+		#Overlord conditions
+		OR = { c:PRC ?= this c:CHI ?= this }
+		game_date >= 1976.9.9									# START DATE: Date colony became self governing ****
+		game_date < 1986.9.9									# END DATE: All historical events must not fire 10 years after the START DATE ****
+		
+		is_a_communist_government = yes							# Correct gov types
+		#is_sufficiently_independent = yes						# is_vassal = no		
+		#is_at_war = no											# war = no
+		
+		#Mao is ruler OR was replaced
+		exists = ruler
+		OR = { 
+			ruler = { interest_group = { is_interest_group_type = ig_trade_unions } is_historical = yes }
+			ruler = { interest_group = { NOT = { is_interest_group_type = ig_trade_unions } } }
+		}
+		
+		# Event has not been fired before
+		NOT = { has_variable = PRC_1976_hgc }					# CHANGE ****
+		
+    }
+	
+	immediate = {
+	
+		#Kill Mao & replace with Brezhnev
+		ruler = {
+			kill_character = yes
+		}
+		
+		#Create new leader for Trade Unions IG
+		create_character = {
+			first_name = "Li_Shumeng_first_name"
+			last_name = "Li_Shumeng_last_name"
+			ruler = yes ig_leader = yes historical = yes female = yes
+			birth_date = 1914.3.19
+			interest_group = ig_anarchists
+			ideology = ideology_maoist
+			culture = cu:han
+			religion = rel:atheist
+			traits = {
+				arrogant
+				ambitious
+				expensive_tastes
+			}
+		}
+		
+		#Jiang Qing is leader by default
+		random_scope_character = {
+			limit = { 
+				interest_group = { is_interest_group_type = ig_anarchists }
+				is_historical = yes
+				is_ruler = no
+			}
+			set_character_as_ruler = yes
+		}
+		every_interest_group = {
+			limit = { is_in_government = yes }
+			remove_ruling_interest_group = yes
+		}
+		ig:ig_anarchists = {
+			add_ruling_interest_group = yes
+		}
+		if = {
+			limit = { ig:ig_socialists = { leader = { is_historical = no } } }
+			create_character = {
+				first_name = "deng_xiaoping_first_name"
+				last_name = "deng_xiaoping_last_name"
+				ig_leader = yes historical = yes
+				birth_date = 1904.8.22
+				interest_group = ig_socialists
+				ideology = ideology_market_socialist
+				culture = cu:hakka
+				religion = rel:atheist
+				traits = {
+					meticulous
+					ambitious
+					cautious
+				}
+			}
+		}
+	
+		# Fire only once
+		set_variable = PRC_1976_hgc							# Change variable ****
+		
+	}
+    
+    option = {
+        name = PRC_deng.option								# Historical
+        highlighted_option = yes
+		default_option = yes
+		
+		#Install Deng Xiaoping
+		random_scope_character = {
+			limit = { 
+				interest_group = { is_interest_group_type = ig_socialists }
+				is_historical = yes
+			}
+			set_character_as_ruler = yes
+		}
+		if = {
+			limit = { ig:ig_socialists = { leader = { is_historical = no } } }
+			create_character = {
+				first_name = "deng_xiaoping_first_name"
+				last_name = "deng_xiaoping_last_name"
+				ruler = yes ig_leader = yes historical = yes
+				birth_date = 1904.8.22
+				interest_group = ig_socialists
+				ideology = ideology_market_socialist
+				culture = cu:hakka
+				religion = rel:atheist
+				traits = {
+					meticulous
+					ambitious
+					cautious
+				}
+			}
+		}
+		ig:ig_socialists = {	
+			add_modifier = {
+				name = bpm_empowered_ig
+				years = 30
+				is_decaying = yes
+			}
+		}
+		
+		#Premier
+		create_character = {
+			first_name = "Zhao_Ziyang_first_name"
+			last_name = "Zhao_Ziyang_last_name"
+			ig_leader = yes historical = yes
+			birth_date = 1919.10.17
+			interest_group = ig_revolutionist_socialists
+			ideology = ideology_market_socialists
+			culture = cu:han
+			religion = rel:atheist
+			traits = {
+				meticulous
+				innovative
+				brave
+			}
+		}
+		
+		#Kill all Gang of Four
+		every_scope_character = { 
+			limit = { 
+				interest_group = { is_interest_group_type = ig_trade_unions }
+			}
+			kill_character = yes
+		}
+		
+		#Deng Reform
+		activate_law = law_type:law_right_of_assembly
+		activate_law = law_type:law_total_separation
+		activate_law = law_type:law_semi_command_economy
+		activate_law = law_type:law_compulsory_primary_school	#Compulsory Tertiary School
+		activate_law = law_type:law_public_schools
+		set_institution_investment_level = { institution = institution_schools level = 5 }
+		
+		ai_chance = { 
+			base = 90 
+		}
+		
+    }
+	
+	option = {
+        name = PRC_jing_qing.option
+		
+		#Install Jing Qing
+		random_scope_character = {
+			limit = { 
+				interest_group = { is_interest_group_type = ig_anarchists }
+				is_historical = yes
+				is_ruler = no
+			}
+			set_character_as_ruler = yes
+		}
+		if = {
+			limit = { ruler = { OR = { interest_group = { NOT = { is_interest_group_type = ig_anarchists } } is_historical = no } } }
+			create_character = {
+				first_name = "Li_Shumeng_first_name"
+				last_name = "Li_Shumeng_last_name"
+				ruler = yes ig_leader = yes historical = yes female = yes
+				birth_date = 1914.3.19
+				interest_group = ig_anarchists
+				ideology = ideology_maoist
+				culture = cu:han
+				religion = rel:atheist
+				traits = {
+					arrogant
+					ambitious
+					expensive_tastes
+				}
+			}
+		}
+
+		ig:ig_anarchists = {
+				
+			add_modifier = {
+				name = bpm_empowered_ig
+				years = 30
+				is_decaying = yes
+			}
+		}
+		
+		#Major discontent
+		add_radicals = {
+			value = large_radicals
+			interest_group = ig:ig_petty_bourgeoisie
+		}
+		add_radicals = {
+			value = large_radicals
+			interest_group = ig:ig_industrialists
+		}
+		add_radicals = {
+			pop_type = academics
+			value = very_large_radicals
+		}
+		
+		ai_chance = { 
+			base = 10 modifier = { trigger = { has_global_variable = historical_railroading_active } add = -100 }
+		}
+		
+    }
+
+}
+
+# June Fourth Incident of 1989
+PRC_gov_changes.3 = {
+    type = country_event
+
+    title = PRC_1989_1_revolution.t 							# Title of the event; ADD LOCALISATION
+    desc = PRC_1989_1_revolution.d 							# Description of the event; ADD LOCALISATION
+    #flavor = PRC_1989_1_revolution.f 						# Flavor for event; ADD LOCALISATION, IF REQUIRED
+
+    event_image = { video = "gfx/event_pictures/europenorthamerica_political_extremism.bk2" }
+
+    icon = "gfx/interface/icons/event_icons/event_protest.dds" 		# Icon that shows on the map or the outliner
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear" 	# Sound effect if needed
+
+    duration = 1 # Duration to fire if triggers are met
+	
+	trigger = {													# What triggers the event, if using other events or journal entries leave empty
+		
+		#Overlord conditions
+		OR = { c:PRC ?= this c:CHI ?= this }
+		game_date >= 1989.6.4									# START DATE: Date colony became self governing ****
+		game_date < 1999.6.4									# END DATE: All historical events must not fire 10 years after the START DATE ****
+		
+		is_a_communist_government = yes							# Correct gov types
+		is_sufficiently_independent = yes						# is_vassal = no		
+		is_at_war = no											# war = no
+		
+		#Deng is in charge
+		exists = ruler
+		OR = { 
+			ruler = { is_interest_group_type = ig_socialists }
+			ruler = { has_ideology = ideology_market_socialist }
+		}
+		
+		#Fall of Eastern Bloc
+		c:SOV ?= {
+			is_sufficiently_independent = yes						# is_vassal = no
+			OR = { 
+				has_journal_entry = je_perestroika
+				NOT = { is_a_communist_government = yes }
+			}
+		}
+		c:RUS ?= {
+			is_sufficiently_independent = yes						# is_vassal = no
+			OR = { 
+				has_journal_entry = je_perestroika
+				NOT = { is_a_communist_government = yes }
+			}
+		}
+		
+		# Event has not been fired before
+		NOT = { has_variable = PRC_1989_1_hgc }					# CHANGE ****
+		
+    }
+	
+	immediate = {
+	
+		# Fire only once
+		set_variable = PRC_1989_1_hgc							# Change variable ****
+		
+	}
+    
+	
+	option = {
+        name = PRC_1989_revolution.option.1						# Reject
+		highlighted_option = yes
+		
+		#Premier
+		create_character = {
+			first_name = "Li_Peng_first_name"
+			last_name = "Li_Peng_last_name"
+			ig_leader = yes historical = yes
+			birth_date = 1928.10.20
+			interest_group = ig_revolutionist_socialists
+			ideology = ideology_market_socialist
+			culture = cu:han
+			religion = rel:atheist
+			traits = {
+				grifter
+				wrathful
+				cautious
+			}
+		}
+		
+		#Major discontent
+		add_radicals = {
+			value = large_radicals
+			interest_group = ig:ig_petty_bourgeoisie
+		}
+		add_radicals = {
+			value = large_radicals
+			interest_group = ig:ig_industrialists
+		}
+		add_radicals = {
+			pop_type = academics
+			value = very_large_radicals
+		}
+		
+		#Because of a certain incident
+		change_infamy = 10
+		
+		ai_chance = { 
+			base = 90 
+		}
+		
+    }
+	
+    option = {
+        name = PRC_1989_revolution.option.2						# Accept
+        default_option = yes
+		
+		#Enact new regime
+		effect_starting_politics_presidential_republic = yes
+		effect_starting_politics_democratic = yes
+		effect_conservative_ruling_coalition = yes
+		
+		ai_chance = { 
+			base = 10 modifier = { trigger = { has_global_variable = historical_railroading_active } add = -100 } 
+		}
+		
+    }
+
+}
+
+# Jiang Zemin
+PRC_gov_changes.4 = {
+    type = country_event
+
+    title = PRC_1989_2_revolution.t 							# Title of the event; ADD LOCALISATION
+    desc = PRC_1989_2_revolution.d 							# Description of the event; ADD LOCALISATION
+    #flavor = PRC_1989_2_revolution.f 						# Flavor for event; ADD LOCALISATION, IF REQUIRED
+
+    event_image = { video = "gfx/event_pictures/unspecific_politicians_arguing.bk2" }
+
+    icon = "gfx/interface/icons/event_icons/event_portrait.dds" 	# Icon that shows on the map or the outliner
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear" 	# Sound effect if needed
+
+    duration = 1 # Duration to fire if triggers are met
+	
+	trigger = {													# What triggers the event, if using other events or journal entries leave empty
+		
+		#Overlord conditions
+		OR = { c:PRC ?= this c:CHI ?= this }
+		game_date >= 1989.6.24									# START DATE: Date colony became self governing ****
+		game_date < 1999.8.12									# END DATE: All historical events must not fire 10 years after the START DATE ****
+		
+		is_a_communist_government = yes							# Correct gov types
+		is_sufficiently_independent = yes						# is_vassal = no		
+		is_at_war = no											# war = no
+		
+		#Deng is in charge
+		exists = ruler
+		OR = { 
+			ruler = { interest_group = { is_interest_group_type = ig_socialists } }
+			ruler = { has_ideology = ideology_market_socialist }
+		}
+		
+		# Event has not been fired before
+		NOT = { has_variable = PRC_1989_2_hgc }					# CHANGE ****
+		
+    }
+	
+	immediate = {
+	
+		# Fire only once
+		set_variable = PRC_1989_2_hgc							# Change variable ****
+		
+	}
+    
+    option = {
+        name = historical_gov_changes.option.1					# Accept
+        highlighted_option = yes
+		activate_law = law_type:law_yes_term_limit
+		#Create character
+		create_character = {
+			first_name = "Jiang_Zemin_first_name"
+			last_name = "Jiang_Zemin_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1926.8.17
+			interest_group = ig_socialists
+			ideology = ideology_market_socialists
+			culture = cu:han
+			religion = rel:atheist
+			traits = {
+				cautious
+				innovative
+				wrathful
+			}
+		}
+		ig:ig_socialists = {	
+			add_modifier = {
+				name = bpm_empowered_ig
+				years = 30
+				is_decaying = yes
+			}
+		}
+		
+		ai_chance = { 
+			base = 90 
+		}
+		
+    }
+	
+	option = {
+        name = historical_gov_changes.option.2				# Reject
+		default_option = yes
+		
+		#Major discontent
+		add_modifier = { 
+			name = domestic_unrest
+			months = 60 
+			is_decaying = yes 
+		}
+		add_modifier = { 
+			name = party_in_chaos_modifier
+			months = 12
+			is_decaying = yes 
+		}
+		
+		ai_chance = { 
+			base = 10 modifier = { trigger = { has_global_variable = historical_railroading_active } add = -100 } 
+		}
+		
+    }
+
+}
+
+# Hu Jintao
+PRC_gov_changes.5 = {
+    type = country_event
+
+    title = PRC_2002_revolution.t 							# Title of the event; ADD LOCALISATION
+    desc = PRC_2002_revolution.d 							# Description of the event; ADD LOCALISATION
+    #flavor = PRC_2002_revolution.f 						# Flavor for event; ADD LOCALISATION, IF REQUIRED
+
+    event_image = { video = "gfx/event_pictures/unspecific_politicians_arguing.bk2" }
+
+    icon = "gfx/interface/icons/event_icons/event_portrait.dds" 	# Icon that shows on the map or the outliner
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear" 	# Sound effect if needed
+
+    duration = 1 # Duration to fire if triggers are met
+	
+	trigger = {													# What triggers the event, if using other events or journal entries leave empty
+		
+		#Overlord conditions
+		OR = { c:PRC ?= this c:CHI ?= this }
+		game_date >= 2002.11.5									# START DATE: Date colony became self governing ****
+		game_date < 2012.11.5									# END DATE: All historical events must not fire 10 years after the START DATE ****
+		
+		is_a_communist_government = yes							# Correct gov types
+		is_sufficiently_independent = yes						# is_vassal = no		
+		is_at_war = no											# war = no
+		
+		# Event has not been fired before
+		NOT = { has_variable = PRC_2002_hgc }					# CHANGE ****
+		
+    }
+	
+	immediate = {
+	
+		# Fire only once
+		set_variable = PRC_2002_hgc								# Change variable ****
+		
+	}
+    
+    option = {
+        name = historical_gov_changes.option.1					# Accept
+        highlighted_option = yes
+		
+		#Create character
+		create_character = {
+			first_name = "Hu_Jintao_first_name"
+			last_name = "Hu_Jintao_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1942.12.21
+			interest_group = ig_socialists
+			ideology = ideology_market_socialist
+			culture = cu:han
+			religion = rel:atheist
+			traits = {
+				cautious
+				reserved
+				persistent
+			}
+		}
+		ig:ig_socialists = {	
+			add_modifier = {
+				name = bpm_empowered_ig
+				years = 30
+				is_decaying = yes
+			}
+		}
+		
+		ai_chance = { 
+			base = 90 
+		}
+		
+    }
+	
+	option = {
+        name = historical_gov_changes.option.2				# Reject
+		default_option = yes
+		
+		#Major discontent
+		add_modifier = { 
+			name = domestic_unrest
+			months = 60 
+			is_decaying = yes 
+		}
+		add_modifier = { 
+			name = party_in_chaos_modifier
+			months = 12
+			is_decaying = yes 
+		}
+		
+		ai_chance = { 
+			base = 10 modifier = { trigger = { has_global_variable = historical_railroading_active } add = -100 } 
+		}
+		
+    }
+
+}
+
+# Xi Jinping
+PRC_gov_changes.6 = {
+    type = country_event
+
+    title = PRC_2012_revolution.t 							# Title of the event; ADD LOCALISATION
+    desc = PRC_2012_revolution.d 							# Description of the event; ADD LOCALISATION
+    #flavor = PRC_2012_revolution.f 						# Flavor for event; ADD LOCALISATION, IF REQUIRED
+
+    event_image = { video = "gfx/event_pictures/unspecific_politicians_arguing.bk2" }
+
+    icon = "gfx/interface/icons/event_icons/event_portrait.dds" 	# Icon that shows on the map or the outliner
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear" 	# Sound effect if needed
+
+    duration = 1 # Duration to fire if triggers are met
+	
+	trigger = {													# What triggers the event, if using other events or journal entries leave empty
+		
+		#Overlord conditions
+		OR = { c:PRC ?= this c:CHI ?= this }
+		game_date >= 2012.11.15									# START DATE: Date colony became self governing ****
+		game_date < 2022.11.15									# END DATE: All historical events must not fire 10 years after the START DATE ****
+		
+		is_a_communist_government = yes							# Correct gov types
+		is_sufficiently_independent = yes						# is_vassal = no		
+		is_at_war = no											# war = no
+		
+		# Event has not been fired before
+		NOT = { has_variable = PRC_2012_hgc }					# CHANGE ****
+		
+    }
+	
+	immediate = {
+	
+		# Fire only once
+		set_variable = PRC_2012_hgc								# Change variable ****
+		
+	}
+    
+    option = {
+        name = historical_gov_changes.option.1					# Accept
+        highlighted_option = yes
+		
+		#Create character
+		create_character = {
+			first_name = "Xi_Jinping_first_name"
+			last_name = "Xi_Jinping_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1953.6.15
+			interest_group = ig_socialists
+			ideology = ideology_vanguardist
+			culture = cu:han
+			religion = rel:atheist
+			traits = {
+				ambitious
+				cautious
+				tactful
+			}
+		}
+		ig:ig_socialists = {	
+			add_modifier = {
+				name = bpm_empowered_ig
+				years = 30
+				is_decaying = yes
+			}
+		}
+		
+		ai_chance = { 
+			base = 90 
+		}
+		
+    }
+	
+	option = {
+        name = historical_gov_changes.option.2				# Reject
+		default_option = yes
+		
+		#Major discontent
+		add_modifier = { 
+			name = domestic_unrest
+			months = 60 
+			is_decaying = yes 
+		}
+		add_modifier = { 
+			name = party_in_chaos_modifier
+			months = 12
+			is_decaying = yes 
+		}
+		
+		ai_chance = { 
+			base = 10 modifier = { trigger = { has_global_variable = historical_railroading_active } add = -100 } 
+		}
+		
+    }
+
+}

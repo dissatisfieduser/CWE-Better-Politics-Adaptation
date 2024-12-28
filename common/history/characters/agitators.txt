@@ -1,0 +1,143 @@
+CHARACTERS = {
+
+	### North America ###
+	c:USA = {
+		create_character = {
+			first_name = "Joseph_McCarthy_first_name"
+			last_name = "Joseph_McCarthy_last_name"
+			is_agitator = yes historical = yes
+			birth_date = 1908.11.14
+			interest_group = ig_industrialists
+			ideology = ideology_agitator_anti_human_rights
+			culture = cu:anglo_american
+			religion = rel:protestant
+			traits = {
+				wrathful
+				persistent
+				charismatic
+				sickly
+			}
+		}
+		create_character = {
+			first_name = "Robert_Oppenheimer_first_name"
+			last_name = "Robert_Oppenheimer_last_name"
+			is_agitator = yes historical = yes
+			birth_date = 1904.4.22
+			interest_group = ig_petty_bourgeoisie
+			ideology = ideology_pacifist
+			culture = cu:anglo_american
+			religion = rel:hindu
+			traits = {
+				direct
+				reserved
+				erudite
+			}
+		}
+    }
+	
+	### Europe ###
+	c:SOV = {
+		create_character = {
+			first_name = "Andrei_Sakharov_first_name"
+			last_name = "Andrei_Sakharov_last_name"
+			is_agitator = yes historical = yes
+			birth_date = 1921.5.21
+			interest_group = ig_petty_bourgeoisie
+			ideology = ideology_agitator_pro_human_rights
+			culture = cu:russian
+			religion = rel:atheist
+			traits = {
+				direct
+				brave
+				erudite
+			}
+		}
+	}
+	c:GBR = {
+		create_character = {
+			first_name = "Anthony_Benn_first_name"
+			last_name = "Anthony_Benn_last_name"
+			is_agitator = yes historical = yes
+			birth_date = 1925.4.3
+			interest_group = ig_trade_unions
+			ideology = ideology_agitator_pro_human_rights
+			culture = cu:english
+			religion = rel:atheist
+			traits = {
+				direct
+				persistent
+				ambitious
+			}
+		}
+		create_character = {
+			first_name = "Bertrand_Russell_first_name"
+			last_name = "Bertrand_Russell_last_name"
+			is_agitator = yes historical = yes
+			birth_date = 1872.5.18
+			interest_group = ig_petty_bourgeoisie
+			ideology = ideology_agitator_pro_human_rights
+			culture = cu:english
+			religion = rel:atheist
+			traits = {
+				erudite
+				charismatic
+				direct
+			}
+		}
+	}
+	
+	### Asia ###
+	c:JAP = {
+		create_character = {
+			first_name = "Yukio_Mishima_first_name"
+			last_name = "Yukio_Mishima_last_name"
+			is_agitator = yes historical = yes
+			birth_date = 1925.1.14
+			interest_group = ig_landowners
+			ideology = ideology_agitator_nationalist
+			culture = cu:japanese
+			religion = rel:shinto
+			traits = {
+				charismatic
+				erudite
+				ambitious
+			}
+			on_created = { set_variable = Yukio_Mishima }
+		}
+		create_character = {
+			first_name = "Kenji_Miyamoto_first_name"
+			last_name = "Kenji_Miyamoto_last_name"
+			is_agitator = yes historical = yes
+			birth_date = 1908.10.17
+			interest_group = ig_trade_unions
+			ideology = ideology_agitator_communist
+			culture = cu:japanese
+			religion = rel:atheist
+			traits = {
+				persistent
+				erudite
+				brave
+			}
+		}
+    }
+	
+	### South East Asia ###
+	c:MLY = {
+		create_character = {
+			first_name = "Chin_Peng_first_name"
+			last_name = "Chin_Peng_last_name"
+			is_agitator = yes historical = yes
+			birth_date = 1924.10.21
+			interest_group = ig_revolutionist_socialists
+			ideology = ideology_vanguardist
+			culture = cu:han
+			religion = rel:atheist
+			traits = {
+				charismatic
+				persistent
+				ambitious
+			}
+		}
+    }
+	
+}

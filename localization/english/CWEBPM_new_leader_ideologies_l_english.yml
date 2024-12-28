@@ -1,0 +1,79 @@
+﻿l_english:
+
+  ideology_maoist:0 "Maoist"
+  ideology_maoist_desc:0 "#lore Maoists are Vanguardists who alternate between a relaxed and heavily restrictive view on free speech, particularly where it pertains to some democratic process. Maoists also subscribe to a revolutionary strategy of mobilizing the countryside to encircle the cities, usually through peasant guerillas combined with a dedicated party core. #!"
+
+  ideology_reform_communist:0 "Reform Communist"
+  ideology_reform_communist_desc:0 "#lore Reform Communists believe that the socialist system requires reforms that enhances the people's democratic power in terms of more government transparency and direct representation. #!"
+
+  ideology_market_socialist:0 "Market Socialist"
+  ideology_market_socialist_desc:0 "#lore Market Socialists believe that the the path towards a building socialism necesssarily requires a period where market forces are active in order to increase the society's productive forces. #!"
+
+  ideology_left_nationalist:0 "Left Nationalist"
+  ideology_left_nationalist_desc:0 "#lore Left Nationalists generally believe that left-wing political ideologies best serve to advance their nation. They are typically nationalists first, leftists second. #!"
+
+  ideology_labour_ethnostatist:0 "Labour Ethnostatist"
+  ideology_labour_ethnostatist_desc:0 "#lore A Labour Ethnostatist is still an ethnostatist, but with a left-wing coat of paint. #!"
+
+  ideology_new_labour:0 "New Labour"
+  ideology_new_labour_desc:0 "#lore New Labour describes a person who is affiliated with a social democratic platform but has assimilated many neoliberal theories. #!"
+
+  ideology_welfare_liberal:0 "Welfare Liberal"
+  ideology_welfare_liberal_desc:0 "#lore Welfare Liberals believe that the free market must be curtailed and managed through government intervention and worker's benefits instituted in order to preserve the liberal regime. #!"
+ 
+  ideology_progressive:0 "Progressive"
+  ideology_progressive_desc:0 "#lore Progressives call for greater consumer benefits and expansion of environmental protections without necesarrily basing these demands on an anti-liberal or anti-capitalist theoretical base. #!"
+
+  ideology_green:0 "Green"
+  ideology_green_desc:0 "#lore Greens care very strongly about the expansion of environmental protections. #!"
+
+  ideology_neoliberal:0 "Neoliberal"
+  ideology_neoliberal_desc:0 "#lore Neoliberals wish to dismantle state-funded welfare systems in order to unshackle the free market from government intervention with the understanding that the prospective gains made by the wealthiest will trickle down to the rest of society. #!"
+
+  ideology_neoconservative:0 "Neoconservative"
+  ideology_neoconservative_desc:0 "#lore Neoconservatives emerged as a reaction against an increasingly radical countercultural left. Essentially Neoliberals but with more reactionary views on culture. #!"
+
+  ideology_libertarian:0 "Libertarian"
+  ideology_libertarian_desc:0 "#lore Libertarians believe that the freedom of the market is the paramount freedom in hierarchy of freedoms, that all other freedoms in fact necessarily require a free market to properly work. #!"
+
+  ideology_theodemocrat:0 "Theodemocrat"
+  ideology_theodemocrat_desc:0 "#lore Theodemocrats are a form of Theocrats who believe that some form of representative democracy can coexist with a theocratic structure. #!"
+
+  William_Z_Foster_first_name:0 "William Z."
+  William_Z_Foster_last_name:0 "Foster"
+  Bhumibol_Adulyadej_last_name:0 "Adulyadej"
+  Bhumibol_Adulyadej_first_name:0 "Bhumibol"
+  george_windsor_first_name:0 " George VI"
+  george_windsor_last_name:0 "Windsor"
+  elizabeth_windsor_first_name:0 "Elizabeth II"
+  elizabeth_windsor_last_name:0 "Windsor"
+  juliana_orangenassau_first_name:0 "Juliana"
+  juliana_orangenassau_last_name:0 "Orange-Nassau"
+  beatrix_orangenassau_first_name:0 "Beatrix"
+  beatrix_orangenassau_last_name:0 "Orange-Nassau"
+  baudouin_belgium_first_name:0 "Baudouin"
+  baudouin_belgium_last_name:0 "Belgium"
+  charlotte_nassauweilburg_first_name:0 "Charlotte"
+  charlotte_nassauweilburg_last_name:0 "Nassau-Weilburg"
+  gustaf_bernadotte_first_name: "Gustaf V"
+  gustaf_bernadotte_last_name: "Bernadotte"
+  gustaf_adolf_bernadotte_first_name:0 "Gustag VI Adolf"
+  gustaf_adolf_bernadotte_last_name:0 "Bernadotte"
+  frederik_glucksburg_first_name:0 "Frederik IX"
+  frederik_glucksburg_last_name:0 "Glucksburg"
+  margrethe_glucksburg_first_name:0 "Margrethe II"
+  margrethe_glucksburg_last_name:0 "Glucksburg"
+  haakon_glucksburg_first_name:0 "Haakon VII"
+  haakon_glucksburg_last_name:0 "Glucksburg"
+  olav_glucksburg_first_name:0 "Olav V"
+  olav_glucksburg_last_name:0 "Glucksburg"
+  paul_glucksburg_first_name:0 "Paul"
+  paul_glucksburg_last_name:0 "Glucksburg"
+  constantine_glucksburg_first_name:0 "Constantine"
+  constantine_glucksburg_last_name:0 "Glucksburg"
+  Bo_Xilai_first_name:0 "Bo"
+  Bo_Xilai_last_name:0 "XiLai"
+  Hirohito_Yamato_first_name:0 "Showa"
+  Hirohito_Yamato_last_name:0 "Yamato"
+  Akihito_Yamato_first_name:0 "Heisei"
+  Akihito_Yamato_last_name:0 "Yamato"

@@ -1,0 +1,225 @@
+namespace = south_african_decolonisation
+
+#Namibia (INDEPENDENCE)
+south_african_decolonisation.1 = {
+    type = country_event
+	placement = scope:colonial_state
+
+    title = south_african_namibia.indy.t 					# Title of the event; ADD LOCALISATION
+    desc = south_african_namibia.indy.d 					# Description of the event; ADD LOCALISATION
+    #flavor = south_african_namibia.indy.f 					# Flavor for event; ADD LOCALISATION, IF REQUIRED
+
+    event_image = { video = "gfx/event_pictures/unspecific_signed_contract.bk2" }
+
+    icon = "gfx/interface/icons/event_icons/waving_flag.dds" 	# Icon that shows on the map or the outliner
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear" 	# Sound effect if needed
+
+    duration = 1 # Duration to fire if triggers are met
+	
+	trigger = {													# What triggers the event, if using other events or journal entries leave empty
+		
+		#Overlord conditions
+		OR = { c:SAF ?= this c:RSA ?= this }					# Change TAG of the overlord ****
+		game_date >= 1990.3.21									# START DATE: Date colony became self governing ****
+		game_date < 2000.3.21									# END DATE: All historical events must not fire 10 years after the START DATE ****
+		
+		# Event has not been fired before
+		NOT = { has_variable = south_african_namibia_indy }		# CHANGE ****
+		
+		OR = { 
+			is_a_democracy = yes								# Correct gov types
+			is_some_kind_of_democracy = yes
+		}
+		is_sufficiently_independent = yes						# is_vassal = no		
+		is_at_war = no											# war = no
+		
+		OR = {
+			AND = {
+				exists = c:NMB
+				c:NMB = { is_direct_subject_of = ROOT }
+			}
+			AND = {
+				NOT = { 												# Colony to be released must not already exist on the map
+					exists = c:NMB										# Change TAG of the colony ****
+				}
+				any_scope_state = { 									# Overlord owns the states of the colony to be released
+					state_region = { is_homeland = cu:namibian }		# Change homeland identity to match colony to be released ****
+				}
+			}
+		}
+		
+    }
+	
+	immediate = {
+	
+		# Generate list of provinces to be released				# DO NOT TOUCH THIS SECTION
+		if = { 
+			limit = {  
+				any_scope_state = {
+					state_region = { is_homeland = cu:namibian }
+				}
+			}
+			every_scope_state = {
+				limit = {
+					state_region = { is_homeland = cu:namibian }	# Change homeland identity to match colony to be released ****
+				}
+				save_scope_as = colonial_state
+			}
+		}
+		else_if = { 
+			limit = { exists = c:NMB }
+			c:NMB = { capital = { save_scope_as = colonial_state } }
+		}
+		
+		# Fire only once
+		set_variable = south_african_namibia_indy						# Change variable ****
+		
+	}
+    
+    option = {
+        name = south_african_decolonisation.option.1				#Grant them self-government
+        default_option = yes highlighted_option = yes
+		
+		#Release country
+		if = {
+			limit = { 
+				NOT = { 
+					exists = c:NMB 
+				} 
+			}
+			create_country = {
+				tag = NMB										# Change TAG of country being released ****
+				origin = THIS									# TAG where the created country takes tech from
+				state = scope:colonial_state
+				
+				on_created = {									# Set government laws & rulers here
+					
+					# SET laws for colony ****
+					effect_starting_politics_semi_presidential_republic = yes
+					effect_starting_politics_democratic = yes
+					effect_starting_politics_constitutional_unitary_state = yes
+					effect_starting_politics_war_policy_anti_military = yes
+					effect_starting_politics_economic_policy_interventionism = yes
+					effect_starting_politics_trade_policy_protectionism = yes
+					effect_starting_politics_anti_nuclear_policy = yes
+					
+					# Set diplomatic recognition
+					set_country_type = unrecognized
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				exists = c:NMB
+			}
+			c:NMB = { 
+				make_independent = yes 
+			}
+		}
+		
+		# Overlord create client state pact with colony
+		if = {
+			limit = { exists = c:NMB }
+			every_scope_state = {
+				limit = {
+					OR = { 
+						state_region = { is_homeland = cu:namibian }	# Change homeland identity to match colony to be released ****
+						state_region = s:STATE_BOTSWANA
+					}
+				}
+				set_state_owner = c:NMB								# Change TAG to colony ****
+			}
+			if = {
+				limit = {
+					p:x8031D0 ?= {
+						owner = c:NMB
+					}
+				}
+				c:NMB = { 
+					s:STATE_NAMAQUALAND = {
+						set_owner_of_provinces = {
+							country = ROOT
+							provinces = { x8031D0 }
+						}
+					}
+				}
+			}
+			set_relations = { 
+				country = c:NMB 
+				value = 100 
+			}
+			create_diplomatic_pact = {
+				country = c:NMB										# Change TAG ****
+				type = protectorate
+			}
+			c:NMB = {
+			
+				#Sam Nujoma
+				create_character = {
+					first_name = "Sam_Nujoma_first_name"
+					last_name = "Sam_Nujoma_last_name"
+					ruler = yes ig_leader = yes historical = yes
+					birth_date = 1929.5.12
+					interest_group = ig_trade_unions
+					ideology = ideology_liberal
+					religion = rel:protestant
+					culture = cu:namibian
+					traits = {
+						persistent
+						brave
+						honorable
+					}
+				}
+				
+			}
+		}
+		
+		# Fire only once
+		set_variable = south_african_namibia_indy						# Change variable ****
+		
+		ai_chance = { 
+			base = 90 
+		}
+		
+    }
+	
+	option = {
+        name = south_african_decolonisation.option.2					# REFUSE
+		
+		change_infamy = 10
+		
+		# Natives are angry!
+		every_scope_state = {
+			limit = {
+		 		state_region = { is_homeland = cu:namibian }	# Change homeland identity to match colony to be released ****
+		 	}
+			add_radicals_in_state = {
+				culture = cu:namibian							# Change culture ****
+				value = large_radicals
+			}
+			add_modifier = { name = nationalist_agitation months = 60 is_decaying = yes } 
+		}
+		random_country = {
+			limit = { c:NMB ?= this }
+			every_scope_state = {
+				limit = {
+					state_region = { is_homeland = cu:namibian }	# Change homeland identity to match colony to be released ****
+				}
+				add_radicals_in_state = {
+					culture = cu:namibian							# Change culture ****
+					value = large_radicals
+				}
+				add_modifier = { name = nationalist_agitation months = 60 is_decaying = yes } 
+			}
+		}
+		
+		# Fire only once
+		set_variable = south_african_namibia_indy						# Change variable ****
+		
+		ai_chance = { 
+			base = 10 modifier = { trigger = { has_global_variable = historical_railroading_active } add = -100 } 
+		}
+		
+    }
+
+}

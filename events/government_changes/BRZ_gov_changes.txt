@@ -1,0 +1,516 @@
+namespace = BRZ_gov_changes
+
+# Revolution of 1964
+BRZ_gov_changes.1 = {
+    type = country_event
+
+    title = BRZ_1964_revolution.t 							# Title of the event; ADD LOCALISATION
+    desc = BRZ_1964_revolution.d 							# Description of the event; ADD LOCALISATION
+    #flavor = BRZ_1964_revolution.f 						# Flavor for event; ADD LOCALISATION, IF REQUIRED
+
+    event_image = { video = "gfx/event_pictures/unspecific_politicians_arguing.bk2" }
+
+    icon = "gfx/interface/icons/event_icons/event_portrait.dds" 	# Icon that shows on the map or the outliner
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear" 	# Sound effect if needed
+
+    duration = 1 # Duration to fire if triggers are met
+	
+	trigger = {													# What triggers the event, if using other events or journal entries leave empty
+		
+		#Overlord conditions
+		exists = c:BRZ
+		this = c:BRZ											# Change TAG of the overlord ****
+		game_date >= 1964.4.1									# START DATE: Date colony became self governing ****
+		game_date < 1974.4.1									# END DATE: All historical events must not fire 10 years after the START DATE ****
+		
+		is_a_republican_democracy = yes							# Correct gov types
+		is_sufficiently_independent = yes						# is_vassal = no		
+		is_at_war = no											# war = no
+		
+		left_wing_ruling_coalition = yes						# Correct Ruling Coalition
+		
+		# Event has not been fired before
+		NOT = { has_variable = BRZ_1964_hgc }					# CHANGE ****
+		
+    }
+	
+	immediate = {
+	
+		# Fire only once
+		set_variable = BRZ_1964_hgc								# Change variable ****
+		
+	}
+    
+    option = {
+        name = historical_gov_changes.option.1					# Accept
+        highlighted_option = yes
+		
+		#Becomes independent
+		if = {
+			limit = { is_subject = yes }
+			make_independent = yes
+		}
+		
+		#Enact new regime
+		effect_starting_politics_nationalist_republic = yes
+		effect_starting_politics_regime = yes
+		effect_rightwing_military_ruling_coalition = yes
+		activate_law = law_type:law_military_junta
+		
+		#Create new leader
+		create_character = {
+			first_name = "Castelo_Branco_first_name"
+			last_name = "Castelo_Branco_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1897.9.20
+			interest_group = ig_armed_forces
+			ideology = ideology_authoritarian
+			culture = cu:brazilian
+			religion = rel:catholic
+			traits = {
+				ambitious
+				cruel
+				wrathful
+			}
+		}
+		
+		ai_chance = { 
+			base = 90 
+		}
+		
+    }
+	
+	option = {
+        name = historical_gov_changes.option.2				# Reject
+		default_option = yes
+		
+		#Major discontent
+		add_radicals = {
+			value = large_radicals
+		}
+		add_modifier = { 
+			name = stirrings_of_revolution
+			months = 60 
+			is_decaying = yes 
+		}
+		
+		ai_chance = { 
+			base = 10 modifier = { trigger = { has_global_variable = historical_railroading_active } add = -100 } 
+		}
+		
+    }
+
+}
+
+# Brazilian Return to democracy
+BRZ_gov_changes.2 = {
+    type = country_event
+
+    title = BRZ_1985_revolution.t 							# Title of the event; ADD LOCALISATION
+    desc = BRZ_1985_revolution.d 							# Description of the event; ADD LOCALISATION
+    #flavor = BRZ_1985_revolution.f 						# Flavor for event; ADD LOCALISATION, IF REQUIRED
+
+    event_image = { video = "gfx/event_pictures/unspecific_politicians_arguing.bk2" }
+
+    icon = "gfx/interface/icons/event_icons/event_portrait.dds" 	# Icon that shows on the map or the outliner
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear" 	# Sound effect if needed
+
+    duration = 1 # Duration to fire if triggers are met
+	
+	trigger = {													# What triggers the event, if using other events or journal entries leave empty
+		
+		#Overlord conditions
+		exists = c:BRZ
+		this = c:BRZ											# Change TAG of the overlord ****
+		game_date >= 1985.4.21									# START DATE: Date colony became self governing ****
+		game_date < 1995.4.21									# END DATE: All historical events must not fire 10 years after the START DATE ****
+		
+		is_a_nationalist_government = yes						# Correct gov types
+		is_sufficiently_independent = yes						# is_vassal = no		
+		is_at_war = no											# war = no
+		
+		right_wing_ruling_coalition = yes						# Correct Ruling Coalition
+		
+		# Event has not been fired before
+		NOT = { has_variable = BRZ_1985_hgc }					# CHANGE ****
+		
+    }
+	
+	immediate = {
+	
+		# Fire only once
+		set_variable = BRZ_1985_hgc								# Change variable ****
+		
+	}
+    
+    option = {
+        name = historical_gov_changes.option.1					# Accept
+        highlighted_option = yes
+		
+		#Becomes independent
+		make_independent = yes
+		
+		#Enact new regime
+		effect_starting_politics_presidential_republic = yes
+		effect_starting_politics_democratic = yes
+		effect_socialist_ruling_coalition = yes
+		
+		#José Sarney
+		create_character = {
+			first_name = "Jose_Sarney_first_name"
+			last_name = "Jose_Sarney_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1930.4.24
+			interest_group = ig_conservatives
+			ideology = ideology_moderate
+			culture = cu:brazilian
+			religion = rel:catholic
+			traits = {
+				reckless
+				charismatic
+				grifter
+			}
+		}
+		
+		ai_chance = { 
+			base = 90 
+		}
+		
+    }
+	
+	option = {
+        name = historical_gov_changes.option.2				# Reject
+		default_option = yes
+		
+		#Major discontent
+		add_radicals = {
+			value = large_radicals
+		}
+		add_modifier = { 
+			name = stirrings_of_revolution
+			months = 60 
+			is_decaying = yes 
+		}
+		
+		ai_chance = { 
+			base = 10 modifier = { trigger = { has_global_variable = historical_railroading_active } add = -100 } 
+		}
+		
+    }
+
+}
+
+# Brazil Monarchy Referendum
+BRZ_gov_changes.3 = {
+    type = country_event
+
+    title = BRZ_1993_revolution.t 							# Title of the event; ADD LOCALISATION
+    desc = BRZ_1993_revolution.d 							# Description of the event; ADD LOCALISATION
+    #flavor = BRZ_1993_revolution.f 						# Flavor for event; ADD LOCALISATION, IF REQUIRED
+
+    event_image = { video = "gfx/event_pictures/unspecific_politicians_arguing.bk2" }
+
+    icon = "gfx/interface/icons/event_icons/event_portrait.dds" 	# Icon that shows on the map or the outliner
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear" 	# Sound effect if needed
+
+    duration = 1 # Duration to fire if triggers are met
+	
+	trigger = {													# What triggers the event, if using other events or journal entries leave empty
+		
+		#Overlord conditions
+		exists = c:BRZ
+		this = c:BRZ											# Change TAG of the overlord ****
+		game_date >= 1993.4.21									# START DATE: Date colony became self governing ****
+		game_date < 2003.4.21									# END DATE: All historical events must not fire 10 years after the START DATE ****
+		
+		is_a_republican_democracy = yes							# Correct gov types
+		is_sufficiently_independent = yes						# is_vassal = no		
+		is_at_war = no											# war = no
+		
+		#Restored democracy
+		has_variable = BRZ_1985_hgc
+		
+		# Event has not been fired before
+		NOT = { has_variable = BRZ_1993_hgc }					# CHANGE ****
+		
+    }
+	
+	immediate = {
+	
+		# Fire only once
+		set_variable = BRZ_1993_hgc								# Change variable ****
+		
+	}
+    
+	option = {
+        name = BRZ_1993_revolution.option.1						# Presidential Republic
+		highlighted_option = yes
+		
+		effect_starting_politics_presidential_republic = yes
+		
+		ai_chance = { 
+			base = 80
+		}
+		
+    }
+	
+	option = {
+        name = BRZ_1993_revolution.option.2						# Parliamentary Republic
+		
+		effect_starting_politics_parliamentary_republic = yes
+		
+		ai_chance = { 
+			base = 10 
+		}
+		
+    }
+	
+    option = {
+        name = BRZ_1993_revolution.option.3						# Constitutional Monarchy
+        default_option = yes
+		
+		#Enact new regime
+		effect_starting_politics_constitutional_monarchy = yes
+		
+		#Major discontent
+		add_radicals = {
+			value = large_radicals
+			strata = poor
+		}
+		
+		ai_chance = { 
+			base = 10 modifier = { trigger = { has_global_variable = historical_railroading_active } add = -100 } 
+		}
+		
+    }
+
+}
+
+# The Impeachment of Dilma Rousseff
+BRZ_gov_changes.4 = {
+    type = country_event
+
+    title = BRZ_2016_revolution.t 							# Title of the event; ADD LOCALISATION
+    desc = BRZ_2016_revolution.d 							# Description of the event; ADD LOCALISATION
+    #flavor = BRZ_2016_revolution.f 						# Flavor for event; ADD LOCALISATION, IF REQUIRED
+
+    event_image = { video = "gfx/event_pictures/unspecific_politicians_arguing.bk2" }
+
+    icon = "gfx/interface/icons/event_icons/event_portrait.dds" 	# Icon that shows on the map or the outliner
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear" 	# Sound effect if needed
+
+    duration = 1 # Duration to fire if triggers are met
+	
+	trigger = {													# What triggers the event, if using other events or journal entries leave empty
+		
+		#Overlord conditions
+		c:BRZ ?= this
+		game_date >= 2016.8.31									# START DATE: Date colony became self governing ****
+		game_date < 2026.8.31									# END DATE: All historical events must not fire 10 years after the START DATE ****
+		
+		is_a_presidential_democracy = yes						# Correct gov types
+		is_sufficiently_independent = yes						# is_vassal = no		
+		is_at_war = no											# war = no
+		
+		#Dilma Rousseff
+		exists = ruler
+		ruler = { has_variable = Dilma_Rousseff }
+		
+		# Event has not been fired before
+		NOT = { has_variable = BRZ_2016_hgc }					# CHANGE ****
+		
+    }
+	
+	immediate = {
+	
+		# Fire only once
+		set_variable = BRZ_2016_hgc								# Change variable ****
+		
+	}
+    
+    option = {
+        name = historical_gov_changes.option.1					# Accept
+        highlighted_option = yes
+		
+		#Remove Dilma Rousseff
+		ruler = { 
+			kill_character = {
+				hidden = yes
+				value = yes
+			} 
+		}
+		
+		#New President
+		create_character = {
+			first_name = "Michel_Temer_first_name"
+			last_name = "Michel_Temer_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1940.9.23
+			interest_group = ig_liberals
+			ideology = ideology_moderate
+			culture = cu:brazilian
+			religion = rel:catholic
+			traits = {
+				erudite
+				reserved
+				grifter
+			}
+		}
+		
+		ai_chance = { 
+			base = 90 
+		}
+		
+    }
+	
+	option = {
+        name = historical_gov_changes.option.2					# Reject
+		default_option = yes
+		
+		#Survived impeachment
+		ruler = { 
+			hidden_effect = { remove_modifier = survived_impeachment }
+			add_modifier = { name = survived_impeachment years = 4 is_decaying = yes } 
+		}
+		
+		#Add corruption
+		activate_law = law_type:law_very_low_anti_corruption
+		
+		#Minor discontent
+		add_radicals = {
+			value = large_radicals
+			interest_group = ig:ig_armed_forces
+		}
+		add_radicals = {
+			value = very_large_radicals
+			interest_group = ig:ig_devout
+		}
+		add_radicals = {
+			value = large_radicals
+			interest_group = ig:ig_rural_folk
+		}
+		
+		ai_chance = { 
+			base = 10 modifier = { trigger = { has_global_variable = historical_railroading_active } add = -100 } 
+		}
+		
+    }
+
+}
+
+# 2023 Brazilian Congress attack
+BRZ_gov_changes.5 = {
+    type = country_event
+
+    title = BRZ_2023_revolution.t 							# Title of the event; ADD LOCALISATION
+    desc = BRZ_2023_revolution.d 							# Description of the event; ADD LOCALISATION
+    #flavor = BRZ_2023_revolution.f 						# Flavor for event; ADD LOCALISATION, IF REQUIRED
+
+    event_image = { video = "gfx/event_pictures/europenorthamerica_political_extremism.bk2" }
+
+    icon = "gfx/interface/icons/event_icons/event_portrait.dds" 	# Icon that shows on the map or the outliner
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear" 	# Sound effect if needed
+
+    duration = 1 # Duration to fire if triggers are met
+	
+	trigger = {													# What triggers the event, if using other events or journal entries leave empty
+		
+		#Overlord conditions
+		c:BRZ ?= this
+		game_date >= 2023.1.8									# START DATE: Date colony became self governing ****
+		game_date < 2033.1.8									# END DATE: All historical events must not fire 10 years after the START DATE ****
+		
+		is_a_presidential_democracy = yes						# Correct gov types
+		is_sufficiently_independent = yes						# is_vassal = no		
+		is_at_war = no											# war = no
+		
+		#Jair Bolsonaro
+		has_variable = Jair_Bolsonaro_elected
+		
+		#Biden
+		exists = ruler
+		ruler = { NOT = { has_variable = Jair_Bolsonaro } }
+		
+		# Event has not been fired before
+		NOT = { has_variable = BRZ_2023_hgc }					# CHANGE ****
+		
+    }
+	
+	immediate = {
+	
+		# Fire only once
+		set_variable = BRZ_2023_hgc								# Change variable ****
+		
+	}
+    
+    option = {
+        name = historical_gov_changes.option.1					# Accept
+        highlighted_option = yes
+		
+		#Minor discontent
+		add_radicals = {
+			value = large_radicals
+			interest_group = ig:ig_armed_forces
+		}
+		add_radicals = {
+			value = very_large_radicals
+			interest_group = ig:ig_devout
+		}
+		add_radicals = {
+			value = large_radicals
+			interest_group = ig:ig_rural_folk
+		}
+		
+		ai_chance = { 
+			base = 90 
+		}
+		
+    }
+	
+	option = {
+        name = historical_gov_changes.option.2				# Reject
+		default_option = yes
+		
+		#Enact new regime
+		effect_starting_politics_dictatorship = yes
+		
+		#Election is reversed
+		create_character = {
+			first_name = "Jair_Bolsonaro_first_name"
+			last_name = "Jair_Bolsonaro_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1955.3.21
+			interest_group = ig_reactionaries
+			ideology = ideology_authoritarian
+			culture = cu:brazilian
+			religion = rel:catholic
+			traits = {
+				reckless
+				hedonist
+				demagogue
+			}
+			on_created = { set_variable = Jair_Bolsonaro }
+		}
+		
+		#Major discontent
+		add_radicals = {
+			value = very_large_radicals
+			interest_group = ig:ig_trade_unions
+		}
+		add_radicals = {
+			value = very_large_radicals
+			interest_group = ig:ig_petty_bourgeoisie
+		}
+		add_modifier = { 
+			name = stirrings_of_revolution
+			months = 60 
+			is_decaying = yes 
+		}
+		
+		ai_chance = { 
+			base = 10 modifier = { trigger = { has_global_variable = historical_railroading_active } add = -100 } 
+		}
+		
+    }
+
+}

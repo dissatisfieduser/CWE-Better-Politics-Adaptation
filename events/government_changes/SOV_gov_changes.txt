@@ -1,0 +1,1347 @@
+namespace = SOV_gov_changes
+
+# Stalin's Successor
+SOV_gov_changes.1 = {
+    type = country_event
+
+    title = SOV_stalin_succession.t 						# Title of the event; ADD LOCALISATION
+    desc = SOV_stalin_succession.d 							# Description of the event; ADD LOCALISATION
+    #flavor = SOV_stalin_succession.f 						# Flavor for event; ADD LOCALISATION, IF REQUIRED
+
+    event_image = { video = "gfx/event_pictures/unspecific_politicians_arguing.bk2" }
+
+    icon = "gfx/interface/icons/event_icons/event_portrait.dds" 	# Icon that shows on the map or the outliner
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear" 	# Sound effect if needed
+
+    duration = 1 # Duration to fire if triggers are met
+	
+	trigger = {													# What triggers the event, if using other events or journal entries leave empty
+		
+		#Overlord conditions
+		exists = c:SOV
+		this = c:SOV											# Change TAG of the overlord ****
+		game_date >= 1953.3.5									# START DATE: Date colony became self governing ****
+		game_date < 1963.3.5									# END DATE: All historical events must not fire 10 years after the START DATE ****
+		
+		is_a_communist_government = yes							# Correct gov types
+		#is_sufficiently_independent = yes						# is_vassal = no		
+		#is_at_war = no											# war = no
+		
+		exists = ruler
+		OR = { 
+			ruler = { interest_group = { is_interest_group_type = ig_trade_unions } is_historical = yes }
+			ruler = { interest_group = { NOT = { is_interest_group_type = ig_trade_unions } } }
+		}
+		
+		# Event has not been fired before
+		NOT = { has_variable = SOV_1953_hgc }					# CHANGE ****
+		
+    }
+	
+	immediate = {
+	
+		#Kill Stalin & replace with Brezhnev
+		ruler = {
+			kill_character = yes
+		}
+		
+		#Create new leader for Trade Unions IG
+		create_character = {
+			first_name = "Leonid_Brezhnev_first_name"
+			last_name = "Leonid_Brezhnev_last_name"
+			ig_leader = yes historical = yes
+			birth_date = 1906.12.19
+			interest_group = ig_revolutionist_socialists
+			ideology = ideology_vanguardist
+			culture = cu:russian
+			religion = rel:atheist
+			traits = {
+				cautious
+				tactful
+				expensive_tastes
+			}
+			on_created = { set_variable = Leonid_Brezhnev }
+		}
+		
+		#Khrushchev is leader by default
+		random_interest_group = {
+			limit = { 
+				is_interest_group_type = ig_rural_folk
+			}
+			leader = { set_character_as_ruler = yes }
+		}
+		every_interest_group = {
+			limit = { is_in_government = yes }
+			remove_ruling_interest_group = yes
+		}
+		ig:ig_revolutionist_socialists = {
+			add_ruling_interest_group = yes
+		}
+		if = {
+			limit = { ig:ig_revolutionist_socialists = { leader = { is_historical = no } } }
+			create_character = {
+				first_name = "nikita_s_khrushchev_first_name"
+				last_name = "nikita_s_khrushchev_last_name"
+				birth_date = 1894.4.15
+				ruler = yes ig_leader = yes historical = yes
+				interest_group = ig_revolutionist_socialists
+				ideology = ideology_reform_communist
+				culture = cu:ukrainian
+				religion = rel:atheist
+				traits = {
+					charismatic
+					reckless
+					persistent
+				}
+			}
+		}
+	
+		# Fire only once
+		set_variable = SOV_1953_hgc							# Change variable ****
+		
+	}
+    
+    option = {
+        name = SOV_khrushchev.option						# Historical
+        highlighted_option = yes
+		default_option = yes
+		
+		#Install Khrushchev
+		random_interest_group = {
+			limit = { 
+				is_interest_group_type = ig_revolutionist_socialists
+				leader = { is_historical = yes }
+			}
+			leader = { set_character_as_ruler = yes }
+		}
+		if = {
+			limit = { ig:ig_revolutionist_socialists = { leader = { is_historical = no } } }
+			create_character = {
+				first_name = "nikita_s_khrushchev_first_name"
+				last_name = "nikita_s_khrushchev_last_name"
+				birth_date = 1894.4.15
+				ruler = yes ig_leader = yes historical = yes
+				interest_group = ig_revolutionist_socialists
+				ideology = ideology_reform_communist
+				culture = cu:ukrainian
+				religion = rel:atheist
+				traits = {
+					charismatic
+					reckless
+					persistent
+				}
+			}
+		}
+		
+		#Kill Beria & purge the KGB
+		every_scope_character = { 
+			limit = { 
+				is_interest_group_type = ig_intelligentsia
+				is_historical = yes
+			}
+			kill_character = yes
+		}
+		
+		ai_chance = { 
+			base = 90 
+		}
+		
+    }
+	
+	option = {
+        name = SOV_beria.option
+		
+		#Install Beria
+		every_interest_group = {
+			limit = { is_in_government = yes }
+			remove_ruling_interest_group = yes
+		}
+		ig:ig_intelligentsia = {
+			add_ruling_interest_group = yes
+		}
+		random_interest_group = {
+			limit = { 
+				is_interest_group_type = ig_intelligentsia
+				leader = { is_historical = yes }
+			}
+			leader = { set_character_as_ruler = yes }
+		}
+		if = {
+			limit = { ig:ig_intelligentsia = { leader = { is_historical = no } } }
+			create_character = {
+				first_name = "lavrentiy_p_beria_first_name"
+				last_name = "lavrentiy_p_beria_last_name"
+				birth_date = 1899.3.29
+				ruler = yes ig_leader = yes historical = yes
+				interest_group = ig_intelligentsia
+				ideology = ideology_vanguardist
+				culture = cu:russian
+				religion = rel:atheist
+				traits = {
+					arrogant
+					cautious
+					meticulous
+				}
+			}
+		}
+		
+		ai_chance = { 
+			base = 5 modifier = { trigger = { has_global_variable = historical_railroading_active } add = -100 }
+		}
+		
+    }
+	
+	option = {
+        name = SOV_molotov.option
+		
+		#Install Molotov
+		every_interest_group = {
+			limit = { is_in_government = yes }
+			remove_ruling_interest_group = yes
+		}
+		ig:ig_petty_bourgeoisie = {
+			add_ruling_interest_group = yes
+		}
+		random_interest_group = {
+			limit = { 
+				is_interest_group_type = ig_petty_bourgeoisie
+				leader = { is_historical = yes }
+			}
+			leader = { set_character_as_ruler = yes }
+		}
+		if = {
+			limit = { ig:ig_petty_bourgeoisie = { leader = { is_historical = no } } }
+			create_character = {
+				first_name = "vyacheslav_m_molotov_first_name"
+				last_name = "vyacheslav_m_molotov_last_name"
+				ig_leader = yes historical = yes
+				birth_date = 1890.3.9
+				interest_group = ig_petty_bourgeoisie 
+				ideology = ideology_vanguardist
+				culture = cu:russian
+				religion = rel:atheist
+				traits = {
+					bigoted
+					experienced_diplomat
+					cautious
+				}
+			}
+		}
+		
+		ai_chance = { 
+			base = 4 modifier = { trigger = { has_global_variable = historical_railroading_active } add = -100 }
+		}
+		
+    }
+	
+	option = {
+        name = SOV_zhukov.option
+		
+		#Install Zhukov
+		every_interest_group = {
+			limit = { is_in_government = yes }
+			remove_ruling_interest_group = yes
+		}
+		ig:ig_armed_forces = {
+			add_ruling_interest_group = yes
+		}
+		random_interest_group = {
+			limit = { 
+				is_interest_group_type = ig_armed_forces
+				leader = { is_historical = yes }
+			}
+			leader = { set_character_as_ruler = yes }
+		}
+		if = {
+			limit = { ig:ig_armed_forces = { leader = { is_historical = no } } }
+			create_character = {
+				first_name = "georgy_k_zhukov_first_name"
+				last_name = "georgy_k_zhukov_last_name"
+				birth_date = 1896.12.1
+				ruler = yes ig_leader = yes historical = yes
+				is_general = yes
+				hq = region_russia
+				commander_rank = commander_rank_5
+				interest_group = ig_armed_forces
+				ideology = ideology_vanguardist
+				culture = cu:russian
+				religion = rel:atheist
+				traits = {
+					ambitious
+					brave
+					direct
+				}
+			}
+		}
+		
+		ai_chance = { 
+			base = 1 modifier = { trigger = { has_global_variable = historical_railroading_active } add = -100 }
+		}
+		
+    }
+
+}
+
+# The Khrushchev Thaw
+SOV_gov_changes.2 = {
+    type = country_event
+
+    title = SOV_khrushchev_thaw.t 								# Title of the event; ADD LOCALISATION
+    desc = SOV_khrushchev_thaw.d 								# Description of the event; ADD LOCALISATION
+    #flavor = SOV_khrushchev_thaw.f 							# Flavor for event; ADD LOCALISATION, IF REQUIRED
+
+    event_image = { video = "gfx/event_pictures/unspecific_politicians_arguing.bk2" }
+
+    icon = "gfx/interface/icons/event_icons/event_portrait.dds" 	# Icon that shows on the map or the outliner
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear" 	# Sound effect if needed
+
+    duration = 1 # Duration to fire if triggers are met
+	
+	trigger = {													# What triggers the event, if using other events or journal entries leave empty
+		
+		#Overlord conditions
+		exists = c:SOV
+		this = c:SOV											# Change TAG of the overlord ****
+		game_date >= 1956.2.14									# START DATE: Date colony became self governing ****
+		game_date < 1966.2.14									# END DATE: All historical events must not fire 10 years after the START DATE ****
+		
+		is_a_communist_government = yes							# Correct gov types
+		is_sufficiently_independent = yes						# is_vassal = no		
+		is_at_war = no											# war = no
+		
+		#Khrushchev
+		exists = ruler
+		ruler = { interest_group = { is_interest_group_type = ig_rural_folk } is_historical = yes }
+		
+		#Has applicable laws
+		OR = { 
+			has_law = law_type:law_outlawed_dissent
+			has_law = law_type:law_slavery_political
+			has_law = law_type:law_slavery_cultural
+		}
+		
+		# Event has not been fired before
+		NOT = { has_variable = SOV_1956_hgc }					# CHANGE ****
+		
+    }
+	
+	immediate = {
+	
+		# Fire only once
+		set_variable = SOV_1956_hgc								# Change variable ****
+		
+	}
+    
+    option = {
+        name = historical_gov_changes.option.1					# Accept
+		highlighted_option = yes
+		
+		#Enact new laws
+		if = {
+			limit = { has_law = law_type:law_outlawed_dissent }
+			activate_law = law_type:law_censorship
+		}
+		if = {
+			limit = { 
+				OR = {
+					has_law = law_type:law_slavery_political
+					has_law = law_type:law_slavery_cultural
+				}
+			}
+			activate_law = law_type:law_slavery_banned
+		}
+		
+		#Foreign Relations
+		random_country = {
+			limit = { 
+				OR = { 
+					c:CHI ?= this 
+					c:PRC ?= this 
+				}
+				is_a_communist_government = yes
+				is_sufficiently_independent = yes
+				ruler ?= { interest_group = { is_interest_group_type = ig_anarchists } }
+			}
+			change_relations = { country = ROOT value = -50 }
+		}
+		random_country = {
+			limit = { 
+				c:YUG ?= this
+				is_a_communist_government = yes
+				is_sufficiently_independent = yes
+				ruler ?= { 
+					has_ideology = ideology:ideology_power_hungry 
+					interest_group = { is_interest_group_type = ig_socialists } 
+				}
+			}
+			change_relations = { country = ROOT value = 50 }
+		}
+		
+		ai_chance = { 
+			base = 90 
+		}
+		
+    }
+	
+	option = {
+		name = historical_gov_changes.option.2					# Reject
+		default_option = yes
+		
+		#Major discontent
+		add_radicals = {
+			value = large_radicals
+			strata = middle
+		}
+		add_modifier = { 
+			name = stirrings_of_revolution
+			months = 60 
+			is_decaying = yes 
+		}
+		
+		ai_chance = { 
+			base = 10 modifier = { trigger = { has_global_variable = historical_railroading_active } add = -100 }
+		}
+		
+    }
+
+}
+
+# The Fall of Nikita Khrushchev
+SOV_gov_changes.3 = {
+    type = country_event
+
+    title = SOV_khrushchev_succession.t 						# Title of the event; ADD LOCALISATION
+    desc = SOV_khrushchev_succession.d 							# Description of the event; ADD LOCALISATION
+    #flavor = SOV_khrushchev_succession.f 						# Flavor for event; ADD LOCALISATION, IF REQUIRED
+
+    event_image = { video = "gfx/event_pictures/unspecific_politicians_arguing.bk2" }
+
+    icon = "gfx/interface/icons/event_icons/event_portrait.dds" 	# Icon that shows on the map or the outliner
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear" 	# Sound effect if needed
+
+    duration = 1 # Duration to fire if triggers are met
+	
+	trigger = {													# What triggers the event, if using other events or journal entries leave empty
+		
+		#Cuban Missile Crisis Fallout
+		has_variable = fall_of_khrushchev
+		
+		#Overlord conditions
+		exists = c:SOV
+		this = c:SOV											# Change TAG of the overlord ****
+		game_date >= 1964.10.14									# START DATE: Date colony became self governing ****
+		game_date < 1974.10.14									# END DATE: All historical events must not fire 10 years after the START DATE ****
+		
+		is_a_communist_government = yes							# Correct gov types
+		#is_sufficiently_independent = yes						# is_vassal = no		
+		#is_at_war = no											# war = no
+		
+		exists = ruler
+		ruler = { interest_group = { is_interest_group_type = ig_rural_folk } is_historical = yes }
+		
+		# Event has not been fired before
+		NOT = { has_variable = SOV_1964_hgc }					# CHANGE ****
+		
+    }
+	
+	immediate = {
+	
+		# Fire only once
+		set_variable = SOV_1964_hgc								# Change variable ****
+		
+	}
+    
+    option = {
+        name = SOV_khrushchev_succession_option.1				# Brezhnev takes over
+		highlighted_option = yes
+		
+		#Install Brezhnev
+		random_interest_group = {
+			limit = { 
+				is_interest_group_type = ig_revolutionist_socialists
+				leader = { is_historical = yes }
+			}
+			leader = { set_character_as_ruler = yes }
+		}
+		if = {
+			limit = { ig:ig_revolutionist_socialists = { leader = { is_historical = no } } }
+			create_character = {
+				first_name = "Leonid_Brezhnev_first_name"
+				last_name = "Leonid_Brezhnev_last_name"
+				ruler = yes ig_leader = yes historical = yes
+				birth_date = 1906.12.19
+				interest_group = ig_revolutionist_socialists
+				ideology = ideology_vanguardist
+				culture = cu:russian
+				religion = rel:atheist
+				traits = {
+					cautious
+					tactful
+					expensive_tastes
+				}
+				on_created = { set_variable = Leonid_Brezhnev }
+			}
+		}
+		
+		#Roll back Khrushchev era reforms
+		if = {
+			limit = { NOT = { has_law = law_type:law_outlawed_dissent } }
+			activate_law = law_type:law_outlawed_dissent
+		}
+		if = {
+			limit = { has_law = law_type:law_semi_command_economy }
+			activate_law = law_type:law_command_economy
+		}
+		if = {
+			limit = { NOT = { is_a_command_economy = yes } }
+			activate_law = law_type:law_semi_command_economy
+		}
+		
+		ai_chance = { 
+			base = 90 
+		}
+		
+    }
+	
+	option = {
+		name = SOV_khrushchev_succession_option.2				# Khrushchev survives
+		default_option = yes
+		
+		#Major discontent
+		add_radicals = {
+			value = large_radicals
+			interest_group = ig:ig_trade_unions
+		}
+		add_modifier = { 
+			name = stirrings_of_revolution
+			months = 60 
+			is_decaying = yes 
+		}
+		
+		ai_chance = { 
+			base = 10 modifier = { trigger = { has_global_variable = historical_railroading_active } add = -100 }
+		}
+		
+    }
+
+}
+
+# Detente
+SOV_gov_changes.4 = {
+    type = country_event
+
+    title = SOV_detente.t 										# Title of the event; ADD LOCALISATION
+    desc = SOV_detente.d 										# Description of the event; ADD LOCALISATION
+    #flavor = SOV_detente.f 									# Flavor for event; ADD LOCALISATION, IF REQUIRED
+
+    event_image = { video = "gfx/event_pictures/unspecific_politicians_arguing.bk2" }
+
+    icon = "gfx/interface/icons/event_icons/event_portrait.dds" 	# Icon that shows on the map or the outliner
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear" 	# Sound effect if needed
+
+    duration = 1 # Duration to fire if triggers are met
+	
+	trigger = {													# What triggers the event, if using other events or journal entries leave empty
+		
+		#Overlord conditions
+		exists = c:SOV
+		this = c:SOV											# Change TAG of the overlord ****
+		game_date >= 1973.1.1									# START DATE: Date colony became self governing ****
+		game_date < 1983.1.1									# END DATE: All historical events must not fire 10 years after the START DATE ****
+		
+		is_a_communist_government = yes							# Correct gov types
+		is_sufficiently_independent = yes						# is_vassal = no		
+		is_at_war = no											# war = no
+		
+		#Brezhnev
+		exists = ruler
+		ruler = { interest_group = { is_interest_group_type = ig_trade_unions } is_historical = yes }
+		
+		#Has applicable laws
+		has_law = law_type:law_isolationism
+		
+		#Cold War ongoing
+		cold_war_ongoing = yes
+		
+		# Event has not been fired before
+		NOT = { has_variable = SOV_1973_hgc }					# CHANGE ****
+		
+    }
+	
+	immediate = {
+	
+		# Fire only once
+		set_variable = SOV_1973_hgc								# Change variable ****
+		
+	}
+    
+    option = {
+        name = historical_gov_changes.option.1					# Accept
+		highlighted_option = yes
+		
+		#Trade Policy
+		activate_law = law_type:law_protectionism
+		
+		#Foreign Policy
+		activate_law = law_type:law_armed_neutrality
+		
+		#Foreign Relations
+		every_country = {
+			limit = { 
+				country_rank >= rank_value:great_power
+				is_a_democracy = yes
+				is_sufficiently_independent = yes
+			}
+			change_relations = { country = ROOT value = 25 }
+		}
+		every_country = {
+			limit = { 
+				is_a_communist_government = yes
+				is_sufficiently_independent = yes
+				has_dictatorial_ruler = yes
+			}
+			change_relations = { country = ROOT value = -50 }
+		}
+		
+		ai_chance = { 
+			base = 90 
+		}
+		
+    }
+	
+	option = {
+		name = historical_gov_changes.option.2					# Reject
+		default_option = yes
+		
+		#Major discontent
+		add_radicals = {
+			value = large_radicals
+			strata = middle
+		}
+		add_radicals = {
+			value = large_radicals
+			strata = rich
+		}
+		
+		ai_chance = { 
+			base = 10 modifier = { trigger = { has_global_variable = historical_railroading_active } add = -100 }
+		}
+		
+    }
+
+}
+
+# Yuri Andropov
+SOV_gov_changes.5 = {
+    type = country_event
+
+    title = SOV_brezhnev_succession.t 							# Title of the event; ADD LOCALISATION
+    desc = SOV_brezhnev_succession.d 							# Description of the event; ADD LOCALISATION
+    #flavor = SOV_brezhnev_succession.f 						# Flavor for event; ADD LOCALISATION, IF REQUIRED
+
+    event_image = { video = "gfx/event_pictures/unspecific_politicians_arguing.bk2" }
+
+    icon = "gfx/interface/icons/event_icons/event_portrait.dds" 	# Icon that shows on the map or the outliner
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear" 	# Sound effect if needed
+
+    duration = 1 # Duration to fire if triggers are met
+	
+	trigger = {													# What triggers the event, if using other events or journal entries leave empty
+		
+		#Overlord conditions
+		exists = c:SOV
+		this = c:SOV											# Change TAG of the overlord ****
+		game_date >= 1982.11.12									# START DATE: Date colony became self governing ****
+		game_date < 1992.11.12									# END DATE: All historical events must not fire 10 years after the START DATE ****
+		
+		is_a_communist_government = yes							# Correct gov types
+		#is_sufficiently_independent = yes						# is_vassal = no		
+		#is_at_war = no											# war = no
+		
+		#Brezhnev
+		exists = ruler
+		ruler ?= { has_variable = Leonid_Brezhnev }
+		
+		# Event has not been fired before
+		NOT = { has_variable = SOV_1982_hgc }					# CHANGE ****
+		
+    }
+	
+	immediate = {
+	
+		# Fire only once
+		set_variable = SOV_1982_hgc								# Change variable ****
+		
+	}
+    
+    option = {
+        name = SOV_andropov_succession_option.1					# Yuri Andropov takes over
+		highlighted_option = yes
+		
+		#Install Yuri Andropov
+		create_character = {
+			first_name = "Yuri_Andropov_first_name"
+			last_name = "Yuri_Andropov_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1914.6.15
+			interest_group = ig_revolutionist_socialists
+			ideology = ideology_vanguardist
+			culture = cu:russian
+			religion = rel:atheist
+			traits = {
+				cautious
+				tactful
+				reserved
+				sickly
+			}
+			on_created = { set_variable = Yuri_Andropov }
+		}
+		
+		ai_chance = { 
+			base = 90 
+		}
+		
+    }
+	
+	option = {
+		name = SOV_other.option
+		default_option = yes
+		
+		#Install an elitist
+		create_character = {
+			#birth_date = 1914.1.1
+			ruler = yes ig_leader = yes
+			interest_group = ig_socialists
+			ideology = ideology_reform_communist
+			culture = cu:russian
+			religion = rel:atheist
+		}
+		
+		#Major discontent
+		add_radicals = {
+			value = large_radicals
+			interest_group = ig:ig_trade_unions
+		}
+		add_modifier = { 
+			name = stirrings_of_revolution
+			months = 60 
+			is_decaying = yes 
+		}
+		
+		ai_chance = { 
+			base = 10 modifier = { trigger = { has_global_variable = historical_railroading_active } add = -100 }
+		}
+		
+    }
+
+}
+
+# Konstantin Chernenko
+SOV_gov_changes.6 = {
+    type = country_event
+
+    title = SOV_andropov_succession.t 							# Title of the event; ADD LOCALISATION
+    desc = SOV_andropov_succession.d 							# Description of the event; ADD LOCALISATION
+    #flavor = SOV_andropov_succession.f 						# Flavor for event; ADD LOCALISATION, IF REQUIRED
+
+    event_image = { video = "gfx/event_pictures/unspecific_politicians_arguing.bk2" }
+
+    icon = "gfx/interface/icons/event_icons/event_portrait.dds" 	# Icon that shows on the map or the outliner
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear" 	# Sound effect if needed
+
+    duration = 1 # Duration to fire if triggers are met
+	
+	trigger = {													# What triggers the event, if using other events or journal entries leave empty
+		
+		#Overlord conditions
+		exists = c:SOV
+		this = c:SOV											# Change TAG of the overlord ****
+		game_date >= 1984.2.13									# START DATE: Date colony became self governing ****
+		game_date < 1994.2.13									# END DATE: All historical events must not fire 10 years after the START DATE ****
+		
+		is_a_communist_government = yes							# Correct gov types
+		#is_sufficiently_independent = yes						# is_vassal = no		
+		#is_at_war = no											# war = no
+		
+		#Brezhnev
+		exists = ruler
+		ruler ?= { has_variable = Yuri_Andropov }
+		
+		# Event has not been fired before
+		NOT = { has_variable = SOV_1984_hgc }					# CHANGE ****
+		
+    }
+	
+	immediate = {
+	
+		# Fire only once
+		set_variable = SOV_1984_hgc								# Change variable ****
+		
+	}
+    
+    option = {
+        name = SOV_chernenko_succession_option.1					# Yuri Andropov takes over
+		highlighted_option = yes
+		
+		#Install Konstantin Chernenko
+		create_character = {
+			first_name = "Konstantin_Chernenko_first_name"
+			last_name = "Konstantin_Chernenko_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1911.9.24
+			interest_group = ig_revolutionist_socialists
+			ideology = ideology_vanguardist
+			culture = cu:russian
+			religion = rel:atheist
+			traits = {
+				cautious
+				innovative
+				reserved
+				sickly
+			}
+			on_created = { set_variable = Konstantin_Chernenko }
+		}
+		
+		ai_chance = { 
+			base = 90 
+		}
+		
+    }
+	
+	option = {
+		name = SOV_other.option
+		default_option = yes
+		
+		#Install an elitist
+		create_character = {
+			#birth_date = 1914.1.1
+			ruler = yes ig_leader = yes
+			interest_group = ig_socialists
+			ideology = ideology_reform_communist
+			culture = cu:russian
+			religion = rel:atheist
+		}
+		
+		#Major discontent
+		add_radicals = {
+			value = large_radicals
+			interest_group = ig:ig_trade_unions
+		}
+		add_modifier = { 
+			name = stirrings_of_revolution
+			months = 60 
+			is_decaying = yes 
+		}
+		
+		ai_chance = { 
+			base = 10 modifier = { trigger = { has_global_variable = historical_railroading_active } add = -100 }
+		}
+		
+    }
+
+}
+
+# Gorbachev
+SOV_gov_changes.7 = {
+    type = country_event
+
+    title = SOV_gorbachev_succession.t 							# Title of the event; ADD LOCALISATION
+    desc = SOV_gorbachev_succession.d 							# Description of the event; ADD LOCALISATION
+    #flavor = SOV_gorbachev_succession.f 						# Flavor for event; ADD LOCALISATION, IF REQUIRED
+
+    event_image = { video = "gfx/event_pictures/unspecific_politicians_arguing.bk2" }
+
+    icon = "gfx/interface/icons/event_icons/event_portrait.dds" 	# Icon that shows on the map or the outliner
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear" 	# Sound effect if needed
+
+    duration = 1 # Duration to fire if triggers are met
+	
+	trigger = {													# What triggers the event, if using other events or journal entries leave empty
+		
+		#Overlord conditions
+		exists = c:SOV
+		this = c:SOV											# Change TAG of the overlord ****
+		game_date >= 1985.3.10									# START DATE: Date colony became self governing ****
+		game_date < 1995.3.10									# END DATE: All historical events must not fire 10 years after the START DATE ****
+		
+		is_a_communist_government = yes							# Correct gov types
+		#is_sufficiently_independent = yes						# is_vassal = no		
+		#is_at_war = no											# war = no
+		
+		exists = ruler
+		OR = { 
+			ruler = { is_interest_group_type = ig_trade_unions is_historical = yes }
+			ruler = { NOT = { is_interest_group_type = ig_trade_unions } }
+		}
+		
+		# Event has not been fired before
+		NOT = { has_variable = SOV_1985_hgc }					# CHANGE ****
+		
+    }
+	
+	immediate = {
+	
+		# Brezhnev or some other elderly leader dies
+		if = {
+			limit = { ruler = { is_interest_group_type = ig_trade_unions is_historical = yes } }
+			ruler = { kill_character = yes }
+		}
+	
+		# Fire only once
+		set_variable = SOV_1985_hgc							# Change variable ****
+		
+	}
+    
+    option = {
+        name = SOV_gorbachev.option							# Historical
+        highlighted_option = yes
+		
+		#Install Gorbachev
+		create_character = {
+			first_name = "Mikhail_Gorbachev_first_name"
+			last_name = "Mikhail_Gorbachev_last_name"
+			birth_date = 1931.3.2
+			ruler = yes ig_leader = yes historical = yes
+			interest_group = ig_socialists
+			ideology = ideology_reform_communist
+			culture = cu:russian
+			religion = rel:atheist
+			traits = {
+				experienced_diplomat
+				reckless
+				innovative
+			}
+			on_created = { set_variable = Mikhail_Gorbachev }
+		}
+		
+		#Start Perestroika
+		add_journal_entry = { type = je_perestroika }
+		
+		ai_chance = { 
+			base = 90 
+		}
+		
+    }
+	
+	option = {
+        name = SOV_other.option
+		default_option = yes
+		
+		#Install an autocrat
+		create_character = {
+			#birth_date = 1914.1.1
+			ruler = yes ig_leader = yes
+			interest_group = ig_revolutionist_socialists
+			ideology = ideology_vanguardist
+			culture = cu:russian
+			religion = rel:atheist
+		}
+		
+		#Major discontent
+		add_radicals = {
+			value = large_radicals
+			interest_group = ig:ig_petty_bourgeoisie
+		}
+		add_radicals = {
+			value = large_radicals
+			interest_group = ig:ig_intelligentsia
+		}
+		add_radicals = {
+			value = large_radicals
+			interest_group = ig:ig_industrialists
+		}
+		
+		ai_chance = { 
+			base = 10 modifier = { trigger = { has_global_variable = historical_railroading_active } add = -100 }
+		}
+		
+    }
+
+}
+
+# Glasnost
+SOV_gov_changes.8 = {
+    type = country_event
+
+    title = SOV_glasnost.t 										# Title of the event; ADD LOCALISATION
+    desc = SOV_glasnost.d 										# Description of the event; ADD LOCALISATION
+    #flavor = SOV_glasnost.f 									# Flavor for event; ADD LOCALISATION, IF REQUIRED
+
+    event_image = { video = "gfx/event_pictures/unspecific_politicians_arguing.bk2" }
+
+    icon = "gfx/interface/icons/event_icons/event_portrait.dds" 	# Icon that shows on the map or the outliner
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear" 	# Sound effect if needed
+
+    duration = 1 # Duration to fire if triggers are met
+	
+	trigger = {													# What triggers the event, if using other events or journal entries leave empty
+		
+		#Overlord conditions
+		c:SOV ?= this
+		game_date >= 1986.1.1									# START DATE: Date colony became self governing ****
+		game_date < 1996.1.1									# END DATE: All historical events must not fire 10 years after the START DATE ****
+		
+		is_a_communist_government = yes							# Correct gov types
+		is_sufficiently_independent = yes						# is_vassal = no		
+		is_at_war = no											# war = no
+		
+		#Has applicable laws
+		OR = { 
+			has_law = law_type:law_outlawed_dissent
+			has_law = law_type:law_censorship
+			has_law = law_type:law_slavery_political
+			has_law = law_type:law_slavery_cultural
+		}
+		
+		#Perestroika
+		OR = { 
+			has_journal_entry = je_perestroika
+			AND = {
+				exists = ruler
+				ruler ?= { has_variable = Mikhail_Gorbachev }
+			}
+		}
+		
+		# Event has not been fired before
+		NOT = { has_variable = SOV_1986_hgc }					# CHANGE ****
+		
+    }
+	
+	immediate = {
+	
+		# Fire only once
+		set_variable = SOV_1986_hgc								# Change variable ****
+		
+	}
+    
+    option = {
+        name = historical_gov_changes.option.1					# Accept
+        highlighted_option = yes
+		
+		#Enact new laws
+		if = {
+			limit = { 
+				OR = { 
+					has_law = law_type:law_outlawed_dissent 
+					has_law = law_type:law_censorship
+				}
+			}
+			activate_law = law_type:law_limited_free_speech
+		}
+		if = {
+			limit = { 
+				OR = {
+					has_law = law_type:law_slavery_political
+					has_law = law_type:law_slavery_cultural
+				}
+			}
+			activate_law = law_type:law_slavery_banned
+		}
+		
+		#Foreign Relations
+		every_country = {
+			limit = { 
+				is_a_communist_government = yes
+				is_sufficiently_independent = yes
+				ruler ?= { 
+					character_is_autocratic = yes
+					interest_group = { is_interest_group_type = ig_trade_unions } 
+				}
+			}
+			change_relations = { country = ROOT value = -50 }
+		}
+		change_infamy = -10
+		
+		#Party discontent
+		add_radicals = {
+			value = very_large_radicals
+			interest_group = ig:ig_intelligentsia
+		}
+		add_radicals = {
+			value = very_large_radicals
+			interest_group = ig:ig_armed_forces
+		}
+		add_radicals = {
+			value = very_large_radicals
+			interest_group = ig:ig_trade_unions
+		}
+		
+		ai_chance = { 
+			base = 90 
+		}
+		
+    }
+	
+	option = {
+        name = historical_gov_changes.option.2					# Reject
+		default_option = yes
+		
+		#Major discontent
+		add_radicals = {
+			value = large_radicals
+			interest_group = ig:ig_petty_bourgeoisie
+		}
+		add_radicals = {
+			value = large_radicals
+			interest_group = ig:ig_industrialists
+		}
+		add_radicals = {
+			pop_type = academics
+			value = very_large_radicals
+		}
+		add_modifier = { 
+			name = stirrings_of_revolution
+			months = 60 
+			is_decaying = yes 
+		}
+		
+		ai_chance = { 
+			base = 10 modifier = { trigger = { has_global_variable = historical_railroading_active } add = -100 }
+		}
+		
+    }
+
+}
+
+# Democratisation
+SOV_gov_changes.9 = {
+    type = country_event
+
+    title = SOV_democratisation.t 								# Title of the event; ADD LOCALISATION
+    desc = SOV_democratisation.d 								# Description of the event; ADD LOCALISATION
+    #flavor = SOV_democratisation.f 							# Flavor for event; ADD LOCALISATION, IF REQUIRED
+
+    event_image = { video = "gfx/event_pictures/unspecific_politicians_arguing.bk2" }
+
+    icon = "gfx/interface/icons/event_icons/event_portrait.dds" 	# Icon that shows on the map or the outliner
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear" 	# Sound effect if needed
+
+    duration = 1 # Duration to fire if triggers are met
+	
+	trigger = {													# What triggers the event, if using other events or journal entries leave empty
+		
+		#Overlord conditions
+		c:SOV ?= this
+		game_date >= 1989.3.26									# START DATE: Date colony became self governing ****
+		game_date < 1999.3.26									# END DATE: All historical events must not fire 10 years after the START DATE ****
+		
+		is_a_communist_dictatorship = yes						# Correct gov types
+		is_sufficiently_independent = yes						# is_vassal = no		
+		is_at_war = no											# war = no
+		
+		#Perestroika
+		OR = { 
+			has_journal_entry = je_perestroika
+			AND = {
+				exists = ruler
+				ruler ?= { has_variable = Mikhail_Gorbachev }
+			}
+		}
+		
+		# Event has not been fired before
+		NOT = { has_variable = SOV_1989_hgc }					# CHANGE ****
+		
+    }
+	
+	immediate = {
+	
+		# Fire only once
+		set_variable = SOV_1989_hgc								# Change variable ****
+		
+	}
+    
+    option = {
+        name = historical_gov_changes.option.1					# Accept
+        highlighted_option = yes
+		
+		#Enact new laws
+		if = {
+			limit = { 
+				has_law = law_type:law_party_single
+			}
+			activate_law = law_type:law_party_anti_reactionary
+		}
+		
+		#Foreign Relations
+		every_country = {
+			limit = { 
+				is_a_communist_government = yes
+				is_sufficiently_independent = yes
+				ruler ?= { 
+					character_is_autocratic = yes
+					interest_group = { is_interest_group_type = ig_revolutionist_socialist } 
+				}
+			}
+			change_relations = { country = ROOT value = -50 }
+		}
+		change_infamy = -10
+		
+		#Party discontent
+		add_radicals = {
+			value = very_large_radicals
+			interest_group = ig:ig_intelligentsia
+		}
+		add_radicals = {
+			value = very_large_radicals
+			interest_group = ig:ig_armed_forces
+		}
+		add_radicals = {
+			value = very_large_radicals
+			interest_group = ig:ig_trade_unions
+		}
+		
+		ai_chance = { 
+			base = 90 
+		}
+		
+    }
+	
+	option = {
+        name = historical_gov_changes.option.2					# Reject
+		default_option = yes
+		
+		#Major discontent
+		add_radicals = {
+			value = large_radicals
+			interest_group = ig:ig_petty_bourgeoisie
+		}
+		add_radicals = {
+			value = large_radicals
+			interest_group = ig:ig_industrialists
+		}
+		add_radicals = {
+			pop_type = academics
+			value = very_large_radicals
+		}
+		add_modifier = { 
+			name = stirrings_of_revolution
+			months = 60 
+			is_decaying = yes 
+		}
+		
+		ai_chance = { 
+			base = 10 modifier = { trigger = { has_global_variable = historical_railroading_active } add = -100 }
+		}
+		
+    }
+
+}
+
+# August Coup
+SOV_gov_changes.10 = {
+    type = country_event
+
+    title = SOV_august_coup.t 								# Title of the event; ADD LOCALISATION
+    desc = SOV_august_coup.d 								# Description of the event; ADD LOCALISATION
+    #flavor = SOV_august_coup.f 							# Flavor for event; ADD LOCALISATION, IF REQUIRED
+
+    event_image = { video = "gfx/event_pictures/unspecific_politicians_arguing.bk2" }
+
+    icon = "gfx/interface/icons/event_icons/event_portrait.dds" 	# Icon that shows on the map or the outliner
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear" 	# Sound effect if needed
+
+    duration = 1 # Duration to fire if triggers are met
+	
+	trigger = {													# What triggers the event, if using other events or journal entries leave empty
+		
+		#Overlord conditions
+		c:SOV ?= this
+		game_date >= 1991.8.19									# START DATE: Date colony became self governing ****
+		game_date < 2001.8.19									# END DATE: All historical events must not fire 10 years after the START DATE ****
+		
+		is_a_communist_government = yes							# Correct gov types
+		is_sufficiently_independent = yes						# is_vassal = no		
+		is_at_war = no											# war = no
+		
+		#Perestroika
+		has_journal_entry = je_perestroika
+		
+		# Event has not been fired before
+		NOT = { has_variable = SOV_1991_hgc }					# CHANGE ****
+		
+    }
+	
+	immediate = {
+	
+		# Fire only once
+		set_variable = SOV_1991_hgc								# Change variable ****
+		
+	}
+    
+    option = {
+        name = SOV_august_coup.option							# Historical
+        highlighted_option = yes
+		
+		#Allow for historical dissolution event
+		set_variable = SOV_august_coup_historical_option
+		
+		#Party discontent
+		add_radicals = {
+			value = very_large_radicals
+			interest_group = ig:ig_intelligentsia
+		}
+		add_radicals = {
+			value = very_large_radicals
+			interest_group = ig:ig_armed_forces
+		}
+		add_radicals = {
+			value = very_large_radicals
+			interest_group = ig:ig_trade_unions
+		}
+		
+		ai_chance = { 
+			base = 90 
+		}
+		
+    }
+	
+	option = {
+        name = SOV_august_coup_other.option
+		default_option = yes
+		
+		#Enact new regime
+		effect_starting_politics_dictatorship = yes
+		
+		#Install Gennady
+		create_character = {
+			first_name = "Gennady_Ivanovich_Yanayev_first_name"
+			last_name = "Gennady_Ivanovich_Yanayev_last_name"
+			birth_date = 1937.8.26
+			ruler = yes ig_leader = yes historical = yes
+			interest_group = ig_revolutionist_socialists
+			ideology = ideology_vanguardist
+			culture = cu:russian
+			religion = rel:atheist
+			traits = {
+				experienced_diplomat
+				reckless
+				innovative
+			}
+		}
+		
+		#Major discontent
+		add_radicals = {
+			value = large_radicals
+			interest_group = ig:ig_petty_bourgeoisie
+		}
+		add_radicals = {
+			value = large_radicals
+			interest_group = ig:ig_industrialists
+		}
+		add_radicals = {
+			pop_type = academics
+			value = very_large_radicals
+		}
+		add_modifier = { 
+			name = stirrings_of_revolution
+			months = 60 
+			is_decaying = yes 
+		}
+		
+		ai_chance = { 
+			base = 10 modifier = { trigger = { has_global_variable = historical_railroading_active } add = -100 }
+		}
+		
+    }
+
+}

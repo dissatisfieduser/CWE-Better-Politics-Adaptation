@@ -1,0 +1,240 @@
+﻿#
+#
+# INSTITUTIONAL
+#
+#
+
+bpm_rename_trade_unions_ig = {
+	
+	if = {
+		limit = {
+			OR = {
+				has_law = law_type:law_illegal_labor_unions
+				AND = {
+					has_law = law_type:law_all_labor_unions_allowed
+					NOT = { has_variable = union_law_introduced_var }
+				}
+			}
+		}
+		ig:ig_trade_unions ?= { set_interest_group_name = ig_labor_radicals }
+	}
+	else_if = {
+		limit = { ig:ig_trade_unions ?= { has_ideology = ideology:ideology_dop_syndical_unionist } }
+		ig:ig_trade_unions ?= { set_interest_group_name = ig_syndicalists }
+	}
+	else = {
+		ig:ig_trade_unions ?= { set_interest_group_name = ig_trade_unions }
+	}
+}
+
+
+
+
+#
+#
+# IDEOLOGICAL
+#
+#
+
+bpm_rename_agpop_ig = {
+	
+	if = {
+		limit = { ig:ig_agrarian_populists ?= { bpm_ig_is_socialist = yes } }
+		ig:ig_agrarian_populists ?= { set_interest_group_name = ig_agrarian_socialists }
+	}
+	
+	else = {
+		ig:ig_agrarian_populists ?= { set_interest_group_name = ig_agrarian_populists }
+	}
+}
+
+bpm_rename_anarchists_ig = {
+	if = {
+		limit = { ig:ig_anarchists ?= { has_ideology = ideology:ideology_dop_anarcho_syndicalist } }
+		ig:ig_anarchists ?= { set_interest_group_name = ig_anarcho_syndicalists }
+	}
+	else_if = {
+		limit = {
+			has_law = law_type:law_council_republic
+			NOR = {
+				this = c:PRC
+				this = c:CHI
+			}
+		}
+		ig:ig_anarchists = {
+			set_interest_group_name = ig_left_opposition
+		}
+	}
+	else_if = {
+		limit = {
+			OR = {
+				this = c:PRC
+				this = c:CHI
+			}
+			has_law = law_type:law_council_republic
+		}
+		ig:ig_anarchists = {
+			set_interest_group_name = ig_maoists
+		}
+	}
+
+	else = {
+		ig:ig_anarchists ?= { set_interest_group_name = ig_anarchists }
+	}
+}
+
+bpm_rename_refsoc_ig = {
+	if = {
+		limit = {
+			has_law = law_type:law_council_republic
+			NOR = {
+				this = c:PRC
+				this = c:CHI
+			}
+		}
+		ig:ig_reformist_socialists = {
+			set_interest_group_name = ig_revisionist_faction
+		}
+	}
+	else_if = {
+		limit = {
+			OR = {
+				this = c:PRC
+				this = c:CHI
+			}
+			has_law = law_type:law_council_republic
+		}
+		ig:ig_reformist_socialists = {
+			set_interest_group_name = ig_left_kmt
+		}
+	}
+
+	else = {
+		ig:ig_reformist_socialists ?= { set_interest_group_name = ig_reformist_socialists }
+	}
+}
+
+bpm_rename_revsoc_ig = {
+}
+
+bpm_rename_socialist_ig = {
+	if = {
+		limit = {
+			has_law = law_type:law_council_republic
+		}
+		ig:ig_socialists = {
+			set_interest_group_name = ig_reform_faction
+		}		
+	}
+
+	else = {
+		ig:ig_socialists ?= { set_interest_group_name = ig_socialists }
+	}
+}
+
+bpm_rename_radlib_ig = {	
+	
+}
+
+bpm_rename_liberal_ig = {
+}
+
+bpm_rename_natlib_ig = {
+}
+
+bpm_rename_marlib_ig = {
+}
+
+bpm_rename_conservative_ig = {
+	if = {
+		limit = { ig:ig_conservatives ?= { 
+			#has_ideology = ideology:ideology_wel_paternalistic_welfare 
+			bpm_ig_is_paternalistic = yes 
+		} }
+		if = {
+			limit = { country_has_state_religion = rel:catholic }
+			ig:ig_conservatives ?= { set_interest_group_name = ig_catholic_democrats }
+		}
+		else = {
+			ig:ig_conservatives ?= { set_interest_group_name = ig_paternal_conservatives }
+		}
+	}
+	# Below: non-paternal conservatives
+	else_if = {
+		limit = { this = c:FRA }
+		if = {
+			limit = { ig:ig_liberals ?= { bpm_ig_is_republican = yes } }
+			ig:ig_conservatives ?= { set_interest_group_name = ig_orleanists }
+		}
+		else = {
+			ig:ig_conservatives ?= { set_interest_group_name = ig_orleanists_right }
+		}
+	}
+	else_if = {
+		limit = {
+			this = c:RUS
+			has_journal_entry = je_bpm_modernizers
+		}
+		ig:ig_conservatives ?= { set_interest_group_name = ig_slavophiles_moderate }
+	}
+	else_if = {
+		limit = {
+			bpm_country_is_pre_constitutional = yes
+		}
+		ig:ig_conservatives ?= { set_interest_group_name = ig_conservative_reformers }
+	}
+	else = {
+		ig:ig_conservatives ?= { set_interest_group_name = ig_conservatives }
+	}
+}
+
+bpm_rename_reactionary_ig = {
+	if = {
+		limit = {
+			bpm_country_is_republic = yes
+			ig:ig_reactionaries ?= { bpm_ig_is_monarchist = yes }
+		}
+		ig:ig_reactionaries ?= { set_interest_group_name = ig_monarchists }
+	}
+	else_if = {
+		limit = {
+			NOT = { has_law = law_type:law_theocracy }
+			ig:ig_reactionaries ?= { bpm_ig_is_theocratic = yes }
+		}
+		ig:ig_reactionaries ?= { set_interest_group_name = ig_theocrats }
+	}
+	else_if = {
+		limit = {
+			 ig:ig_reactionaries ?= { bpm_ig_is_democrat = yes }
+		}
+		ig:ig_reactionaries ?= { set_interest_group_name = ig_national_conservatives }
+	}
+	else = {
+		ig:ig_reactionaries ?= { set_interest_group_name = ig_reactionaries }
+	}
+}
+
+#
+#
+# 
+#
+#
+
+bpm_rename_igs = {
+	hidden_effect = {
+		bpm_rename_trade_unions_ig = yes
+		bpm_rename_rural_folk_ig = yes
+		bpm_rename_intelligentsia_ig = yes
+		bpm_rename_agpop_ig = yes
+		bpm_rename_anarchists_ig = yes
+		bpm_rename_refsoc_ig = yes
+		bpm_rename_revsoc_ig = yes
+		bpm_rename_socialist_ig = yes
+		bpm_rename_radlib_ig = yes
+		bpm_rename_liberal_ig = yes
+		bpm_rename_natlib_ig = yes
+		bpm_rename_marlib_ig = yes
+		bpm_rename_conservative_ig = yes
+		bpm_rename_reactionary_ig = yes	
+	}
+}

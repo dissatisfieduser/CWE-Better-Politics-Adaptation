@@ -1,0 +1,49 @@
+﻿l_english:
+
+ monarch_ig_anarchists:0 "@anarchists!$ig_anarchists$ Monarch"
+ monarch_ig_conservatives:0 "@conservatives!$ig_conservatives$ Monarch"
+ monarch_ig_fascists:0 "@fascists!$ig_fascists$ Monarch"
+ monarch_ig_liberals:0 "@liberals!$ig_liberals$ Monarch"
+ monarch_ig_radicals:0 "@radicals!$ig_radicals$ Monarch"
+ monarch_ig_reactionaries:0 "@reactionaries!$ig_reactionaries$ Monarch"
+ monarch_ig_reformist_socialists:0 "@reformist_socialists!$ig_reformist_socialists$ Monarch"
+ monarch_ig_revolutionist_socialists:0 "@revolutionist_socialists!$ig_revolutionist_socialists$ Monarch"
+ monarch_ig_socialists:0 "@socialists!$ig_socialists$ Monarch"
+ monarch_ig_national_liberals:0 "@national_liberals!$ig_national_liberals$ Monarch"
+
+ rule_cwe_gov_changes:0 "CWE Historical Government Change Events"
+ setting_no_cwe_gov_changes:0 "Disabled"
+ setting_no_cwe_gov_changes_desc:0 "CWE's historical government change events will not fire"
+ setting_yes_cwe_gov_changes:0 "Enabled"
+ setting_yes_cwe_gov_changes_desc:0 "CWE's historical government change events will fire"
+
+ rule_cwe_elections:0 "CWE Historical Election Outcomes"
+ setting_no_cwe_elections:0 "Disabled"
+ setting_no_cwe_elections_desc:0 "Historical election outcomes will be disabled"
+ setting_yes_cwe_gov_changes:0 "Enabled"
+ setting_yes_cwe_gov_changes_desc:0 "Historical election outcomes will be enabled"
+
+ rule_cwe_historical_economy:0 "CWE Historical Economy Events"
+ setting_no_cwe_historical_economy:0 "Disabled"
+ setting_no_cwe_historical_economy_desc:0 "CWE's historical economy events will not fire"
+ setting_yes_cwe_historical_economy:0 "Enabled"
+ setting_yes_cwe_historical_economy_desc:0 "CWE's historical economy events will fire"
+
+ rule_cwe_historical_unrest:0 "CWE Historical Unrest Events"
+ setting_no_cwe_historical_unrest:0 "Disabled"
+ setting_no_cwe_historical_unrest_desc:0 "CWE's historical unrest events will not fire"
+ setting_yes_cwe_historical_unrest:0 "Enabled"
+ setting_yes_cwe_historical_unrest_desc:0 "CWE's historical unrest events will fire"
+
+ rule_cwe_historical_decolonization:0 "CWE Historical Decolonization Events"
+ setting_no_cwe_historical_deolonization:0 "Disabled"
+ setting_no_cwe_historical_deolonization_desc:0 "CWE's historical decolonization events will not fire. NOT RECOMMENDED"
+ setting_yes_cwe_historical_decolonization:0 "Enabled"
+ setting_yes_cwe_historical_decolonization_desc:0 "CWE's historical decolonization events will fire"
+
+ rule_cwe_historical_wars:0 "CWE Historical Decolonization Events"
+ setting_no_cwe_historical_wars:0 "Disabled"
+ setting_no_cwe_historical_wars_desc:0 "CWE's historical war events will not fire. NOT RECOMMENDED"
+ setting_yes_cwe_historical_wars:0 "Enabled"
+ setting_yes_cwe_historical_wars_desc:0 "CWE's historical war events will fire"
+    

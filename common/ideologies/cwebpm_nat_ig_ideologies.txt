@@ -1,0 +1,31 @@
+#Natalist/pop growth category
+
+ideology_nat_pro_natal = {
+    icon = "gfx/interface/icons/ideology_icons/ban_ideology/pro_single_party.dds"
+
+    lawgroup_pop_growth_policy = {
+        law_pro_pop_growth_policy = approve
+		law_no_pop_growth_policy = disapprove
+		law_anti_pop_growth_policy = disapprove
+    }
+}
+
+ideology_nat_moderate = {
+    icon = "gfx/interface/icons/ideology_icons/ban_ideology/socialist_antifascist.dds"
+
+    lawgroup_pop_growth_policy = {
+        law_pro_pop_growth_policy = disapprove
+		law_no_pop_growth_policy = approve
+		law_anti_pop_growth_policy = disapprove
+    }
+}
+
+ideology_nat_anti_natal = {
+    icon = "gfx/interface/icons/ideology_icons/ban_ideology/socialist_supremacist.dds"
+    
+    lawgroup_pop_growth_policy = {
+        law_pro_pop_growth_policy = disapprove
+		law_no_pop_growth_policy = disapprove
+		law_anti_pop_growth_policy = approve
+    }
+}

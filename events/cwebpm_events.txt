@@ -1,0 +1,76 @@
+﻿namespace = cwebpm_events
+
+cwebpm_events.1 = { # initialise all
+	type = country_event
+	hidden = yes
+	placement = root
+
+	event_image = { video = "gfx/event_pictures/unspecific_ruler_speaking_to_people.bk2" }
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+	title = bpm_natlib_split.1.t
+	desc = bpm_natlib_split.1.d
+	flavor = bpm_natlib_split.1.f
+	duration = 3
+
+	immediate = {
+		bpm_initialize_trade_unions = yes
+		bpm_initialize_radlibs = yes
+
+		if = {
+			limit = { NOT = { has_law = law_type:law_council_republic } }
+			bpm_initialize_fascists = yes
+		}
+
+		every_interest_group = {
+			limit = { is_interest_group_type = ig_revolutionist_socialists }
+			set_interest_group_name = ig_communists
+		}
+		every_interest_group = {
+			limit = { is_interest_group_type = ig_reformist_socialists }
+			set_interest_group_name = ig_social_democrats
+		}
+		every_interest_group = {
+			limit = { is_interest_group_type = ig_socialists }
+			set_interest_group_name = ig_market_socialists
+		}
+		
+		
+		if = {
+			limit = {
+				has_law = law_type:law_council_republic
+			}
+			ig:ig_socialists = {
+				set_interest_group_name = ig_reform_faction
+			}
+			ig:ig_anarchists = {
+				set_interest_group_name = ig_left_opposition
+			}
+			ig:ig_reformist_socialists = {
+				set_interest_group_name = ig_revisionist_faction
+			}
+		}
+		if = {
+			limit = {
+				c:PRC ?= root
+			}
+			ig:ig_anarchists = {
+				set_interest_group_name = ig_maoists
+				add_modifier = {
+					name = bpm_empowered_ig
+					years = 30
+					is_decaying = yes
+				}
+			}
+			ig:ig_reformist_socialists = {
+				set_interest_group_name = ig_left_kmt
+			}
+		}
+
+		set_global_variable = global_socialist_heroic_period
+		set_global_variable = global_socialists_split_var
+		set_variable = local_socialists_split_var
+		trigger_event = { id = bpm_cabinet_event.1 days = 2 }
+		
+	}
+}

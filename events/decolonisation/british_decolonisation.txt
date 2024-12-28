@@ -1,0 +1,4794 @@
+namespace = british_decolonisation
+
+################################################
+
+### Granting of Self-Governing Colony status ###
+
+################################################
+
+# Note: Format used is similar to the one in the V2 mod
+
+# REMEMBER TO ADD ENTRY IN ON_ACTIONS
+
+### AFRICA ###
+
+# Nigeria
+british_decolonisation.1 = {
+    type = country_event
+	placement = scope:colonial_state
+
+    title = british_nigeria.sgc.t 		# Title of the event; ADD LOCALISATION
+    desc = british_nigeria.sgc.d 		# Description of the event; ADD LOCALISATION
+    #flavor = british_nigeria.sgc.f 	# Flavor for event; ADD LOCALISATION, IF REQUIRED
+
+    event_image = { video = "gfx/event_pictures/unspecific_signed_contract.bk2" }
+
+    icon = "gfx/interface/icons/event_icons/waving_flag.dds" 	# Icon that shows on the map or the outliner
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear" 	# Sound effect if needed
+
+    duration = 1 # Duration to fire if triggers are met
+	
+	trigger = {													# What triggers the event, if using other events or journal entries leave empty
+		
+		#Overlord conditions
+		exists = c:GBR this = c:GBR											# Change TAG of the overlord ****
+		game_date >= 1954.10.1									# START DATE: Date colony became self governing ****
+		game_date < 1970.10.1									# END DATE: All historical events must not fire 10 years after the START DATE ****
+		
+		is_a_democratic_monarchy = yes									# Correct gov types
+		is_sufficiently_independent = yes						# is_vassal = no		
+		is_at_war = no											# war = no
+		
+		#Colony conditions
+		NOT = { 												# Colony to be released must not already exist on the map
+			exists = c:NGE										# Change TAG of the colony ****
+		}
+		
+		any_scope_state = { 									# Overlord owns the states of the colony to be released
+			state_region = { is_homeland = cu:nigerian NOT = { is_homeland = cu:ambazonian } }		# Change homeland identity to match colony to be released ****
+			#is_incorporated = no								# State is a colony
+			#owner = THIS										# Overlord must own the state to be released
+		}
+		
+		# Event has not been fired before
+		NOT = { has_variable = british_nigeria_sgc }			# CHANGE ****
+		
+    }
+	
+	immediate = {
+	
+		# Generate list of provinces to be released				# DO NOT REMOVE THIS SECTION
+		every_scope_state = {
+			limit = {
+				state_region = { is_homeland = cu:nigerian }	# Change homeland identity to match colony to be released ****
+				#is_incorporated = no							# State is a colony
+				#contains_capital_of = c:NGE						# State is the capital of colony ****
+			}
+			save_scope_as = colonial_state
+		}
+		
+	}
+    
+    option = {
+        name = american_decolonisation.option.1				# Grant them self-government
+        default_option = yes highlighted_option = yes
+		
+		#Release country
+		create_country = {
+			tag = NGE										# Change TAG of country being released ****
+			origin = THIS									# TAG where the created country takes tech from
+			state = scope:colonial_state
+			
+			on_created = {									# Set government laws & rulers here
+				
+				# SET laws for colony ****
+				effect_starting_politics_parliamentary_republic = yes
+				effect_starting_politics_democratic = yes
+				effect_starting_politics_constitutional_federal_state = yes
+				effect_starting_politics_war_policy_anti_military = yes
+				effect_starting_politics_economic_policy_interventionism = yes
+				effect_starting_politics_trade_policy_protectionism = yes
+				effect_starting_politics_anti_nuclear_policy = yes
+				
+				# CREATE leader for colony ****
+				create_character = {
+					first_name = "guy_incognito_first_name"		# CHANGE
+					last_name = "guy_incognito_last_name"		# CHANGE
+					ruler = yes
+					#birth_date = 1910.1.1						# CHANGE
+					interest_group = ig_rural_folk					# CHANGE
+					ideology = ideology_democratic				# CHANGE
+					traits = {
+						charismatic								# CHANGE
+						persistent								# CHANGE
+						meticulous								# CHANGE
+					}
+				}
+				
+				# Set diplomatic recognition
+				set_country_type = unrecognized
+			}
+		}
+		every_scope_state = {
+			limit = {
+		 		state_region = { is_homeland = cu:nigerian NOT = { is_homeland = cu:ambazonian } }	# Change homeland identity to match colony to be released ****
+				#is_incorporated = no							# State is a colony
+		 	}
+			set_state_owner = c:NGE								# Change TAG to colony ****
+		}
+		
+		# Overlord create self governing colony pact with colony
+		if = {
+			limit = { exists = c:NGE }
+			create_diplomatic_pact = {
+				country = c:NGE										# Change TAG ****
+				type = semi_autonomous_colony
+			}
+			create_decolonisation_pacts = yes
+		}
+		
+		# Fire only once
+		set_variable = british_nigeria_sgc						# Change variable ****
+		
+		ai_chance = {
+			base = 90
+		}
+		
+    }
+	
+	option = {
+        name = british_decolonisation.option.2					# REFUSE
+		
+		# Natives are angry!
+		every_scope_state = {
+			limit = {
+		 		state_region = { is_homeland = cu:nigerian NOT = { is_homeland = cu:ambazonian } }	# Change homeland identity to match colony to be released ****
+		 	}
+			add_radicals_in_state = {
+				culture = cu:nigerian							# Change culture ****
+				value = large_radicals
+			}
+			add_modifier = { name = nationalist_agitation months = 60 is_decaying = yes } 
+		}
+		
+		# Fire only once
+		set_variable = british_nigeria_sgc						# Change variable ****
+		
+		ai_chance = { 
+			base = 10 modifier = { trigger = { has_global_variable = historical_railroading_active } add = -100 } 
+		}
+		
+    }
+
+}
+
+# Sudan
+british_decolonisation.2 = {
+    type = country_event
+	placement = scope:colonial_state
+
+    title = british_sudan.sgc.t 			# Title of the event; ADD LOCALISATION
+    desc = british_sudan.sgc.d 				# Description of the event; ADD LOCALISATION
+    #flavor = british_sudan.sgc.f 			# Flavor for event; ADD LOCALISATION, IF REQUIRED
+
+    event_image = { video = "gfx/event_pictures/unspecific_signed_contract.bk2" }
+
+    icon = "gfx/interface/icons/event_icons/waving_flag.dds" 	# Icon that shows on the map or the outliner
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear" 	# Sound effect if needed
+
+    duration = 1 # Duration to fire if triggers are met
+	
+	trigger = {													# What triggers the event, if using other events or journal entries leave empty
+		
+		#Overlord conditions
+		exists = c:GBR this = c:GBR											# Change TAG of the overlord ****
+		game_date >= 1954.1.6									# START DATE: Date colony became self governing ****
+		game_date < 1964.1.6									# END DATE: All historical events must not fire 10 years after the START DATE ****
+		
+		is_a_democratic_monarchy = yes									# Correct gov types
+		is_sufficiently_independent = yes						# is_vassal = no		
+		is_at_war = no											# war = no
+		
+		#Colony conditions
+		NOT = { 												# Colony to be released must not already exist on the map
+			exists = c:SUD										# Change TAG of the colony ****
+		}
+		any_scope_state = { 									# Overlord owns the states of the colony to be released
+			state_region = { is_homeland = cu:sudanese }		# Change homeland identity to match colony to be released ****
+			#is_incorporated = no								# State is a colony
+			#owner = THIS										# Overlord must own the state to be released
+		}
+		
+		# Event has not been fired before
+		NOT = { has_variable = british_sudan_sgc }				# CHANGE ****
+		
+    }
+	
+	immediate = {
+	
+		# Generate list of provinces to be released				# DO NOT TOUCH THIS SECTION
+		every_scope_state = {
+			limit = {
+				state_region = { is_homeland = cu:sudanese }	# Change homeland identity to match colony to be released ****
+				#is_incorporated = no							# State is a colony
+				#contains_capital_of = c:SUD						# State is the capital of colony ****
+			}
+			save_scope_as = colonial_state
+		}
+		
+	}
+    
+    option = {
+        name = british_decolonisation.option.1				#Grant them self-government
+        default_option = yes highlighted_option = yes
+		
+		#Release country
+		create_country = {
+			tag = SUD										# Change TAG of country being released ****
+			origin = THIS									# TAG where the created country takes tech from
+			state = scope:colonial_state
+			
+			on_created = {									# Set government laws & rulers here
+				
+				# SET laws for colony ****
+				effect_starting_politics_parliamentary_republic = yes
+				effect_starting_politics_democratic = yes
+				effect_starting_politics_constitutional_unitary_state = yes
+				effect_starting_politics_war_policy_anti_military = yes
+				effect_starting_politics_economic_policy_interventionism = yes
+				effect_starting_politics_trade_policy_protectionism = yes
+				effect_starting_politics_anti_nuclear_policy = yes
+				
+				# CREATE leader for colony ****
+				create_character = {
+					first_name = "guy_incognito_first_name"		# CHANGE
+					last_name = "guy_incognito_last_name"		# CHANGE
+					ruler = yes
+					#birth_date = 1910.1.1						# CHANGE
+					interest_group = ig_rural_folk					# CHANGE
+					ideology = ideology_democratic				# CHANGE
+					traits = {
+						charismatic								# CHANGE
+						persistent								# CHANGE
+						meticulous								# CHANGE
+					}
+				}
+				
+				# Set diplomatic recognition
+				set_country_type = unrecognized
+			}
+		}
+		every_scope_state = {
+			limit = {
+		 		state_region = { is_homeland = cu:sudanese }	# Change homeland identity to match colony to be released ****
+				#is_incorporated = no							# State is a colony
+		 	}
+			set_state_owner = c:SUD								# Change TAG to colony ****
+		}
+		
+		# Overlord create self governing colony pact with colony
+		if = {
+			limit = { exists = c:SUD }
+			create_diplomatic_pact = {
+				country = c:SUD										# Change TAG ****
+				type = semi_autonomous_colony
+			}
+			create_decolonisation_pacts = yes
+		}
+		
+		# Fire only once
+		set_variable = british_sudan_sgc						# Change variable ****
+		
+		ai_chance = { 
+			base = 90 
+		}
+		
+    }
+	
+	option = {
+        name = british_decolonisation.option.2					# REFUSE
+		
+		# Natives are angry!
+		every_scope_state = {
+			limit = {
+		 		state_region = { is_homeland = cu:sudanese }	# Change homeland identity to match colony to be released ****
+		 	}
+			add_radicals_in_state = {
+				culture = cu:sudanese							# Change culture ****
+				value = large_radicals
+			}
+			add_modifier = { name = nationalist_agitation months = 60 is_decaying = yes } 
+		}
+		
+		# Fire only once
+		set_variable = british_sudan_sgc						# Change variable ****
+		
+		ai_chance = { 
+			base = 10 modifier = { trigger = { has_global_variable = historical_railroading_active } add = -100 } 
+		}
+		
+    }
+
+}
+
+# Ghana
+british_decolonisation.3 = {
+    type = country_event
+	placement = scope:colonial_state
+
+    title = british_ghana.sgc.t 			# Title of the event; ADD LOCALISATION
+    desc = british_ghana.sgc.d 				# Description of the event; ADD LOCALISATION
+    #flavor = british_ghana.sgc.f 		# Flavor for event; ADD LOCALISATION, IF REQUIRED
+
+    event_image = { video = "gfx/event_pictures/unspecific_signed_contract.bk2" }
+
+    icon = "gfx/interface/icons/event_icons/waving_flag.dds" 	# Icon that shows on the map or the outliner
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear" 	# Sound effect if needed
+
+    duration = 1 # Duration to fire if triggers are met
+	
+	trigger = {													# What triggers the event, if using other events or journal entries leave empty
+		
+		#Overlord conditions
+		exists = c:GBR this = c:GBR											# Change TAG of the overlord ****
+		game_date >= 1952.1.1									# START DATE: Date colony became self governing ****
+		game_date < 1962.1.1									# END DATE: All historical events must not fire 10 years after the START DATE ****
+		
+		is_a_democratic_monarchy = yes									# Correct gov types
+		is_sufficiently_independent = yes						# is_vassal = no		
+		is_at_war = no											# war = no
+		
+		#Colony conditions
+		NOT = { 												# Colony to be released must not already exist on the map
+			exists = c:GHA										# Change TAG of the colony ****
+		}
+		any_scope_state = { 									# Overlord owns the states of the colony to be released
+			state_region = { is_homeland = cu:ghanaian }		# Change homeland identity to match colony to be released ****
+			#is_incorporated = no								# State is a colony
+			#owner = THIS										# Overlord must own the state to be released
+		}
+		
+		# Event has not been fired before
+		NOT = { has_variable = british_ghana_sgc }				# CHANGE ****
+		
+    }
+	
+	immediate = {
+	
+		# Generate list of provinces to be released				# DO NOT TOUCH THIS SECTION
+		every_scope_state = {
+			limit = {
+				state_region = { is_homeland = cu:ghanaian }	# Change homeland identity to match colony to be released ****
+				#is_incorporated = no							# State is a colony
+				#contains_capital_of = c:GHA						# State is the capital of colony ****
+			}
+			save_scope_as = colonial_state
+		}
+		
+	}
+    
+    option = {
+        name = british_decolonisation.option.1				#Grant them self-government
+        default_option = yes highlighted_option = yes
+		
+		#Release country
+		create_country = {
+			tag = GHA										# Change TAG of country being released ****
+			origin = THIS									# TAG where the created country takes tech from
+			state = scope:colonial_state
+			
+			on_created = {									# Set government laws & rulers here
+				
+				# SET laws for colony ****
+				effect_starting_politics_parliamentary_republic = yes
+				effect_starting_politics_democratic = yes
+				effect_starting_politics_constitutional_unitary_state = yes
+				effect_starting_politics_war_policy_anti_military = yes
+				effect_starting_politics_economic_policy_interventionism = yes
+				effect_starting_politics_trade_policy_protectionism = yes
+				effect_starting_politics_anti_nuclear_policy = yes
+				
+				#Create new leader
+				create_character = {
+					first_name = "Kwame_Nkrumah_first_name"
+					last_name = "Kwame_Nkrumah_last_name"
+					ruler = yes ig_leader = yes historical = yes
+					birth_date = 1909.9.21
+					interest_group = ig_rural_folk
+					ideology = ideology_autocratic
+					culture = cu:ghanaian
+					religion = rel:protestant
+					traits = {
+						ambitious
+						charismatic
+						wrathful
+					}
+				}
+				
+				# Set diplomatic recognition
+				set_country_type = unrecognized
+			}
+		}
+		every_scope_state = {
+			limit = {
+		 		state_region = { OR = { is_homeland = cu:ghanaian is_homeland = cu:togolese } }	# Change homeland identity to match colony to be released ****
+				#is_incorporated = no							# State is a colony
+		 	}
+			set_state_owner = c:GHA								# Change TAG to colony ****
+		}
+		
+		# Overlord create self governing colony pact with colony
+		if = {
+			limit = { exists = c:GHA }
+			create_diplomatic_pact = {
+				country = c:GHA										# Change TAG ****
+				type = semi_autonomous_colony
+			}
+			create_decolonisation_pacts = yes
+		}
+		
+		# Fire only once
+		set_variable = british_ghana_sgc						# Change variable ****
+		
+		ai_chance = { 
+			base = 90 
+		}
+		
+    }
+	
+	option = {
+        name = british_decolonisation.option.2					# REFUSE
+		
+		# Natives are angry!
+		every_scope_state = {
+			limit = {
+		 		state_region = { OR = { is_homeland = cu:ghanaian is_homeland = cu:togolese } }	# Change homeland identity to match colony to be released ****
+		 	}
+			add_radicals_in_state = {
+				culture = cu:ghanaian							# Change culture ****
+				value = large_radicals
+			}
+			add_modifier = { name = nationalist_agitation months = 60 is_decaying = yes } 
+		}
+		
+		# Fire only once
+		set_variable = british_ghana_sgc						# Change variable ****
+		
+		ai_chance = { 
+			base = 10 modifier = { trigger = { has_global_variable = historical_railroading_active } add = -100 } 
+		}
+		
+    }
+
+}
+
+# Sierra Leone
+british_decolonisation.4 = {
+    type = country_event
+	placement = scope:colonial_state
+
+    title = british_sierra_leone.sgc.t 			# Title of the event; ADD LOCALISATION
+    desc = british_sierra_leone.sgc.d 			# Description of the event; ADD LOCALISATION
+    #flavor = british_sierra_leone.sgc.f 		# Flavor for event; ADD LOCALISATION, IF REQUIRED
+
+    event_image = { video = "gfx/event_pictures/unspecific_signed_contract.bk2" }
+
+    icon = "gfx/interface/icons/event_icons/waving_flag.dds" 	# Icon that shows on the map or the outliner
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear" 	# Sound effect if needed
+
+    duration = 1 # Duration to fire if triggers are met
+	
+	trigger = {													# What triggers the event, if using other events or journal entries leave empty
+		
+		#Overlord conditions
+		exists = c:GBR this = c:GBR											# Change TAG of the overlord ****
+		game_date >= 1954.1.1									# START DATE: Date colony became self governing ****
+		game_date < 1964.1.1									# END DATE: All historical events must not fire 10 years after the START DATE ****
+		
+		is_a_democratic_monarchy = yes									# Correct gov types
+		is_sufficiently_independent = yes						# is_vassal = no		
+		is_at_war = no											# war = no
+		
+		#Colony conditions
+		NOT = { 												# Colony to be released must not already exist on the map
+			exists = c:SIL										# Change TAG of the colony ****
+		}
+		any_scope_state = { 									# Overlord owns the states of the colony to be released
+			state_region = { is_homeland = cu:sierra_leonean }	# Change homeland identity to match colony to be released ****
+			#is_incorporated = no								# State is a colony
+			#owner = THIS										# Overlord must own the state to be released
+		}
+		
+		# Event has not been fired before
+		NOT = { has_variable = british_sierra_leone_sgc }		# CHANGE ****
+		
+    }
+	
+	immediate = {
+	
+		# Generate list of provinces to be released				# DO NOT TOUCH THIS SECTION
+		every_scope_state = {
+			limit = {
+				state_region = { is_homeland = cu:sierra_leonean }	# Change homeland identity to match colony to be released ****
+				#is_incorporated = no								# State is a colony
+				#contains_capital_of = c:SIL							# State is the capital of colony ****
+			}
+			save_scope_as = colonial_state
+		}
+		
+	}
+    
+    option = {
+        name = british_decolonisation.option.1				#Grant them self-government
+        default_option = yes highlighted_option = yes
+		
+		#Release country
+		create_country = {
+			tag = SIL										# Change TAG of country being released ****
+			origin = THIS									# TAG where the created country takes tech from
+			state = scope:colonial_state
+			
+			on_created = {									# Set government laws & rulers here
+				
+				# SET laws for colony ****
+				effect_starting_politics_parliamentary_republic = yes
+				effect_starting_politics_democratic = yes
+				effect_starting_politics_constitutional_unitary_state = yes
+				effect_starting_politics_war_policy_anti_military = yes
+				effect_starting_politics_economic_policy_interventionism = yes
+				effect_starting_politics_trade_policy_protectionism = yes
+				effect_starting_politics_anti_nuclear_policy = yes
+				
+				# CREATE leader for colony ****
+				create_character = {
+					first_name = "guy_incognito_first_name"		# CHANGE
+					last_name = "guy_incognito_last_name"		# CHANGE
+					ruler = yes
+					#birth_date = 1910.1.1						# CHANGE
+					interest_group = ig_rural_folk					# CHANGE
+					ideology = ideology_democratic				# CHANGE
+					traits = {
+						charismatic								# CHANGE
+						persistent								# CHANGE
+						meticulous								# CHANGE
+					}
+				}
+				
+				# Set diplomatic recognition
+				set_country_type = unrecognized
+			}
+		}
+		every_scope_state = {
+			limit = {
+		 		state_region = { is_homeland = cu:sierra_leonean }	# Change homeland identity to match colony to be released ****
+				#is_incorporated = no								# State is a colony
+		 	}
+			set_state_owner = c:SIL									# Change TAG to colony ****
+		}
+		
+		# Overlord create self governing colony pact with colony
+		if = {
+			limit = { exists = c:SIL }
+			create_diplomatic_pact = {
+				country = c:SIL										# Change TAG ****
+				type = semi_autonomous_colony
+			}
+			create_decolonisation_pacts = yes
+		}
+		
+		# Fire only once
+		set_variable = british_sierra_leone_sgc					# Change variable ****
+		
+		ai_chance = { 
+			base = 90 
+		}
+		
+    }
+	
+	option = {
+        name = british_decolonisation.option.2					# REFUSE
+		
+		# Natives are angry!
+		every_scope_state = {
+			limit = {
+		 		state_region = { is_homeland = cu:sierra_leonean }	# Change homeland identity to match colony to be released ****
+		 	}
+			add_radicals_in_state = {
+				culture = cu:sierra_leonean						# Change culture ****
+				value = large_radicals
+			}
+			add_modifier = { name = nationalist_agitation months = 60 is_decaying = yes } 
+		}
+		
+		# Fire only once
+		set_variable = british_sierra_leone_sgc					# Change variable ****
+		
+		ai_chance = { 
+			base = 10 modifier = { trigger = { has_global_variable = historical_railroading_active } add = -100 } 
+		}
+		
+    }
+
+}
+
+# The Gambia
+british_decolonisation.5 = {
+    type = country_event
+	placement = scope:colonial_state
+
+    title = british_gambia.sgc.t 			# Title of the event; ADD LOCALISATION
+    desc = british_gambia.sgc.d 			# Description of the event; ADD LOCALISATION
+    #flavor = british_gambia.sgc.f 			# Flavor for event; ADD LOCALISATION, IF REQUIRED
+
+    event_image = { video = "gfx/event_pictures/unspecific_signed_contract.bk2" }
+
+    icon = "gfx/interface/icons/event_icons/waving_flag.dds" 	# Icon that shows on the map or the outliner
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear" 	# Sound effect if needed
+
+    duration = 1 # Duration to fire if triggers are met
+	
+	trigger = {													# What triggers the event, if using other events or journal entries leave empty
+		
+		#Overlord conditions
+		exists = c:GBR this = c:GBR											# Change TAG of the overlord ****
+		game_date >= 1960.1.1									# START DATE: Date colony became self governing ****
+		game_date < 1970.1.1									# END DATE: All historical events must not fire 10 years after the START DATE ****
+		
+		is_a_democratic_monarchy = yes									# Correct gov types
+		is_sufficiently_independent = yes						# is_vassal = no		
+		is_at_war = no											# war = no
+		
+		#Colony conditions
+		NOT = { 												# Colony to be released must not already exist on the map
+			exists = c:GAM										# Change TAG of the colony ****
+		}
+		any_scope_state = { 									# Overlord owns the states of the colony to be released
+			state_region = { is_homeland = cu:gambian }			# Change homeland identity to match colony to be released ****
+			#is_incorporated = no								# State is a colony
+			#owner = THIS										# Overlord must own the state to be released
+		}
+		
+		# Event has not been fired before
+		NOT = { has_variable = british_gambia_sgc }				# CHANGE ****
+		
+    }
+	
+	immediate = {
+	
+		# Generate list of provinces to be released				# DO NOT TOUCH THIS SECTION
+		every_scope_state = {
+			limit = {
+				state_region = { is_homeland = cu:gambian }		# Change homeland identity to match colony to be released ****
+				#is_incorporated = no							# State is a colony
+				#contains_capital_of = c:GAM						# State is the capital of colony ****
+			}
+			save_scope_as = colonial_state
+		}
+		
+	}
+    
+    option = {
+        name = british_decolonisation.option.1				#Grant them self-government
+        default_option = yes highlighted_option = yes
+		
+		#Release country
+		create_country = {
+			tag = GAM										# Change TAG of country being released ****
+			origin = THIS									# TAG where the created country takes tech from
+			state = scope:colonial_state
+			
+			on_created = {									# Set government laws & rulers here
+				
+				# SET laws for colony ****
+				effect_starting_politics_parliamentary_republic = yes
+				effect_starting_politics_democratic = yes
+				effect_starting_politics_constitutional_unitary_state = yes
+				effect_starting_politics_war_policy_anti_military = yes
+				effect_starting_politics_economic_policy_interventionism = yes
+				effect_starting_politics_trade_policy_protectionism = yes
+				effect_starting_politics_anti_nuclear_policy = yes
+				
+				# CREATE leader for colony ****
+				create_character = {
+					first_name = "guy_incognito_first_name"		# CHANGE
+					last_name = "guy_incognito_last_name"		# CHANGE
+					ruler = yes
+					#birth_date = 1910.1.1						# CHANGE
+					interest_group = ig_rural_folk					# CHANGE
+					ideology = ideology_democratic				# CHANGE
+					traits = {
+						charismatic								# CHANGE
+						persistent								# CHANGE
+						meticulous								# CHANGE
+					}
+				}
+				
+				# Set diplomatic recognition
+				set_country_type = unrecognized
+			}
+		}
+		every_scope_state = {
+			limit = {
+		 		state_region = { is_homeland = cu:gambian }		# Change homeland identity to match colony to be released ****
+				#is_incorporated = no							# State is a colony
+		 	}
+			set_state_owner = c:GAM								# Change TAG to colony ****
+		}
+		
+		# Overlord create self governing colony pact with colony
+		if = {
+			limit = { exists = c:GAM }
+			create_diplomatic_pact = {
+				country = c:GAM										# Change TAG ****
+				type = semi_autonomous_colony
+			}
+			create_decolonisation_pacts = yes
+		}
+		
+		# Fire only once
+		set_variable = british_gambia_sgc						# Change variable ****
+		
+		ai_chance = { 
+			base = 90 
+		}
+		
+    }
+	
+	option = {
+        name = british_decolonisation.option.2					# REFUSE
+		
+		# Natives are angry!
+		every_scope_state = {
+			limit = {
+		 		state_region = { is_homeland = cu:gambian }		# Change homeland identity to match colony to be released ****
+		 	}
+			add_radicals_in_state = {
+				culture = cu:gambian							# Change culture ****
+				value = large_radicals
+			}
+			add_modifier = { name = nationalist_agitation months = 60 is_decaying = yes } 
+		}
+		
+		# Fire only once
+		set_variable = british_gambia_sgc						# Change variable ****
+		
+		ai_chance = { 
+			base = 10 modifier = { trigger = { has_global_variable = historical_railroading_active } add = -100 } 
+		}
+		
+    }
+
+}
+
+# Uganda
+british_decolonisation.6 = {
+    type = country_event
+	placement = scope:colonial_state
+
+    title = british_uganda.sgc.t 			# Title of the event; ADD LOCALISATION
+    desc = british_uganda.sgc.d 			# Description of the event; ADD LOCALISATION
+    #flavor = british_uganda.sgc.f 			# Flavor for event; ADD LOCALISATION, IF REQUIRED
+
+    event_image = { video = "gfx/event_pictures/unspecific_signed_contract.bk2" }
+
+    icon = "gfx/interface/icons/event_icons/waving_flag.dds" 	# Icon that shows on the map or the outliner
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear" 	# Sound effect if needed
+
+    duration = 1 # Duration to fire if triggers are met
+	
+	trigger = {													# What triggers the event, if using other events or journal entries leave empty
+		
+		#Overlord conditions
+		exists = c:GBR this = c:GBR											# Change TAG of the overlord ****
+		game_date >= 1958.10.1									# START DATE: Date colony became self governing ****
+		game_date < 1968.1.1									# END DATE: All historical events must not fire 10 years after the START DATE ****
+		
+		is_a_democratic_monarchy = yes									# Correct gov types
+		is_sufficiently_independent = yes						# is_vassal = no		
+		is_at_war = no											# war = no
+		
+		#Colony conditions
+		NOT = { 												# Colony to be released must not already exist on the map
+			exists = c:UGA										# Change TAG of the colony ****
+		}
+		any_scope_state = { 									# Overlord owns the states of the colony to be released
+			state_region = { is_homeland = cu:ugandan }			# Change homeland identity to match colony to be released ****
+			#is_incorporated = no								# State is a colony
+			#owner = THIS										# Overlord must own the state to be released
+		}
+		
+		# Event has not been fired before
+		NOT = { has_variable = british_uganda_sgc }				# CHANGE ****
+		
+    }
+	
+	immediate = {
+	
+		# Generate list of provinces to be released				# DO NOT TOUCH THIS SECTION
+		every_scope_state = {
+			limit = {
+				state_region = { is_homeland = cu:ugandan }		# Change homeland identity to match colony to be released ****
+				#is_incorporated = no							# State is a colony
+				#contains_capital_of = c:UGA						# State is the capital of colony ****
+			}
+			save_scope_as = colonial_state
+		}
+		
+	}
+    
+    option = {
+        name = british_decolonisation.option.1				#Grant them self-government
+        default_option = yes highlighted_option = yes
+		
+		#Release country
+		create_country = {
+			tag = UGA										# Change TAG of country being released ****
+			origin = THIS									# TAG where the created country takes tech from
+			state = scope:colonial_state
+			
+			on_created = {									# Set government laws & rulers here
+				
+				# SET laws for colony ****
+				effect_starting_politics_parliamentary_republic = yes
+				effect_starting_politics_democratic = yes
+				effect_starting_politics_constitutional_unitary_state = yes
+				effect_starting_politics_war_policy_anti_military = yes
+				effect_starting_politics_economic_policy_interventionism = yes
+				effect_starting_politics_trade_policy_protectionism = yes
+				effect_starting_politics_anti_nuclear_policy = yes
+				
+				# CREATE leader for colony ****
+				create_character = {
+					first_name = "guy_incognito_first_name"		# CHANGE
+					last_name = "guy_incognito_last_name"		# CHANGE
+					ruler = yes
+					#birth_date = 1910.1.1						# CHANGE
+					interest_group = ig_rural_folk					# CHANGE
+					ideology = ideology_democratic				# CHANGE
+					traits = {
+						charismatic								# CHANGE
+						persistent								# CHANGE
+						meticulous								# CHANGE
+					}
+				}
+				
+				# Set diplomatic recognition
+				set_country_type = unrecognized
+			}
+		}
+		every_scope_state = {
+			limit = {
+		 		state_region = { is_homeland = cu:ugandan }		# Change homeland identity to match colony to be released ****
+				#is_incorporated = no							# State is a colony
+		 	}
+			set_state_owner = c:UGA								# Change TAG to colony ****
+		}
+		
+		# Overlord create self governing colony pact with colony
+		if = {
+			limit = { exists = c:UGA }
+			create_diplomatic_pact = {
+				country = c:UGA										# Change TAG ****
+				type = semi_autonomous_colony
+			}
+			create_decolonisation_pacts = yes
+		}
+		
+		# Fire only once
+		set_variable = british_uganda_sgc						# Change variable ****
+		
+		ai_chance = { 
+			base = 90 
+		}
+		
+    }
+	
+	option = {
+        name = british_decolonisation.option.2					# REFUSE
+		
+		# Natives are angry!
+		every_scope_state = {
+			limit = {
+		 		state_region = { is_homeland = cu:ugandan }		# Change homeland identity to match colony to be released ****
+		 	}
+			add_radicals_in_state = {
+				culture = cu:ugandan							# Change culture ****
+				value = large_radicals
+			}
+			add_modifier = { name = nationalist_agitation months = 60 is_decaying = yes } 
+		}
+		
+		# Fire only once
+		set_variable = british_uganda_sgc						# Change variable ****
+		
+		ai_chance = { 
+			base = 10 modifier = { trigger = { has_global_variable = historical_railroading_active } add = -100 } 
+		}
+		
+    }
+
+}
+
+# Kenya
+british_decolonisation.7 = {
+    type = country_event
+	placement = scope:colonial_state
+
+    title = british_kenya.sgc.t 			# Title of the event; ADD LOCALISATION
+    desc = british_kenya.sgc.d 			# Description of the event; ADD LOCALISATION
+    #flavor = british_kenya.sgc.f 			# Flavor for event; ADD LOCALISATION, IF REQUIRED
+
+    event_image = { video = "gfx/event_pictures/unspecific_signed_contract.bk2" }
+
+    icon = "gfx/interface/icons/event_icons/waving_flag.dds" 	# Icon that shows on the map or the outliner
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear" 	# Sound effect if needed
+
+    duration = 1 # Duration to fire if triggers are met
+	
+	trigger = {													# What triggers the event, if using other events or journal entries leave empty
+		
+		#Overlord conditions
+		exists = c:GBR this = c:GBR											# Change TAG of the overlord ****
+		game_date >= 1957.1.1									# START DATE: Date colony became self governing ****
+		game_date < 1967.1.1									# END DATE: All historical events must not fire 10 years after the START DATE ****
+		
+		is_a_democratic_monarchy = yes									# Correct gov types
+		is_sufficiently_independent = yes						# is_vassal = no		
+		is_at_war = no											# war = no
+		
+		#Colony conditions
+		NOT = { 												# Colony to be released must not already exist on the map
+			exists = c:KEN										# Change TAG of the colony ****
+		}
+		any_scope_state = { 									# Overlord owns the states of the colony to be released
+			state_region = { is_homeland = cu:kenyan }			# Change homeland identity to match colony to be released ****
+			#is_incorporated = no								# State is a colony
+			#owner = THIS										# Overlord must own the state to be released
+		}
+		
+		# Event has not been fired before
+		NOT = { has_variable = british_kenya_sgc }				# CHANGE ****
+		
+    }
+	
+	immediate = {
+	
+		# Generate list of provinces to be released				# DO NOT TOUCH THIS SECTION
+		every_scope_state = {
+			limit = {
+				state_region = { is_homeland = cu:kenyan }		# Change homeland identity to match colony to be released ****
+				#is_incorporated = no							# State is a colony
+				#contains_capital_of = c:KEN						# State is the capital of colony ****
+			}
+			save_scope_as = colonial_state
+		}
+		
+	}
+    
+    option = {
+        name = british_decolonisation.option.1				#Grant them self-government
+        default_option = yes highlighted_option = yes
+		
+		#Release country
+		create_country = {
+			tag = KEN										# Change TAG of country being released ****
+			origin = THIS									# TAG where the created country takes tech from
+			state = scope:colonial_state
+			
+			on_created = {									# Set government laws & rulers here
+				
+				# SET laws for colony ****
+				effect_starting_politics_parliamentary_republic = yes
+				effect_starting_politics_democratic = yes
+				effect_starting_politics_constitutional_unitary_state = yes
+				effect_starting_politics_war_policy_anti_military = yes
+				effect_starting_politics_economic_policy_interventionism = yes
+				effect_starting_politics_trade_policy_protectionism = yes
+				effect_starting_politics_anti_nuclear_policy = yes
+				
+				# CREATE leader for colony ****
+				create_character = {
+					first_name = "guy_incognito_first_name"		# CHANGE
+					last_name = "guy_incognito_last_name"		# CHANGE
+					ruler = yes
+					#birth_date = 1910.1.1						# CHANGE
+					interest_group = ig_rural_folk					# CHANGE
+					ideology = ideology_democratic				# CHANGE
+					traits = {
+						charismatic								# CHANGE
+						persistent								# CHANGE
+						meticulous								# CHANGE
+					}
+				}
+				
+				# Set diplomatic recognition
+				set_country_type = unrecognized
+			}
+		}
+		every_scope_state = {
+			limit = {
+		 		state_region = { is_homeland = cu:kenyan }		# Change homeland identity to match colony to be released ****
+				#is_incorporated = no							# State is a colony
+		 	}
+			set_state_owner = c:KEN								# Change TAG to colony ****
+		}
+		
+		# Overlord create self governing colony pact with colony
+		if = {
+			limit = { exists = c:KEN }
+			create_diplomatic_pact = {
+				country = c:KEN										# Change TAG ****
+				type = semi_autonomous_colony
+			}
+			create_decolonisation_pacts = yes
+		}
+		
+		# Fire only once
+		set_variable = british_kenya_sgc						# Change variable ****
+		
+		ai_chance = { 
+			base = 90 
+		}
+		
+    }
+	
+	option = {
+        name = british_decolonisation.option.2					# REFUSE
+		
+		# Natives are angry!
+		every_scope_state = {
+			limit = {
+		 		state_region = { is_homeland = cu:kenyan }		# Change homeland identity to match colony to be released ****
+		 	}
+			add_radicals_in_state = {
+				culture = cu:kenyan							# Change culture ****
+				value = large_radicals
+			}
+			add_modifier = { name = nationalist_agitation months = 60 is_decaying = yes } 
+		}
+		
+		# Fire only once
+		set_variable = british_kenya_sgc						# Change variable ****
+		
+		ai_chance = { 
+			base = 10 modifier = { trigger = { has_global_variable = historical_railroading_active } add = -100 } 
+		}
+		
+    }
+
+}
+
+# Tanganyika
+british_decolonisation.8 = {
+    type = country_event
+	placement = scope:colonial_state
+
+    title = british_tanganyika.sgc.t 			# Title of the event; ADD LOCALISATION
+    desc = british_tanganyika.sgc.d 			# Description of the event; ADD LOCALISATION
+    #flavor = british_tanganyika.sgc.f 			# Flavor for event; ADD LOCALISATION, IF REQUIRED
+
+    event_image = { video = "gfx/event_pictures/unspecific_signed_contract.bk2" }
+
+    icon = "gfx/interface/icons/event_icons/waving_flag.dds" 	# Icon that shows on the map or the outliner
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear" 	# Sound effect if needed
+
+    duration = 1 # Duration to fire if triggers are met
+	
+	trigger = {													# What triggers the event, if using other events or journal entries leave empty
+		
+		#Overlord conditions
+		exists = c:GBR this = c:GBR											# Change TAG of the overlord ****
+		game_date >= 1958.9.1									# START DATE: Date colony became self governing ****
+		game_date < 1968.9.1									# END DATE: All historical events must not fire 10 years after the START DATE ****
+		
+		is_a_democratic_monarchy = yes									# Correct gov types
+		is_sufficiently_independent = yes						# is_vassal = no		
+		is_at_war = no											# war = no
+		
+		#Colony conditions
+		NOT = { 												# Colony to be released must not already exist on the map
+			exists = c:TGY										# Change TAG of the colony ****
+		}
+		any_scope_state = { 									# Overlord owns the states of the colony to be released
+			state_region = { is_homeland = cu:tanganyikan }			# Change homeland identity to match colony to be released ****
+			#is_incorporated = no								# State is a colony
+			#owner = THIS										# Overlord must own the state to be released
+		}
+		
+		# Event has not been fired before
+		NOT = { has_variable = british_tanganyika_sgc }				# CHANGE ****
+		
+    }
+	
+	immediate = {
+	
+		# Generate list of provinces to be released				# DO NOT TOUCH THIS SECTION
+		every_scope_state = {
+			limit = {
+				state_region = { is_homeland = cu:tanganyikan }		# Change homeland identity to match colony to be released ****
+				#is_incorporated = no							# State is a colony
+				#contains_capital_of = c:TGY						# State is the capital of colony ****
+			}
+			save_scope_as = colonial_state
+		}
+		
+	}
+    
+    option = {
+        name = british_decolonisation.option.1				#Grant them self-government
+        default_option = yes highlighted_option = yes
+		
+		#Release country
+		create_country = {
+			tag = TGY										# Change TAG of country being released ****
+			origin = THIS									# TAG where the created country takes tech from
+			state = scope:colonial_state
+			
+			on_created = {									# Set government laws & rulers here
+				
+				# SET laws for colony ****
+				effect_starting_politics_presidential_republic = yes
+				effect_starting_politics_democratic = yes
+				effect_starting_politics_constitutional_unitary_state = yes
+				effect_starting_politics_war_policy_anti_military = yes
+				effect_starting_politics_economic_policy_interventionism = yes
+				effect_starting_politics_trade_policy_protectionism = yes
+				effect_starting_politics_anti_nuclear_policy = yes
+				
+				# CREATE leader for colony ****
+				create_character = {
+					first_name = "Julius_Nyerere_first_name"
+					last_name = "Julius_Nyerere_last_name"
+					ruler = yes ig_leader = yes historical = yes
+					birth_date = 1922.4.13
+					interest_group = ig_rural_folk
+					ideology = ideology_autocratic
+					culture = cu:tanganyikan
+					religion = rel:catholic
+					traits = {
+						direct
+						charismatic
+						wrathful
+					}
+					on_created = { set_variable = Julius_Nyerere }
+				}
+				
+				# Set diplomatic recognition
+				set_country_type = unrecognized
+			}
+		}
+		every_scope_state = {
+			limit = {
+		 		state_region = { is_homeland = cu:tanganyikan }		# Change homeland identity to match colony to be released ****
+				#is_incorporated = no							# State is a colony
+		 	}
+			set_state_owner = c:TGY								# Change TAG to colony ****
+		}
+		
+		# Overlord create self governing colony pact with colony
+		if = {
+			limit = { exists = c:TGY }
+			create_diplomatic_pact = {
+				country = c:TGY										# Change TAG ****
+				type = mandate
+			}
+			create_decolonisation_pacts = yes
+		}
+		
+		# Fire only once
+		set_variable = british_tanganyika_sgc						# Change variable ****
+		
+		ai_chance = { 
+			base = 90 
+		}
+		
+    }
+	
+	option = {
+        name = british_decolonisation.option.2					# REFUSE
+		
+		# Natives are angry!
+		every_scope_state = {
+			limit = {
+		 		state_region = { is_homeland = cu:tanganyikan }		# Change homeland identity to match colony to be released ****
+		 	}
+			add_radicals_in_state = {
+				culture = cu:tanganyikan							# Change culture ****
+				value = large_radicals
+			}
+			add_modifier = { name = nationalist_agitation months = 60 is_decaying = yes } 
+		}
+		
+		# Add Infamy because doing this is against international law
+		change_infamy = 10
+		
+		# Fire only once
+		set_variable = british_tanganyika_sgc						# Change variable ****
+		
+		ai_chance = { 
+			base = 10 modifier = { trigger = { has_global_variable = historical_railroading_active } add = -100 } 
+		}
+		
+    }
+
+}
+
+# Botswana
+british_decolonisation.9 = {
+    type = country_event
+	placement = scope:colonial_state
+
+    title = british_botswana.sgc.t 			# Title of the event; ADD LOCALISATION
+    desc = british_botswana.sgc.d 			# Description of the event; ADD LOCALISATION
+    #flavor = british_botswana.sgc.f 			# Flavor for event; ADD LOCALISATION, IF REQUIRED
+
+    event_image = { video = "gfx/event_pictures/unspecific_signed_contract.bk2" }
+
+    icon = "gfx/interface/icons/event_icons/waving_flag.dds" 	# Icon that shows on the map or the outliner
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear" 	# Sound effect if needed
+
+    duration = 1 # Duration to fire if triggers are met
+	
+	trigger = {													# What triggers the event, if using other events or journal entries leave empty
+		
+		#Overlord conditions
+		exists = c:GBR this = c:GBR											# Change TAG of the overlord ****
+		game_date >= 1965.3.3									# START DATE: Date colony became self governing ****
+		game_date < 1975.9.1									# END DATE: All historical events must not fire 10 years after the START DATE ****
+		
+		is_a_democratic_monarchy = yes									# Correct gov types
+		is_sufficiently_independent = yes						# is_vassal = no		
+		is_at_war = no											# war = no
+		
+		#Colony conditions
+		NOT = { 												# Colony to be released must not already exist on the map
+			exists = c:BOT										# Change TAG of the colony ****
+		}
+		any_scope_state = { 									# Overlord owns the states of the colony to be released
+			state_region = { is_homeland = cu:tswana }			# Change homeland identity to match colony to be released ****
+			#is_incorporated = no								# State is a colony
+			#owner = THIS										# Overlord must own the state to be released
+		}
+		
+		# Event has not been fired before
+		NOT = { has_variable = british_botswana_sgc }				# CHANGE ****
+		
+    }
+	
+	immediate = {
+	
+		# Generate list of provinces to be released				# DO NOT TOUCH THIS SECTION
+		every_scope_state = {
+			limit = {
+				state_region = { is_homeland = cu:tswana }		# Change homeland identity to match colony to be released ****
+				#is_incorporated = no							# State is a colony
+				#contains_capital_of = c:BOT						# State is the capital of colony ****
+			}
+			save_scope_as = colonial_state
+		}
+		
+	}
+    
+    option = {
+        name = british_decolonisation.option.1				#Grant them self-government
+        default_option = yes highlighted_option = yes
+		
+		#Release country
+		create_country = {
+			tag = BOT										# Change TAG of country being released ****
+			origin = THIS									# TAG where the created country takes tech from
+			state = scope:colonial_state
+			
+			on_created = {									# Set government laws & rulers here
+				
+				# SET laws for colony ****
+				effect_starting_politics_parliamentary_republic = yes
+				effect_starting_politics_democratic = yes
+				effect_starting_politics_constitutional_unitary_state = yes
+				effect_starting_politics_war_policy_anti_military = yes
+				effect_starting_politics_economic_policy_interventionism = yes
+				effect_starting_politics_trade_policy_protectionism = yes
+				effect_starting_politics_anti_nuclear_policy = yes
+				
+				# CREATE leader for colony ****
+				create_character = {
+					first_name = "guy_incognito_first_name"		# CHANGE
+					last_name = "guy_incognito_last_name"		# CHANGE
+					ruler = yes
+					#birth_date = 1910.1.1						# CHANGE
+					interest_group = ig_rural_folk					# CHANGE
+					ideology = ideology_democratic				# CHANGE
+					traits = {
+						charismatic								# CHANGE
+						persistent								# CHANGE
+						meticulous								# CHANGE
+					}
+				}
+				
+				# Set diplomatic recognition
+				set_country_type = unrecognized
+			}
+		}
+		every_scope_state = {
+			limit = {
+		 		state_region = { is_homeland = cu:tswana }		# Change homeland identity to match colony to be released ****
+				#is_incorporated = no							# State is a colony
+		 	}
+			set_state_owner = c:BOT								# Change TAG to colony ****
+		}
+		
+		# Overlord create self governing colony pact with colony
+		if = {
+			limit = { exists = c:BOT }
+			create_diplomatic_pact = {
+				country = c:BOT										# Change TAG ****
+				type = semi_autonomous_colony
+			}
+			create_decolonisation_pacts = yes
+		}
+		
+		# Fire only once
+		set_variable = british_botswana_sgc						# Change variable ****
+		
+		ai_chance = { 
+			base = 90 
+		}
+		
+    }
+	
+	option = {
+        name = british_decolonisation.option.2					# REFUSE
+		
+		# Natives are angry!
+		every_scope_state = {
+			limit = {
+		 		state_region = { is_homeland = cu:tswana }		# Change homeland identity to match colony to be released ****
+		 	}
+			add_radicals_in_state = {
+				culture = cu:tswana							# Change culture ****
+				value = large_radicals
+			}
+			add_modifier = { name = nationalist_agitation months = 60 is_decaying = yes } 
+		}
+		
+		# Fire only once
+		set_variable = british_botswana_sgc						# Change variable ****
+		
+		ai_chance = { 
+			base = 10 modifier = { trigger = { has_global_variable = historical_railroading_active } add = -100 } 
+		}
+		
+    }
+
+}
+
+# Swaziland
+british_decolonisation.10 = {
+    type = country_event
+	placement = scope:colonial_state
+
+    title = british_swaziland.sgc.t 			# Title of the event; ADD LOCALISATION
+    desc = british_swaziland.sgc.d 				# Description of the event; ADD LOCALISATION
+    #flavor = british_swaziland.sgc.f 			# Flavor for event; ADD LOCALISATION, IF REQUIRED
+
+    event_image = { video = "gfx/event_pictures/unspecific_signed_contract.bk2" }
+
+    icon = "gfx/interface/icons/event_icons/waving_flag.dds" 	# Icon that shows on the map or the outliner
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear" 	# Sound effect if needed
+
+    duration = 1 # Duration to fire if triggers are met
+	
+	trigger = {													# What triggers the event, if using other events or journal entries leave empty
+		
+		#Overlord conditions
+		exists = c:GBR this = c:GBR											# Change TAG of the overlord ****
+		game_date >= 1964.9.9									# START DATE: Date colony became self governing ****
+		game_date < 1974.9.9									# END DATE: All historical events must not fire 10 years after the START DATE ****
+		
+		is_a_democratic_monarchy = yes									# Correct gov types
+		is_sufficiently_independent = yes						# is_vassal = no		
+		is_at_war = no											# war = no
+		
+		#Colony conditions
+		NOT = { 												# Colony to be released must not already exist on the map
+			exists = c:ESW										# Change TAG of the colony ****
+		}
+		any_scope_state = { 									# Overlord owns the states of the colony to be released
+			state_region = { is_homeland = cu:liswati }			# Change homeland identity to match colony to be released ****
+			#is_incorporated = no								# State is a colony
+			#owner = THIS										# Overlord must own the state to be released
+		}
+		
+		# Event has not been fired before
+		NOT = { has_variable = british_swaziland_sgc }				# CHANGE ****
+		
+    }
+	
+	immediate = {
+	
+		# Generate list of provinces to be released				# DO NOT TOUCH THIS SECTION
+		every_scope_state = {
+			limit = {
+				state_region = { is_homeland = cu:liswati }		# Change homeland identity to match colony to be released ****
+				#is_incorporated = no							# State is a colony
+				#contains_capital_of = c:ESW						# State is the capital of colony ****
+			}
+			save_scope_as = colonial_state
+		}
+		
+	}
+    
+    option = {
+        name = british_decolonisation.option.1				#Grant them self-government
+        default_option = yes highlighted_option = yes
+		
+		#Release country
+		create_country = {
+			tag = ESW										# Change TAG of country being released ****
+			origin = THIS									# TAG where the created country takes tech from
+			state = scope:colonial_state
+			
+			on_created = {									# Set government laws & rulers here
+				
+				# SET laws for colony ****
+				effect_starting_politics_semi_constitutional_monarchy = yes
+				effect_starting_politics_democratic = yes
+				effect_starting_politics_constitutional_unitary_state = yes
+				effect_starting_politics_war_policy_anti_military = yes
+				effect_starting_politics_economic_policy_interventionism = yes
+				effect_starting_politics_trade_policy_protectionism = yes
+				effect_starting_politics_anti_nuclear_policy = yes
+				
+				# CREATE leader for colony ****
+				create_character = {
+					first_name = "guy_incognito_first_name"		# CHANGE
+					last_name = "guy_incognito_last_name"		# CHANGE
+					ruler = yes
+					#birth_date = 1910.1.1						# CHANGE
+					interest_group = ig_rural_folk					# CHANGE
+					ideology = ideology_democratic				# CHANGE
+					traits = {
+						charismatic								# CHANGE
+						persistent								# CHANGE
+						meticulous								# CHANGE
+					}
+				}
+				
+				# Set diplomatic recognition
+				set_country_type = unrecognized
+			}
+		}
+		every_scope_state = {
+			limit = {
+		 		state_region = { is_homeland = cu:liswati }		# Change homeland identity to match colony to be released ****
+				#is_incorporated = no							# State is a colony
+		 	}
+			set_state_owner = c:ESW								# Change TAG to colony ****
+		}
+		
+		# Overlord create self governing colony pact with colony
+		if = {
+			limit = { exists = c:ESW }
+			create_diplomatic_pact = {
+				country = c:ESW										# Change TAG ****
+				type = semi_autonomous_colony
+			}
+			create_decolonisation_pacts = yes
+		}
+		
+		# Fire only once
+		set_variable = british_swaziland_sgc						# Change variable ****
+		
+		ai_chance = { 
+			base = 90 
+		}
+		
+    }
+	
+	option = {
+        name = british_decolonisation.option.2						# REFUSE
+		
+		# Natives are angry!
+		every_scope_state = {
+			limit = {
+		 		state_region = { is_homeland = cu:liswati }			# Change homeland identity to match colony to be released ****
+		 	}
+			add_radicals_in_state = {
+				culture = cu:liswati								# Change culture ****
+				value = large_radicals
+			}
+			add_modifier = { name = nationalist_agitation months = 60 is_decaying = yes } 
+		}
+		
+		# Fire only once
+		set_variable = british_swaziland_sgc						# Change variable ****
+		
+		ai_chance = { 
+			base = 10 modifier = { trigger = { has_global_variable = historical_railroading_active } add = -100 } 
+		}
+		
+    }
+
+}
+
+# Lesotho
+british_decolonisation.11 = {
+    type = country_event
+	placement = scope:colonial_state
+
+    title = british_lesotho.sgc.t 			# Title of the event; ADD LOCALISATION
+    desc = british_lesotho.sgc.d 				# Description of the event; ADD LOCALISATION
+    #flavor = british_lesotho.sgc.f 			# Flavor for event; ADD LOCALISATION, IF REQUIRED
+
+    event_image = { video = "gfx/event_pictures/unspecific_signed_contract.bk2" }
+
+    icon = "gfx/interface/icons/event_icons/waving_flag.dds" 	# Icon that shows on the map or the outliner
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear" 	# Sound effect if needed
+
+    duration = 1 # Duration to fire if triggers are met
+	
+	trigger = {													# What triggers the event, if using other events or journal entries leave empty
+		
+		#Overlord conditions
+		exists = c:GBR this = c:GBR											# Change TAG of the overlord ****
+		game_date >= 1965.1.1									# START DATE: Date colony became self governing ****
+		game_date < 1975.1.1									# END DATE: All historical events must not fire 10 years after the START DATE ****
+		
+		is_a_democratic_monarchy = yes									# Correct gov types
+		is_sufficiently_independent = yes						# is_vassal = no		
+		is_at_war = no											# war = no
+		
+		#Colony conditions
+		NOT = { 												# Colony to be released must not already exist on the map
+			exists = c:LES										# Change TAG of the colony ****
+		}
+		any_scope_state = { 									# Overlord owns the states of the colony to be released
+			state_region = { is_homeland = cu:sotho }			# Change homeland identity to match colony to be released ****
+			#is_incorporated = no								# State is a colony
+			#owner = THIS										# Overlord must own the state to be released
+		}
+		
+		# Event has not been fired before
+		NOT = { has_variable = british_lesotho_sgc }				# CHANGE ****
+		
+    }
+	
+	immediate = {
+	
+		# Generate list of provinces to be released				# DO NOT TOUCH THIS SECTION
+		every_scope_state = {
+			limit = {
+				state_region = { is_homeland = cu:sotho }		# Change homeland identity to match colony to be released ****
+				#is_incorporated = no							# State is a colony
+				#contains_capital_of = c:LES						# State is the capital of colony ****
+			}
+			save_scope_as = colonial_state
+		}
+		
+	}
+    
+    option = {
+        name = british_decolonisation.option.1				#Grant them self-government
+        default_option = yes highlighted_option = yes
+		
+		#Release country
+		create_country = {
+			tag = LES										# Change TAG of country being released ****
+			origin = THIS									# TAG where the created country takes tech from
+			state = scope:colonial_state
+			
+			on_created = {									# Set government laws & rulers here
+				
+				# SET laws for colony ****
+				effect_starting_politics_semi_constitutional_monarchy = yes
+				effect_starting_politics_democratic = yes
+				effect_starting_politics_constitutional_unitary_state = yes
+				effect_starting_politics_war_policy_anti_military = yes
+				effect_starting_politics_economic_policy_interventionism = yes
+				effect_starting_politics_trade_policy_protectionism = yes
+				effect_starting_politics_anti_nuclear_policy = yes
+				
+				# CREATE leader for colony ****
+				create_character = {
+					first_name = "guy_incognito_first_name"		# CHANGE
+					last_name = "guy_incognito_last_name"		# CHANGE
+					ruler = yes
+					#birth_date = 1910.1.1						# CHANGE
+					interest_group = ig_rural_folk					# CHANGE
+					ideology = ideology_democratic				# CHANGE
+					traits = {
+						charismatic								# CHANGE
+						persistent								# CHANGE
+						meticulous								# CHANGE
+					}
+				}
+				
+				# Set diplomatic recognition
+				set_country_type = unrecognized
+			}
+		}
+		every_scope_state = {
+			limit = {
+		 		state_region = { is_homeland = cu:sotho }		# Change homeland identity to match colony to be released ****
+				#is_incorporated = no							# State is a colony
+		 	}
+			set_state_owner = c:LES								# Change TAG to colony ****
+		}
+		
+		# Overlord create self governing colony pact with colony
+		if = {
+			limit = { exists = c:LES }
+			create_diplomatic_pact = {
+				country = c:LES										# Change TAG ****
+				type = semi_autonomous_colony
+			}
+			create_decolonisation_pacts = yes
+		}
+		
+		# Fire only once
+		set_variable = british_lesotho_sgc						# Change variable ****
+		
+		ai_chance = { 
+			base = 90 
+		}
+		
+    }
+	
+	option = {
+        name = british_decolonisation.option.2						# REFUSE
+		
+		# Natives are angry!
+		every_scope_state = {
+			limit = {
+		 		state_region = { is_homeland = cu:sotho }			# Change homeland identity to match colony to be released ****
+		 	}
+			add_radicals_in_state = {
+				culture = cu:sotho									# Change culture ****
+				value = large_radicals
+			}
+			add_modifier = { name = nationalist_agitation months = 60 is_decaying = yes } 
+		}
+		
+		# Fire only once
+		set_variable = british_lesotho_sgc							# Change variable ****
+		
+		ai_chance = { 
+			base = 10 modifier = { trigger = { has_global_variable = historical_railroading_active } add = -100 } 
+		}
+		
+    }
+
+}
+
+# Rhodesia & Nyasaland (SPECIAL FORMAT)
+british_decolonisation.12 = {
+    type = country_event
+	placement = scope:colonial_state
+
+    title = british_rhodesia_nyasaland.sgc.t 		# Title of the event; ADD LOCALISATION
+    desc = british_rhodesia_nyasaland.sgc.d 		# Description of the event; ADD LOCALISATION
+    #flavor = british_rhodesia_nyasaland.sgc.f 		# Flavor for event; ADD LOCALISATION, IF REQUIRED
+
+    event_image = { video = "gfx/event_pictures/unspecific_signed_contract.bk2" }
+
+    icon = "gfx/interface/icons/event_icons/waving_flag.dds" 	# Icon that shows on the map or the outliner
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear" 	# Sound effect if needed
+
+    duration = 1 # Duration to fire if triggers are met
+	
+	trigger = {													# What triggers the event, if using other events or journal entries leave empty
+		
+		#Overlord conditions
+		exists = c:GBR this = c:GBR											# Change TAG of the overlord ****
+		game_date >= 1953.8.1									# START DATE: Date colony became self governing ****
+		game_date < 1963.8.1									# END DATE: All historical events must not fire 10 years after the START DATE ****
+		
+		is_a_democratic_monarchy = yes									# Correct gov types
+		is_sufficiently_independent = yes						# is_vassal = no		
+		is_at_war = no											# war = no
+		
+		#Colony conditions
+		NOT = { 												# Colony to be released must not already exist on the map
+			exists = c:CAF										# Change TAG of the colony ****
+		}
+		c:RHO = { is_subject_of = c:GBR }						# Rhodesia is our subject
+		any_scope_state = { 									# Overlord owns the states of the colony to be released
+			state_region = { is_homeland = cu:zambian }			# Change homeland identity to match colony to be released ****
+			#is_incorporated = no								# State is a colony
+			#owner = THIS										# Overlord must own the state to be released
+		}
+		any_scope_state = { 									# Overlord owns the states of the colony to be released
+			state_region = { is_homeland = cu:malawian }		# Change homeland identity to match colony to be released ****
+			#is_incorporated = no								# State is a colony
+			#owner = THIS										# Overlord must own the state to be released
+		}
+		
+		# Event has not been fired before
+		NOT = { has_variable = british_rhodesia_nyasaland_sgc }				# CHANGE ****
+		
+    }
+	
+	immediate = {
+		
+	}
+    
+    option = {
+        name = british_decolonisation.option.1				#Grant them self-government
+        default_option = yes highlighted_option = yes
+		
+		#Rhodesia becomes CAF
+		c:RHO = { change_tag = CAF }
+		
+		#Zambia joins CAF
+		every_scope_state = {
+			limit = {
+		 		state_region = { is_homeland = cu:zambian }		# Change homeland identity to match colony to be released ****
+				#is_incorporated = no							# State is a colony
+		 	}
+			set_state_owner = c:CAF								# Change TAG to colony ****
+		}
+		
+		#Malawi joins CAF
+		every_scope_state = {
+			limit = {
+		 		state_region = { is_homeland = cu:malawian }	# Change homeland identity to match colony to be released ****
+				#is_incorporated = no							# State is a colony
+		 	}
+			set_state_owner = c:CAF								# Change TAG to colony ****
+		}
+		
+		c:CAF = { 
+			every_scope_state = { state_region = { add_claim = c:CAF } }
+		}
+		
+		# Fire only once
+		set_variable = british_rhodesia_nyasaland_sgc			# Change variable ****
+		
+		ai_chance = { 
+			base = 90 
+		}
+		
+    }
+	
+	option = {
+        name = british_decolonisation.option.2					# REFUSE
+		
+		#Rhodesia is angry
+		change_relations = {
+			country = c:RHO
+			value = -100
+		}
+		
+		# Natives are angry!
+		every_scope_state = {
+			limit = {
+		 		state_region = { OR = { is_homeland = cu:zambian is_homeland = cu:malawian } }
+		 	}
+			add_radicals_in_state = {
+				value = large_radicals
+			}
+			add_modifier = { name = nationalist_agitation months = 60 is_decaying = yes } 
+		}
+		
+		# Fire only once
+		set_variable = british_rhodesia_nyasaland_sgc			# Change variable ****
+		
+		ai_chance = { 
+			base = 10 modifier = { trigger = { has_global_variable = historical_railroading_active } add = -100 } 
+		}
+		
+    }
+
+}
+
+### South America ###
+
+# Guyana
+british_decolonisation.13 = {
+    type = country_event
+	placement = scope:colonial_state
+
+    title = british_guyana.sgc.t 				# Title of the event; ADD LOCALISATION
+    desc = british_guyana.sgc.d 				# Description of the event; ADD LOCALISATION
+    #flavor = british_guyana.sgc.f 				# Flavor for event; ADD LOCALISATION, IF REQUIRED
+
+    event_image = { video = "gfx/event_pictures/unspecific_signed_contract.bk2" }
+
+    icon = "gfx/interface/icons/event_icons/waving_flag.dds" 	# Icon that shows on the map or the outliner
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear" 	# Sound effect if needed
+
+    duration = 1 # Duration to fire if triggers are met
+	
+	trigger = {													# What triggers the event, if using other events or journal entries leave empty
+		
+		#Overlord conditions
+		exists = c:GBR this = c:GBR											# Change TAG of the overlord ****
+		game_date >= 1961.8.21									# START DATE: Date colony became self governing ****
+		game_date < 1971.8.21									# END DATE: All historical events must not fire 10 years after the START DATE ****
+		
+		is_a_democratic_monarchy = yes									# Correct gov types
+		is_sufficiently_independent = yes						# is_vassal = no		
+		is_at_war = no											# war = no
+		
+		#Colony conditions
+		NOT = { 												# Colony to be released must not already exist on the map
+			exists = c:GUY										# Change TAG of the colony ****
+		}
+		any_scope_state = { 									# Overlord owns the states of the colony to be released
+			state_region = { is_homeland = cu:guyanese }		# Change homeland identity to match colony to be released ****
+			#is_incorporated = no								# State is a colony
+			#owner = THIS										# Overlord must own the state to be released
+		}
+		
+		# Event has not been fired before
+		NOT = { has_variable = british_guyana_sgc }				# CHANGE ****
+		
+    }
+	
+	immediate = {
+	
+		# Generate list of provinces to be released				# DO NOT TOUCH THIS SECTION
+		every_scope_state = {
+			limit = {
+				state_region = { is_homeland = cu:guyanese }	# Change homeland identity to match colony to be released ****
+				#is_incorporated = no							# State is a colony
+				#contains_capital_of = c:GUY					# State is the capital of colony ****
+			}
+			save_scope_as = colonial_state
+		}
+		
+	}
+    
+    option = {
+        name = british_decolonisation.option.1				#Grant them self-government
+        default_option = yes highlighted_option = yes
+		
+		#Release country
+		create_country = {
+			tag = GUY										# Change TAG of country being released ****
+			origin = THIS									# TAG where the created country takes tech from
+			state = scope:colonial_state
+			
+			on_created = {									# Set government laws & rulers here
+				
+				# SET laws for colony ****
+				effect_starting_politics_parliamentary_republic = yes
+				effect_starting_politics_democratic = yes
+				effect_starting_politics_constitutional_unitary_state = yes
+				effect_starting_politics_war_policy_anti_military = yes
+				effect_starting_politics_economic_policy_interventionism = yes
+				effect_starting_politics_trade_policy_protectionism = yes
+				effect_starting_politics_anti_nuclear_policy = yes
+				
+				# CREATE leader for colony ****
+				create_character = {
+					first_name = "guy_incognito_first_name"		# CHANGE
+					last_name = "guy_incognito_last_name"		# CHANGE
+					ruler = yes
+					#birth_date = 1910.1.1						# CHANGE
+					interest_group = ig_rural_folk					# CHANGE
+					ideology = ideology_democratic				# CHANGE
+					traits = {
+						charismatic								# CHANGE
+						persistent								# CHANGE
+						meticulous								# CHANGE
+					}
+				}
+				
+				# Set diplomatic recognition
+				set_country_type = unrecognized
+			}
+		}
+		every_scope_state = {
+			limit = {
+		 		state_region = { is_homeland = cu:guyanese }	# Change homeland identity to match colony to be released ****
+				#is_incorporated = no							# State is a colony
+		 	}
+			set_state_owner = c:GUY								# Change TAG to colony ****
+		}
+		
+		# Overlord create self governing colony pact with colony
+		if = {
+			limit = { exists = c:GUY }
+			create_diplomatic_pact = {
+				country = c:GUY										# Change TAG ****
+				type = semi_autonomous_colony
+			}
+			create_decolonisation_pacts = yes
+		}
+		
+		# Fire only once
+		set_variable = british_guyana_sgc						# Change variable ****
+		
+		ai_chance = { 
+			base = 90 
+		}
+		
+    }
+	
+	option = {
+        name = british_decolonisation.option.2						# REFUSE
+		
+		# Natives are angry!
+		every_scope_state = {
+			limit = {
+		 		state_region = { is_homeland = cu:guyanese }		# Change homeland identity to match colony to be released ****
+		 	}
+			add_radicals_in_state = {
+				culture = cu:guyanese								# Change culture ****
+				value = large_radicals
+			}
+			add_modifier = { name = nationalist_agitation months = 60 is_decaying = yes } 
+		}
+		
+		# Fire only once
+		set_variable = british_guyana_sgc							# Change variable ****
+		
+		ai_chance = { 
+			base = 10 modifier = { trigger = { has_global_variable = historical_railroading_active } add = -100 } 
+		}
+		
+    }
+
+}
+
+### Central America ###
+
+# British Belize
+british_decolonisation.14 = {
+    type = country_event
+	placement = scope:colonial_state
+
+    title = british_belize.sgc.t 				# Title of the event; ADD LOCALISATION
+    desc = british_belize.sgc.d 				# Description of the event; ADD LOCALISATION
+    #flavor = british_belize.sgc.f 				# Flavor for event; ADD LOCALISATION, IF REQUIRED
+
+    event_image = { video = "gfx/event_pictures/unspecific_signed_contract.bk2" }
+
+    icon = "gfx/interface/icons/event_icons/waving_flag.dds" 	# Icon that shows on the map or the outliner
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear" 	# Sound effect if needed
+
+    duration = 1 # Duration to fire if triggers are met
+	
+	trigger = {													# What triggers the event, if using other events or journal entries leave empty
+		
+		#Overlord conditions
+		exists = c:GBR this = c:GBR											# Change TAG of the overlord ****
+		game_date >= 1964.1.1									# START DATE: Date colony became self governing ****
+		game_date < 1974.1.1									# END DATE: All historical events must not fire 10 years after the START DATE ****
+		
+		is_a_democratic_monarchy = yes									# Correct gov types
+		is_sufficiently_independent = yes						# is_vassal = no		
+		is_at_war = no											# war = no
+		
+		#Colony conditions
+		NOT = { 												# Colony to be released must not already exist on the map
+			exists = c:BLZ										# Change TAG of the colony ****
+		}
+		any_scope_state = { 									# Overlord owns the states of the colony to be released
+			state_region = { is_homeland = cu:belizean }		# Change homeland identity to match colony to be released ****
+			#is_incorporated = no								# State is a colony
+			#owner = THIS										# Overlord must own the state to be released
+		}
+		
+		# Event has not been fired before
+		NOT = { has_variable = british_belize_sgc }				# CHANGE ****
+		
+    }
+	
+	immediate = {
+	
+		# Generate list of provinces to be released				# DO NOT TOUCH THIS SECTION
+		every_scope_state = {
+			limit = {
+				state_region = { is_homeland = cu:belizean }	# Change homeland identity to match colony to be released ****
+				#is_incorporated = no							# State is a colony
+				#contains_capital_of = c:BLZ					# State is the capital of colony ****
+			}
+			save_scope_as = colonial_state
+		}
+		
+	}
+    
+    option = {
+        name = british_decolonisation.option.1				#Grant them self-government
+        default_option = yes highlighted_option = yes
+		
+		#Release country
+		create_country = {
+			tag = BLZ										# Change TAG of country being released ****
+			origin = THIS									# TAG where the created country takes tech from
+			state = scope:colonial_state
+			
+			on_created = {									# Set government laws & rulers here
+				
+				# SET laws for colony ****
+				effect_starting_politics_parliamentary_republic = yes
+				effect_starting_politics_democratic = yes
+				effect_starting_politics_constitutional_unitary_state = yes
+				effect_starting_politics_war_policy_anti_military = yes
+				effect_starting_politics_economic_policy_interventionism = yes
+				effect_starting_politics_trade_policy_protectionism = yes
+				effect_starting_politics_anti_nuclear_policy = yes
+				
+				# CREATE leader for colony ****
+				create_character = {
+					first_name = "guy_incognito_first_name"		# CHANGE
+					last_name = "guy_incognito_last_name"		# CHANGE
+					ruler = yes
+					#birth_date = 1910.1.1						# CHANGE
+					interest_group = ig_rural_folk					# CHANGE
+					ideology = ideology_democratic				# CHANGE
+					traits = {
+						charismatic								# CHANGE
+						persistent								# CHANGE
+						meticulous								# CHANGE
+					}
+				}
+				
+				# Set diplomatic recognition
+				set_country_type = unrecognized
+			}
+		}
+		every_scope_state = {
+			limit = {
+		 		state_region = { is_homeland = cu:belizean }	# Change homeland identity to match colony to be released ****
+				#is_incorporated = no							# State is a colony
+		 	}
+			set_state_owner = c:BLZ								# Change TAG to colony ****
+		}
+		
+		# Overlord create self governing colony pact with colony
+		if = {
+			limit = { exists = c:BLZ }
+			create_diplomatic_pact = {
+				country = c:BLZ										# Change TAG ****
+				type = semi_autonomous_colony
+			}
+			create_decolonisation_pacts = yes
+		}
+		
+		# Fire only once
+		set_variable = british_belize_sgc						# Change variable ****
+		
+		ai_chance = { 
+			base = 90 
+		}
+		
+    }
+	
+	option = {
+        name = british_decolonisation.option.2						# REFUSE
+		
+		# Natives are angry!
+		every_scope_state = {
+			limit = {
+		 		state_region = { is_homeland = cu:belizean }		# Change homeland identity to match colony to be released ****
+		 	}
+			add_radicals_in_state = {
+				culture = cu:belizean								# Change culture ****
+				value = large_radicals
+			}
+			add_modifier = { name = nationalist_agitation months = 60 is_decaying = yes } 
+		}
+		
+		# Fire only once
+		set_variable = british_belize_sgc							# Change variable ****
+		
+		ai_chance = { 
+			base = 10 modifier = { trigger = { has_global_variable = historical_railroading_active } add = -100 } 
+		}
+		
+    }
+
+}
+
+### Middle East ###
+
+# Yemen
+british_decolonisation.15 = {
+    type = country_event
+	placement = scope:colonial_state
+
+    title = british_yemen.sgc.t 				# Title of the event; ADD LOCALISATION
+    desc = british_yemen.sgc.d 					# Description of the event; ADD LOCALISATION
+    #flavor = british_yemen.sgc.f 				# Flavor for event; ADD LOCALISATION, IF REQUIRED
+
+    event_image = { video = "gfx/event_pictures/unspecific_signed_contract.bk2" }
+
+    icon = "gfx/interface/icons/event_icons/waving_flag.dds" 	# Icon that shows on the map or the outliner
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear" 	# Sound effect if needed
+
+    duration = 1 # Duration to fire if triggers are met
+	
+	trigger = {													# What triggers the event, if using other events or journal entries leave empty
+		
+		#Overlord conditions
+		exists = c:GBR this = c:GBR											# Change TAG of the overlord ****
+		game_date >= 1962.4.4									# START DATE: Date colony became self governing ****
+		game_date < 1972.4.4									# END DATE: All historical events must not fire 10 years after the START DATE ****
+		
+		is_a_democratic_monarchy = yes									# Correct gov types
+		is_sufficiently_independent = yes						# is_vassal = no		
+		is_at_war = no											# war = no
+		
+		#Colony conditions
+		NOT = { 												# Colony to be released must not already exist on the map
+			exists = c:SYE										# Change TAG of the colony ****
+		}
+		any_scope_state = { 									# Overlord owns the states of the colony to be released
+			state_region = { is_homeland = cu:yemenite }		# Change homeland identity to match colony to be released ****
+			#is_incorporated = no								# State is a colony
+			#owner = THIS										# Overlord must own the state to be released
+		}
+		
+		# Event has not been fired before
+		NOT = { has_variable = british_yemen_sgc }				# CHANGE ****
+		
+    }
+	
+	immediate = {
+	
+		# Generate list of provinces to be released				# DO NOT TOUCH THIS SECTION
+		every_scope_state = {
+			limit = {
+				state_region = { is_homeland = cu:yemenite }	# Change homeland identity to match colony to be released ****
+				#is_incorporated = no							# State is a colony
+				#contains_capital_of = c:SYE					# State is the capital of colony ****
+			}
+			save_scope_as = colonial_state
+		}
+		
+	}
+    
+    option = {
+        name = british_decolonisation.option.1				#Grant them self-government
+        default_option = yes highlighted_option = yes
+		
+		#Release country
+		create_country = {
+			tag = SYE										# Change TAG of country being released ****
+			origin = THIS									# TAG where the created country takes tech from
+			state = scope:colonial_state
+			
+			on_created = {									# Set government laws & rulers here
+				
+				# SET laws for colony ****
+				effect_starting_politics_parliamentary_republic = yes
+				effect_starting_politics_democratic = yes
+				effect_starting_politics_constitutional_unitary_state = yes
+				effect_starting_politics_war_policy_anti_military = yes
+				effect_starting_politics_economic_policy_interventionism = yes
+				effect_starting_politics_trade_policy_protectionism = yes
+				effect_starting_politics_anti_nuclear_policy = yes
+				
+				# CREATE leader for colony ****
+				create_character = {
+					first_name = "guy_incognito_first_name"		# CHANGE
+					last_name = "guy_incognito_last_name"		# CHANGE
+					ruler = yes
+					#birth_date = 1910.1.1						# CHANGE
+					interest_group = ig_rural_folk					# CHANGE
+					ideology = ideology_democratic				# CHANGE
+					traits = {
+						charismatic								# CHANGE
+						persistent								# CHANGE
+						meticulous								# CHANGE
+					}
+				}
+				
+				# Set diplomatic recognition
+				set_country_type = unrecognized
+			}
+		}
+		every_scope_state = {
+			limit = {
+		 		state_region = { is_homeland = cu:yemenite }	# Change homeland identity to match colony to be released ****
+				#is_incorporated = no							# State is a colony
+		 	}
+			set_state_owner = c:SYE								# Change TAG to colony ****
+		}
+		
+		# Overlord create self governing colony pact with colony
+		if = {
+			limit = { exists = c:SYE }
+			create_diplomatic_pact = {
+				country = c:SYE										# Change TAG ****
+				type = semi_autonomous_colony
+			}
+			create_decolonisation_pacts = yes
+		}
+		
+		# Fire only once
+		set_variable = british_yemen_sgc						# Change variable ****
+		
+		ai_chance = { 
+			base = 90 
+		}
+		
+    }
+	
+	option = {
+        name = british_decolonisation.option.2						# REFUSE
+		
+		# Natives are angry!
+		every_scope_state = {
+			limit = {
+		 		state_region = { is_homeland = cu:yemenite }		# Change homeland identity to match colony to be released ****
+		 	}
+			add_radicals_in_state = {
+				culture = cu:yemenite								# Change culture ****
+				value = large_radicals
+			}
+			add_modifier = { name = nationalist_agitation months = 60 is_decaying = yes } 
+		}
+		
+		# Fire only once
+		set_variable = british_yemen_sgc							# Change variable ****
+		
+		ai_chance = { 
+			base = 10 modifier = { trigger = { has_global_variable = historical_railroading_active } add = -100 } 
+		}
+		
+    }
+
+}
+
+### Asia ###
+
+# Fiji
+british_decolonisation.16 = {
+    type = country_event
+	placement = scope:colonial_state
+
+    title = british_fiji.sgc.t 					# Title of the event; ADD LOCALISATION
+    desc = british_fiji.sgc.d 					# Description of the event; ADD LOCALISATION
+    #flavor = british_fiji.sgc.f 				# Flavor for event; ADD LOCALISATION, IF REQUIRED
+
+    event_image = { video = "gfx/event_pictures/unspecific_signed_contract.bk2" }
+
+    icon = "gfx/interface/icons/event_icons/waving_flag.dds" 	# Icon that shows on the map or the outliner
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear" 	# Sound effect if needed
+
+    duration = 1 # Duration to fire if triggers are met
+	
+	trigger = {													# What triggers the event, if using other events or journal entries leave empty
+		
+		#Overlord conditions
+		exists = c:GBR this = c:GBR											# Change TAG of the overlord ****
+		game_date >= 1967.9.20									# START DATE: Date colony became self governing ****
+		game_date < 1977.9.20									# END DATE: All historical events must not fire 10 years after the START DATE ****
+		
+		is_a_democratic_monarchy = yes									# Correct gov types
+		is_sufficiently_independent = yes						# is_vassal = no		
+		is_at_war = no											# war = no
+		
+		#Colony conditions
+		NOT = { 												# Colony to be released must not already exist on the map
+			exists = c:FIJ										# Change TAG of the colony ****
+		}
+		any_scope_state = { 									# Overlord owns the states of the colony to be released
+			state_region = { is_homeland = cu:fijian }			# Change homeland identity to match colony to be released ****
+			#is_incorporated = no								# State is a colony
+			#owner = THIS										# Overlord must own the state to be released
+		}
+		
+		# Event has not been fired before
+		NOT = { has_variable = british_fiji_sgc }				# CHANGE ****
+		
+    }
+	
+	immediate = {
+	
+		# Generate list of provinces to be released				# DO NOT TOUCH THIS SECTION
+		every_scope_state = {
+			limit = {
+				state_region = { is_homeland = cu:fijian }		# Change homeland identity to match colony to be released ****
+				#is_incorporated = no							# State is a colony
+				#contains_capital_of = c:FIJ					# State is the capital of colony ****
+			}
+			save_scope_as = colonial_state
+		}
+		
+	}
+    
+    option = {
+        name = british_decolonisation.option.1				#Grant them self-government
+        default_option = yes highlighted_option = yes
+		
+		#Release country
+		create_country = {
+			tag = FIJ										# Change TAG of country being released ****
+			origin = THIS									# TAG where the created country takes tech from
+			state = scope:colonial_state
+			
+			on_created = {									# Set government laws & rulers here
+				
+				# SET laws for colony ****
+				effect_starting_politics_constitutional_monarchy = yes
+				effect_starting_politics_democratic = yes
+				effect_starting_politics_constitutional_unitary_state = yes
+				effect_starting_politics_war_policy_anti_military = yes
+				effect_starting_politics_economic_policy_interventionism = yes
+				effect_starting_politics_trade_policy_protectionism = yes
+				effect_starting_politics_anti_nuclear_policy = yes
+				
+				# CREATE leader for colony ****
+				create_character = {
+					first_name = "guy_incognito_first_name"		# CHANGE
+					last_name = "guy_incognito_last_name"		# CHANGE
+					ruler = yes
+					#birth_date = 1910.1.1						# CHANGE
+					interest_group = ig_rural_folk					# CHANGE
+					ideology = ideology_democratic				# CHANGE
+					traits = {
+						charismatic								# CHANGE
+						persistent								# CHANGE
+						meticulous								# CHANGE
+					}
+				}
+				
+				# Set diplomatic recognition
+				set_country_type = unrecognized
+			}
+		}
+		every_scope_state = {
+			limit = {
+		 		state_region = { is_homeland = cu:fijian }		# Change homeland identity to match colony to be released ****
+				#is_incorporated = no							# State is a colony
+		 	}
+			set_state_owner = c:FIJ								# Change TAG to colony ****
+		}
+		
+		# Overlord create self governing colony pact with colony
+		if = {
+			limit = { exists = c:FIJ }
+			create_diplomatic_pact = {
+				country = c:FIJ										# Change TAG ****
+				type = semi_autonomous_colony
+			}
+			create_decolonisation_pacts = yes
+		}
+		
+		# Fire only once
+		set_variable = british_fiji_sgc							# Change variable ****
+		
+		ai_chance = { 
+			base = 90 
+		}
+		
+    }
+	
+	option = {
+        name = british_decolonisation.option.2						# REFUSE
+		
+		# Natives are angry!
+		every_scope_state = {
+			limit = {
+		 		state_region = { is_homeland = cu:fijian }			# Change homeland identity to match colony to be released ****
+		 	}
+			add_radicals_in_state = {
+				culture = cu:fijian									# Change culture ****
+				value = large_radicals
+			}
+			add_modifier = { name = nationalist_agitation months = 60 is_decaying = yes } 
+		}
+		
+		# Fire only once
+		set_variable = british_fiji_sgc							# Change variable ****
+		
+		ai_chance = { 
+			base = 10 modifier = { trigger = { has_global_variable = historical_railroading_active } add = -100 } 
+		}
+		
+    }
+
+}
+
+# Seychelles
+british_decolonisation.17 = {
+    type = country_event
+	placement = scope:colonial_state
+
+    title = british_seychelles.sgc.t 					# Title of the event; ADD LOCALISATION
+    desc = british_seychelles.sgc.d 					# Description of the event; ADD LOCALISATION
+    #flavor = british_seychelles.sgc.f 					# Flavor for event; ADD LOCALISATION, IF REQUIRED
+
+    event_image = { video = "gfx/event_pictures/unspecific_signed_contract.bk2" }
+
+    icon = "gfx/interface/icons/event_icons/waving_flag.dds" 	# Icon that shows on the map or the outliner
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear" 	# Sound effect if needed
+
+    duration = 1 # Duration to fire if triggers are met
+	
+	trigger = {													# What triggers the event, if using other events or journal entries leave empty
+		
+		#Overlord conditions
+		exists = c:GBR this = c:GBR											# Change TAG of the overlord ****
+		game_date >= 1966.1.1									# START DATE: Date colony became self governing ****
+		game_date < 1976.1.1									# END DATE: All historical events must not fire 10 years after the START DATE ****
+		
+		is_a_democratic_monarchy = yes									# Correct gov types
+		is_sufficiently_independent = yes						# is_vassal = no		
+		is_at_war = no											# war = no
+		
+		#Colony conditions
+		NOT = { 												# Colony to be released must not already exist on the map
+			exists = c:SEY										# Change TAG of the colony ****
+		}
+		any_scope_state = { 									# Overlord owns the states of the colony to be released
+			state_region = { is_homeland = cu:seychellois }		# Change homeland identity to match colony to be released ****
+			#is_incorporated = no								# State is a colony
+			#owner = THIS										# Overlord must own the state to be released
+		}
+		has_state_in_state_region = STATE_INDIAN_OCEAN_TERRITORY
+		
+		# Event has not been fired before
+		NOT = { has_variable = british_seychelles_sgc }			# CHANGE ****
+		
+    }
+	
+	immediate = {
+	
+		# Generate list of provinces to be released				# DO NOT TOUCH THIS SECTION
+		every_scope_state = {
+			limit = {
+				state_region = { is_homeland = cu:seychellois }	# Change homeland identity to match colony to be released ****
+				#is_incorporated = no							# State is a colony
+				#contains_capital_of = c:SEY					# State is the capital of colony ****
+			}
+			save_scope_as = colonial_state
+		}
+		
+	}
+    
+    option = {
+        name = british_decolonisation.option.1				#Grant them self-government
+        default_option = yes highlighted_option = yes
+		
+		#Release country
+		create_country = {
+			tag = SEY										# Change TAG of country being released ****
+			origin = THIS									# TAG where the created country takes tech from
+			province = p:x60E0B0
+			
+			on_created = {									# Set government laws & rulers here
+				
+				# SET laws for colony ****
+				effect_starting_politics_parliamentary_republic = yes
+				effect_starting_politics_democratic = yes
+				effect_starting_politics_constitutional_unitary_state = yes
+				effect_starting_politics_war_policy_anti_military = yes
+				effect_starting_politics_economic_policy_interventionism = yes
+				effect_starting_politics_trade_policy_protectionism = yes
+				effect_starting_politics_anti_nuclear_policy = yes
+				
+				# CREATE leader for colony ****
+				create_character = {
+					first_name = "guy_incognito_first_name"		# CHANGE
+					last_name = "guy_incognito_last_name"		# CHANGE
+					ruler = yes
+					#birth_date = 1910.1.1						# CHANGE
+					interest_group = ig_rural_folk					# CHANGE
+					ideology = ideology_democratic				# CHANGE
+					traits = {
+						charismatic								# CHANGE
+						persistent								# CHANGE
+						meticulous								# CHANGE
+					}
+				}
+				
+				# Set diplomatic recognition
+				set_country_type = unrecognized
+			}
+		}
+		
+		# Overlord create self governing colony pact with colony
+		if = {
+			limit = { exists = c:SEY }
+			create_diplomatic_pact = {
+				country = c:SEY										# Change TAG ****
+				type = semi_autonomous_colony
+			}
+			create_decolonisation_pacts = yes
+		}
+		
+		# Fire only once
+		set_variable = british_seychelles_sgc					# Change variable ****
+		
+		ai_chance = { 
+			base = 90 
+		}
+		
+    }
+	
+	option = {
+        name = british_decolonisation.option.2						# REFUSE
+		
+		# Natives are angry!
+		every_scope_state = {
+			limit = {
+		 		state_region = { is_homeland = cu:seychellois }		# Change homeland identity to match colony to be released ****
+		 	}
+			add_radicals_in_state = {
+				culture = cu:seychellois							# Change culture ****
+				value = large_radicals
+			}
+			add_modifier = { name = nationalist_agitation months = 60 is_decaying = yes } 
+		}
+		
+		# Fire only once
+		set_variable = british_seychelles_sgc						# Change variable ****
+		
+		ai_chance = { 
+			base = 10 modifier = { trigger = { has_global_variable = historical_railroading_active } add = -100 } 
+		}
+		
+    }
+
+}
+
+# Mauritius
+british_decolonisation.18 = {
+    type = country_event
+	placement = scope:colonial_state
+
+    title = british_mauritius.sgc.t 					# Title of the event; ADD LOCALISATION
+    desc = british_mauritius.sgc.d 						# Description of the event; ADD LOCALISATION
+    #flavor = british_mauritius.sgc.f 					# Flavor for event; ADD LOCALISATION, IF REQUIRED
+
+    event_image = { video = "gfx/event_pictures/unspecific_signed_contract.bk2" }
+
+    icon = "gfx/interface/icons/event_icons/waving_flag.dds" 	# Icon that shows on the map or the outliner
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear" 	# Sound effect if needed
+
+    duration = 1 # Duration to fire if triggers are met
+	
+	trigger = {													# What triggers the event, if using other events or journal entries leave empty
+		
+		#Overlord conditions
+		exists = c:GBR this = c:GBR											# Change TAG of the overlord ****
+		game_date >= 1961.1.1									# START DATE: Date colony became self governing ****
+		game_date < 1971.1.1									# END DATE: All historical events must not fire 10 years after the START DATE ****
+		
+		is_a_democratic_monarchy = yes									# Correct gov types
+		is_sufficiently_independent = yes						# is_vassal = no		
+		is_at_war = no											# war = no
+		
+		#Colony conditions
+		NOT = { 												# Colony to be released must not already exist on the map
+			exists = c:MRT										# Change TAG of the colony ****
+		}
+		any_scope_state = { 									# Overlord owns the states of the colony to be released
+			state_region = { is_homeland = cu:mauritian }		# Change homeland identity to match colony to be released ****
+			#is_incorporated = no								# State is a colony
+			#owner = THIS										# Overlord must own the state to be released
+		}
+		has_state_in_state_region = STATE_INDIAN_OCEAN_TERRITORY
+		
+		# Event has not been fired before
+		NOT = { has_variable = british_mauritius_sgc }			# CHANGE ****
+		
+    }
+	
+	immediate = {
+	
+		# Generate list of provinces to be released				# DO NOT TOUCH THIS SECTION
+		every_scope_state = {
+			limit = {
+				state_region = { is_homeland = cu:mauritian }	# Change homeland identity to match colony to be released ****
+				#is_incorporated = no							# State is a colony
+				#contains_capital_of = c:MRT					# State is the capital of colony ****
+			}
+			save_scope_as = colonial_state
+		}
+		
+	}
+    
+    option = {
+        name = british_decolonisation.option.1				#Grant them self-government
+        default_option = yes highlighted_option = yes
+		
+		#Release country
+		create_country = {
+			tag = MRT										# Change TAG of country being released ****
+			origin = THIS									# TAG where the created country takes tech from
+			province = p:xD0E090
+			
+			on_created = {									# Set government laws & rulers here
+				
+				# SET laws for colony ****
+				effect_starting_politics_parliamentary_republic = yes
+				effect_starting_politics_democratic = yes
+				effect_starting_politics_constitutional_unitary_state = yes
+				effect_starting_politics_war_policy_anti_military = yes
+				effect_starting_politics_economic_policy_interventionism = yes
+				effect_starting_politics_trade_policy_protectionism = yes
+				effect_starting_politics_anti_nuclear_policy = yes
+				
+				# CREATE leader for colony ****
+				create_character = {
+					first_name = "guy_incognito_first_name"		# CHANGE
+					last_name = "guy_incognito_last_name"		# CHANGE
+					ruler = yes
+					#birth_date = 1910.1.1						# CHANGE
+					interest_group = ig_rural_folk					# CHANGE
+					ideology = ideology_democratic				# CHANGE
+					traits = {
+						charismatic								# CHANGE
+						persistent								# CHANGE
+						meticulous								# CHANGE
+					}
+				}
+				
+				# Set diplomatic recognition
+				set_country_type = unrecognized
+			}
+		}
+		
+		# Overlord create self governing colony pact with colony
+		if = {
+			limit = { exists = c:MRT }
+			create_diplomatic_pact = {
+				country = c:MRT										# Change TAG ****
+				type = semi_autonomous_colony
+			}
+			create_decolonisation_pacts = yes
+		}
+		
+		# Fire only once
+		set_variable = british_mauritius_sgc					# Change variable ****
+		
+		ai_chance = { 
+			base = 90 
+		}
+		
+    }
+	
+	option = {
+        name = british_decolonisation.option.2						# REFUSE
+		
+		# Natives are angry!
+		every_scope_state = {
+			limit = {
+		 		state_region = { is_homeland = cu:mauritian }		# Change homeland identity to match colony to be released ****
+		 	}
+			add_radicals_in_state = {
+				culture = cu:mauritian								# Change culture ****
+				value = large_radicals
+			}
+			add_modifier = { name = nationalist_agitation months = 60 is_decaying = yes } 
+		}
+		
+		# Fire only once
+		set_variable = british_mauritius_sgc						# Change variable ****
+		
+		ai_chance = { 
+			base = 10 modifier = { trigger = { has_global_variable = historical_railroading_active } add = -100 } 
+		}
+		
+    }
+
+}
+
+# Solomon Islands
+british_decolonisation.19 = {
+    type = country_event
+	placement = scope:colonial_state
+
+    title = british_solomon_islands.sgc.t 					# Title of the event; ADD LOCALISATION
+    desc = british_solomon_islands.sgc.d 					# Description of the event; ADD LOCALISATION
+    #flavor = british_solomon_islands.sgc.f 				# Flavor for event; ADD LOCALISATION, IF REQUIRED
+
+    event_image = { video = "gfx/event_pictures/unspecific_signed_contract.bk2" }
+
+    icon = "gfx/interface/icons/event_icons/waving_flag.dds" 	# Icon that shows on the map or the outliner
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear" 	# Sound effect if needed
+
+    duration = 1 # Duration to fire if triggers are met
+	
+	trigger = {													# What triggers the event, if using other events or journal entries leave empty
+		
+		#Overlord conditions
+		exists = c:GBR this = c:GBR											# Change TAG of the overlord ****
+		game_date >= 1974.1.1									# START DATE: Date colony became self governing ****
+		game_date < 1984.1.1									# END DATE: All historical events must not fire 10 years after the START DATE ****
+		
+		is_a_democratic_monarchy = yes									# Correct gov types
+		is_sufficiently_independent = yes						# is_vassal = no		
+		is_at_war = no											# war = no
+		
+		#Colony conditions
+		NOT = { 												# Colony to be released must not already exist on the map
+			exists = c:SOL										# Change TAG of the colony ****
+		}
+		any_scope_state = { 										# Overlord owns the states of the colony to be released
+			state_region = { is_homeland = cu:solomon_islander }	# Change homeland identity to match colony to be released ****
+			#is_incorporated = no									# State is a colony
+			#owner = THIS											# Overlord must own the state to be released
+		}
+		
+		# Event has not been fired before
+		NOT = { has_variable = british_solomon_islands_sgc }		# CHANGE ****
+		
+    }
+	
+	immediate = {
+	
+		# Generate list of provinces to be released				# DO NOT TOUCH THIS SECTION
+		every_scope_state = {
+			limit = {
+				state_region = { is_homeland = cu:solomon_islander }	# Change homeland identity to match colony to be released ****
+				#is_incorporated = no									# State is a colony
+				#contains_capital_of = c:SOL							# State is the capital of colony ****
+			}
+			save_scope_as = colonial_state
+		}
+		
+	}
+    
+    option = {
+        name = british_decolonisation.option.1				#Grant them self-government
+        default_option = yes highlighted_option = yes
+		
+		#Release country
+		create_country = {
+			tag = SOL										# Change TAG of country being released ****
+			origin = THIS									# TAG where the created country takes tech from
+			state = scope:colonial_state
+			
+			on_created = {									# Set government laws & rulers here
+				
+				# SET laws for colony ****
+				effect_starting_politics_parliamentary_republic = yes
+				effect_starting_politics_democratic = yes
+				effect_starting_politics_constitutional_unitary_state = yes
+				effect_starting_politics_war_policy_anti_military = yes
+				effect_starting_politics_economic_policy_interventionism = yes
+				effect_starting_politics_trade_policy_protectionism = yes
+				effect_starting_politics_anti_nuclear_policy = yes
+				
+				# CREATE leader for colony ****
+				create_character = {
+					first_name = "guy_incognito_first_name"		# CHANGE
+					last_name = "guy_incognito_last_name"		# CHANGE
+					ruler = yes
+					#birth_date = 1910.1.1						# CHANGE
+					interest_group = ig_rural_folk					# CHANGE
+					ideology = ideology_democratic				# CHANGE
+					traits = {
+						charismatic								# CHANGE
+						persistent								# CHANGE
+						meticulous								# CHANGE
+					}
+				}
+				
+				# Set diplomatic recognition
+				set_country_type = unrecognized
+			}
+		}
+		every_scope_state = {
+			limit = {
+		 		state_region = { is_homeland = cu:solomon_islander }	# Change homeland identity to match colony to be released ****
+				#is_incorporated = no									# State is a colony
+		 	}
+			set_state_owner = c:SOL										# Change TAG to colony ****
+		}
+		
+		# Overlord create self governing colony pact with colony
+		if = {
+			limit = { exists = c:SOL }
+			create_diplomatic_pact = {
+				country = c:SOL											# Change TAG ****
+				type = mandate
+			}
+			create_decolonisation_pacts = yes
+		}
+		
+		# Fire only once
+		set_variable = british_solomon_islands_sgc					# Change variable ****
+		
+		ai_chance = { 
+			base = 90 
+		}
+		
+    }
+	
+	option = {
+        name = british_decolonisation.option.2						# REFUSE
+		
+		# Natives are angry!
+		every_scope_state = {
+			limit = {
+		 		state_region = { is_homeland = cu:solomon_islander }		# Change homeland identity to match colony to be released ****
+		 	}
+			add_radicals_in_state = {
+				culture = cu:solomon_islander								# Change culture ****
+				value = large_radicals
+			}
+			add_modifier = { name = nationalist_agitation months = 60 is_decaying = yes } 
+		}
+		
+		# Add Infamy because doing this is against international law
+		change_infamy = 10
+		
+		# Fire only once
+		set_variable = british_solomon_islands_sgc							# Change variable ****
+		
+		ai_chance = { 
+			base = 10 modifier = { trigger = { has_global_variable = historical_railroading_active } add = -100 } 
+		}
+		
+    }
+
+}
+
+# Gilbert and Ellice Islands (Kiribati & Tuvalu)
+british_decolonisation.20 = {
+    type = country_event
+	placement = scope:colonial_state
+
+    title = british_gilbert_ellice.sgc.t 					# Title of the event; ADD LOCALISATION
+    desc = british_gilbert_ellice.sgc.d 					# Description of the event; ADD LOCALISATION
+    #flavor = british_gilbert_ellice.sgc.f 					# Flavor for event; ADD LOCALISATION, IF REQUIRED
+
+    event_image = { video = "gfx/event_pictures/unspecific_signed_contract.bk2" }
+
+    icon = "gfx/interface/icons/event_icons/waving_flag.dds" 	# Icon that shows on the map or the outliner
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear" 	# Sound effect if needed
+
+    duration = 1 # Duration to fire if triggers are met
+	
+	trigger = {													# What triggers the event, if using other events or journal entries leave empty
+		
+		#Overlord conditions
+		exists = c:GBR this = c:GBR											# Change TAG of the overlord ****
+		game_date >= 1964.1.1									# START DATE: Date colony became self governing ****
+		game_date < 1974.1.1									# END DATE: All historical events must not fire 10 years after the START DATE ****
+		
+		is_a_democratic_monarchy = yes									# Correct gov types
+		is_sufficiently_independent = yes						# is_vassal = no		
+		is_at_war = no											# war = no
+		
+		#Colony conditions
+		NOT = { 												# Colony to be released must not already exist on the map
+			exists = c:KIR										# Change TAG of the colony ****
+		}
+		any_scope_state = { 									# Overlord owns the states of the colony to be released
+			state_region = { is_homeland = cu:kiribati }		# Change homeland identity to match colony to be released ****
+			#is_incorporated = no								# State is a colony
+			#owner = THIS										# Overlord must own the state to be released
+		}
+		
+		# Event has not been fired before
+		NOT = { has_variable = british_gilbert_ellice_sgc }		# CHANGE ****
+		
+		
+		
+    }
+	
+	immediate = {
+	
+		# Generate list of provinces to be released				# DO NOT TOUCH THIS SECTION
+		every_scope_state = {
+			limit = {
+				state_region = { is_homeland = cu:kiribati }	# Change homeland identity to match colony to be released ****
+				#is_incorporated = no							# State is a colony
+				#contains_capital_of = c:KIR					# State is the capital of colony ****
+			}
+			save_scope_as = colonial_state
+		}
+		
+	}
+    
+    option = {
+        name = british_decolonisation.option.1				#Grant them self-government
+        default_option = yes highlighted_option = yes
+		
+		#Release country
+		create_country = {
+			tag = KIR										# Change TAG of country being released ****
+			origin = THIS									# TAG where the created country takes tech from
+			state = scope:colonial_state
+			
+			on_created = {									# Set government laws & rulers here
+				
+				# SET laws for colony ****
+				effect_starting_politics_constitutional_monarchy = yes
+				effect_starting_politics_democratic = yes
+				effect_starting_politics_constitutional_unitary_state = yes
+				effect_starting_politics_war_policy_anti_military = yes
+				effect_starting_politics_economic_policy_interventionism = yes
+				effect_starting_politics_trade_policy_protectionism = yes
+				effect_starting_politics_anti_nuclear_policy = yes
+				
+				# CREATE leader for colony ****
+				create_character = {
+					first_name = "guy_incognito_first_name"		# CHANGE
+					last_name = "guy_incognito_last_name"		# CHANGE
+					ruler = yes
+					#birth_date = 1910.1.1						# CHANGE
+					interest_group = ig_rural_folk					# CHANGE
+					ideology = ideology_democratic				# CHANGE
+					traits = {
+						charismatic								# CHANGE
+						persistent								# CHANGE
+						meticulous								# CHANGE
+					}
+				}
+				
+				# Set diplomatic recognition
+				set_country_type = unrecognized
+			}
+		}
+		every_scope_state = {
+			limit = {
+		 		state_region = { is_homeland = cu:kiribati }	# Change homeland identity to match colony to be released ****
+				#is_incorporated = no							# State is a colony
+		 	}
+			set_state_owner = c:KIR								# Change TAG to colony ****
+		}
+		
+		# Overlord create self governing colony pact with colony
+		if = {
+			limit = { exists = c:KIR }
+			create_diplomatic_pact = {
+				country = c:KIR										# Change TAG ****
+				type = semi_autonomous_colony
+			}
+			create_decolonisation_pacts = yes
+		}
+		
+		# Fire only once
+		set_variable = british_gilbert_ellice_sgc				# Change variable ****
+		
+		ai_chance = { 
+			base = 90 
+		}
+		
+    }
+	
+	option = {
+        name = british_decolonisation.option.2					# REFUSE
+		
+		# Natives are angry!
+		every_scope_state = {
+			limit = {
+		 		state_region = { is_homeland = cu:kiribati }	# Change homeland identity to match colony to be released ****
+		 	}
+			add_radicals_in_state = {
+				culture = cu:kiribati							# Change culture ****
+				value = large_radicals
+			}
+			add_modifier = { name = nationalist_agitation months = 60 is_decaying = yes } 
+		}
+		
+		# Fire only once
+		set_variable = british_gilbert_ellice_sgc				# Change variable ****
+		
+		ai_chance = { 
+			base = 10 modifier = { trigger = { has_global_variable = historical_railroading_active } add = -100 } 
+		}
+		
+    }
+
+}
+
+# Singapore
+british_decolonisation.21 = {
+    type = country_event
+	placement = scope:colonial_state
+
+    title = british_singapore.sgc.t 			# Title of the event; ADD LOCALISATION
+    desc = british_singapore.sgc.d 				# Description of the event; ADD LOCALISATION
+    #flavor = british_singapore.sgc.f 			# Flavor for event; ADD LOCALISATION, IF REQUIRED
+
+    event_image = { video = "gfx/event_pictures/unspecific_signed_contract.bk2" }
+
+    icon = "gfx/interface/icons/event_icons/waving_flag.dds" 	# Icon that shows on the map or the outliner
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear" 	# Sound effect if needed
+
+    duration = 1 # Duration to fire if triggers are met
+	
+	trigger = {													# What triggers the event, if using other events or journal entries leave empty
+		
+		#Overlord conditions
+		exists = c:GBR this = c:GBR								# Change TAG of the overlord ****
+		game_date >= 1955.4.6									# START DATE: Date colony became self governing ****
+		game_date < 1965.4.6									# END DATE: All historical events must not fire 10 years after the START DATE ****
+		
+		is_a_democratic_monarchy = yes							# Correct gov types
+		is_sufficiently_independent = yes						# is_vassal = no		
+		is_at_war = no											# war = no
+		
+		#Colony conditions
+		NOT = { 												# Colony to be released must not already exist on the map
+			exists = c:SGP										# Change TAG of the colony ****
+		}
+		p:xC00130 ?= {
+			owner = ROOT
+		}
+		
+		# Event has not been fired before
+		NOT = { has_variable = british_singapore_sgc }				# CHANGE ****
+		
+    }
+	
+	immediate = {
+	
+		# Generate list of provinces to be released				# DO NOT TOUCH THIS SECTION
+		every_scope_state = {
+			limit = {
+				state_region = { is_homeland = cu:singaporean }	# Change homeland identity to match colony to be released ****
+				#is_incorporated = no							# State is a colony
+				#contains_capital_of = c:SGP						# State is the capital of colony ****
+			}
+			save_scope_as = colonial_state
+		}
+		
+	}
+    
+    option = {
+        name = british_decolonisation.option.1				#Grant them self-government
+        default_option = yes highlighted_option = yes
+		
+		#Release country
+		create_country = {
+			tag = SGP										# Change TAG of country being released ****
+			origin = ROOT									# TAG where the created country takes tech from
+			province = p:xC00130
+			
+			on_created = {									# Set government laws & rulers here
+				
+				# SET laws for colony ****
+				effect_starting_politics_parliamentary_republic = yes
+				effect_starting_politics_democratic = yes
+				effect_starting_politics_constitutional_unitary_state = yes
+				effect_starting_politics_war_policy_anti_military = yes
+				effect_starting_politics_economic_policy_interventionism = yes
+				effect_starting_politics_trade_policy_protectionism = yes
+				effect_starting_politics_anti_nuclear_policy = yes
+				
+				# CREATE leader for colony ****
+				create_character = {
+					first_name = "David_Saul_Marshall_first_name"		# CHANGE
+					last_name = "David_Saul_Marshall_last_name"		# CHANGE
+					ruler = yes ig_leader = yes historical = yes
+					birth_date = 1908.3.12						# CHANGE
+					interest_group = ig_trade_unions			# CHANGE
+					ideology = ideology_democratic				# CHANGE
+					culture = cu:sephardic
+					traits = {
+						charismatic								# CHANGE
+						persistent								# CHANGE
+						meticulous								# CHANGE
+					}
+				}
+				
+				# Set diplomatic recognition
+				set_country_type = unrecognized
+			}
+		}
+		
+		# Overlord create self governing colony pact with colony
+		if = {
+			limit = { exists = c:SGP }
+			create_diplomatic_pact = {
+				country = c:SGP										# Change TAG ****
+				type = semi_autonomous_colony
+			}
+			create_decolonisation_pacts = yes
+		}
+		
+		# Fire only once
+		set_variable = british_singapore_sgc						# Change variable ****
+		
+		ai_chance = { 
+			base = 90 
+		}
+		
+    }
+	
+	option = {
+        name = british_decolonisation.option.2					# REFUSE
+		
+		# Natives are angry!
+		every_scope_state = {
+			limit = {
+		 		state_region = { is_homeland = cu:singaporean }	# Change homeland identity to match colony to be released ****
+		 	}
+			add_radicals_in_state = {
+				culture = cu:singaporean							# Change culture ****
+				value = large_radicals
+			}
+			add_modifier = { name = nationalist_agitation months = 60 is_decaying = yes } 
+		}
+		
+		# Fire only once
+		set_variable = british_singapore_sgc						# Change variable ****
+		
+		ai_chance = { 
+			base = 10 modifier = { trigger = { has_global_variable = historical_railroading_active } add = -100 } 
+		}
+		
+    }
+
+}
+
+# Singapore (For flag change)
+british_decolonisation.211 = {
+    type = country_event
+	placement = scope:colonial_state
+
+    title = british_singapore_state.sgc.t 				# Title of the event; ADD LOCALISATION
+    desc = british_singapore_state.sgc.d 				# Description of the event; ADD LOCALISATION
+    #flavor = british_singapore_state.sgc.f 			# Flavor for event; ADD LOCALISATION, IF REQUIRED
+
+    event_image = { video = "gfx/event_pictures/unspecific_signed_contract.bk2" }
+
+    icon = "gfx/interface/icons/event_icons/waving_flag.dds" 	# Icon that shows on the map or the outliner
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear" 	# Sound effect if needed
+
+    duration = 1 # Duration to fire if triggers are met
+	
+	trigger = {													# What triggers the event, if using other events or journal entries leave empty
+		
+		#Overlord conditions
+		exists = c:GBR this = c:GBR								# Change TAG of the overlord ****
+		game_date >= 1959.6.3									# START DATE: Date colony became self governing ****
+		game_date < 1969.6.3									# END DATE: All historical events must not fire 10 years after the START DATE ****
+		
+		is_a_democratic_monarchy = yes							# Correct gov types
+		is_sufficiently_independent = yes						# is_vassal = no		
+		is_at_war = no											# war = no
+		
+		#Colony conditions
+		exists = c:SGP
+		exists = c:MLY
+		c:MLY = {
+			is_some_kind_of_democracy = yes
+			OR = { 
+				is_sufficiently_independent = yes
+				is_direct_subject_of = ROOT
+			}
+		}
+		c:SGP = { 												# Change TAG of the colony ****
+			is_direct_subject_of = ROOT
+			is_not_sufficiently_independent = yes
+		}
+		has_diplomatic_pact = { 
+			who = c:SGP 
+			type = semi_autonomous_colony 
+			is_initiator = yes 
+		}
+		
+		# Event has not been fired before
+		NOT = { has_variable = british_singapore_state_sgc }				# CHANGE ****
+		
+    }
+	
+	immediate = {
+		
+		c:SGP = { save_scope_as = colonial_state }
+		
+		# Fire only once
+		set_variable = british_singapore_state_sgc						# Change variable ****
+		
+	}
+    
+    option = {
+        name = british_decolonisation.option.1				#Grant them self-government
+        default_option = yes highlighted_option = yes
+		
+		#Malaysia formation event enabled
+		c:SGP = { set_variable = singapore_road_to_malaysia }
+		
+		# Overlord create self governing colony pact with colony
+		if = {
+			limit = { exists = c:SGP }
+			remove_diplomatic_pact = {
+				country = c:SGP										# Change TAG ****
+				type = semi_autonomous_colony
+			}
+			create_diplomatic_pact = {
+				country = c:SGP										# Change TAG ****
+				type = puppet
+			}
+		}
+		
+		#Change ruler of colony
+		c:SGP = {
+		
+			ig:ig_petty_bourgeoisie = { add_ruling_interest_group = yes }
+		
+			#Create new leader
+			create_character = {
+				first_name = "Lee_Kuan_Yew_first_name"
+				last_name = "Lee_Kuan_Yew_last_name"
+				ruler = yes ig_leader = yes historical = yes
+				birth_date = 1923.9.16
+				interest_group = ig_petty_bourgeoisie
+				ideology = ideology_autocratic
+				culture = cu:singaporean
+				religion = rel:atheist
+				traits = {
+					charismatic
+					innovative
+					direct
+				}
+			}
+			
+			#Party reforms
+			effect_starting_politics_trade_policy_free_trade = yes
+			
+			activate_law = law_type:law_public_schools
+			activate_law = law_type:law_public_health_insurance
+			activate_law = law_type:law_medium_social_security
+			
+			activate_law = law_type:law_pro_industry_regulations
+			activate_law = law_type:law_weak_financial_regulations
+			
+			activate_law = law_type:law_taxation_2
+			
+		}
+		
+		ai_chance = { 
+			base = 90 
+		}
+		
+    }
+	
+	option = {
+        name = british_decolonisation.option.2					# REFUSE
+		
+		c:SGP = {
+		
+			# Natives are angry!
+			every_scope_state = {
+				add_radicals_in_state = {
+					value = large_radicals
+				}
+				add_modifier = { name = nationalist_agitation months = 60 is_decaying = yes } 
+			}
+			
+			#Colony is angry
+			change_relations = {
+				country = ROOT
+				value = -100
+			}
+			
+		}
+		
+		change_infamy = 10
+		
+		ai_chance = { 
+			base = 10 modifier = { trigger = { has_global_variable = historical_railroading_active } add = -100 } 
+		}
+		
+    }
+
+}
+
+# Malaysia (SPECIAL FORMAT)
+british_decolonisation.22 = {
+    type = country_event
+	placement = scope:colonial_state
+
+    title = british_malaysia.sgc.t 			# Title of the event; ADD LOCALISATION
+    desc = british_malaysia.sgc.d 			# Description of the event; ADD LOCALISATION
+    #flavor = british_malaysia.sgc.f 		# Flavor for event; ADD LOCALISATION, IF REQUIRED
+
+    event_image = { video = "gfx/event_pictures/unspecific_signed_contract.bk2" }
+
+    icon = "gfx/interface/icons/event_icons/waving_flag.dds" 	# Icon that shows on the map or the outliner
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear" 	# Sound effect if needed
+
+    duration = 1 # Duration to fire if triggers are met
+	
+	trigger = {													# What triggers the event, if using other events or journal entries leave empty
+		
+		#Overlord conditions
+		exists = c:GBR this = c:GBR											# Change TAG of the overlord ****
+		game_date >= 1963.9.16									# START DATE: Date colony became self governing ****
+		game_date < 1973.9.16									# END DATE: All historical events must not fire 10 years after the START DATE ****
+		
+		is_a_democracy = yes									# Correct gov types
+		is_sufficiently_independent = yes						# is_vassal = no		
+		is_at_war = no											# war = no
+		
+		#Colony conditions
+		NOR = { 												# Colony to be released must not already exist on the map
+			exists = c:MSY
+			
+			exists = c:SAB
+			exists = c:SWK
+		}
+		c:MLY = { 
+			is_some_kind_of_democracy = yes
+			is_sufficiently_independent = yes 
+			is_at_war = no
+		}
+		any_scope_state = { 									# Overlord owns the states of the colony to be released
+			state_region = { 									# Change homeland identity to match colony to be released ****
+				OR = {
+					is_homeland = cu:malaysian
+					is_homeland = cu:sabahan
+					is_homeland = cu:sarawakian
+				}
+			}
+			#is_incorporated = no								# State is a colony
+			#owner = THIS										# Overlord must own the state to be released
+		}
+		
+		# Event has not been fired before
+		NOT = { has_variable = british_malaysia_formation }		# CHANGE ****
+		
+    }
+	
+	immediate = {
+		
+		c:MLY = { save_scope_as = colonial_state }
+		
+	}
+    
+    option = {
+        name = british_decolonisation.20.option.1				#Grant them self-government
+        default_option = yes highlighted_option = yes
+		
+		#MLY becomes MSY
+		c:MLY = { 
+			add_primary_culture = cu:malaysian
+			change_tag = MSY
+		}
+		
+		#Malaysia is happy
+		change_relations = {
+			country = c:MSY
+			value = 100
+		}
+		
+		#British colonies joins MSY
+		every_scope_state = {
+			limit = {
+			
+				# Change homeland identity to match colony to be released ****
+				state_region = { 
+					OR = {
+						is_homeland = cu:malaysian 
+						is_homeland = cu:singaporean
+						is_homeland = cu:sabahan
+						is_homeland = cu:sarawakian
+					}
+				}
+				
+				#is_incorporated = no							# State is a colony
+		 	}
+			set_state_owner = c:MSY								# Change TAG to colony ****
+		}
+		
+		#Singapore joins Malaysia, if it is a subject of GBR
+		if = {
+			limit = { 
+				exists = c:SGP
+				c:SGP = {
+					is_direct_subject_of = ROOT
+					is_not_sufficiently_independent = yes 
+					
+					has_variable = singapore_road_to_malaysia
+				} 
+			}
+			c:SGP = {
+			
+				make_independent = yes
+				effect_starting_politics_parliamentary_republic = yes
+				activate_law = law_type:law_multicultural
+				
+			}
+			c:MSY = {
+				create_diplomatic_pact = {
+					country = c:SGP								# Change TAG ****
+					type = special_administrative_region
+				}
+			}
+		}
+		
+		# Fire only once
+		set_variable = british_malaysia_formation				# Change variable ****
+		
+		ai_chance = { 
+			base = 90 
+		}
+		
+    }
+	
+	option = {
+        name = british_decolonisation.20.option.2				# REFUSE
+		
+		#Malaya is angry
+		change_relations = {
+			country = c:MLY
+			value = -100
+		}
+		
+		# Natives are angry!
+		every_scope_state = {
+			limit = {
+		 		state_region = { 
+					OR = {
+						is_homeland = cu:malaysian 
+						is_homeland = cu:singaporean
+						is_homeland = cu:sabahan
+						is_homeland = cu:sarawakian
+					}
+				}
+		 	}
+			add_radicals_in_state = {
+				value = large_radicals
+			}
+			add_modifier = { name = nationalist_agitation months = 60 is_decaying = yes } 
+		}
+		
+		# Fire only once
+		set_variable = british_malaysia_formation				# Change variable ****
+		
+		ai_chance = { 
+			base = 10 modifier = { trigger = { has_global_variable = historical_railroading_active } add = -100 } 
+		}
+		
+    }
+
+}
+
+### Caribbean ###
+
+# West Indies Federation
+british_decolonisation.23 = {
+    type = country_event
+	placement = scope:colonial_state
+
+    title = british_west_indies.sgc.t 		# Title of the event; ADD LOCALISATION
+    desc = british_west_indies.sgc.d 		# Description of the event; ADD LOCALISATION
+    #flavor = british_west_indies.sgc.f 	# Flavor for event; ADD LOCALISATION, IF REQUIRED
+
+    event_image = { video = "gfx/event_pictures/unspecific_signed_contract.bk2" }
+
+    icon = "gfx/interface/icons/event_icons/waving_flag.dds" 	# Icon that shows on the map or the outliner
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear" 	# Sound effect if needed
+
+    duration = 1 # Duration to fire if triggers are met
+	
+	trigger = {													# What triggers the event, if using other events or journal entries leave empty
+		
+		#Overlord conditions
+		exists = c:GBR this = c:GBR											# Change TAG of the overlord ****
+		game_date >= 1958.1.3									# START DATE: Date colony became self governing ****
+		game_date < 1968.1.3									# END DATE: All historical events must not fire 10 years after the START DATE ****
+		
+		is_a_democratic_monarchy = yes									# Correct gov types
+		is_sufficiently_independent = yes						# is_vassal = no		
+		is_at_war = no											# war = no
+		
+		#Colony conditions
+		NOT = { 												# Colony to be released must not already exist on the map
+			exists = c:WIF										# Change TAG of the colony ****
+		}
+		
+		any_scope_state = { 									# Overlord owns the states of the colony to be released
+			state_region = { OR = { is_homeland = cu:afro_caribbean is_homeland = cu:afro_antillean } }		# Change homeland identity to match colony to be released ****
+			#is_incorporated = no								# State is a colony
+			#owner = THIS										# Overlord must own the state to be released
+		}
+		
+		# Event has not been fired before
+		NOT = { has_variable = british_west_indies_sgc }		# CHANGE ****
+		
+    }
+	
+	immediate = {
+	
+		# Generate list of provinces to be released				# DO NOT REMOVE THIS SECTION
+		every_scope_state = {
+			limit = {
+				state_region = { OR = { is_homeland = cu:afro_caribbean is_homeland = cu:afro_antillean } }	# Change homeland identity to match colony to be released ****
+				#is_incorporated = no							# State is a colony
+				NOT = { state_region = s:STATE_BAHAMAS }
+				#contains_capital_of = c:WIF					# State is the capital of colony ****
+			}
+			save_scope_as = colonial_state
+		}
+		
+	}
+    
+    option = {
+        name = british_decolonisation.option.1				# Grant them self-government
+        default_option = yes highlighted_option = yes
+		
+		#Release country
+		create_country = {
+			tag = WIF										# Change TAG of country being released ****
+			origin = THIS									# TAG where the created country takes tech from
+			state = scope:colonial_state
+			
+			on_created = {									# Set government laws & rulers here
+				
+				# SET laws for colony ****
+				effect_starting_politics_parliamentary_republic = yes
+				effect_starting_politics_democratic = yes
+				effect_starting_politics_constitutional_federal_state = yes
+				effect_starting_politics_war_policy_anti_military = yes
+				effect_starting_politics_economic_policy_interventionism = yes
+				effect_starting_politics_trade_policy_protectionism = yes
+				effect_starting_politics_anti_nuclear_policy = yes
+				
+				# CREATE leader for colony ****
+				create_character = {
+					first_name = "guy_incognito_first_name"		# CHANGE
+					last_name = "guy_incognito_last_name"		# CHANGE
+					ruler = yes
+					#birth_date = 1910.1.1						# CHANGE
+					interest_group = ig_rural_folk				# CHANGE
+					ideology = ideology_democratic				# CHANGE
+					traits = {
+						charismatic								# CHANGE
+						persistent								# CHANGE
+						meticulous								# CHANGE
+					}
+				}
+				
+				# Set diplomatic recognition
+				set_country_type = unrecognized
+			}
+		}
+		every_scope_state = {
+			limit = {
+		 		state_region = { OR = { is_homeland = cu:afro_caribbean is_homeland = cu:afro_antillean } }	# Change homeland identity to match colony to be released ****
+				#is_incorporated = no							# State is a colony
+				NOT = { state_region = s:STATE_BAHAMAS }
+		 	}
+			set_state_owner = c:WIF								# Change TAG to colony ****
+		}
+		
+		# Overlord create self governing colony pact with colony
+		if = {
+			limit = { exists = c:WIF }
+			create_diplomatic_pact = {
+				country = c:WIF										# Change TAG ****
+				type = semi_autonomous_colony
+			}
+			create_decolonisation_pacts = yes
+		}
+		
+		# Fire only once
+		set_variable = british_west_indies_sgc					# Change variable ****
+		
+		ai_chance = {
+			base = 90
+		}
+		
+    }
+	
+	option = {
+        name = british_decolonisation.option.2					# REFUSE
+		
+		# Natives are angry!
+		every_scope_state = {
+			limit = {
+		 		state_region = { OR = { is_homeland = cu:afro_caribbean is_homeland = cu:afro_antillean } }	# Change homeland identity to match colony to be released ****
+		 	}
+			add_radicals_in_state = {
+				culture = cu:afro_caribbean						# Change culture ****
+				value = large_radicals
+			}
+			add_radicals_in_state = {
+				culture = cu:afro_antillean						# Change culture ****
+				value = large_radicals
+			}
+			add_modifier = { name = nationalist_agitation months = 60 is_decaying = yes } 
+		}
+		
+		# Fire only once
+		set_variable = british_west_indies_sgc					# Change variable ****
+		
+		ai_chance = { 
+			base = 10 modifier = { trigger = { has_global_variable = historical_railroading_active } add = -100 } 
+		}
+		
+    }
+
+}
+
+# Bermuda
+british_decolonisation.24 = {
+    type = country_event
+	placement = scope:colonial_state
+
+    title = british_bermuda.sgc.t 				# Title of the event; ADD LOCALISATION
+    desc = british_bermuda.sgc.d 				# Description of the event; ADD LOCALISATION
+    #flavor = british_bermuda.sgc.f 			# Flavor for event; ADD LOCALISATION, IF REQUIRED
+
+    event_image = { video = "gfx/event_pictures/unspecific_signed_contract.bk2" }
+
+    icon = "gfx/interface/icons/event_icons/waving_flag.dds" 	# Icon that shows on the map or the outliner
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear" 	# Sound effect if needed
+
+    duration = 1 # Duration to fire if triggers are met
+	
+	trigger = {													# What triggers the event, if using other events or journal entries leave empty
+		
+		#Overlord conditions
+		exists = c:GBR this = c:GBR								# Change TAG of the overlord ****
+		game_date >= 1968.1.1									# START DATE: Date colony became self governing ****
+		game_date < 1978.1.1									# END DATE: All historical events must not fire 10 years after the START DATE ****
+		
+		is_a_democratic_monarchy = yes							# Correct gov types
+		is_sufficiently_independent = yes						# is_vassal = no		
+		is_at_war = no											# war = no
+		
+		#Colony conditions
+		NOT = { 												# Colony to be released must not already exist on the map
+			exists = c:BEU										# Change TAG of the colony ****
+		}
+		any_scope_state = { 									# Overlord owns the states of the colony to be released
+			state_region = s:STATE_BERMUDA						# Change homeland identity to match colony to be released ****
+			#is_incorporated = no								# State is a colony
+			#owner = ROOT										# Overlord must own the state to be released
+		}
+		
+		# Event has not been fired before
+		NOT = { has_variable = british_bermuda_sgc }				# CHANGE ****
+		
+    }
+	
+	immediate = {
+	
+		# Generate list of provinces to be released				# DO NOT TOUCH ROOT SECTION
+		every_scope_state = {
+			limit = {
+				state_region = s:STATE_BERMUDA					# Change homeland identity to match colony to be released ****
+				#is_incorporated = no							# State is a colony
+				#contains_capital_of = c:BEU					# State is the capital of colony ****
+			}
+			save_scope_as = colonial_state
+		}
+		
+	}
+    
+    option = {
+        name = british_decolonisation.option.1				#Grant them self-government
+        default_option = yes highlighted_option = yes
+		
+		#Release country
+		create_country = {
+			tag = BEU										# Change TAG of country being released ****
+			origin = ROOT									# TAG where the created country takes tech from
+			state = scope:colonial_state
+			
+			on_created = {									# Set government laws & rulers here
+				
+				# SET laws for colony ****
+				effect_starting_politics_parliamentary_republic = yes
+				effect_starting_politics_democratic = yes
+				effect_starting_politics_constitutional_unitary_state = yes
+				effect_starting_politics_war_policy_anti_military = yes
+				effect_starting_politics_economic_policy_interventionism = yes
+				effect_starting_politics_trade_policy_protectionism = yes
+				effect_starting_politics_anti_nuclear_policy = yes
+				
+				# CREATE leader for colony ****
+				create_character = {
+					first_name = "guy_incognito_first_name"		# CHANGE
+					last_name = "guy_incognito_last_name"		# CHANGE
+					ruler = yes
+					#birth_date = 1910.1.1						# CHANGE
+					interest_group = ig_rural_folk					# CHANGE
+					ideology = ideology_democratic				# CHANGE
+					traits = {
+						charismatic								# CHANGE
+						persistent								# CHANGE
+						meticulous								# CHANGE
+					}
+				}
+				
+				# Set diplomatic recognition
+				set_country_type = unrecognized
+			}
+		}
+		
+		# Overlord create self governing colony pact with colony
+		if = {
+			limit = { exists = c:BEU }
+			create_diplomatic_pact = {
+				country = c:BEU										# Change TAG ****
+				type = semi_autonomous_colony
+			}
+			create_decolonisation_pacts = yes
+		}
+		
+		# Fire only once
+		set_variable = british_bermuda_sgc						# Change variable ****
+		
+		ai_chance = { 
+			base = 90 
+		}
+		
+    }
+	
+	option = {
+        name = british_decolonisation.option.2					# REFUSE
+		
+		# Natives are angry!
+		every_scope_state = {
+			limit = {
+		 		state_region = s:STATE_BERMUDA					# Change homeland identity to match colony to be released ****
+		 	}
+			add_radicals_in_state = {
+				value = large_radicals
+			}
+			add_modifier = { name = nationalist_agitation months = 60 is_decaying = yes } 
+		}
+		
+		# Fire only once
+		set_variable = british_bermuda_sgc						# Change variable ****
+		
+		ai_chance = { 
+			base = 10 modifier = { trigger = { has_global_variable = historical_railroading_active } add = -100 } 
+		}
+		
+    }
+
+}
+
+# Bahamas
+british_decolonisation.25 = {
+    type = country_event
+	placement = scope:colonial_state
+
+    title = british_bahamas.sgc.t 				# Title of the event; ADD LOCALISATION
+    desc = british_bahamas.sgc.d 				# Description of the event; ADD LOCALISATION
+    #flavor = british_bahamas.sgc.f 			# Flavor for event; ADD LOCALISATION, IF REQUIRED
+
+    event_image = { video = "gfx/event_pictures/unspecific_signed_contract.bk2" }
+
+    icon = "gfx/interface/icons/event_icons/waving_flag.dds" 	# Icon that shows on the map or the outliner
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear" 	# Sound effect if needed
+
+    duration = 1 # Duration to fire if triggers are met
+	
+	trigger = {													# What triggers the event, if using other events or journal entries leave empty
+		
+		#Overlord conditions
+		exists = c:GBR this = c:GBR								# Change TAG of the overlord ****
+		game_date >= 1964.1.1									# START DATE: Date colony became self governing ****
+		game_date < 1974.1.1									# END DATE: All historical events must not fire 10 years after the START DATE ****
+		
+		is_a_democratic_monarchy = yes							# Correct gov types
+		is_sufficiently_independent = yes						# is_vassal = no		
+		is_at_war = no											# war = no
+		
+		#Colony conditions
+		NOT = { 												# Colony to be released must not already exist on the map
+			exists = c:BAH										# Change TAG of the colony ****
+		}
+		any_scope_state = { 									# Overlord owns the states of the colony to be released
+			state_region = s:STATE_BAHAMAS						# Change homeland identity to match colony to be released ****
+			#is_incorporated = no								# State is a colony
+			#owner = ROOT										# Overlord must own the state to be released
+		}
+		
+		# Event has not been fired before
+		NOT = { has_variable = british_bahamas_sgc }			# CHANGE ****
+		
+    }
+	
+	immediate = {
+	
+		# Generate list of provinces to be released				# DO NOT TOUCH ROOT SECTION
+		every_scope_state = {
+			limit = {
+				state_region = s:STATE_BAHAMAS					# Change homeland identity to match colony to be released ****
+				#is_incorporated = no							# State is a colony
+				#contains_capital_of = c:BAH					# State is the capital of colony ****
+			}
+			save_scope_as = colonial_state
+		}
+		
+	}
+    
+    option = {
+        name = british_decolonisation.option.1				#Grant them self-government
+        default_option = yes highlighted_option = yes
+		
+		#Release country
+		create_country = {
+			tag = BAH										# Change TAG of country being released ****
+			origin = ROOT									# TAG where the created country takes tech from
+			state = scope:colonial_state
+			
+			on_created = {									# Set government laws & rulers here
+				
+				# SET laws for colony ****
+				effect_starting_politics_parliamentary_republic = yes
+				effect_starting_politics_democratic = yes
+				effect_starting_politics_constitutional_unitary_state = yes
+				effect_starting_politics_war_policy_anti_military = yes
+				effect_starting_politics_economic_policy_interventionism = yes
+				effect_starting_politics_trade_policy_protectionism = yes
+				effect_starting_politics_anti_nuclear_policy = yes
+				
+				# CREATE leader for colony ****
+				create_character = {
+					first_name = "guy_incognito_first_name"		# CHANGE
+					last_name = "guy_incognito_last_name"		# CHANGE
+					ruler = yes
+					#birth_date = 1910.1.1						# CHANGE
+					interest_group = ig_rural_folk					# CHANGE
+					ideology = ideology_democratic				# CHANGE
+					traits = {
+						charismatic								# CHANGE
+						persistent								# CHANGE
+						meticulous								# CHANGE
+					}
+				}
+				
+				# Set diplomatic recognition
+				set_country_type = unrecognized
+			}
+		}
+		
+		# Overlord create self governing colony pact with colony
+		if = {
+			limit = { exists = c:BAH }
+			create_diplomatic_pact = {
+				country = c:BAH										# Change TAG ****
+				type = semi_autonomous_colony
+			}
+			create_decolonisation_pacts = yes
+		}
+		
+		# Fire only once
+		set_variable = british_bahamas_sgc						# Change variable ****
+		
+		ai_chance = { 
+			base = 90 
+		}
+		
+    }
+	
+	option = {
+        name = british_decolonisation.option.2					# REFUSE
+		
+		# Natives are angry!
+		every_scope_state = {
+			limit = {
+		 		state_region = s:STATE_BAHAMAS					# Change homeland identity to match colony to be released ****
+		 	}
+			add_radicals_in_state = {
+				value = large_radicals
+			}
+			add_modifier = { name = nationalist_agitation months = 60 is_decaying = yes } 
+		}
+		
+		# Fire only once
+		set_variable = british_bahamas_sgc						# Change variable ****
+		
+		ai_chance = { 
+			base = 10 modifier = { trigger = { has_global_variable = historical_railroading_active } add = -100 } 
+		}
+		
+    }
+
+}
+
+### Special - Libya ###
+
+# Libya
+british_decolonisation.26 = {
+    type = country_event
+	placement = scope:colonial_state
+
+    title = british_libya.sgc.t 			# Title of the event; ADD LOCALISATION
+    desc = british_libya.sgc.d 				# Description of the event; ADD LOCALISATION
+    #flavor = british_libya.sgc.f 			# Flavor for event; ADD LOCALISATION, IF REQUIRED
+
+    event_image = { video = "gfx/event_pictures/unspecific_signed_contract.bk2" }
+
+    icon = "gfx/interface/icons/event_icons/waving_flag.dds" 	# Icon that shows on the map or the outliner
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear" 	# Sound effect if needed
+
+    duration = 1 # Duration to fire if triggers are met
+	
+	trigger = {													# What triggers the event, if using other events or journal entries leave empty
+		
+		#Overlord conditions
+		exists = c:GBR this = c:GBR											# Change TAG of the overlord ****
+		game_date >= 1951.12.24									# START DATE: Date colony became self governing ****
+		game_date < 1961.12.24									# END DATE: All historical events must not fire 10 years after the START DATE ****
+		
+		is_a_democratic_monarchy = yes							# Correct gov types
+		is_sufficiently_independent = yes						# is_vassal = no		
+		is_at_war = no											# war = no
+		
+		#Colony conditions
+		NOT = { 												# Colony to be released must not already exist on the map
+			exists = c:LBY										# Change TAG of the colony ****
+		}
+		any_scope_state = { 									# Overlord owns the states of the colony to be released
+			state_region = { is_homeland = cu:libyan }			# Change homeland identity to match colony to be released ****
+			#is_incorporated = no								# State is a colony
+			#owner = ROOT										# Overlord must own the state to be released
+		}
+		
+		#In case of revolts in CYR
+		c:CYR ?= { 
+			OR = { 
+				is_sufficiently_independent = yes
+				is_direct_subject_of = ROOT
+			}
+			has_revolution = no
+		}
+		
+		# Event has not been fired before
+		NOT = { has_variable = british_libya_sgc }				# CHANGE ****
+		
+    }
+	
+	immediate = {
+	
+		# Generate list of provinces to be released				# DO NOT TOUCH ROOT SECTION
+		every_scope_state = {
+			limit = {
+				state_region = { is_homeland = cu:libyan }	# Change homeland identity to match colony to be released ****
+				#is_incorporated = no							# State is a colony
+				#contains_capital_of = c:LBY						# State is the capital of colony ****
+			}
+			save_scope_as = colonial_state
+		}
+		
+	}
+    
+    option = {
+        name = british_decolonisation_indy.option.1			#Grant them self-government
+        default_option = yes highlighted_option = yes
+		
+		#Release country
+		create_country = {
+			tag = LBY										# Change TAG of country being released ****
+			origin = ROOT									# TAG where the created country takes tech from
+			state = scope:colonial_state
+			
+			on_created = {									# Set government laws & rulers here
+				
+				# SET laws for colony ****
+				effect_starting_politics_parliamentary_republic = yes
+				effect_starting_politics_democratic = yes
+				effect_starting_politics_constitutional_federal_state = yes
+				effect_starting_politics_war_policy_anti_military = yes
+				effect_starting_politics_economic_policy_interventionism = yes
+				effect_starting_politics_trade_policy_protectionism = yes
+				effect_starting_politics_anti_nuclear_policy = yes
+				
+				# Set diplomatic recognition
+				set_country_type = unrecognized
+			}
+		}
+		if = {
+			limit = { exists = c:LBY }
+			every_scope_state = {
+				limit = {
+					state_region = { is_homeland = cu:libyan }		# Change homeland identity to match colony to be released ****
+					#is_incorporated = no							# State is a colony
+				}
+				set_state_owner = c:LBY								# Change TAG to colony ****
+			}
+		}
+		
+		# Overlord create self governing colony pact with colony
+		if = {
+			limit = { exists = c:LBY }
+			create_diplomatic_pact = {
+				country = c:LBY										# Change TAG ****
+				type = satellite
+			}
+			create_diplomatic_pact = {
+				country = c:LBY										# Change TAG ****
+				type = military_cooperation_agreement
+			}
+		}
+		
+		# Libya invites countries to join
+		if = {
+			limit = { exists = c:LBY }
+			c:LBY = {
+				every_country = {
+					limit = { 
+						c:CYR ?= this
+						OR = { 
+							is_sufficiently_independent = yes
+							is_direct_subject_of = ROOT
+						}
+					}
+					trigger_event = { id = historical_union_formation.1 }
+				}
+				every_country = {
+					limit = {
+						is_sufficiently_independent = yes
+						any_scope_state = { 
+							state_region = { is_homeland = cu:libyan } 
+							#is_incorporated = no 
+						} 
+					}
+					trigger_event = { id = historical_territorial_transfers.1 }
+				}
+			}
+		}
+		
+		# Fire only once
+		set_variable = british_libya_sgc						# Change variable ****
+		
+		ai_chance = { 
+			base = 90 
+		}
+		
+    }
+	
+	option = {
+        name = british_decolonisation_indy.option.2				# REFUSE
+		
+		# Natives are angry!
+		every_scope_state = {
+			limit = {
+		 		state_region = { is_homeland = cu:libyan }		# Change homeland identity to match colony to be released ****
+		 	}
+			add_radicals_in_state = {
+				culture = cu:libyan								# Change culture ****
+				value = large_radicals
+			}
+			add_modifier = { name = nationalist_agitation months = 60 is_decaying = yes } 
+		}
+		
+		# Add Infamy because doing this is against international law
+		change_infamy = 10
+		
+		# Fire only once
+		set_variable = british_libya_sgc						# Change variable ****
+		
+		ai_chance = { 
+			base = 10 modifier = { trigger = { has_global_variable = historical_railroading_active } add = -100 } 
+		}
+		
+    }
+
+}
+
+#Falkland Islands
+british_decolonisation.27 = {
+    type = country_event
+	placement = scope:colonial_state
+	
+    title = british_falkland_islands.sgc.t 			# Title of the event; ADD LOCALISATION
+    desc = british_falkland_islands.sgc.d 				# Description of the event; ADD LOCALISATION
+    #flavor = british_falkland_islands.sgc.f 			# Flavor for event; ADD LOCALISATION, IF REQUIRED
+
+    event_image = { video = "gfx/event_pictures/unspecific_signed_contract.bk2" }
+
+    icon = "gfx/interface/icons/event_icons/waving_flag.dds" 	# Icon that shows on the map or the outliner
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear" 	# Sound effect if needed
+
+    duration = 1 # Duration to fire if triggers are met
+	
+	trigger = {													# What triggers the event, if using other events or journal entries leave empty
+		
+		#Overlord conditions
+		exists = c:GBR
+		this = c:GBR											# Change TAG of the overlord ****
+		game_date >= 2009.1.1									# START DATE: Date colony became self governing ****
+		game_date < 2019.1.1									# END DATE: All historical events must not fire 10 years after the START DATE ****
+		
+		is_a_democratic_monarchy = yes							# Correct gov types
+		is_sufficiently_independent = yes						# is_vassal = no		
+		is_at_war = no											# war = no
+		
+		#Colony conditions
+		NOT = { 												# Colony to be released must not already exist on the map
+			exists = c:FLK										# Change TAG of the colony ****
+		}
+		p:x9EF337.state.owner = {
+			THIS = ROOT
+		}
+		p:x5E9DB3.state.owner = {
+			THIS = ROOT
+		}
+		p:x3020D0.state.owner = {
+			THIS = ROOT
+		}
+		
+		# Event has not been fired before
+		NOT = { has_variable = british_falkland_islands_sgc }				# CHANGE ****
+		
+    }
+	
+	immediate = {
+		
+		p:x9EF337.state = {
+			save_scope_as = colonial_state
+		}
+		
+		# Fire only once
+		set_variable = british_falkland_islands_sgc						# Change variable ****
+		
+	}
+    
+    option = {
+        name = british_decolonisation.option.1				#Grant them self-government
+        default_option = yes highlighted_option = yes
+		
+		#Release country
+		create_country = {
+			tag = FLK										# Change TAG of country being released ****
+			origin = ROOT									# TAG where the created country takes tech from
+			province = p:x9EF337
+			province = p:x5E9DB3
+			province = p:x3020D0
+			
+			on_created = {									# Set government laws & rulers here
+				
+				# SET laws for colony ****
+				effect_starting_politics_parliamentary_republic = yes
+				effect_starting_politics_democratic = yes
+				effect_starting_politics_constitutional_unitary_state = yes
+				effect_starting_politics_war_policy_anti_military = yes
+				effect_starting_politics_economic_policy_interventionism = yes
+				effect_starting_politics_trade_policy_protectionism = yes
+				effect_starting_politics_anti_nuclear_policy = yes
+				
+				# Set diplomatic recognition
+				set_country_type = unrecognized
+			}
+		}
+		
+		# Overlord create self governing colony pact with colony
+		if = { 
+			limit = { exists = c:FLK }
+			create_diplomatic_pact = {
+				country = c:FLK										# Change TAG ****
+				type = semi_autonomous_colony
+			}
+			create_decolonisation_pacts = yes
+		}
+		
+		change_infamy = -10
+		
+		# Fire only once
+		set_variable = british_falkland_islands_sgc						# Change variable ****
+		
+		ai_chance = { 
+			base = 90 
+		}
+		
+    }
+	
+	option = {
+        name = british_decolonisation.option.2					# REFUSE
+		
+		# Natives are angry!
+		every_scope_state = {
+			limit = {
+		 		state_region = s:STATE_SOUTH_ATLANTIC_ISLANDS
+		 	}
+			add_radicals_in_state = {
+				value = small_radicals
+			}
+		}
+		
+		# Fire only once
+		set_variable = british_falkland_islands_sgc						# Change variable ****
+		
+		ai_chance = { 
+			base = 10 
+		}
+		
+    }
+
+}
+
+#Cayman Islands
+british_decolonisation.28 = {
+    type = country_event
+	placement = scope:colonial_state
+	
+    title = british_cayman_islands.sgc.t 			# Title of the event; ADD LOCALISATION
+    desc = british_cayman_islands.sgc.d 			# Description of the event; ADD LOCALISATION
+    #flavor = british_cayman_islands.sgc.f 			# Flavor for event; ADD LOCALISATION, IF REQUIRED
+
+    event_image = { video = "gfx/event_pictures/unspecific_signed_contract.bk2" }
+
+    icon = "gfx/interface/icons/event_icons/waving_flag.dds" 	# Icon that shows on the map or the outliner
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear" 	# Sound effect if needed
+
+    duration = 1 # Duration to fire if triggers are met
+	
+	trigger = {													# What triggers the event, if using other events or journal entries leave empty
+		
+		#Overlord conditions
+		exists = c:GBR
+		this = c:GBR											# Change TAG of the overlord ****
+		game_date >= 2009.11.6									# START DATE: Date colony became self governing ****
+		game_date < 2019.11.16									# END DATE: All historical events must not fire 10 years after the START DATE ****
+		
+		is_a_democratic_monarchy = yes							# Correct gov types
+		is_sufficiently_independent = yes						# is_vassal = no		
+		is_at_war = no											# war = no
+		
+		#Colony conditions
+		NOT = { 												# Colony to be released must not already exist on the map
+			exists = c:CYI										# Change TAG of the colony ****
+		}
+		p:x1E761E.state.owner = {
+			THIS = ROOT
+		}
+		
+		# Event has not been fired before
+		NOT = { has_variable = british_cayman_islands_sgc }				# CHANGE ****
+		
+    }
+	
+	immediate = {
+		
+		p:x1E761E.state = {
+			save_scope_as = colonial_state
+		}
+		
+		# Fire only once
+		set_variable = british_cayman_islands_sgc						# Change variable ****
+		
+	}
+    
+    option = {
+        name = british_decolonisation.option.1				#Grant them self-government
+        default_option = yes highlighted_option = yes
+		
+		#Release country
+		create_country = {
+			tag = CYI										# Change TAG of country being released ****
+			origin = ROOT									# TAG where the created country takes tech from
+			province = p:x1E761E
+			
+			on_created = {									# Set government laws & rulers here
+				
+				# SET laws for colony ****
+				effect_starting_politics_parliamentary_republic = yes
+				effect_starting_politics_democratic = yes
+				effect_starting_politics_constitutional_unitary_state = yes
+				effect_starting_politics_war_policy_anti_military = yes
+				effect_starting_politics_economic_policy_interventionism = yes
+				effect_starting_politics_trade_policy_protectionism = yes
+				effect_starting_politics_anti_nuclear_policy = yes
+				
+				# Set diplomatic recognition
+				set_country_type = unrecognized
+			}
+		}
+		
+		# Overlord create self governing colony pact with colony
+		if = { 
+			limit = { exists = c:CYI }
+			create_diplomatic_pact = {
+				country = c:CYI										# Change TAG ****
+				type = semi_autonomous_colony
+			}
+			create_decolonisation_pacts = yes
+		}
+		
+		change_infamy = -10
+		
+		ai_chance = { 
+			base = 90 
+		}
+		
+    }
+	
+	option = {
+        name = british_decolonisation.option.2					# REFUSE
+		
+		# Natives are angry!
+		every_scope_state = {
+			limit = {
+		 		state_region = s:STATE_JAMAICA
+		 	}
+			add_radicals_in_state = {
+				value = large_radicals
+			}
+		}
+		
+		ai_chance = { 
+			base = 10 
+		}
+		
+    }
+
+}
+
+#Anguilla
+british_decolonisation.29 = {
+    type = country_event
+	placement = scope:colonial_state
+	
+    title = british_anguilla.sgc.t 				# Title of the event; ADD LOCALISATION
+    desc = british_anguilla.sgc.d 				# Description of the event; ADD LOCALISATION
+    #flavor = british_anguilla.sgc.f 			# Flavor for event; ADD LOCALISATION, IF REQUIRED
+
+    event_image = { video = "gfx/event_pictures/unspecific_signed_contract.bk2" }
+
+    icon = "gfx/interface/icons/event_icons/waving_flag.dds" 	# Icon that shows on the map or the outliner
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear" 	# Sound effect if needed
+
+    duration = 1 # Duration to fire if triggers are met
+	
+	trigger = {													# What triggers the event, if using other events or journal entries leave empty
+		
+		#Overlord conditions
+		exists = c:GBR
+		this = c:GBR											# Change TAG of the overlord ****
+		game_date >= 1976.2.10									# START DATE: Date colony became self governing ****
+		game_date < 1986.2.10									# END DATE: All historical events must not fire 10 years after the START DATE ****
+		
+		is_a_democratic_monarchy = yes							# Correct gov types
+		is_sufficiently_independent = yes						# is_vassal = no		
+		is_at_war = no											# war = no
+		
+		#Colony conditions
+		NOT = { 												# Colony to be released must not already exist on the map
+			exists = c:AGU										# Change TAG of the colony ****
+		}
+		p:x606060.state.owner = {
+			THIS = ROOT
+		}
+		
+		# Event has not been fired before
+		NOT = { has_variable = british_anguilla_sgc }			# CHANGE ****
+		
+    }
+	
+	immediate = {
+		
+		p:x606060.state = {
+			save_scope_as = colonial_state
+		}
+		
+		# Fire only once
+		set_variable = british_anguilla_sgc						# Change variable ****
+		
+	}
+    
+    option = {
+        name = british_decolonisation.option.1				#Grant them self-government
+        default_option = yes highlighted_option = yes
+		
+		#Release country
+		create_country = {
+			tag = AGU										# Change TAG of country being released ****
+			origin = ROOT									# TAG where the created country takes tech from
+			province = p:x606060
+			
+			on_created = {									# Set government laws & rulers here
+				
+				# SET laws for colony ****
+				effect_starting_politics_parliamentary_republic = yes
+				effect_starting_politics_democratic = yes
+				effect_starting_politics_constitutional_unitary_state = yes
+				effect_starting_politics_war_policy_anti_military = yes
+				effect_starting_politics_economic_policy_interventionism = yes
+				effect_starting_politics_trade_policy_protectionism = yes
+				effect_starting_politics_anti_nuclear_policy = yes
+				
+				# Set diplomatic recognition
+				set_country_type = unrecognized
+			}
+		}
+		
+		# Overlord create self governing colony pact with colony
+		if = { 
+			limit = { exists = c:AGU }
+			create_diplomatic_pact = {
+				country = c:AGU										# Change TAG ****
+				type = semi_autonomous_colony
+			}
+			create_decolonisation_pacts = yes
+		}
+		
+		ai_chance = { 
+			base = 90 
+		}
+		
+    }
+	
+	option = {
+        name = british_decolonisation.option.2					# REFUSE
+		
+		# Natives are angry!
+		every_scope_state = {
+			limit = {
+		 		state_region = s:STATE_WEST_INDIES
+		 	}
+			add_radicals_in_state = {
+				value = large_radicals
+			}
+		}
+		
+		change_infamy = 10
+		
+		ai_chance = { 
+			base = 10 
+		}
+		
+    }
+
+}
+
+#Turks and Caicos Islands
+british_decolonisation.30 = {
+    type = country_event
+	placement = scope:colonial_state
+	
+    title = british_TCI.sgc.t 				# Title of the event; ADD LOCALISATION
+    desc = british_TCI.sgc.d 				# Description of the event; ADD LOCALISATION
+    #flavor = british_TCI.sgc.f 			# Flavor for event; ADD LOCALISATION, IF REQUIRED
+
+    event_image = { video = "gfx/event_pictures/unspecific_signed_contract.bk2" }
+
+    icon = "gfx/interface/icons/event_icons/waving_flag.dds" 	# Icon that shows on the map or the outliner
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear" 	# Sound effect if needed
+
+    duration = 1 # Duration to fire if triggers are met
+	
+	trigger = {													# What triggers the event, if using other events or journal entries leave empty
+		
+		#Overlord conditions
+		exists = c:GBR
+		this = c:GBR											# Change TAG of the overlord ****
+		game_date >= 1976.8.30									# START DATE: Date colony became self governing ****
+		game_date < 1986.8.30									# END DATE: All historical events must not fire 10 years after the START DATE ****
+		
+		is_a_democratic_monarchy = yes							# Correct gov types
+		is_sufficiently_independent = yes						# is_vassal = no		
+		is_at_war = no											# war = no
+		
+		#Colony conditions
+		NOT = { 												# Colony to be released must not already exist on the map
+			exists = c:TCI										# Change TAG of the colony ****
+		}
+		p:x7A6FA3.state.owner = {
+			THIS = ROOT
+		}
+		
+		# Event has not been fired before
+		NOT = { has_variable = british_TCI_sgc }			# CHANGE ****
+		
+    }
+	
+	immediate = {
+		
+		p:x7A6FA3.state = {
+			save_scope_as = colonial_state
+		}
+		
+		# Fire only once
+		set_variable = british_TCI_sgc						# Change variable ****
+		
+	}
+    
+    option = {
+        name = british_decolonisation.option.1				#Grant them self-government
+        default_option = yes highlighted_option = yes
+		
+		#Release country
+		create_country = {
+			tag = TCI										# Change TAG of country being released ****
+			origin = ROOT									# TAG where the created country takes tech from
+			province = p:x7A6FA3
+			
+			on_created = {									# Set government laws & rulers here
+				
+				# SET laws for colony ****
+				effect_starting_politics_parliamentary_republic = yes
+				effect_starting_politics_democratic = yes
+				effect_starting_politics_constitutional_unitary_state = yes
+				effect_starting_politics_war_policy_anti_military = yes
+				effect_starting_politics_economic_policy_interventionism = yes
+				effect_starting_politics_trade_policy_protectionism = yes
+				effect_starting_politics_anti_nuclear_policy = yes
+				
+				# Set diplomatic recognition
+				set_country_type = unrecognized
+			}
+		}
+		
+		# Overlord create self governing colony pact with colony
+		if = { 
+			limit = { exists = c:TCI }
+			create_diplomatic_pact = {
+				country = c:TCI										# Change TAG ****
+				type = semi_autonomous_colony
+			}
+			create_decolonisation_pacts = yes
+		}
+		
+		ai_chance = { 
+			base = 90 
+		}
+		
+    }
+	
+	option = {
+        name = british_decolonisation.option.2					# REFUSE
+		
+		# Natives are angry!
+		every_scope_state = {
+			limit = {
+		 		state_region = s:STATE_WEST_INDIES
+		 	}
+			add_radicals_in_state = {
+				value = large_radicals
+			}
+		}
+		
+		change_infamy = 10
+		
+		ai_chance = { 
+			base = 10 
+		}
+		
+    }
+
+}
+
+#Hong Kong
+british_decolonisation.31 = {
+    type = country_event
+	placement = scope:colonial_state
+	
+    title = british_hong_kong.sgc.t 			# Title of the event; ADD LOCALISATION
+    desc = british_hong_kong.sgc.d 				# Description of the event; ADD LOCALISATION
+    #flavor = british_hong_kong.sgc.f 			# Flavor for event; ADD LOCALISATION, IF REQUIRED
+
+    event_image = { video = "gfx/event_pictures/unspecific_signed_contract.bk2" }
+
+    icon = "gfx/interface/icons/event_icons/waving_flag.dds" 		# Icon that shows on the map or the outliner
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear" 	# Sound effect if needed
+
+    duration = 1 # Duration to fire if triggers are met
+	
+	trigger = {													# What triggers the event, if using other events or journal entries leave empty
+		
+		#Overlord conditions
+		exists = c:GBR
+		this = c:GBR											# Change TAG of the overlord ****
+		game_date >= 1985.9.26									# START DATE: Date colony became self governing ****
+		game_date < 1995.9.26									# END DATE: All historical events must not fire 10 years after the START DATE ****
+		
+		is_a_democratic_monarchy = yes							# Correct gov types
+		is_sufficiently_independent = yes						# is_vassal = no		
+		is_at_war = no											# war = no
+		
+		#Colony conditions
+		NOT = { 												# Colony to be released must not already exist on the map
+			exists = c:HKG										# Change TAG of the colony ****
+		}
+		p:xB03161.state.owner = {
+			THIS = ROOT
+		}
+		
+		# Event has not been fired before
+		NOT = { has_variable = british_hong_kong_sgc }			# CHANGE ****
+		
+    }
+	
+	immediate = {
+		
+		p:xB03161.state = {
+			save_scope_as = colonial_state
+		}
+		
+		# Fire only once
+		set_variable = british_hong_kong_sgc					# Change variable ****
+		
+	}
+    
+    option = {
+        name = british_decolonisation.option.1				#Grant them self-government
+        default_option = yes highlighted_option = yes
+		
+		#Release country
+		create_country = {
+			tag = HKG										# Change TAG of country being released ****
+			origin = ROOT									# TAG where the created country takes tech from
+			province = p:xB03161
+			
+			on_created = {									# Set government laws & rulers here
+				
+				# SET laws for colony ****
+				effect_starting_politics_parliamentary_republic = yes
+				effect_starting_politics_democratic = yes
+				effect_starting_politics_constitutional_unitary_state = yes
+				effect_starting_politics_war_policy_anti_military = yes
+				effect_starting_politics_economic_policy_laissez_faire = yes
+				effect_starting_politics_trade_policy_free_trade = yes
+				effect_starting_politics_anti_nuclear_policy = yes
+				
+				# Set diplomatic recognition
+				set_country_type = unrecognized
+			}
+		}
+		
+		# Overlord create self governing colony pact with colony
+		if = { 
+			limit = { exists = c:HKG }
+			create_diplomatic_pact = {
+				country = c:HKG								# Change TAG ****
+				type = semi_autonomous_colony
+			}
+			create_decolonisation_pacts = yes
+		}
+		
+		ai_chance = { 
+			base = 90 
+		}
+		
+    }
+	
+	option = {
+        name = british_decolonisation.option.2					# REFUSE
+		
+		# Natives are angry!
+		scope:colonial_state = {
+			add_radicals_in_state = {
+				value = large_radicals
+			}
+		}
+		
+		change_infamy = 10
+		
+		ai_chance = { 
+			base = 10 
+		}
+		
+    }
+
+}
+
+# Cyrenaica
+british_decolonisation.32 = {
+    type = country_event
+	placement = scope:colonial_state
+
+    title = british_cyrenaica.sgc.t 	# Title of the event; ADD LOCALISATION
+    desc = british_cyrenaica.sgc.d 		# Description of the event; ADD LOCALISATION
+    #flavor = british_cyrenaica.sgc.f 	# Flavor for event; ADD LOCALISATION, IF REQUIRED
+
+    event_image = { video = "gfx/event_pictures/unspecific_signed_contract.bk2" }
+
+    icon = "gfx/interface/icons/event_icons/waving_flag.dds" 		# Icon that shows on the map or the outliner
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear" 	# Sound effect if needed
+
+    duration = 1 # Duration to fire if triggers are met
+	
+	trigger = {													# What triggers the event, if using other events or journal entries leave empty
+		
+		has_global_variable = 1946_start_date
+		
+		#Overlord conditions
+		exists = c:GBR this = c:GBR								# Change TAG of the overlord ****
+		game_date >= 1949.3.1									# START DATE: Date colony became self governing ****
+		game_date < 1959.3.1									# END DATE: All historical events must not fire 10 years after the START DATE ****
+		
+		is_a_democratic_monarchy = yes							# Correct gov types
+		is_sufficiently_independent = yes						# is_vassal = no		
+		is_at_war = no											# war = no
+		
+		#Colony conditions
+		NOT = { 												# Colony to be released must not already exist on the map
+			exists = c:CYR										# Change TAG of the colony ****
+		}
+		has_state_in_state_region = STATE_LIBYA
+		
+		# Event has not been fired before
+		NOT = { has_variable = british_cyrenaica_sgc }			# CHANGE ****
+		
+    }
+	
+	immediate = {
+	
+		# Generate list of provinces to be released				# DO NOT REMOVE THIS SECTION
+		every_scope_state = {
+			limit = {
+				state_region = s:STATE_LIBYA
+			}
+			save_scope_as = colonial_state
+		}
+		
+		# Fire only once
+		set_variable = british_cyrenaica_sgc					# Change variable ****
+		
+	}
+    
+    option = {
+        name = british_decolonisation.option.1				# Grant them self-government
+        default_option = yes highlighted_option = yes
+		
+		#Release country
+		create_country = {
+			tag = CYR										# Change TAG of country being released ****
+			origin = THIS									# TAG where the created country takes tech from
+			state = scope:colonial_state
+			
+			on_created = {									# Set government laws & rulers here
+				
+				# SET laws for colony ****
+				effect_starting_politics_absolute_monarchy = yes
+				effect_starting_politics_dictatorship = yes
+				effect_starting_politics_constitutional_unitary_state = yes
+				effect_starting_politics_war_policy_pro_military = yes
+				effect_starting_politics_economic_policy_interventionism = yes
+				effect_starting_politics_trade_policy_free_trade = yes
+				effect_starting_politics_anti_nuclear_policy = yes
+				
+				effect_starting_politics_specialisation_natural_resource = yes
+				
+				effect_starting_politics_semi_gold_system = yes
+				
+				# CREATE leader for colony ****
+				create_character = {
+					first_name = "idris_of_libya_first_name"
+					last_name = "idris_of_libya_last_name"
+					ruler = yes ig_leader = yes historical = yes
+					birth_date = 1890.3.13
+					interest_group = ig_landowners 
+					ideology = ideology_autocratic
+					religion = rel:sunni
+					traits = {
+						expensive_tastes
+						imperious
+					}
+				}
+				
+				# Set diplomatic recognition
+				set_country_type = unrecognized
+			}
+		}
+		
+		# Overlord create self governing colony pact with colony
+		if = {
+			limit = { exists = c:CYR }
+			create_diplomatic_pact = {
+				country = c:CYR									# Change TAG ****
+				type = satellite
+			}
+		}
+		
+		ai_chance = {
+			base = 90
+		}
+		
+    }
+	
+	option = {
+        name = british_decolonisation.option.2					# REFUSE
+		
+		# Natives are angry!
+		every_scope_state = {
+			limit = {
+		 		state_region = s:STATE_LIBYA
+		 	}
+			add_radicals_in_state = {
+				value = large_radicals
+			}
+			add_modifier = { name = nationalist_agitation months = 60 is_decaying = yes } 
+		}
+		
+		ai_chance = { 
+			base = 10 modifier = { trigger = { has_global_variable = historical_railroading_active } add = -100 } 
+		}
+		
+    }
+
+}

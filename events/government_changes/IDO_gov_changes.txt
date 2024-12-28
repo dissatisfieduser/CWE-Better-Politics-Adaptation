@@ -1,0 +1,313 @@
+namespace = IDO_gov_changes
+
+# Guided Democracy
+IDO_gov_changes.1 = {
+    type = country_event
+
+    title = IDO_1959_revolution.t 							# Title of the event; ADD LOCALISATION
+    desc = IDO_1959_revolution.d 							# Description of the event; ADD LOCALISATION
+    #flavor = IDO_1959_revolution.f 						# Flavor for event; ADD LOCALISATION, IF REQUIRED
+
+    event_image = { video = "gfx/event_pictures/unspecific_politicians_arguing.bk2" }
+
+    icon = "gfx/interface/icons/event_icons/event_portrait.dds" 	# Icon that shows on the map or the outliner
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear" 	# Sound effect if needed
+
+    duration = 1 # Duration to fire if triggers are met
+	
+	trigger = {													# What triggers the event, if using other events or journal entries leave empty
+		
+		#Overlord conditions
+		c:IDO ?= this
+		game_date >= 1959.7.5									# START DATE: Date colony became self governing ****
+		game_date < 1969.7.5									# END DATE: All historical events must not fire 10 years after the START DATE ****
+		
+		is_a_republican_democracy = yes							# Correct gov types
+		is_sufficiently_independent = yes						# is_vassal = no		
+		is_at_war = no											# war = no
+		
+		#right_wing_ruling_coalition = yes						# Correct Ruling Coalition
+		
+		# Event has not been fired before
+		NOT = { has_variable = IDO_1959_hgc }					# CHANGE ****
+		
+    }
+	
+	immediate = {
+	
+		# Fire only once
+		set_variable = IDO_1959_hgc								# Change variable ****
+		
+	}
+    
+    option = {
+        name = historical_gov_changes.option.1					# Accept
+        highlighted_option = yes
+		
+		#Enact new regime
+		effect_starting_politics_regime = yes
+		effect_starting_politics_economic_policy_state_capitalism = yes
+		effect_starting_politics_constitutional_unitary_state = yes
+		
+		#Create new leader
+		if = {
+			limit = {
+				NOT = { ruler = { is_interest_group_type = ig_rural_folk is_historical = yes } }
+			}
+			create_character = {
+				first_name = "sukarno_first_name"
+				last_name = "sukarno_last_name"
+				ruler = yes ig_leader = yes historical = yes
+				birth_date = 1901.6.6
+				interest_group = ig_agrarian_populists
+				ideology = ideology_left_nationalist
+				culture = cu:indonesian
+				religion = rel:sunni
+				traits = {
+					charismatic
+					demagogue
+					ambitious
+				}
+				on_created = { set_variable = sukarno }
+			}
+		}
+		
+		ai_chance = { 
+			base = 90 
+		}
+		
+    }
+	
+	option = {
+        name = historical_gov_changes.option.2				# Reject
+		default_option = yes
+		
+		#Major discontent
+		add_radicals = {
+			value = large_radicals
+		}
+		add_modifier = { 
+			name = stirrings_of_revolution
+			months = 60 
+			is_decaying = yes 
+		}
+		
+		ai_chance = { 
+			base = 10 modifier = { trigger = { has_global_variable = historical_railroading_active } add = -100 } 
+		}
+		
+    }
+
+}
+
+# Indonesia Coup of 1968
+IDO_gov_changes.2 = {
+    type = country_event
+
+    title = IDO_1968_revolution.t 							# Title of the event; ADD LOCALISATION
+    desc = IDO_1968_revolution.d 							# Description of the event; ADD LOCALISATION
+    #flavor = IDO_1968_revolution.f 						# Flavor for event; ADD LOCALISATION, IF REQUIRED
+
+    event_image = { video = "gfx/event_pictures/unspecific_politicians_arguing.bk2" }
+
+    icon = "gfx/interface/icons/event_icons/event_portrait.dds" 	# Icon that shows on the map or the outliner
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear" 	# Sound effect if needed
+
+    duration = 1 # Duration to fire if triggers are met
+	
+	trigger = {													# What triggers the event, if using other events or journal entries leave empty
+		
+		#Overlord conditions
+		c:IDO ?= this
+		game_date >= 1968.3.27									# START DATE: Date colony became self governing ****
+		game_date < 1978.3.27									# END DATE: All historical events must not fire 10 years after the START DATE ****
+		
+		is_a_republican_regime = yes							# Correct gov types
+		is_sufficiently_independent = yes						# is_vassal = no		
+		is_at_war = no											# war = no
+		
+		#right_wing_ruling_coalition = yes						# Correct Ruling Coalition
+		
+		# Event has not been fired before
+		NOT = { has_variable = IDO_1968_hgc }					# CHANGE ****
+		
+    }
+	
+	immediate = {
+	
+		# Fire only once
+		set_variable = IDO_1968_hgc								# Change variable ****
+		
+	}
+    
+    option = {
+        name = historical_gov_changes.option.1					# Accept
+        highlighted_option = yes
+		
+		#Becomes independent
+		make_independent = yes
+		
+		#Enact new regime
+		effect_starting_politics_presidential_republic = yes
+		effect_starting_politics_dictatorship = yes
+		activate_law = law_type:law_military_junta
+		
+		#Create new leader
+		create_character = {
+			first_name = "Suharto_first_name"
+			last_name = "Suharto_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			is_general = yes
+			commander_rank = commander_rank_5
+			birth_date = 1921.6.8
+			interest_group = ig_armed_forces
+			ideology = ideology_authoritarian
+			culture = cu:indonesian
+			religion = rel:sunni
+			traits = {
+				charismatic
+				innovative
+				expensive_tastes
+			}
+		}
+		
+		ai_chance = { 
+			base = 90 
+		}
+		
+    }
+	
+	option = {
+        name = historical_gov_changes.option.2				# Reject
+		default_option = yes
+		
+		#Major discontent
+		add_radicals = {
+			value = large_radicals
+		}
+		add_modifier = { 
+			name = stirrings_of_revolution
+			months = 60 
+			is_decaying = yes 
+		}
+		
+		ai_chance = { 
+			base = 10 modifier = { trigger = { has_global_variable = historical_railroading_active } add = -100 } 
+		}
+		
+    }
+
+}
+
+# Democratisation of Indonesia
+IDO_gov_changes.3 = {
+    type = country_event
+
+    title = IDO_1998_revolution.t 							# Title of the event; ADD LOCALISATION
+    desc = IDO_1998_revolution.d 							# Description of the event; ADD LOCALISATION
+    #flavor = IDO_1998_revolution.f 						# Flavor for event; ADD LOCALISATION, IF REQUIRED
+
+    event_image = { video = "gfx/event_pictures/unspecific_politicians_arguing.bk2" }
+
+    icon = "gfx/interface/icons/event_icons/event_portrait.dds" 	# Icon that shows on the map or the outliner
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear" 	# Sound effect if needed
+
+    duration = 1 # Duration to fire if triggers are met
+	
+	trigger = {													# What triggers the event, if using other events or journal entries leave empty
+		
+		#Overlord conditions
+		c:IDO ?= this
+		game_date >= 1998.5.21									# START DATE: Date colony became self governing ****
+		game_date < 2008.5.21									# END DATE: All historical events must not fire 10 years after the START DATE ****
+		
+		is_a_presidential_regime = yes							# Correct gov types
+		is_sufficiently_independent = yes						# is_vassal = no		
+		is_at_war = no											# war = no
+		
+		# Event has not been fired before
+		NOT = { has_variable = IDO_1998_hgc }					# CHANGE ****
+		
+    }
+	
+	immediate = {
+	
+		# Fire only once
+		set_variable = IDO_1998_hgc								# Change variable ****
+		
+	}
+    
+    option = {
+        name = historical_gov_changes.option.1					# Accept
+        highlighted_option = yes
+		
+		#Enact new regime
+		effect_starting_politics_presidential_republic = yes
+		effect_starting_politics_democratic = yes
+		
+		#Create new leader
+		create_character = {
+			first_name = "Bacharuddin_Jusuf_Habibie_first_name"
+			last_name = "Bacharuddin_Jusuf_Habibie_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1936.6.25
+			interest_group = ig_conservatives
+			ideology = ideology_moderate
+			culture = cu:indonesian
+			religion = rel:sunni
+			traits = {
+				charismatic
+				innovative
+				persistent
+			}
+		}
+		
+		#Create new IG leader
+		create_character = {
+			first_name = "Abdurrahman_Wahid_first_name"
+			last_name = "Abdurrahman_Wahid_last_name"
+			ig_leader = yes historical = yes
+			birth_date = 1940.9.7
+			interest_group = ig_rural_folk
+			ideology = ideology_power_hungry
+			culture = cu:indonesian
+			religion = rel:sunni
+			traits = {
+				pious
+				grifter
+				sickly
+			}
+		}
+		
+		ai_chance = { 
+			base = 90 
+		}
+		
+    }
+	
+	option = {
+        name = historical_gov_changes.option.2					# Reject
+		default_option = yes
+		
+		#Major discontent
+		add_radicals = {
+			value = large_radicals
+			strata = poor
+		}
+		add_radicals = {
+			value = very_large_radicals
+			strata = middle
+		}
+		add_modifier = { 
+			name = stirrings_of_revolution
+			months = 60 
+			is_decaying = yes 
+		}
+		
+		ai_chance = { 
+			base = 10 modifier = { trigger = { has_global_variable = historical_railroading_active } add = -100 } 
+		}
+		
+    }
+
+}

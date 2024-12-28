@@ -1,0 +1,1044 @@
+﻿# Urbanisation
+
+tech_urbanization_1 = {
+	era = era_1
+	texture = "gfx/interface/icons/invention_icons/urbanization.dds"
+	category = society
+	
+	modifier = {
+		state_infrastructure_from_population_add = 0.05
+		state_infrastructure_from_population_max_add = 10
+		#state_building_construction_sector_max_level_add = 5
+		state_urbanization_per_level_mult = -0.05
+		state_market_access_price_impact = 0.05
+	}
+	
+	ai_weight = {
+		value = 1
+	}
+	
+}
+
+tech_urbanization_2 = {
+	era = era_2
+	texture = "gfx/interface/icons/invention_icons/urbanization.dds"
+	category = society
+	
+	modifier = {
+		state_infrastructure_from_population_add = 0.05
+		state_infrastructure_from_population_max_add = 10
+		#state_building_construction_sector_max_level_add = 5
+		state_urbanization_per_level_mult = -0.05
+		state_market_access_price_impact = 0.05
+	}
+	
+	unlocking_technologies = { tech_urbanization_1 }
+	
+	ai_weight = {
+		value = 1
+	}
+	
+}
+
+tech_urbanization_3 = {
+	era = era_3
+	texture = "gfx/interface/icons/invention_icons/urbanization.dds"
+	category = society
+	
+	modifier = {
+		state_infrastructure_from_population_add = 0.05
+		state_infrastructure_from_population_max_add = 10
+		#state_building_construction_sector_max_level_add = 5
+		state_urbanization_per_level_mult = -0.05
+		state_market_access_price_impact = 0.05
+	}
+	
+	unlocking_technologies = { tech_urbanization_2 }
+	
+	ai_weight = {
+		value = 1
+	}
+	
+}
+
+tech_urbanization_4 = {
+	era = era_4
+	texture = "gfx/interface/icons/invention_icons/urbanization.dds"
+	category = society
+	
+	modifier = {
+		state_infrastructure_from_population_add = 0.05
+		state_infrastructure_from_population_max_add = 10
+		#state_building_construction_sector_max_level_add = 5
+		state_urbanization_per_level_mult = -0.05
+		state_market_access_price_impact = 0.05
+	}
+	
+	unlocking_technologies = { tech_urbanization_3 }
+	
+	ai_weight = {
+		value = 1
+	}
+	
+}
+
+tech_urbanization_5 = {
+	era = era_5
+	texture = "gfx/interface/icons/invention_icons/urbanization.dds"
+	category = society
+	
+	modifier = {
+		state_infrastructure_from_population_add = 0.05
+		state_infrastructure_from_population_max_add = 10
+		#state_building_construction_sector_max_level_add = 5
+		state_urbanization_per_level_mult = -0.05
+		state_market_access_price_impact = 0.05
+	}
+	
+	unlocking_technologies = { tech_urbanization_4 }
+	
+	ai_weight = {
+		value = 1
+	}
+	
+}
+
+tech_urbanization_6 = {
+	era = era_6
+	texture = "gfx/interface/icons/invention_icons/urbanization.dds"
+	category = society
+	
+	modifier = {
+		state_infrastructure_from_population_add = 0.05
+		state_infrastructure_from_population_max_add = 10
+		#state_building_construction_sector_max_level_add = 5
+		state_urbanization_per_level_mult = -0.05
+		state_market_access_price_impact = 0.05
+	}
+	
+	unlocking_technologies = { tech_urbanization_5 }
+	
+	ai_weight = {
+		value = 1
+	}
+	
+}
+
+tech_urbanization_7 = {
+	era = era_7
+	texture = "gfx/interface/icons/invention_icons/urbanization.dds"
+	category = society
+	
+	modifier = {
+		state_infrastructure_from_population_add = 0.05
+		state_infrastructure_from_population_max_add = 10
+		#state_building_construction_sector_max_level_add = 5
+		state_urbanization_per_level_mult = -0.05
+		state_market_access_price_impact = 0.05
+	}
+	
+	unlocking_technologies = { tech_urbanization_6 }
+	
+	ai_weight = {
+		value = 1
+	}
+	
+}
+
+tech_urbanization_8 = {
+	era = era_8
+	texture = "gfx/interface/icons/invention_icons/urbanization.dds"
+	category = society
+	
+	modifier = {
+		state_infrastructure_from_population_add = 0.05
+		state_infrastructure_from_population_max_add = 10
+		#state_building_construction_sector_max_level_add = 5
+		state_urbanization_per_level_mult = -0.05
+		state_market_access_price_impact = 0.05
+	}
+	
+	unlocking_technologies = { tech_urbanization_7 }
+	
+	ai_weight = {
+		value = 1
+	}
+	
+}
+
+tech_urbanization_9 = {
+	era = era_9
+	texture = "gfx/interface/icons/invention_icons/urbanization.dds"
+	category = society
+	
+	modifier = {
+		state_infrastructure_from_population_add = 0.05
+		state_infrastructure_from_population_max_add = 10
+		#state_building_construction_sector_max_level_add = 5
+		state_urbanization_per_level_mult = -0.05
+		state_market_access_price_impact = 0.05
+	}
+	
+	unlocking_technologies = { tech_urbanization_8 }
+	
+	ai_weight = {
+		value = 1
+	}
+	
+}
+
+tech_urbanization_10 = {
+	era = era_10
+	texture = "gfx/interface/icons/invention_icons/urbanization.dds"
+	category = society
+	
+	modifier = {
+		state_infrastructure_from_population_add = 0.05
+		state_infrastructure_from_population_max_add = 10
+		#state_building_construction_sector_max_level_add = 5
+		state_urbanization_per_level_mult = -0.05
+		state_market_access_price_impact = 0.05
+	}
+	
+	unlocking_technologies = { tech_urbanization_9 }
+	
+	ai_weight = {
+		value = 1
+	}
+	
+}
+
+# Economic System
+
+tech_economy_1 = {
+	era = era_1
+	texture = "gfx/interface/icons/invention_icons/macroeconomics.dds"
+	category = society
+	
+	modifier = {
+		country_minting_mult = 0.05
+		country_loan_interest_rate_add = -0.01
+		
+		country_trade_route_quantity_mult = 0.05
+		country_trade_route_cost_mult = -0.02
+		country_trade_route_competitiveness_mult = 0.02
+		
+		building_cash_reserves_mult = 0.1
+		
+		country_max_weekly_construction_progress_add = 5
+		
+		country_max_companies_add = 1
+		country_institution_economy_max_investment_add = 2
+	}
+	
+	ai_weight = {
+		value = 1
+	}
+	
+}
+
+tech_economy_2 = {
+	era = era_2
+	texture = "gfx/interface/icons/invention_icons/macroeconomics.dds"
+	category = society
+	
+	modifier = {
+		country_minting_mult = 0.05
+		country_loan_interest_rate_add = -0.01
+		
+		country_trade_route_quantity_mult = 0.05
+		country_trade_route_cost_mult = -0.02
+		country_trade_route_competitiveness_mult = 0.02
+		
+		building_cash_reserves_mult = 0.1
+		
+		country_max_weekly_construction_progress_add = 5
+		
+		country_max_companies_add = 1
+		country_institution_economy_max_investment_add = 1
+	}
+	
+	unlocking_technologies = { tech_economy_1 }
+	
+	ai_weight = {
+		value = 1
+	}
+	
+}
+
+tech_economy_3 = {
+	era = era_3
+	texture = "gfx/interface/icons/invention_icons/macroeconomics.dds"
+	category = society
+	
+	modifier = {
+		country_minting_mult = 0.05
+		country_loan_interest_rate_add = -0.01
+		
+		country_trade_route_quantity_mult = 0.05
+		country_trade_route_cost_mult = -0.02
+		country_trade_route_competitiveness_mult = 0.02
+		
+		building_cash_reserves_mult = 0.1
+		
+		country_max_weekly_construction_progress_add = 5
+		
+		country_max_companies_add = 1
+	}
+	
+	unlocking_technologies = { tech_economy_2 }
+	
+	ai_weight = {
+		value = 1
+	}
+	
+}
+
+tech_economy_4 = {
+	era = era_4
+	texture = "gfx/interface/icons/invention_icons/macroeconomics.dds"
+	category = society
+	
+	modifier = {
+		country_minting_mult = 0.05
+		country_loan_interest_rate_add = -0.01
+		
+		country_trade_route_quantity_mult = 0.05
+		country_trade_route_cost_mult = -0.02
+		country_trade_route_competitiveness_mult = 0.02
+		
+		building_cash_reserves_mult = 0.1
+		
+		country_max_weekly_construction_progress_add = 5
+		
+		country_max_companies_add = 1
+	}
+	
+	unlocking_technologies = { tech_economy_3 }
+	
+	ai_weight = {
+		value = 1
+	}
+	
+}
+
+tech_economy_5 = {
+	era = era_5
+	texture = "gfx/interface/icons/invention_icons/macroeconomics.dds"
+	category = society
+	
+	modifier = {
+		country_minting_mult = 0.05
+		country_loan_interest_rate_add = -0.01
+		
+		country_trade_route_quantity_mult = 0.05
+		country_trade_route_cost_mult = -0.02
+		country_trade_route_competitiveness_mult = 0.02
+		
+		building_cash_reserves_mult = 0.1
+		
+		country_max_weekly_construction_progress_add = 5
+		
+		country_max_companies_add = 1
+	}
+	
+	unlocking_technologies = { tech_economy_4 }
+	
+	ai_weight = {
+		value = 1
+	}
+	
+}
+
+tech_economy_6 = {
+	era = era_6
+	texture = "gfx/interface/icons/invention_icons/macroeconomics.dds"
+	category = society
+	
+	modifier = {
+		country_minting_mult = 0.05
+		country_loan_interest_rate_add = -0.01
+		
+		country_trade_route_quantity_mult = 0.05
+		country_trade_route_cost_mult = -0.02
+		country_trade_route_competitiveness_mult = 0.02
+		
+		building_cash_reserves_mult = 0.1
+		
+		country_max_weekly_construction_progress_add = 5
+		
+		country_max_companies_add = 1
+	}
+	
+	unlocking_technologies = { tech_economy_5 }
+	
+	ai_weight = {
+		value = 1
+	}
+	
+}
+
+tech_economy_7 = {
+	era = era_7
+	texture = "gfx/interface/icons/invention_icons/macroeconomics.dds"
+	category = society
+	
+	modifier = {
+		country_minting_mult = 0.05
+		country_loan_interest_rate_add = -0.01
+		
+		country_trade_route_quantity_mult = 0.05
+		country_trade_route_cost_mult = -0.02
+		country_trade_route_competitiveness_mult = 0.02
+		
+		building_cash_reserves_mult = 0.1
+		
+		country_max_weekly_construction_progress_add = 5
+		
+		country_max_companies_add = 1
+	}
+	
+	unlocking_technologies = { tech_economy_6 }
+	
+	ai_weight = {
+		value = 1
+	}
+	
+}
+
+tech_economy_8 = {
+	era = era_8
+	texture = "gfx/interface/icons/invention_icons/macroeconomics.dds"
+	category = society
+	
+	modifier = {
+		country_minting_mult = 0.05
+		country_loan_interest_rate_add = -0.01
+		
+		country_trade_route_quantity_mult = 0.05
+		country_trade_route_cost_mult = -0.02
+		country_trade_route_competitiveness_mult = 0.02
+		
+		building_cash_reserves_mult = 0.1
+		
+		country_max_weekly_construction_progress_add = 5
+		
+		country_max_companies_add = 1
+	}
+	
+	unlocking_technologies = { tech_economy_7 }
+	
+	ai_weight = {
+		value = 1
+	}
+	
+}
+
+tech_economy_9 = {
+	era = era_9
+	texture = "gfx/interface/icons/invention_icons/macroeconomics.dds"
+	category = society
+	
+	modifier = {
+		country_minting_mult = 0.05
+		country_loan_interest_rate_add = -0.01
+		
+		country_trade_route_quantity_mult = 0.05
+		country_trade_route_cost_mult = -0.02
+		country_trade_route_competitiveness_mult = 0.02
+		
+		building_cash_reserves_mult = 0.1
+		
+		country_max_weekly_construction_progress_add = 5
+		
+		country_max_companies_add = 1
+	}
+	
+	unlocking_technologies = { tech_economy_8 }
+	
+	ai_weight = {
+		value = 1
+	}
+	
+}
+
+tech_economy_10 = {
+	era = era_10
+	texture = "gfx/interface/icons/invention_icons/macroeconomics.dds"
+	category = society
+	
+	modifier = {
+		country_minting_mult = 0.05
+		country_loan_interest_rate_add = -0.01
+		
+		country_trade_route_quantity_mult = 0.05
+		country_trade_route_cost_mult = -0.02
+		country_trade_route_competitiveness_mult = 0.02
+		
+		building_cash_reserves_mult = 0.1
+		
+		country_max_weekly_construction_progress_add = 5
+		
+		country_max_companies_add = 1
+	}
+	
+	unlocking_technologies = { tech_economy_9 }
+	
+	ai_weight = {
+		value = 1
+	}
+	
+}
+
+# Political Thought
+
+tech_politics_1 = {
+	era = era_1
+	texture = "gfx/interface/icons/invention_icons/centralization.dds"
+	category = society
+	
+	modifier = {
+		state_tax_capacity_add = 2
+		country_authority_mult = 0.05
+		state_bureaucracy_population_base_cost_factor_mult = -0.05
+		country_institution_home_affairs_max_investment_add = 5
+		country_institution_centralization_max_investment_add = 5
+		country_institution_social_security_max_investment_add = 5	
+		country_institution_suffrage_max_investment_add = 5
+		country_institution_culture_max_investment_add = 5
+	}
+	
+	ai_weight = {
+		value = 1
+	}
+	
+}
+
+tech_politics_2 = {
+	era = era_2
+	texture = "gfx/interface/icons/invention_icons/centralization.dds"
+	category = society
+	
+	modifier = {
+		state_tax_capacity_add = 2
+		country_authority_mult = 0.05
+		state_bureaucracy_population_base_cost_factor_mult = -0.05
+		country_agitator_slots_add = 1
+	}
+	
+	unlocking_technologies = { tech_politics_1 }
+	
+	ai_weight = {
+		value = 1
+	}
+	
+}
+
+tech_politics_3 = {
+	era = era_3
+	texture = "gfx/interface/icons/invention_icons/centralization.dds"
+	category = society
+	
+	modifier = {
+		state_tax_capacity_add = 2
+		country_authority_mult = 0.05
+		state_bureaucracy_population_base_cost_factor_mult = -0.05
+	}
+	
+	unlocking_technologies = { tech_politics_2 }
+	
+	ai_weight = {
+		value = 1
+	}
+	
+}
+
+tech_politics_4 = {
+	era = era_4
+	texture = "gfx/interface/icons/invention_icons/centralization.dds"
+	category = society
+	
+	modifier = {
+		state_tax_capacity_add = 2
+		country_authority_mult = 0.05
+		state_bureaucracy_population_base_cost_factor_mult = -0.05
+		country_agitator_slots_add = 1
+	}
+	
+	unlocking_technologies = { tech_politics_3 }
+	
+	ai_weight = {
+		value = 1
+	}
+	
+}
+
+tech_politics_5 = {
+	era = era_5
+	texture = "gfx/interface/icons/invention_icons/centralization.dds"
+	category = society
+	
+	modifier = {
+		state_tax_capacity_add = 2
+		country_authority_mult = 0.05
+		state_bureaucracy_population_base_cost_factor_mult = -0.05
+	}
+	
+	unlocking_technologies = { tech_politics_4 }
+	
+	ai_weight = {
+		value = 1
+	}
+	
+}
+
+tech_politics_6 = {
+	era = era_6
+	texture = "gfx/interface/icons/invention_icons/centralization.dds"
+	category = society
+	
+	modifier = {
+		state_tax_capacity_add = 2
+		country_authority_mult = 0.05
+		state_bureaucracy_population_base_cost_factor_mult = -0.05
+		country_agitator_slots_add = 1
+	}
+	
+	unlocking_technologies = { tech_politics_5 }
+	
+	ai_weight = {
+		value = 1
+	}
+	
+}
+
+tech_politics_7 = {
+	era = era_7
+	texture = "gfx/interface/icons/invention_icons/centralization.dds"
+	category = society
+	
+	modifier = {
+		state_tax_capacity_add = 2
+		country_authority_mult = 0.05
+		state_bureaucracy_population_base_cost_factor_mult = -0.05
+	}
+	
+	unlocking_technologies = { tech_politics_6 }
+	
+	ai_weight = {
+		value = 1
+	}
+	
+}
+
+tech_politics_8 = {
+	era = era_8
+	texture = "gfx/interface/icons/invention_icons/centralization.dds"
+	category = society
+	
+	modifier = {
+		state_tax_capacity_add = 2
+		country_authority_mult = 0.05
+		state_bureaucracy_population_base_cost_factor_mult = -0.05
+		country_agitator_slots_add = 1
+	}
+	
+	unlocking_technologies = { tech_politics_7 }
+	
+	ai_weight = {
+		value = 1
+	}
+	
+}
+
+tech_politics_9 = {
+	era = era_9
+	texture = "gfx/interface/icons/invention_icons/centralization.dds"
+	category = society
+	
+	modifier = {
+		state_tax_capacity_add = 2
+		country_authority_mult = 0.05
+		state_bureaucracy_population_base_cost_factor_mult = -0.05
+	}
+	
+	unlocking_technologies = { tech_politics_8 }
+	
+	ai_weight = {
+		value = 1
+	}
+	
+}
+
+tech_politics_10 = {
+	era = era_10
+	texture = "gfx/interface/icons/invention_icons/centralization.dds"
+	category = society
+	
+	modifier = {
+		state_tax_capacity_add = 2
+		country_authority_mult = 0.05
+		state_bureaucracy_population_base_cost_factor_mult = -0.05
+		country_agitator_slots_add = 1
+	}
+	
+	unlocking_technologies = { tech_politics_9 }
+	
+	ai_weight = {
+		value = 1
+	}
+	
+}
+
+# Philosophy (Improves university output)
+
+tech_philosophy_1 = {
+	era = era_1
+	texture = "gfx/interface/icons/invention_icons/academia.dds"
+	category = society
+	
+	modifier = {
+		country_prestige_mult = 0.01
+		country_institution_education_max_investment_add = 3
+	}
+	
+	ai_weight = {
+		value = 1
+	}
+	
+}
+
+tech_philosophy_2 = {
+	era = era_2
+	texture = "gfx/interface/icons/invention_icons/academia.dds"
+	category = society
+	
+	modifier = {
+		country_prestige_mult = 0.01
+	}
+	
+	unlocking_technologies = { tech_philosophy_1 }
+	
+	ai_weight = {
+		value = 1
+	}
+	
+}
+
+tech_philosophy_3 = {
+	era = era_3
+	texture = "gfx/interface/icons/invention_icons/academia.dds"
+	category = society
+	
+	modifier = {
+		country_prestige_mult = 0.01
+	}
+	
+	unlocking_technologies = { tech_philosophy_2 }
+	
+	ai_weight = {
+		value = 1
+	}
+	
+}
+
+tech_philosophy_4 = {
+	era = era_4
+	texture = "gfx/interface/icons/invention_icons/academia.dds"
+	category = society
+	
+	modifier = {
+		country_prestige_mult = 0.01
+	}
+	
+	unlocking_technologies = { tech_philosophy_3 }
+	
+	ai_weight = {
+		value = 1
+	}
+	
+}
+
+tech_philosophy_5 = {
+	era = era_5
+	texture = "gfx/interface/icons/invention_icons/academia.dds"
+	category = society
+	
+	modifier = {
+		country_prestige_mult = 0.01
+	}
+	
+	unlocking_technologies = { tech_philosophy_4 }
+	
+	ai_weight = {
+		value = 1
+	}
+	
+}
+
+tech_philosophy_6 = {
+	era = era_6
+	texture = "gfx/interface/icons/invention_icons/academia.dds"
+	category = society
+	
+	modifier = {
+		country_prestige_mult = 0.01
+	}
+	
+	unlocking_technologies = { tech_philosophy_5 }
+	
+	ai_weight = {
+		value = 1
+	}
+	
+}
+
+tech_philosophy_7 = {
+	era = era_7
+	texture = "gfx/interface/icons/invention_icons/academia.dds"
+	category = society
+	
+	modifier = {
+		country_prestige_mult = 0.01
+	}
+	
+	unlocking_technologies = { tech_philosophy_6 }
+	
+	ai_weight = {
+		value = 1
+	}
+	
+}
+
+tech_philosophy_8 = {
+	era = era_8
+	texture = "gfx/interface/icons/invention_icons/academia.dds"
+	category = society
+	
+	modifier = {
+		country_prestige_mult = 0.01
+	}
+	
+	unlocking_technologies = { tech_philosophy_7 }
+	
+	ai_weight = {
+		value = 1
+	}
+	
+}
+
+tech_philosophy_9 = {
+	era = era_9
+	texture = "gfx/interface/icons/invention_icons/academia.dds"
+	category = society
+	
+	modifier = {
+		country_prestige_mult = 0.01
+	}
+	
+	unlocking_technologies = { tech_philosophy_8 }
+	
+	ai_weight = {
+		value = 1
+	}
+	
+}
+
+tech_philosophy_10 = {
+	era = era_10
+	texture = "gfx/interface/icons/invention_icons/academia.dds"
+	category = society
+	
+	modifier = {
+		country_prestige_mult = 0.01
+	}
+	
+	unlocking_technologies = { tech_philosophy_9 }
+	
+	ai_weight = {
+		value = 1
+	}
+	
+}
+
+# Geopolitics (Improves diplomacy abilities)
+
+tech_geopolitics_1 = {
+	era = era_1
+	texture = "gfx/interface/icons/invention_icons/multilateral_alliances.dds"
+	category = society
+	
+	modifier = {
+		country_diplomatic_play_maneuvers_add = 20
+		country_influence_mult = 0.05
+		
+		country_allow_multiple_alliances_bool = yes
+	}
+	
+	ai_weight = {
+		value = 1
+	}
+	
+}
+
+tech_geopolitics_2 = {
+	era = era_2
+	texture = "gfx/interface/icons/invention_icons/multilateral_alliances.dds"
+	category = society
+	
+	modifier = {
+		country_diplomatic_play_maneuvers_add = 20
+		country_influence_mult = 0.05
+	}
+	
+	unlocking_technologies = { tech_geopolitics_1 }
+	
+	ai_weight = {
+		value = 1
+	}
+	
+}
+
+tech_geopolitics_3 = {
+	era = era_3
+	texture = "gfx/interface/icons/invention_icons/multilateral_alliances.dds"
+	category = society
+	
+	modifier = {
+		country_diplomatic_play_maneuvers_add = 20
+		country_influence_mult = 0.05
+	}
+	
+	unlocking_technologies = { tech_geopolitics_2 }
+	
+	ai_weight = {
+		value = 1
+	}
+	
+}
+
+tech_geopolitics_4 = {
+	era = era_4
+	texture = "gfx/interface/icons/invention_icons/multilateral_alliances.dds"
+	category = society
+	
+	modifier = {
+		country_diplomatic_play_maneuvers_add = 20
+		country_influence_mult = 0.05
+	}
+	
+	unlocking_technologies = { tech_geopolitics_3 }
+	
+	ai_weight = {
+		value = 1
+	}
+	
+}
+
+tech_geopolitics_5 = {
+	era = era_5
+	texture = "gfx/interface/icons/invention_icons/multilateral_alliances.dds"
+	category = society
+	
+	modifier = {
+		country_diplomatic_play_maneuvers_add = 20
+		country_influence_mult = 0.05
+	}
+	
+	unlocking_technologies = { tech_geopolitics_4 }
+	
+	ai_weight = {
+		value = 1
+	}
+	
+}
+
+tech_geopolitics_6 = {
+	era = era_6
+	texture = "gfx/interface/icons/invention_icons/multilateral_alliances.dds"
+	category = society
+	
+	modifier = {
+		country_diplomatic_play_maneuvers_add = 20
+		country_influence_mult = 0.05
+	}
+	
+	unlocking_technologies = { tech_geopolitics_5 }
+	
+	ai_weight = {
+		value = 1
+	}
+	
+}
+
+tech_geopolitics_7 = {
+	era = era_7
+	texture = "gfx/interface/icons/invention_icons/multilateral_alliances.dds"
+	category = society
+	
+	modifier = {
+		country_diplomatic_play_maneuvers_add = 20
+		country_influence_mult = 0.05
+	}
+	
+	unlocking_technologies = { tech_geopolitics_6 }
+	
+	ai_weight = {
+		value = 1
+	}
+	
+}
+
+tech_geopolitics_8 = {
+	era = era_8
+	texture = "gfx/interface/icons/invention_icons/multilateral_alliances.dds"
+	category = society
+	
+	modifier = {
+		country_diplomatic_play_maneuvers_add = 20
+		country_influence_mult = 0.05
+	}
+	
+	unlocking_technologies = { tech_geopolitics_7 }
+	
+	ai_weight = {
+		value = 1
+	}
+	
+}
+
+tech_geopolitics_9 = {
+	era = era_9
+	texture = "gfx/interface/icons/invention_icons/multilateral_alliances.dds"
+	category = society
+	
+	modifier = {
+		country_diplomatic_play_maneuvers_add = 20
+		country_influence_mult = 0.05
+	}
+	
+	unlocking_technologies = { tech_geopolitics_8 }
+	
+	ai_weight = {
+		value = 1
+	}
+	
+}
+
+tech_geopolitics_10 = {
+	era = era_10
+	texture = "gfx/interface/icons/invention_icons/multilateral_alliances.dds"
+	category = society
+	
+	modifier = {
+		country_diplomatic_play_maneuvers_add = 20
+		country_influence_mult = 0.05
+	}
+	
+	unlocking_technologies = { tech_geopolitics_9 }
+	
+	ai_weight = {
+		value = 1
+	}
+	
+}

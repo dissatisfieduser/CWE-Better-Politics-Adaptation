@@ -1,0 +1,15 @@
+﻿l_english:
+ ideology_cor_very_high_corruption:0 "Extremely Corrupt"
+ ideology_cor_very_high_corruption_desc:0 "#lore This group is extremely corrupt. #!"
+
+ ideology_cor_high_corruption:0 "Highly Corrupt"
+ ideology_cor_high_corruption_desc:0 "#lore This group is highly corrupt. #!"
+
+ ideology_cor_medium_corruption:0 "Moderately Corrupt"
+ ideology_cor_medium_corruption_desc:0 "#lore This group is moderately corrupt. #!"
+
+ ideology_cor_low_corruption:0 "Somewhat Corrupt"
+ ideology_cor_low_corruption_desc:0 "#lore This group is somewhat corrupt. #!"
+
+ ideology_cor_very_low_corruption:0 "Minimally Corrupt"
+ ideology_cor_very_low_corruption_desc:0 "#lore This group is minimally corrupt #!"

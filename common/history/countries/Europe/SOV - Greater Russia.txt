@@ -1,0 +1,54 @@
+﻿COUNTRIES = {
+
+	c:SOV = {
+	
+		#Ruling Party
+		ig:ig_revolutionist_socialists = { add_ruling_interest_group = yes }
+		ig:ig_trade_unions = { add_ruling_interest_group = yes }
+		
+		ig:ig_industrialists = { set_ig_suppression = yes }
+		ig:ig_landowners = { set_ig_suppression = yes }
+		ig:ig_petty_bourgeoisie = { set_ig_suppression = yes }
+		
+		effect_starting_technology_tier_2_5_tech = yes
+		effect_starting_technology_nuclear_tech = yes
+
+		set_tax_level = medium
+		
+		add_taxed_goods = g:wine
+		
+		# Laws
+		effect_starting_politics_communist_republic = yes
+		effect_starting_politics_dictatorship = yes
+		effect_starting_politics_constitutional_federal_state = yes
+		effect_starting_politics_war_policy_pro_military = yes
+		effect_starting_politics_economic_policy_planned_economy = yes
+		effect_starting_politics_trade_policy_autarky = yes
+		effect_starting_politics_pro_nuclear_policy = yes
+		
+		effect_starting_politics_specialisation_manufacturing = yes
+		
+		effect_starting_politics_fiat_standard = yes
+		
+		#International Memberships
+		add_modifier = { name = unga_member }
+		add_modifier = { name = unsc_permanent_member }
+		add_modifier = { name = COMECON_leader }
+		
+		#Extra prestige for winning WW2
+		add_modifier = { name = ww2_victor months = 120 is_decaying = yes }
+		
+		#Nuclear capability
+		add_modifier = { name = nuclear_capability }
+		set_variable = nuclear_program_started
+		
+		#Chemical capability
+		add_modifier = { name = chemical_capability }
+		set_variable = chemical_program_started
+		
+		#Completed JEs
+		set_variable = communism_1_done
+		
+	}
+	
+}

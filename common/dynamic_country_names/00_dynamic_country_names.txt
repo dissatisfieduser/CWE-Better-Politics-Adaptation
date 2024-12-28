@@ -1,0 +1,1750 @@
+﻿### Try to keep tags in alphabetical order if it's not too far gone, please.
+
+################################################################
+## DEFAULT COUNTRY NAMES EXAMPLE CAN BE USED WITH ANY COUNTRY ##
+################################################################
+
+# Uncomment when need a dynamic_country_name for any country
+DEFAULT = {
+	
+	# Generic fallbacks
+	dynamic_country_name = {
+		name = generic_revolt_1
+		adjective = generic_revolt_1_adj
+		
+		is_revolutionary = yes
+		priority = 0
+		
+		trigger = {
+			exists = scope:actor
+			scope:actor = {
+				is_secessionist = no
+			}
+		}
+	}
+	dynamic_country_name = {
+		name = generic_revolt_2
+		adjective = generic_revolt_2_adj
+		
+		is_revolutionary = yes
+		priority = 0
+		
+		trigger = {
+			exists = scope:actor
+			scope:actor = {
+				is_secessionist = no
+			}
+		}
+	}
+	dynamic_country_name = {
+		name = generic_revolt_3
+		adjective = generic_revolt_3_adj
+		
+		is_revolutionary = yes
+		priority = 0
+		
+		trigger = {
+			exists = scope:actor
+			scope:actor = {
+				is_secessionist = no
+			}
+		}
+	}
+	
+	#Special
+	dynamic_country_name = {
+		name = ISI
+		adjective = ISI_ADJ
+		
+		priority = 1
+		
+		trigger = {
+			exists = scope:actor
+			scope:actor = {
+				has_variable = ISIS_tag
+				is_a_theocratic_government = yes
+			}
+		}
+	}
+	
+}
+
+ACE = { # Sumatra
+	dynamic_country_name = {
+		name = dyn_c_sumatra
+		adjective = dyn_c_sumatra_adj
+		
+		is_main_tag_only = yes
+		priority = 0
+		
+		trigger = {
+			exists = scope:actor
+			scope:actor = {
+				owns_entire_state_region = STATE_ACEH
+				owns_entire_state_region = STATE_NORTH_SUMATRA
+				owns_entire_state_region = STATE_SOUTH_SUMATRA
+			}
+		}
+	}
+}
+
+AUS = { # Austria
+	dynamic_country_name = {
+		name = dyn_c_austria-hungary
+		adjective = dyn_c_austria-hungary_adj
+		
+		is_main_tag_only = yes
+		priority = 0
+		
+		trigger = {
+			exists = scope:actor
+			scope:actor = { 
+				country_has_primary_culture = cu:hungarian 
+				is_a_monarchy = yes
+			}
+		}
+	}
+}
+
+KUK = { # Austria-Hungary
+	dynamic_country_name = {
+		name = dyn_c_austria-hungary
+		adjective = dyn_c_austria-hungary_adj
+		
+		is_main_tag_only = yes
+		priority = 0
+		
+		trigger = {
+			exists = scope:actor
+			scope:actor = { 
+				country_has_primary_culture = cu:hungarian 
+				is_a_monarchy = yes
+			}
+		}
+	}
+}
+
+BOL = {
+	dynamic_country_name = {
+		name = dyn_c_peru_bolivia
+		adjective = dyn_c_peru_bolivia_adj
+		
+		is_main_tag_only = yes
+		priority = 1
+		
+		trigger = {
+			scope:actor = {
+				owns_entire_state_region = STATE_LA_PAZ
+				owns_entire_state_region = STATE_LIMA
+			}
+		}
+	}
+}
+
+BNG = {
+	dynamic_country_name = {
+		name = dyn_c_east_pakistan
+		adjective = BNG_ADJ
+		
+		is_main_tag_only = yes
+		priority = 1
+		
+		trigger = {
+			exists = c:PAK
+			scope:actor = {
+				is_direct_subject_of = c:PAK
+				OR = {
+					is_subject_type = subject_type_special_administrative_region
+					is_subject_type = subject_type_semi_autonomous_colony
+				}
+			}
+		}
+	}
+}
+
+BOH = {
+	dynamic_country_name = {
+		name = dyn_c_czech_republic
+		adjective = BOH_ADJ
+		
+		is_main_tag_only = yes
+		priority = 2
+		
+		trigger = {
+			NOT = { coa_def_monarchy_flag_trigger = yes }
+			game_date < 2016.5.17
+		}
+	}
+	dynamic_country_name = {
+		name = dyn_c_bohemia
+		adjective = dyn_c_bohemia_adj
+		
+		is_main_tag_only = yes
+		priority = 1
+		
+		trigger = {
+			coa_def_monarchy_flag_trigger = yes
+		}
+	}
+}
+
+CAM = { # Cambodia
+	#Khmer Republic
+	dynamic_country_name = {
+		name = dyn_c_khmer_republic
+		adjective = dyn_c_khmer_republic_adj
+		
+		is_main_tag_only = yes
+		priority = 0
+		
+		trigger = {
+			scope:actor = { 
+				OR = { 
+					has_law = law_type:law_presidential_republic
+					has_law = law_type:law_parliamentary_republic
+				}
+			}
+		}
+	}
+	#Kampuchea
+	dynamic_country_name = {
+		name = dyn_c_kampuchea
+		adjective = dyn_c_kampuchea_adj
+		
+		is_main_tag_only = yes
+		priority = 0
+		
+		trigger = {
+			scope:actor = { 
+				has_law = law_type:law_council_republic
+			}
+		}
+	}
+}
+
+CHI = { # China
+	dynamic_country_name = {
+		name = dyn_c_great_qing
+		adjective = dyn_c_great_qing_adj
+		
+		is_main_tag_only = yes
+		priority = 0
+		
+		trigger = {
+			scope:actor = { 
+				has_law = law_type:law_monarchy
+				has_law = law_type:law_theocracy
+			}
+		}
+	}
+	dynamic_country_name = {
+		name = dyn_c_peoples_republic_of_china
+		adjective = PRC_ADJ
+		
+		is_main_tag_only = yes
+		priority = 0
+		
+		trigger = {
+			scope:actor = { 
+				has_law = law_type:law_council_republic
+			}
+		}
+	}
+	dynamic_country_name = {
+		name = dyn_c_republic_of_china
+		adjective = ROC_ADJ
+		
+		is_main_tag_only = yes
+		priority = 0
+		
+		trigger = {
+			scope:actor = { 
+				has_law = law_type:law_presidential_republic
+			}
+		}
+	}
+}
+
+PRC = { # China
+	dynamic_country_name = {
+		name = dyn_c_great_qing
+		adjective = dyn_c_great_qing_adj
+		
+		is_main_tag_only = yes
+		priority = 0
+		
+		trigger = {
+			scope:actor = { 
+				has_law = law_type:law_monarchy
+				has_law = law_type:law_theocracy
+			}
+		}
+	}
+	dynamic_country_name = {
+		name = dyn_c_peoples_republic_of_china
+		adjective = PRC_ADJ
+		
+		is_main_tag_only = yes
+		priority = 0
+		
+		trigger = {
+			scope:actor = { 
+				has_law = law_type:law_council_republic
+			}
+		}
+	}
+	dynamic_country_name = {
+		name = dyn_c_republic_of_china
+		adjective = ROC_ADJ
+		
+		is_main_tag_only = yes
+		priority = 0
+		
+		trigger = {
+			scope:actor = { 
+				has_law = law_type:law_presidential_republic
+			}
+		}
+	}
+}
+
+ROC = { # China
+	dynamic_country_name = {
+		name = dyn_c_great_qing
+		adjective = dyn_c_great_qing_adj
+		
+		is_main_tag_only = yes
+		priority = 0
+		
+		trigger = {
+			scope:actor = { 
+				has_law = law_type:law_monarchy
+				has_law = law_type:law_theocracy
+			}
+		}
+	}
+	dynamic_country_name = {
+		name = dyn_c_peoples_republic_of_china
+		adjective = PRC_ADJ
+		
+		is_main_tag_only = yes
+		priority = 0
+		
+		trigger = {
+			scope:actor = { 
+				has_law = law_type:law_council_republic
+			}
+		}
+	}
+	dynamic_country_name = {
+		name = dyn_c_republic_of_china
+		adjective = ROC_ADJ
+		
+		is_main_tag_only = yes
+		priority = 0
+		
+		trigger = {
+			scope:actor = { 
+				OR = { 
+					has_law = law_type:law_presidential_republic
+					is_a_nationalist_government = yes
+				}
+			}
+		}
+	}
+}
+
+GBR = { # Great Britain of United Kingdom
+	dynamic_country_name = {
+		name = dyn_c_united_kingdom
+		adjective = dyn_c_united_kingdom_adj
+		is_main_tag_only = yes
+		priority = 10
+
+		trigger = {
+			coa_def_controls_part_of_ireland = yes
+			scope:actor = { 
+				has_law = law_type:law_monarchy
+			}
+		}
+	}
+}
+
+HAI = { # Haiti
+	dynamic_country_name = {
+		name = dyn_c_saint-domingue
+		adjective = dyn_c_saint-domingue_adj
+		
+		is_main_tag_only = yes
+		priority = 0
+		
+		trigger = {
+			coa_def_french_ensign_trigger = yes
+		}
+	}
+}
+
+ITA = { # Italy
+	dynamic_country_name = { # Papal Italy
+		name = dyn_c_papal_italy
+		adjective = dyn_c_papal_italy_adj
+		
+		is_main_tag_only = yes
+		priority = 5
+		
+		trigger = {
+			scope:actor = { 
+				has_law = law_type:law_theocracy
+			}
+		}
+	}
+}
+
+TRE = { # Trieste
+	dynamic_country_name = {
+		name = dyn_c_free_territory_of_trieste
+		adjective = TRE_ADJ
+		
+		is_main_tag_only = yes
+		priority = 5
+		
+		trigger = {
+			scope:actor = { 
+				OR = { 
+					is_subject_type = subject_type_mandate
+					is_subject_type = subject_type_special_administrative_region
+				}
+			}
+		}
+	}
+}
+
+KOR = { # Korea
+	dynamic_country_name = { # Joseon
+		name = dyn_c_korea_joseon
+		adjective = dyn_c_korea_joseon_adj
+		
+		is_main_tag_only = yes
+		priority = 10
+		
+		trigger = {
+			exists = scope:actor
+			scope:actor = { has_law = law_type:law_monarchy }
+		}
+	}
+}
+
+LAT = { # Latvia
+	dynamic_country_name = {
+		name = dyn_c_courland
+		adjective = dyn_c_courland_adj
+		
+		is_main_tag_only = yes
+		priority = 0
+		
+		trigger = {
+			coa_def_monarchy_flag_trigger = yes
+			coa_def_german_ensign_trigger = yes
+		}
+	}
+}
+
+MEX = { # Mexico
+
+	dynamic_country_name = {
+		name = dyn_c_new_spain
+		adjective = dyn_c_new_spain_adj
+		
+		is_main_tag_only = yes
+		priority = 0
+		
+		trigger = {
+			coa_def_spanish_ensign_trigger = yes
+		}
+	}
+	
+}
+
+MOL = { # Moldavia
+	dynamic_country_name = {
+		name = dyn_c_moldova
+		adjective = dyn_c_moldova_adj
+		
+		is_main_tag_only = yes
+		priority = 0
+		
+		trigger = {
+			coa_def_monarchy_flag_trigger = no
+		}
+	}
+}
+
+NET = { # Netherlands
+	dynamic_country_name = {
+		name = dyn_c_united_netherlands
+		adjective = NET_ADJ
+		
+		is_main_tag_only = yes
+		priority = 0
+		
+		trigger = {
+			exists = scope:actor
+			scope:actor = { 
+				owns_entire_state_region = STATE_FLANDERS
+				owns_entire_state_region = STATE_WALLONIA
+			}
+		}
+	}
+}
+
+PEU = {
+	dynamic_country_name = {
+		name = dyn_c_peru_bolivia
+		adjective = dyn_c_peru_bolivia_adj
+		
+		is_main_tag_only = yes
+		priority = 1
+		
+		trigger = {
+			scope:actor = {
+				owns_entire_state_region = STATE_LA_PAZ
+				owns_entire_state_region = STATE_LIMA
+			}
+		}
+	}
+}
+
+PHI = {
+	dynamic_country_name = {
+		name = dyn_c_spanish_philippines
+		adjective = dyn_c_spanish_philippines_adj
+		
+		is_main_tag_only = yes
+		priority = 0
+		
+		trigger = {
+			exists = c:SPA
+			c:SPA = {
+				has_diplomatic_pact = {
+					who = c:PHI
+					type = puppet
+					is_initiator = yes
+				}
+			}
+		}
+	}
+}
+
+RUS = { # Russia
+	dynamic_country_name = {
+		name = dyn_c_soviet_union
+		adjective = dyn_c_soviet_union_adj
+		
+		is_main_tag_only = yes
+		priority = 0
+		
+		trigger = {
+			OR = {
+				scope:actor = { has_government_type = gov_council_single_party_state }
+				scope:actor = { has_government_type = gov_soviet_dictatorship }
+				scope:actor = { has_government_type = gov_soviet_single_party_state }
+				scope:actor = { has_government_type = gov_council_dictatorship }
+				scope:actor = { has_government_type = gov_cybernetic_state }
+			}
+		}
+	}
+	dynamic_country_name = {
+		name = dyn_c_union_of_sovereign_states
+		adjective = dyn_c_soviet_union_adj
+		
+		is_main_tag_only = yes
+		priority = 0
+		
+		trigger = {
+			OR = {
+				scope:actor = { has_government_type = gov_soviet_republic }
+				scope:actor = { has_government_type = gov_council_republic }
+			}
+		}
+	}
+}
+
+SOV = { # Russia
+	dynamic_country_name = {
+		name = dyn_c_soviet_union
+		adjective = dyn_c_soviet_union_adj
+		
+		is_main_tag_only = yes
+		priority = 0
+		
+		trigger = {
+			OR = {
+				scope:actor = { has_government_type = gov_council_single_party_state }
+				scope:actor = { has_government_type = gov_soviet_dictatorship }
+				scope:actor = { has_government_type = gov_soviet_single_party_state }
+				scope:actor = { has_government_type = gov_council_dictatorship }
+				scope:actor = { has_government_type = gov_cybernetic_state }
+			}
+		}
+	}
+	dynamic_country_name = {
+		name = dyn_c_union_of_sovereign_states
+		adjective = dyn_c_soviet_union_adj
+		
+		is_main_tag_only = yes
+		priority = 1
+		
+		trigger = {
+			OR = {
+				scope:actor = { has_government_type = gov_soviet_republic }
+				scope:actor = { has_government_type = gov_council_republic }
+			}
+		}
+	}
+}
+
+UAR = { # United Arab Republic
+	dynamic_country_name = {
+		name = dyn_c_united_arab_republic
+		adjective = UAR_ADJ
+		
+		is_main_tag_only = yes
+		priority = 0
+		
+		trigger = {
+			scope:actor = { NOT = { is_a_monarchy = yes } }
+		}
+	}
+	dynamic_country_name = {
+		name = dyn_c_united_arab_kingdom
+		adjective = UAR_ADJ
+		
+		is_main_tag_only = yes
+		priority = 0
+		
+		trigger = {
+			scope:actor = { is_a_monarchy = yes }
+		}
+	}
+}
+
+BOT = { # Botswana
+	dynamic_country_name = {
+		name = dyn_c_botswana
+		adjective = dyn_c_botswana_adj
+		
+		is_main_tag_only = yes
+		priority = 0
+		
+		trigger = {
+			exists = scope:actor
+			scope:actor = {
+				NOT = { is_country_type = decentralized } # if Tswana is recognized, then they get a more formal name
+			}
+			coa_def_british_ensign_trigger = no
+		}
+	}
+	dynamic_country_name = {
+		name = dyn_c_bechuanaland
+		adjective = dyn_c_bechuanaland_adj
+		
+		is_main_tag_only = yes
+		priority = 0
+		
+		trigger = {
+			coa_def_british_ensign_trigger = yes
+		}
+	}
+}
+
+TUN = { # Tunis
+	dynamic_country_name = {
+		name = dyn_c_tunisia
+		adjective = TUN_ADJ
+		
+		is_main_tag_only = yes
+		priority = 0
+		
+		trigger = {
+			OR = { 
+				NOT = { coa_def_absolute_monarchy_flag_trigger = yes }
+				scope:actor = { exists = c:FRA is_subject_of = c:FRA }
+			}
+		}
+	}
+}
+
+TUR = { # Turkey
+	dynamic_country_name = {
+		name = dyn_c_ottoman_empire
+		adjective = dyn_c_ottoman_empire_adj
+		
+		is_main_tag_only = yes
+		priority = 0
+		
+		trigger = {
+			coa_def_monarchy_flag_trigger = yes
+		}
+	}
+	dynamic_country_name = {
+		name = dyn_c_turkiye
+		adjective = TUR_ADJ
+		
+		is_main_tag_only = yes
+		priority = 5
+		
+		trigger = {
+			NOT = { coa_def_monarchy_flag_trigger = yes }
+			game_date > 2022.6.2
+		}
+	}
+}
+
+MCD = { # Macedonia
+	dynamic_country_name = {
+		name = dyn_c_north_macedonia
+		adjective = MCD_ADJ
+		
+		is_main_tag_only = yes
+		priority = 10
+		
+		trigger = {
+			exists = c:GRE
+			game_date > 2019.2.1
+		}
+	}
+}
+
+OMA = { # Oman
+	dynamic_country_name = {
+		name = dyn_c_muscat_oman
+		adjective = OMA_ADJ
+		
+		is_main_tag_only = yes
+		priority = 10
+		
+		trigger = {
+			coa_def_monarchy_flag_trigger = yes
+			game_date < 1970.8.9
+		}
+	}
+}
+
+#### Added ####
+
+GHA = {
+	dynamic_country_name = {
+		name = dyn_c_gold_coast
+		adjective = GHA_ADJ
+		
+		is_main_tag_only = yes
+		priority = 0
+		trigger = {
+			scope:actor = { exists = c:GBR is_subject_of = c:GBR }
+		}
+	}
+}
+
+MAD = {
+	dynamic_country_name = {
+		name = dyn_c_magalasy_republic
+		adjective = dyn_c_magalasy_republic_adj
+		is_main_tag_only = yes
+		priority = 0
+		trigger = {
+			OR = { 
+				scope:actor = { exists = c:FRA is_subject_of = c:FRA }
+				AND = { 
+					game_date < 1975.12.30
+					scope:actor = { is_a_republican_democracy = yes }
+				}
+			}
+		}
+	}
+}
+
+DJI = {
+	dynamic_country_name = {
+		name = dyn_c_afars_issas
+		adjective = DJI_ADJ
+		
+		is_main_tag_only = yes
+		priority = 0
+		trigger = {
+			scope:actor = { exists = c:FRA is_subject_of = c:FRA }
+		}
+	}
+}
+
+VAN = {
+	dynamic_country_name = {
+		name = dyn_c_british_vanuatu
+		adjective = dyn_c_british_vanuatu_adj
+		is_main_tag_only = yes
+		priority = 0
+		trigger = {
+			scope:actor = {
+				exists = c:GBR
+				is_subject_of = c:GBR
+			}
+		}
+	}
+}
+
+TVL = {
+	dynamic_country_name = {
+		name = dyn_c_british_tuvalu
+		adjective = dyn_c_british_tuvalu_adj
+		is_main_tag_only = yes
+		priority = 0
+		trigger = {
+			scope:actor = {
+				exists = c:GBR
+				is_subject_of = c:GBR
+			}
+		}
+	}
+}
+
+SYE = {
+	dynamic_country_name = {
+		name = dyn_c_british_aden
+		adjective = dyn_c_british_aden_adj
+		is_main_tag_only = yes
+		priority = 0
+		trigger = {
+			scope:actor = {
+				exists = c:GBR
+				is_subject_of = c:GBR
+			}
+		}
+	}
+}
+
+BUR = {
+	#Burma
+	dynamic_country_name = {
+		name = dyn_c_british_myanmar
+		adjective = dyn_c_british_myanmar_adj
+		is_main_tag_only = yes
+		priority = 0
+		trigger = {
+			scope:actor = {
+				OR = { 
+					AND = { exists = c:GBR is_subject_of = c:GBR }
+					
+					has_government_type = gov_parliamentary_regime
+					has_government_type = gov_parliamentary_democracy
+					
+					game_date < 1989.1.1
+				}
+			}
+		}
+	}
+}
+
+JOR = {
+	dynamic_country_name = {
+		name = dyn_c_british_jordan
+		adjective = dyn_c_british_jordan_adj
+		is_main_tag_only = yes
+		priority = 0
+		trigger = {
+			scope:actor = {
+				OR = { 
+					AND = { 
+						exists = c:GBR
+						is_subject_of = c:GBR
+					}
+					game_date < 1949.1.1
+				}
+			}
+		}
+	}
+}
+
+UAE = {
+	dynamic_country_name = {
+		name = dyn_c_free_uae
+		adjective = dyn_c_free_uae_adj
+		is_main_tag_only = yes
+		priority = 0
+		trigger = {
+			coa_def_monarchy_flag_trigger = yes
+		}
+	}
+	dynamic_country_name = {
+		name = dyn_c_trucial_states
+		adjective = dyn_c_trucial_states_adj
+		is_main_tag_only = yes
+		priority = 1
+		trigger = {
+			scope:actor = {
+				exists = c:GBR
+				is_subject_of = c:GBR
+			}
+		}
+	}
+}
+
+FAE = {
+	dynamic_country_name = {
+		name = dyn_c_federation_of_arab_emirates
+		adjective = dyn_c_federation_of_arab_emirates_adj
+		is_main_tag_only = yes
+		priority = 0
+		trigger = {
+			coa_def_monarchy_flag_trigger = yes
+		}
+	}
+	dynamic_country_name = {
+		name = dyn_c_trucial_states
+		adjective = dyn_c_trucial_states_adj
+		is_main_tag_only = yes
+		priority = 1
+		trigger = {
+			scope:actor = {
+				exists = c:GBR
+				is_subject_of = c:GBR
+			}
+		}
+	}
+}
+
+CAR = {
+	dynamic_country_name = {
+		name = dyn_c_french_central_africa
+		adjective = CAR_ADJ
+		
+		is_main_tag_only = yes
+		priority = 2
+		trigger = {
+			scope:actor = {
+				exists = c:FRA
+				is_subject_of = c:FRA
+			}
+		}
+	}
+	dynamic_country_name = {
+		name = dyn_c_central_africa_republic
+		adjective = CAR_ADJ
+		
+		is_main_tag_only = yes
+		priority = 1
+		trigger = {
+			scope:actor = {
+				is_not_a_monarchy = yes
+			}
+		}
+	}
+	dynamic_country_name = {
+		name = dyn_c_central_africa_empire
+		adjective = CAR_ADJ
+		
+		is_main_tag_only = yes
+		priority = 1
+		trigger = {
+			scope:actor = {
+				is_a_monarchy = yes
+			}
+		}
+	}
+}
+
+CMR = {
+	dynamic_country_name = {
+		name = dyn_c_french_cameroun
+		adjective = CMR_ADJ
+		
+		is_main_tag_only = yes
+		priority = 0
+		trigger = {
+			scope:actor = {
+				exists = c:FRA
+				is_subject_of = c:FRA
+			}
+		}
+	}
+}
+
+CNG = {
+	dynamic_country_name = {
+		name = dyn_c_zaire
+		adjective = dyn_c_zaire_adj
+		is_main_tag_only = yes
+		priority = 0
+		trigger = {
+			scope:actor = {
+				is_a_nationalist_government = yes
+			}
+		}
+	}
+}
+
+BEN = {
+	dynamic_country_name = {
+		name = dyn_c_dahomey
+		adjective = dyn_c_dahomey_adj
+		is_main_tag_only = yes
+		priority = 0
+		trigger = {
+			OR = { 
+				scope:actor = { exists = c:FRA is_subject_of = c:FRA }
+				game_date < 1975.11.30
+			}
+		}
+	}
+}
+
+BUF = {
+	dynamic_country_name = {
+		name = dyn_c_upper_volta
+		adjective = dyn_c_upper_volta_adj
+		is_main_tag_only = yes
+		priority = 0
+		trigger = {
+			OR = { 
+				scope:actor = { exists = c:FRA is_subject_of = c:FRA }
+				game_date < 1984.8.4
+			}
+		}
+	}
+}
+
+NEJ = {
+	# Nejd
+	dynamic_country_name = {
+		name = dyn_c_saudi_arabia
+		adjective = dyn_c_saudi_arabia_adj
+		is_main_tag_only = yes
+		priority = 0
+		trigger = {
+			coa_def_monarchy_flag_trigger = yes
+		}
+	}
+}
+
+SRL = {
+	# Sri Lanka
+	dynamic_country_name = {
+		name = dyn_c_british_sri_lanka
+		adjective = dyn_c_british_sri_lanka_adj
+		is_main_tag_only = yes
+		priority = 1
+		trigger = {
+			scope:actor = {
+				exists = c:GBR
+				OR = { 
+					is_subject_of = c:GBR
+					is_subject_type = subject_type_personal_union
+				}
+			}
+		}
+	}
+}
+
+NAM = {
+	dynamic_country_name = {
+		name = dyn_c_british_namibia
+		adjective = dyn_c_british_namibia_adj
+		is_main_tag_only = yes
+		priority = 0
+		trigger = {
+			scope:actor = {
+				exists = c:GBR
+				is_subject_of = c:GBR
+			}
+		}
+	}
+}
+
+MLW = {
+	dynamic_country_name = {
+		name = dyn_c_british_malawi
+		adjective = dyn_c_british_malawi_adj
+		is_main_tag_only = yes
+		priority = 0
+		trigger = {
+			scope:actor = {
+				exists = c:GBR
+				is_subject_of = c:GBR
+			}
+		}
+	}
+}
+
+ZAM = {
+	# Zambia
+	dynamic_country_name = {
+		name = dyn_c_north_rhodesia
+		adjective = dyn_c_north_rhodesia_adj
+		is_main_tag_only = yes
+		priority = 0
+		trigger = {
+			scope:actor = {
+				exists = c:GBR
+				is_subject_of = c:GBR
+			}
+		}
+	}
+}
+
+RHO = {
+	dynamic_country_name = {
+		name = dyn_c_south_rhodesia
+		adjective = dyn_c_south_rhodesia_adj
+		is_main_tag_only = yes
+		priority = 0
+		trigger = {
+			scope:actor = {
+				exists = c:GBR
+				is_subject_of = c:GBR
+			}
+		}
+	}
+}
+
+CAF = {
+	dynamic_country_name = {
+		name = dyn_c_rhodesia_nyasaland
+		adjective = dyn_c_rhodesia_nyasaland_adj
+		is_main_tag_only = yes
+		priority = 2
+		trigger = {
+			scope:actor = {
+				OR = { 
+					AND = { 
+						exists = c:GBR
+						is_subject_of = c:GBR
+					}
+					AND = { 
+						is_subject = no
+						NOR = { 
+							has_law = law_type:law_multicultural 
+							is_a_democracy = yes
+						}
+					}
+				}
+				has_state_in_state_region = STATE_KAZEMBE
+			}
+		}
+	}
+	dynamic_country_name = {
+		name = RHO
+		adjective = RHO_ADJ
+		is_main_tag_only = yes
+		priority = 1
+		trigger = {
+			scope:actor = {
+				is_subject = no
+				NOR = { 
+					has_law = law_type:law_multicultural 
+					is_a_democracy = yes
+				}
+			}
+		}
+	}
+}
+
+LES = {
+	dynamic_country_name = {
+		name = dyn_c_british_lesotho
+		adjective = dyn_c_british_lesotho_adj
+		is_main_tag_only = yes
+		priority = 0
+		trigger = {
+			scope:actor = {
+				exists = c:GBR
+				is_subject_of = c:GBR
+			}
+		}
+	}
+}
+
+ESW = {
+	dynamic_country_name = {
+		name = dyn_c_british_eswatini
+		adjective = dyn_c_british_eswatini_adj
+		is_main_tag_only = yes
+		priority = 0
+		trigger = {
+			game_date < 2018.4.19
+		}
+	}
+}
+
+TOG = {
+	dynamic_country_name = {
+		name = dyn_c_british_togo
+		adjective = TOG_ADJ
+		is_main_tag_only = yes
+		priority = 0
+		trigger = {
+			scope:actor = {
+				exists = c:GBR
+				is_subject_of = c:GBR
+			}
+		}
+	}
+}
+
+BLZ = {
+	dynamic_country_name = {
+		name = dyn_c_british_belize
+		adjective = dyn_c_british_belize_adj
+		use_overlord_prefix = yes
+		is_main_tag_only = yes
+		priority = 0
+		trigger = {
+			scope:actor = {
+				exists = c:GBR
+				is_subject_of = c:GBR
+			}
+		}
+	}
+}
+
+MIC = {
+	dynamic_country_name = {
+		name = dyn_c_american_pacfic_islands
+		adjective = dyn_c_american_pacfic_islands_adj
+		is_main_tag_only = yes
+		priority = 0
+		trigger = {
+			scope:actor = {
+				is_subject_type = subject_type_mandate
+			}
+		}
+	}
+}
+
+SOM = {
+	dynamic_country_name = {
+		name = dyn_c_italian_somalia
+		adjective = SOM_ADJ
+		is_main_tag_only = yes
+		priority = 0
+		trigger = {
+			scope:actor = {
+				is_subject_type = subject_type_mandate
+			}
+		}
+	}
+}
+
+GUY = {
+	dynamic_country_name = {
+		name = dyn_c_british_guyana
+		adjective = dyn_c_british_guyana_adj
+		is_main_tag_only = yes
+		priority = 0
+		trigger = {
+			scope:actor = {
+				exists = c:GBR
+				is_subject_of = c:GBR
+			}
+		}
+	}
+}
+
+SAB = {
+	dynamic_country_name = {
+		name = dyn_c_british_north_borneo
+		adjective = dyn_c_british_north_borneo_adj
+		is_main_tag_only = yes
+		priority = 0
+		trigger = {
+			scope:actor = {
+				exists = c:GBR
+				is_subject_of = c:GBR
+			}
+		}
+	}
+}
+
+DAN = {
+	dynamic_country_name = {
+		name = dyn_c_dutch_antilles
+		adjective = dyn_c_dutch_antilles_adj
+		is_main_tag_only = yes
+		priority = 1
+		trigger = {
+			scope:actor = {
+				exists = c:NET
+				is_subject_of = c:NET
+			}
+		}
+	}
+	dynamic_country_name = {
+		name = dyn_c_generic_antilles
+		adjective = DAN_ADJ
+		use_overlord_prefix = yes
+		is_main_tag_only = yes
+		priority = 0
+		trigger = {
+			scope:actor = {
+				is_not_sufficiently_independent = yes
+			}
+		}
+	}
+}
+
+PAL = {
+	dynamic_country_name = {
+		name = dyn_c_palestinian_authority
+		adjective = PAL_ADJ
+		is_main_tag_only = yes
+		priority = 0
+		trigger = {
+			scope:actor = {
+				exists = c:ISR
+				is_subject_of = c:ISR
+				is_subject_type = subject_type_special_administrative_region
+			}
+		}
+	}
+}
+
+ISR = {
+	dynamic_country_name = {
+		name = PAL
+		adjective = PAL_ADJ
+		is_main_tag_only = yes
+		priority = 0
+		trigger = {
+			scope:actor = {
+				exists = c:GBR
+				is_subject_of = c:GBR
+				is_subject_type = subject_type_mandate
+			}
+		}
+	}
+}
+
+MSY = {
+	dynamic_country_name = {
+		name = dyn_c_malaya
+		adjective = dyn_c_malaya_adj
+		is_main_tag_only = yes
+		priority = 1
+		trigger = {
+			scope:actor = {
+				
+				NOR = {
+					has_state_in_state_region = STATE_NORTH_BORNEO
+					owns_entire_state_region = STATE_MALAYA
+					AND = {
+						exists = c:SGP
+						exists = c:MSY
+						c:SGP = {
+							is_subject_of = c:MSY
+							is_subject_type = subject_type_special_administrative_region
+						}
+					}
+				}
+				
+			}
+		}
+	}
+}
+
+SER = {
+	dynamic_country_name = {
+		name = dyn_c_serbia_and_montenegro
+		adjective = SER_ADJ
+		is_main_tag_only = yes
+		priority = 1
+		trigger = {
+			scope:actor = {
+				has_state_in_state_region = STATE_MONTENEGRO
+				has_law = law_type:law_federal_state
+			}
+		}
+	}
+}
+
+WCY = {
+	dynamic_country_name = {
+		name = CYP
+		adjective = CYP_ADJ
+		is_main_tag_only = yes
+		priority = 0
+		trigger = {
+			scope:actor = {
+				NOT = { exists = c:CYP }
+				NOT = { exists = c:ECY }
+			}
+		}
+	}
+}
+
+UNO = { # United Nations
+	dynamic_country_name = {
+		name = dyn_c_united_kingdoms
+		adjective = dyn_c_united_kingdoms_adj
+		
+		is_main_tag_only = yes
+		priority = 1
+		
+		trigger = {
+			exists = scope:actor
+			scope:actor = {
+				is_a_monarchy = yes
+			}
+		}
+	}
+	dynamic_country_name = {
+		name = dyn_c_imperium_of_man
+		adjective = dyn_c_imperium_of_man_adj
+		
+		is_main_tag_only = yes
+		priority = 2
+		
+		trigger = {
+			exists = scope:actor
+			scope:actor = {
+				is_a_regime_monarchy = yes
+			}
+		}
+	}
+	dynamic_country_name = {
+		name = dyn_c_united_communes
+		adjective = dyn_c_united_communes_adj
+		
+		is_main_tag_only = yes
+		priority = 1
+		
+		trigger = {
+			exists = scope:actor
+			scope:actor = {
+				is_a_communist_government = yes
+			}
+		}
+	}
+	dynamic_country_name = {
+		name = dyn_c_united_theocracies
+		adjective = dyn_c_united_theocracies_adj
+		
+		is_main_tag_only = yes
+		priority = 1
+		
+		trigger = {
+			exists = scope:actor
+			scope:actor = {
+				is_a_theocratic_government = yes
+			}
+		}
+	}
+	dynamic_country_name = {
+		name = dyn_c_earth_empire
+		adjective = dyn_c_earth_empire_adj
+		
+		is_main_tag_only = yes
+		priority = 1
+		
+		trigger = {
+			exists = scope:actor
+			scope:actor = {
+				is_a_nationalist_government = yes
+			}
+		}
+	}
+}
+
+USA = { # United States of America
+
+	dynamic_country_name = {
+		name = dyn_c_united_state
+		adjective = USA_ADJ
+
+		priority = 1
+		
+		trigger = {
+			exists = c:USA
+			c:USA = {		
+				any_scope_state = {
+					state_region = { NOT = { has_variable = district_of_columbia } }
+					count = 1
+				}
+			}
+		}
+	}
+
+	dynamic_country_name = {
+		name = dyn_c_united_sovereign_archduchy
+		adjective = USA_ADJ
+		
+		is_main_tag_only = yes
+		priority = 1
+		
+		trigger = {
+			coa_def_monarchy_flag_trigger = yes
+		}
+	}
+
+	dynamic_country_name = {
+		name = dyn_c_united_syndicates_of_america
+		adjective = USA_ADJ
+		
+		is_main_tag_only = yes
+		priority = 1
+		
+		trigger = {
+			coa_def_communist_flag_trigger = yes
+		}
+	}	
+
+	dynamic_country_name = {
+		name = dyn_c_united_synods_of_america
+		adjective = USA_ADJ
+		
+		is_main_tag_only = yes
+		priority = 1
+		
+		trigger = {
+			coa_def_theocracy_flag_trigger = yes
+		}
+	}
+	
+}
+
+ATH = {
+	dynamic_country_name = {
+		name = dyn_c_Nagorno_Karabakh
+		adjective = ATH_ADJ
+		is_main_tag_only = yes
+		priority = 1
+		trigger = {
+			scope:actor = {
+				is_country_type = unrecognized
+			}
+		}
+	}
+}
+
+SAF = {
+	dynamic_country_name = {
+		name = dyn_c_Volkstaat
+		adjective = dyn_c_Volkstaat_adj
+		is_main_tag_only = yes
+		priority = 1
+		trigger = {
+			scope:actor = {
+				exists = c:RSA
+			}
+		}
+	}
+}
+
+NYE = {
+	dynamic_country_name = {
+		name = YEM
+		adjective = YEM_ADJ
+		is_main_tag_only = yes
+		priority = 1
+		trigger = {
+			NOR = { 
+				exists = c:SYE
+				exists = c:YEM
+			}
+		}
+	}
+}
+
+BOU = {
+	dynamic_country_name = {
+		name = dyn_c_North_Solomons
+		adjective = BOU_ADJ
+		is_main_tag_only = yes
+		priority = 1
+		trigger = {
+			game_date < 2002.6.25
+		}
+	}
+}
+
+KUR = { # Kurdistan
+	dynamic_country_name = {
+		name = dyn_c_Kurdistan_Region
+		adjective = KUR_ADJ
+		
+		is_main_tag_only = yes
+		priority = 5
+		
+		trigger = {
+			scope:actor = { 
+				is_subject_type = subject_type_special_administrative_region
+			}
+		}
+	}
+}
+
+IDO = { # Indonesia
+	dynamic_country_name = {
+		name = dyn_c_west_indonesia
+		adjective = dyn_c_west_indonesia_adj
+		
+		is_main_tag_only = yes
+		priority = 5
+		
+		trigger = {
+			scope:actor = { 
+				exists = c:EID
+				c:EID = { is_sufficiently_independent = yes }
+			}
+		}
+	}
+}
+
+SIR = { # Southern Ireland
+	dynamic_country_name = {
+		name = IRE
+		adjective = IRE_ADJ
+		
+		is_main_tag_only = yes
+		priority = 1
+		
+		trigger = {
+			scope:actor = { 
+				OR = {
+					NOT = { exists = c:NIR }
+					AND = {
+						exists = c:NIR
+						c:NIR = { NOT = { is_sufficiently_independent = yes } }
+					}
+				}
+			}
+		}
+	}
+}
+
+SMK = { # South Maluku
+	dynamic_country_name = {
+		name = dyn_c_maluku
+		adjective = dyn_c_maluku_adj
+		
+		is_main_tag_only = yes
+		priority = 1
+		
+		trigger = {
+			scope:actor = { 
+				owns_entire_state_region = STATE_CELEBES
+			}
+		}
+	}
+}
+
+NMB = { # Namibia
+	dynamic_country_name = {
+		name = dyn_c_south_west_africa
+		adjective = dyn_c_south_west_africa_adj
+		
+		is_main_tag_only = yes
+		priority = 1
+		
+		trigger = {
+			OR = { 
+				scope:actor = { 
+					exists = c:SAF
+					is_direct_subject_of = c:SAF
+					NOT = { is_sufficiently_independent = yes }
+				}
+				coa_def_british_ensign_trigger = yes
+			}
+		}
+	}
+}
+
+SKN = { # Saint Kitts and Nevis
+	dynamic_country_name = {
+		name = dyn_c_Saint_Christopher_Nevis_Anguilla
+		adjective = dyn_c_Saint_Christopher_Nevis_Anguilla_adj
+		
+		is_main_tag_only = yes
+		priority = 1
+		
+		trigger = {
+			scope:actor ?= { 
+				p:x606060 = {
+					owner = scope:actor
+				}
+			}
+		}
+	}
+}
+
+IMP = { # British Commonwealth
+	dynamic_country_name = {
+		name = dyn_c_Imperial_Federation
+		adjective = GBR_ADJ
+		is_main_tag_only = yes
+		priority = 10
+
+		trigger = {
+			scope:actor = { 
+				is_a_regime_monarchy = yes
+				has_law = law_type:law_federal_state
+			}
+		}
+	}
+	dynamic_country_name = {
+		name = dyn_c_Imperial_Union
+		adjective = GBR_ADJ
+		is_main_tag_only = yes
+		priority = 5
+
+		trigger = {
+			scope:actor = { 
+				is_a_regime_monarchy = yes
+			}
+		}
+	}
+}
+
+GRE = { # Greece
+	dynamic_country_name = {
+		name = dyn_c_South_Greece
+		adjective = dyn_c_South_Greece_adj
+		
+		is_main_tag_only = yes
+		priority = 1
+		
+		trigger = {
+			scope:actor = { 
+				exists = c:UGR
+			}
+		}
+	}
+}
+
+WGR = { # West Germany
+	dynamic_country_name = {
+		name = dyn_c_North_Germany
+		adjective = dyn_c_North_Germany_adj
+		
+		is_main_tag_only = yes
+		priority = 1
+		
+		trigger = {
+			scope:actor = { 
+				exists = c:SGR
+			}
+		}
+	}
+}
+
+CRI = { # Crimea
+	dynamic_country_name = {
+		name = TAR
+		adjective = TAR_ADJ
+		
+		is_main_tag_only = yes
+		priority = 1
+		
+		trigger = {
+			scope:actor = { 
+				capital ?= { NOT = { state_region = s:STATE_CRIMEA } }
+			}
+		}
+	}
+}

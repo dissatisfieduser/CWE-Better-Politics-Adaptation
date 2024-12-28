@@ -1,0 +1,43 @@
+COUNTRIES = {
+
+	c:SPA = {
+	
+		#Ruling Party
+		ig:ig_armed_forces = { 
+			remove_ideology = ideology_far_right_economy
+			remove_ideology = ideology_right_economy
+			add_ideology = ideology_centre_economy
+			remove_ideology = ideology_left_economy
+			remove_ideology = ideology_far_left_economy
+			
+			add_ruling_interest_group = yes 
+		}
+		
+		ig:ig_trade_unions = { set_ig_suppression = yes }
+		
+		effect_starting_technology_tier_1_tech = yes
+		effect_starting_technology_tier_2_tech = yes
+
+		set_tax_level = medium
+		
+		add_taxed_goods = g:wine
+		
+		# Laws
+		effect_starting_politics_nationalist_republic = yes
+		effect_starting_politics_dictatorship = yes
+		effect_starting_politics_constitutional_unitary_state = yes
+		effect_starting_politics_war_policy_jingoism = yes
+		effect_starting_politics_economic_policy_state_capitalism = yes
+		effect_starting_politics_trade_policy_autarky = yes
+		effect_starting_politics_anti_nuclear_policy = yes
+		
+		effect_starting_politics_specialisation_manufacturing = yes
+		
+		effect_starting_politics_semi_gold_system = yes
+		
+		#International Memberships
+		add_modifier = { name = unga_member }
+		
+	}
+	
+}

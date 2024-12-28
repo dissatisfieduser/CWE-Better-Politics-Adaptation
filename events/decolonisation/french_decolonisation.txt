@@ -1,0 +1,1282 @@
+namespace = french_decolonisation
+
+### Africa ###
+
+# French Community
+french_decolonisation.1 = {
+    type = country_event
+
+    title = french_community.sgc.t 				# Title of the event; ADD LOCALISATION
+    desc = french_community.sgc.d 				# Description of the event; ADD LOCALISATION
+    #flavor = french_community.sgc.f 			# Flavor for event; ADD LOCALISATION, IF REQUIRED
+
+    event_image = { video = "gfx/event_pictures/unspecific_signed_contract.bk2" }
+
+    icon = "gfx/interface/icons/event_icons/waving_flag.dds" 	# Icon that shows on the map or the outliner
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear" 	# Sound effect if needed
+
+    duration = 1 # Duration to fire if triggers are met
+	
+	trigger = {													# What triggers the event, if using other events or journal entries leave empty
+		
+		#Overlord conditions
+		exists = c:FRA this = c:FRA											# Change TAG of the overlord ****
+		game_date >= 1958.10.4									# START DATE: Date colony became self governing ****
+		game_date < 1968.10.4									# END DATE: All historical events must not fire 10 years after the START DATE ****
+		
+		is_a_republican_democracy = yes							# Correct gov types
+		is_sufficiently_independent = yes						# is_vassal = no		
+		is_at_war = no											# war = no
+		
+		#Colony conditions
+		NOR = { 												# Colony to be released must not already exist on the map
+			exists = c:GUI 
+			exists = c:CAR
+			exists = c:MAU
+			exists = c:CHA
+			exists = c:GAB
+			exists = c:IVC
+			exists = c:MAD
+			exists = c:BUF
+			exists = c:NIG
+			exists = c:MAL
+			exists = c:KNG
+			exists = c:BEN
+			exists = c:SEN			
+		}
+		any_scope_state = { 									# Overlord owns the states of the colony to be released
+		
+			# Change homeland identity to match colony to be released ****
+			state_region = {
+				OR = {
+					is_homeland = cu:guinean
+					is_homeland = cu:central_african
+					is_homeland = cu:mauritanian
+					is_homeland = cu:chadian
+					is_homeland = cu:gabonese
+					is_homeland = cu:ivorian
+					is_homeland = cu:malagasy
+					is_homeland = cu:burkinese
+					is_homeland = cu:nigerien
+					is_homeland = cu:malian
+					is_homeland = cu:kongolese
+					is_homeland = cu:beninese
+					is_homeland = cu:senegalese
+				}
+			}
+			
+			##is_incorporated = no								# State is a colony
+			#owner = THIS										# Overlord must own the state to be released
+		}
+		
+		# Event has not been fired before
+		NOT = { has_variable = french_community_formed }		# CHANGE ****
+		
+		
+    }
+	
+	immediate = {
+		
+	}
+    
+    option = {
+        name = french_decolonisation.option.1				#Grant them self-government
+        default_option = yes highlighted_option = yes
+		
+		custom_tooltip = {
+			text = end_of_french_africa.tt
+			
+			# Create colonial countries
+			create_country = { tag = GUI origin = THIS on_created = { set_country_type = unrecognized effect_french_community_colony_laws = yes } state = s:STATE_GUINEA.region_state:FRA }
+			create_country = { tag = CAR origin = THIS on_created = { set_country_type = unrecognized effect_french_community_colony_laws = yes } state = s:STATE_UBANGI_SHARI.region_state:FRA }
+			create_country = { tag = MAU origin = THIS on_created = { set_country_type = unrecognized effect_french_community_colony_laws = yes } state = s:STATE_MAURITANIA.region_state:FRA }
+			create_country = { tag = CHA origin = THIS on_created = { set_country_type = unrecognized effect_french_community_colony_laws = yes } state = s:STATE_CHAD.region_state:FRA }
+			create_country = { tag = GAB origin = THIS on_created = { set_country_type = unrecognized effect_french_community_colony_laws = yes } state = s:STATE_GABON.region_state:FRA }
+			create_country = { tag = IVC origin = THIS on_created = { set_country_type = unrecognized effect_french_community_colony_laws = yes } state = s:STATE_WINDWARD_COAST.region_state:FRA }
+			create_country = { tag = MAD origin = THIS on_created = { set_country_type = unrecognized effect_french_community_colony_laws = yes } state = s:STATE_NORTH_MADAGASCAR.region_state:FRA }
+			create_country = { tag = BUF origin = THIS on_created = { set_country_type = unrecognized effect_french_community_colony_laws = yes } state = s:STATE_VOLTA.region_state:FRA }
+			create_country = { tag = NIG origin = THIS on_created = { set_country_type = unrecognized effect_french_community_colony_laws = yes } state = s:STATE_NIGER.region_state:FRA }
+			create_country = { tag = MAL origin = THIS on_created = { set_country_type = unrecognized effect_french_community_colony_laws = yes } state = s:STATE_WESTERN_MALI.region_state:FRA }
+			create_country = { tag = KNG origin = THIS on_created = { set_country_type = unrecognized effect_french_community_colony_laws = yes } state = s:STATE_CONGO.region_state:FRA }
+			create_country = { tag = BEN origin = THIS on_created = { set_country_type = unrecognized effect_french_community_colony_laws = yes } state = s:STATE_DAHOMEY.region_state:FRA }
+			create_country = { tag = SEN origin = THIS on_created = { set_country_type = unrecognized effect_french_community_colony_laws = yes } state = s:STATE_SENEGAL.region_state:FRA }
+			
+			if = { limit = { exists = c:GUI } every_scope_state = { limit = { state_region = { is_homeland = cu:guinean } } set_state_owner = c:GUI } }
+			if = { limit = { exists = c:CAR } every_scope_state = { limit = { state_region = { is_homeland = cu:central_african } } set_state_owner = c:CAR } }
+			if = { limit = { exists = c:MAU } every_scope_state = { limit = { state_region = { is_homeland = cu:mauritanian } } set_state_owner = c:MAU } }
+			if = { limit = { exists = c:CHA } every_scope_state = { limit = { state_region = { is_homeland = cu:chadian } } set_state_owner = c:CHA } }
+			if = { limit = { exists = c:GAB } every_scope_state = { limit = { state_region = { is_homeland = cu:gabonese } } set_state_owner = c:GAB } }
+			if = { limit = { exists = c:IVC } every_scope_state = { limit = { state_region = { is_homeland = cu:ivorian } } set_state_owner = c:IVC } }
+			if = { limit = { exists = c:MAD } every_scope_state = { limit = { state_region = { is_homeland = cu:malagasy } } set_state_owner = c:MAD } }
+			if = { limit = { exists = c:BUF } every_scope_state = { limit = { state_region = { is_homeland = cu:burkinese } } set_state_owner = c:BUF } }
+			if = { limit = { exists = c:NIG } every_scope_state = { limit = { state_region = { is_homeland = cu:nigerien } } set_state_owner = c:NIG } }
+			if = { limit = { exists = c:MAL } every_scope_state = { limit = { state_region = { is_homeland = cu:malian } } set_state_owner = c:MAL } }
+			if = { limit = { exists = c:KNG } every_scope_state = { limit = { state_region = { is_homeland = cu:kongolese } } set_state_owner = c:KNG } }
+			if = { limit = { exists = c:BEN } every_scope_state = { limit = { state_region = { is_homeland = cu:beninese } } set_state_owner = c:BEN } }
+			if = { limit = { exists = c:SEN } every_scope_state = { limit = { state_region = { is_homeland = cu:senegalese } } set_state_owner = c:SEN } }
+			
+			# Create overlord relations
+			if = { limit = { exists = c:CAR } create_diplomatic_pact = { country = c:CAR type = semi_autonomous_colony } }
+			if = { limit = { exists = c:MAU } create_diplomatic_pact = { country = c:MAU type = semi_autonomous_colony } }
+			if = { limit = { exists = c:CHA } create_diplomatic_pact = { country = c:CHA type = semi_autonomous_colony } }
+			if = { limit = { exists = c:GAB } create_diplomatic_pact = { country = c:GAB type = semi_autonomous_colony } }
+			if = { limit = { exists = c:IVC } create_diplomatic_pact = { country = c:IVC type = semi_autonomous_colony } }
+			if = { limit = { exists = c:MAD } create_diplomatic_pact = { country = c:MAD type = semi_autonomous_colony } }
+			if = { limit = { exists = c:BUF } create_diplomatic_pact = { country = c:BUF type = semi_autonomous_colony } }
+			if = { limit = { exists = c:NIG } create_diplomatic_pact = { country = c:NIG type = semi_autonomous_colony } }
+			if = { limit = { exists = c:MAL } create_diplomatic_pact = { country = c:MAL type = semi_autonomous_colony } }
+			if = { limit = { exists = c:KNG } create_diplomatic_pact = { country = c:KNG type = semi_autonomous_colony } }
+			if = { limit = { exists = c:BEN } create_diplomatic_pact = { country = c:BEN type = semi_autonomous_colony } }
+			if = { limit = { exists = c:SEN } create_diplomatic_pact = { country = c:SEN type = semi_autonomous_colony } }
+			
+			# CFA Franc
+			if = { limit = { exists = c:CAR } create_diplomatic_pact = { country = c:CAR type = currency_union } }
+			if = { limit = { exists = c:MAU } create_diplomatic_pact = { country = c:MAU type = currency_union } }
+			if = { limit = { exists = c:CHA } create_diplomatic_pact = { country = c:CHA type = currency_union } }
+			if = { limit = { exists = c:GAB } create_diplomatic_pact = { country = c:GAB type = currency_union } }
+			if = { limit = { exists = c:IVC } create_diplomatic_pact = { country = c:IVC type = currency_union } }
+			if = { limit = { exists = c:MAD } create_diplomatic_pact = { country = c:MAD type = currency_union } }
+			if = { limit = { exists = c:BUF } create_diplomatic_pact = { country = c:BUF type = currency_union } }
+			if = { limit = { exists = c:NIG } create_diplomatic_pact = { country = c:NIG type = currency_union } }
+			if = { limit = { exists = c:MAL } create_diplomatic_pact = { country = c:MAL type = currency_union } }
+			if = { limit = { exists = c:KNG } create_diplomatic_pact = { country = c:KNG type = currency_union } }
+			if = { limit = { exists = c:BEN } create_diplomatic_pact = { country = c:BEN type = currency_union } }
+			if = { limit = { exists = c:SEN } create_diplomatic_pact = { country = c:SEN type = currency_union } }
+			
+			# Legal Union
+			if = { limit = { exists = c:CAR } create_diplomatic_pact = { country = c:CAR type = legal_union } }
+			if = { limit = { exists = c:MAU } create_diplomatic_pact = { country = c:MAU type = legal_union } }
+			if = { limit = { exists = c:CHA } create_diplomatic_pact = { country = c:CHA type = legal_union } }
+			if = { limit = { exists = c:GAB } create_diplomatic_pact = { country = c:GAB type = legal_union } }
+			if = { limit = { exists = c:IVC } create_diplomatic_pact = { country = c:IVC type = legal_union } }
+			if = { limit = { exists = c:MAD } create_diplomatic_pact = { country = c:MAD type = legal_union } }
+			if = { limit = { exists = c:BUF } create_diplomatic_pact = { country = c:BUF type = legal_union } }
+			if = { limit = { exists = c:NIG } create_diplomatic_pact = { country = c:NIG type = legal_union } }
+			if = { limit = { exists = c:MAL } create_diplomatic_pact = { country = c:MAL type = legal_union } }
+			if = { limit = { exists = c:KNG } create_diplomatic_pact = { country = c:KNG type = legal_union } }
+			if = { limit = { exists = c:BEN } create_diplomatic_pact = { country = c:BEN type = legal_union } }
+			if = { limit = { exists = c:SEN } create_diplomatic_pact = { country = c:SEN type = legal_union } }
+			
+			#French bases
+			if = { limit = { exists = c:CAR } create_diplomatic_pact = { country = c:CAR type = military_cooperation_agreement } }
+			if = { limit = { exists = c:MAU } create_diplomatic_pact = { country = c:MAU type = military_cooperation_agreement } }
+			if = { limit = { exists = c:CHA } create_diplomatic_pact = { country = c:CHA type = military_cooperation_agreement } }
+			if = { limit = { exists = c:GAB } create_diplomatic_pact = { country = c:GAB type = military_cooperation_agreement } }
+			if = { limit = { exists = c:IVC } create_diplomatic_pact = { country = c:IVC type = military_cooperation_agreement } }
+			if = { limit = { exists = c:MAD } create_diplomatic_pact = { country = c:MAD type = military_cooperation_agreement } }
+			if = { limit = { exists = c:BUF } create_diplomatic_pact = { country = c:BUF type = military_cooperation_agreement } }
+			if = { limit = { exists = c:NIG } create_diplomatic_pact = { country = c:NIG type = military_cooperation_agreement } }
+			if = { limit = { exists = c:MAL } create_diplomatic_pact = { country = c:MAL type = military_cooperation_agreement } }
+			if = { limit = { exists = c:KNG } create_diplomatic_pact = { country = c:KNG type = military_cooperation_agreement } }
+			if = { limit = { exists = c:BEN } create_diplomatic_pact = { country = c:BEN type = military_cooperation_agreement } }
+			if = { limit = { exists = c:SEN } create_diplomatic_pact = { country = c:SEN type = military_cooperation_agreement } }
+			
+			#Relationships
+			if = { limit = { exists = c:GUI } set_relations = { country = c:CAR value = -100 } }
+			if = { limit = { exists = c:CAR } set_relations = { country = c:CAR value = 100 } }
+			if = { limit = { exists = c:MAU } set_relations = { country = c:MAU value = 100 } }
+			if = { limit = { exists = c:CHA } set_relations = { country = c:CHA value = 100 } }
+			if = { limit = { exists = c:GAB } set_relations = { country = c:GAB value = 100 } }
+			if = { limit = { exists = c:IVC } set_relations = { country = c:IVC value = 100 } }
+			if = { limit = { exists = c:MAD } set_relations = { country = c:MAD value = 100 } }
+			if = { limit = { exists = c:BUF } set_relations = { country = c:BUF value = 100 } }
+			if = { limit = { exists = c:NIG } set_relations = { country = c:NIG value = 100 } }
+			if = { limit = { exists = c:MAL } set_relations = { country = c:MAL value = 100 } }
+			if = { limit = { exists = c:KNG } set_relations = { country = c:KNG value = 100 } }
+			if = { limit = { exists = c:BEN } set_relations = { country = c:BEN value = 100 } }
+			if = { limit = { exists = c:SEN } set_relations = { country = c:SEN value = 100 } }
+		
+		}
+
+		#Clean up Comoros
+		if = { 
+			limit = { 
+				exists = c:MAD
+				NOT = { exists = c:COM }
+				p:x606CE0.state.owner = { THIS = c:MAD }
+			}
+			s:STATE_SOUTH_MADAGASCAR = {
+				set_owner_of_provinces = {
+					country = c:FRA
+					provinces = { x606CE0 }
+				}
+			}
+		}
+
+		# Fire only once
+		set_variable = french_community_formed					# Change variable ****
+		
+		ai_chance = { 
+			base = 90 
+		}
+		
+    }
+	
+	option = {
+        name = french_decolonisation.option.2					# REFUSE
+		
+		# Natives are angry!
+		every_scope_state = {
+			limit = {
+		 		state_region = { 
+					OR = {
+						is_homeland = cu:guinean 
+						is_homeland = cu:central_african
+						is_homeland = cu:mauritanian
+						is_homeland = cu:chadian
+						is_homeland = cu:gabonese
+						is_homeland = cu:ivorian
+						is_homeland = cu:malagasy
+						is_homeland = cu:burkinese
+						is_homeland = cu:nigerien
+						is_homeland = cu:malian
+						is_homeland = cu:kongolese
+						is_homeland = cu:beninese
+						is_homeland = cu:senegalese
+					}
+				}
+		 	}
+			add_radicals_in_state = {
+				value = large_radicals
+			}
+			add_modifier = { name = nationalist_agitation months = 60 is_decaying = yes } 
+		}
+		
+		# Fire only once
+		set_variable = french_community_formed					# Change variable ****
+		
+		ai_chance = { 
+			base = 10 modifier = { trigger = { has_global_variable = historical_railroading_active } add = -100 } 
+		}
+		
+    }
+
+}
+
+#Cameroon
+french_decolonisation.2 = {
+    type = country_event
+	placement = scope:colonial_state
+
+    title = french_cameroon.sgc.t 				# Title of the event; ADD LOCALISATION
+    desc = french_cameroon.sgc.d 				# Description of the event; ADD LOCALISATION
+    #flavor = french_cameroon.sgc.f 		# Flavor for event; ADD LOCALISATION, IF REQUIRED
+
+    event_image = { video = "gfx/event_pictures/unspecific_signed_contract.bk2" }
+
+    icon = "gfx/interface/icons/event_icons/waving_flag.dds" 	# Icon that shows on the map or the outliner
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear" 	# Sound effect if needed
+
+    duration = 1 # Duration to fire if triggers are met
+	
+	trigger = {													# What triggers the event, if using other events or journal entries leave empty
+		
+		#Overlord conditions
+		exists = c:FRA this = c:FRA								# Change TAG of the overlord ****
+		game_date >= 1956.1.1									# START DATE: Date colony became self governing ****
+		game_date < 1966.1.1									# END DATE: All historical events must not fire 10 years after the START DATE ****
+		
+		is_a_republican_democracy = yes							# Correct gov types
+		is_sufficiently_independent = yes						# is_vassal = no		
+		is_at_war = no											# war = no
+		
+		#Colony conditions
+		NOT = { 												# Colony to be released must not already exist on the map
+			exists = c:CMR										# Change TAG of the colony ****
+		}
+		any_scope_state = { 									# Overlord owns the states of the colony to be released
+			state_region = { is_homeland = cu:cameroonian }		# Change homeland identity to match colony to be released ****
+			#is_incorporated = no								# State is a colony
+			#owner = THIS										# Overlord must own the state to be released
+		}
+		
+		# Event has not been fired before
+		NOT = { has_variable = french_cameroon_sgc }			# CHANGE ****
+		
+    }
+	
+	immediate = {
+	
+		# Generate list of provinces to be released				# DO NOT TOUCH THIS SECTION
+		every_scope_state = {
+			limit = {
+				state_region = { is_homeland = cu:cameroonian }	# Change homeland identity to match colony to be released ****
+				#is_incorporated = no							# State is a colony
+				#contains_capital_of = c:CMR					# State is the capital of colony ****
+			}
+			save_scope_as = colonial_state
+		}
+		
+	}
+    
+    option = {
+        name = french_decolonisation.option.1				#Grant them self-government
+        default_option = yes highlighted_option = yes
+		
+		#Release country
+		create_country = {
+			tag = CMR										# Change TAG of country being released ****
+			origin = THIS									# TAG where the created country takes tech from
+			state = scope:colonial_state
+			
+			on_created = {									# Set government laws & rulers here
+				
+				# SET laws for colony ****
+				effect_starting_politics_presidential_republic = yes
+				effect_starting_politics_democratic = yes
+				effect_starting_politics_constitutional_unitary_state = yes
+				effect_starting_politics_war_policy_anti_military = yes
+				effect_starting_politics_economic_policy_interventionism = yes
+				effect_starting_politics_trade_policy_protectionism = yes
+				effect_starting_politics_anti_nuclear_policy = yes
+				
+				# CREATE leader for colony ****
+				create_character = {
+					first_name = "guy_incognito_first_name"		# CHANGE
+					last_name = "guy_incognito_last_name"		# CHANGE
+					ruler = yes
+					#birth_date = 1910.1.1						# CHANGE
+					interest_group = ig_rural_folk				# CHANGE
+					ideology = ideology_democratic				# CHANGE
+					traits = {
+						charismatic								# CHANGE
+						persistent								# CHANGE
+						meticulous								# CHANGE
+					}
+				}
+				
+				# Set diplomatic recognition
+				set_country_type = unrecognized
+			}
+		}
+		if = {
+			limit = { exists = c:CMR }
+			every_scope_state = {
+				limit = {
+					state_region = { is_homeland = cu:cameroonian }	# Change homeland identity to match colony to be released ****
+				}
+				set_state_owner = c:CMR							# Change TAG to colony ****
+			}
+			c:CMR = {
+				if = {
+					limit = { has_state_in_state_region = STATE_SOUTH_CAMEROON }
+					set_capital = STATE_SOUTH_CAMEROON
+				}
+			}
+		}
+		
+		# Overlord create self governing colony pact with colony
+		if = {
+			limit = { exists = c:CMR }
+			create_diplomatic_pact = {
+				country = c:CMR										# Change TAG ****
+				type = mandate
+			}
+			create_decolonisation_pacts = yes
+		}
+		
+		# Fire only once
+		set_variable = french_cameroon_sgc						# Change variable ****
+		
+		ai_chance = { 
+			base = 90 
+		}
+		
+    }
+	
+	option = {
+        name = french_decolonisation.option.2					# REFUSE
+		
+		# Natives are angry!
+		every_scope_state = {
+			limit = {
+		 		state_region = { is_homeland = cu:cameroonian }	# Change homeland identity to match colony to be released ****
+		 	}
+			add_radicals_in_state = {
+				culture = cu:cameroonian						# Change culture ****
+				value = large_radicals
+			}
+			add_modifier = { name = nationalist_agitation months = 60 is_decaying = yes } 
+		}
+		
+		# Add Infamy because doing this is against international law
+		change_infamy = 10
+		
+		# Fire only once
+		set_variable = french_cameroon_sgc						# Change variable ****
+		
+		ai_chance = { 
+			base = 10 modifier = { trigger = { has_global_variable = historical_railroading_active } add = -100 } 
+		}
+		
+    }
+
+}
+
+#Togo
+french_decolonisation.3 = {
+    type = country_event
+	placement = scope:colonial_state
+
+    title = french_togo.sgc.t 					# Title of the event; ADD LOCALISATION
+    desc = french_togo.sgc.d 					# Description of the event; ADD LOCALISATION
+    #flavor = french_togo.sgc.f 			# Flavor for event; ADD LOCALISATION, IF REQUIRED
+
+    event_image = { video = "gfx/event_pictures/unspecific_signed_contract.bk2" }
+
+    icon = "gfx/interface/icons/event_icons/waving_flag.dds" 	# Icon that shows on the map or the outliner
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear" 	# Sound effect if needed
+
+    duration = 1 # Duration to fire if triggers are met
+	
+	trigger = {													# What triggers the event, if using other events or journal entries leave empty
+		
+		#Overlord conditions
+		exists = c:FRA this = c:FRA											# Change TAG of the overlord ****
+		game_date >= 1955.1.1									# START DATE: Date colony became self governing ****
+		game_date < 1965.1.1									# END DATE: All historical events must not fire 10 years after the START DATE ****
+		
+		is_a_republican_democracy = yes							# Correct gov types
+		is_sufficiently_independent = yes						# is_vassal = no		
+		is_at_war = no											# war = no
+		
+		#Colony conditions
+		NOT = { 												# Colony to be released must not already exist on the map
+			exists = c:TOG										# Change TAG of the colony ****
+		}
+		any_scope_state = { 									# Overlord owns the states of the colony to be released
+			state_region = { is_homeland = cu:togolese }		# Change homeland identity to match colony to be released ****
+			#is_incorporated = no								# State is a colony
+			#owner = THIS										# Overlord must own the state to be released
+		}
+		
+		# Event has not been fired before
+		NOT = { has_variable = french_togo_sgc }				# CHANGE ****
+		
+    }
+	
+	immediate = {
+	
+		# Generate list of provinces to be released				# DO NOT TOUCH THIS SECTION
+		every_scope_state = {
+			limit = {
+				state_region = { is_homeland = cu:togolese }	# Change homeland identity to match colony to be released ****
+				#is_incorporated = no							# State is a colony
+				#contains_capital_of = c:TOG						# State is the capital of colony ****
+			}
+			save_scope_as = colonial_state
+		}
+		
+	}
+    
+    option = {
+        name = french_decolonisation.option.1				#Grant them self-government
+        default_option = yes highlighted_option = yes
+		
+		#Release country
+		create_country = {
+			tag = TOG										# Change TAG of country being released ****
+			origin = THIS									# TAG where the created country takes tech from
+			state = scope:colonial_state
+			
+			on_created = {									# Set government laws & rulers here
+				
+				# SET laws for colony ****
+				effect_starting_politics_presidential_republic = yes
+				effect_starting_politics_democratic = yes
+				effect_starting_politics_constitutional_unitary_state = yes
+				effect_starting_politics_war_policy_anti_military = yes
+				effect_starting_politics_economic_policy_interventionism = yes
+				effect_starting_politics_trade_policy_protectionism = yes
+				effect_starting_politics_anti_nuclear_policy = yes
+				
+				# CREATE leader for colony ****
+				create_character = {
+					first_name = "guy_incognito_first_name"		# CHANGE
+					last_name = "guy_incognito_last_name"		# CHANGE
+					ruler = yes
+					#birth_date = 1910.1.1						# CHANGE
+					interest_group = ig_rural_folk				# CHANGE
+					ideology = ideology_democratic				# CHANGE
+					traits = {
+						charismatic								# CHANGE
+						persistent								# CHANGE
+						meticulous								# CHANGE
+					}
+				}
+				
+				# Set diplomatic recognition
+				set_country_type = unrecognized
+			}
+		}
+		every_scope_state = {
+			limit = {
+		 		state_region = { is_homeland = cu:togolese }	# Change homeland identity to match colony to be released ****
+				#is_incorporated = no							# State is a colony
+		 	}
+			set_state_owner = c:TOG								# Change TAG to colony ****
+		}
+		
+		# Overlord create self governing colony pact with colony
+		if = {
+			limit = { exists = c:TOG }
+			create_diplomatic_pact = {
+				country = c:TOG										# Change TAG ****
+				type = mandate
+			}
+			create_decolonisation_pacts = yes
+		}
+		
+		# Fire only once
+		set_variable = french_togo_sgc							# Change variable ****
+		
+		ai_chance = { 
+			base = 90 
+		}
+		
+    }
+	
+	option = {
+        name = french_decolonisation.option.2					# REFUSE
+		
+		# Natives are angry!
+		every_scope_state = {
+			limit = {
+		 		state_region = { is_homeland = cu:togolese }	# Change homeland identity to match colony to be released ****
+		 	}
+			add_radicals_in_state = {
+				culture = cu:togolese							# Change culture ****
+				value = large_radicals
+			}
+			add_modifier = { name = nationalist_agitation months = 60 is_decaying = yes } 
+		}
+		
+		# Add Infamy because doing this is against international law
+		change_infamy = 10
+		
+		# Fire only once
+		set_variable = french_togo_sgc							# Change variable ****
+		
+		ai_chance = { 
+			base = 10 modifier = { trigger = { has_global_variable = historical_railroading_active } add = -100 } 
+		}
+		
+    }
+
+}
+
+#Djibouti
+french_decolonisation.4 = {
+    type = country_event
+	placement = scope:colonial_state
+
+    title = french_djibouti.sgc.t 					# Title of the event; ADD LOCALISATION
+    desc = french_djibouti.sgc.d 					# Description of the event; ADD LOCALISATION
+    #flavor = french_djibouti.sgc.f 			# Flavor for event; ADD LOCALISATION, IF REQUIRED
+
+    event_image = { video = "gfx/event_pictures/unspecific_signed_contract.bk2" }
+
+    icon = "gfx/interface/icons/event_icons/waving_flag.dds" 	# Icon that shows on the map or the outliner
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear" 	# Sound effect if needed
+
+    duration = 1 # Duration to fire if triggers are met
+	
+	trigger = {													# What triggers the event, if using other events or journal entries leave empty
+		
+		#Overlord conditions
+		exists = c:FRA this = c:FRA											# Change TAG of the overlord ****
+		game_date >= 1967.1.1									# START DATE: Date colony became self governing ****
+		game_date < 1977.1.1									# END DATE: All historical events must not fire 10 years after the START DATE ****
+		
+		is_a_republican_democracy = yes							# Correct gov types
+		is_sufficiently_independent = yes						# is_vassal = no		
+		is_at_war = no											# war = no
+		
+		#Colony conditions
+		NOT = { 												# Colony to be released must not already exist on the map
+			exists = c:DJI										# Change TAG of the colony ****
+		}
+		any_scope_state = { 									# Overlord owns the states of the colony to be released
+			state_region = { is_homeland = cu:djibouti }		# Change homeland identity to match colony to be released ****
+			#is_incorporated = no								# State is a colony
+			#owner = THIS										# Overlord must own the state to be released
+		}
+		
+		# Event has not been fired before
+		NOT = { has_variable = french_djibouti_sgc }			# CHANGE ****
+		
+    }
+	
+	immediate = {
+	
+		# Generate list of provinces to be released				# DO NOT TOUCH THIS SECTION
+		every_scope_state = {
+			limit = {
+				state_region = { is_homeland = cu:djibouti }	# Change homeland identity to match colony to be released ****
+				#is_incorporated = no							# State is a colony
+				#contains_capital_of = c:DJI					# State is the capital of colony ****
+			}
+			save_scope_as = colonial_state
+		}
+		
+	}
+    
+    option = {
+        name = french_decolonisation.option.1				#Grant them self-government
+        default_option = yes highlighted_option = yes
+		
+		#Release country
+		create_country = {
+			tag = DJI										# Change TAG of country being released ****
+			origin = THIS									# TAG where the created country takes tech from
+			state = scope:colonial_state
+			
+			on_created = {									# Set government laws & rulers here
+				
+				# SET laws for colony ****
+				effect_starting_politics_presidential_republic = yes
+				effect_starting_politics_democratic = yes
+				effect_starting_politics_constitutional_unitary_state = yes
+				effect_starting_politics_war_policy_anti_military = yes
+				effect_starting_politics_economic_policy_interventionism = yes
+				effect_starting_politics_trade_policy_protectionism = yes
+				effect_starting_politics_anti_nuclear_policy = yes
+				
+				# CREATE leader for colony ****
+				create_character = {
+					first_name = "guy_incognito_first_name"		# CHANGE
+					last_name = "guy_incognito_last_name"		# CHANGE
+					ruler = yes
+					#birth_date = 1910.1.1						# CHANGE
+					interest_group = ig_rural_folk				# CHANGE
+					ideology = ideology_democratic				# CHANGE
+					traits = {
+						charismatic								# CHANGE
+						persistent								# CHANGE
+						meticulous								# CHANGE
+					}
+				}
+				
+				# Set diplomatic recognition
+				set_country_type = unrecognized
+			}
+		}
+		every_scope_state = {
+			limit = {
+		 		state_region = { is_homeland = cu:djibouti }	# Change homeland identity to match colony to be released ****
+				#is_incorporated = no							# State is a colony
+		 	}
+			set_state_owner = c:DJI								# Change TAG to colony ****
+		}
+		
+		# Overlord create self governing colony pact with colony
+		if = {
+			limit = { exists = c:DJI }
+			create_diplomatic_pact = {
+				country = c:DJI										# Change TAG ****
+				type = semi_autonomous_colony
+			}
+			create_decolonisation_pacts = yes
+		}
+		
+		# Fire only once
+		set_variable = french_djibouti_sgc						# Change variable ****
+		
+		ai_chance = { 
+			base = 90 
+		}
+		
+    }
+	
+	option = {
+        name = french_decolonisation.option.2					# REFUSE
+		
+		# Natives are angry!
+		every_scope_state = {
+			limit = {
+		 		state_region = { is_homeland = cu:djibouti }	# Change homeland identity to match colony to be released ****
+		 	}
+			add_radicals_in_state = {
+				culture = cu:djibouti							# Change culture ****
+				value = large_radicals
+			}
+			add_modifier = { name = nationalist_agitation months = 60 is_decaying = yes } 
+		}
+		
+		# Fire only once
+		set_variable = french_djibouti_sgc						# Change variable ****
+		
+		ai_chance = { 
+			base = 10 modifier = { trigger = { has_global_variable = historical_railroading_active } add = -100 } 
+		}
+		
+    }
+
+}
+
+#Comoros
+french_decolonisation.5 = {
+    type = country_event
+	placement = scope:colonial_state
+
+    title = french_comoros.sgc.t 					# Title of the event; ADD LOCALISATION
+    desc = french_comoros.sgc.d 					# Description of the event; ADD LOCALISATION
+    #flavor = french_comoros.sgc.f 				# Flavor for event; ADD LOCALISATION, IF REQUIRED
+
+    event_image = { video = "gfx/event_pictures/unspecific_signed_contract.bk2" }
+
+    icon = "gfx/interface/icons/event_icons/waving_flag.dds" 	# Icon that shows on the map or the outliner
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear" 	# Sound effect if needed
+
+    duration = 1 # Duration to fire if triggers are met
+	
+	trigger = {													# What triggers the event, if using other events or journal entries leave empty
+		
+		#Overlord conditions
+		exists = c:FRA this = c:FRA											# Change TAG of the overlord ****
+		game_date >= 1963.1.1									# START DATE: Date colony became self governing ****
+		game_date < 1973.1.1									# END DATE: All historical events must not fire 10 years after the START DATE ****
+		
+		is_a_republican_democracy = yes							# Correct gov types
+		is_sufficiently_independent = yes						# is_vassal = no		
+		is_at_war = no											# war = no
+		
+		#Colony conditions
+		NOT = { 												# Colony to be released must not already exist on the map
+			exists = c:COM										# Change TAG of the colony ****
+		}
+		p:x606CE0.state.owner = {
+			THIS = ROOT
+		}
+		
+		# Event has not been fired before
+		NOT = { has_variable = french_comoros_sgc }			# CHANGE ****
+		
+    }
+	
+	immediate = {
+	
+		# Generate list of provinces to be released				# DO NOT TOUCH THIS SECTION
+		p:x606CE0.state = {
+			save_scope_as = colonial_state
+		}
+		
+	}
+    
+    option = {
+        name = french_decolonisation.option.1				#Grant them self-government
+        default_option = yes highlighted_option = yes
+		
+		#Release country
+		create_country = {
+			tag = COM										# Change TAG of country being released ****
+			origin = THIS									# TAG where the created country takes tech from
+			province = p:x606CE0
+			
+			on_created = {									# Set government laws & rulers here
+				
+				# SET laws for colony ****
+				effect_starting_politics_presidential_republic = yes
+				effect_starting_politics_democratic = yes
+				effect_starting_politics_constitutional_unitary_state = yes
+				effect_starting_politics_war_policy_anti_military = yes
+				effect_starting_politics_economic_policy_interventionism = yes
+				effect_starting_politics_trade_policy_protectionism = yes
+				effect_starting_politics_anti_nuclear_policy = yes
+				
+				# Set diplomatic recognition
+				set_country_type = unrecognized
+			}
+		}
+		
+		# Overlord create self governing colony pact with colony
+		if = {
+			limit = { exists = c:COM }
+			create_diplomatic_pact = {
+				country = c:COM										# Change TAG ****
+				type = semi_autonomous_colony
+			}
+			create_decolonisation_pacts = yes
+		}
+		
+		# Fire only once
+		set_variable = french_comoros_sgc						# Change variable ****
+		
+		ai_chance = { 
+			base = 90 
+		}
+		
+    }
+	
+	option = {
+        name = french_decolonisation.option.2					# REFUSE
+		
+		# Natives are angry!
+		every_scope_state = {
+			limit = {
+		 		state_region = { is_homeland = cu:malagasy }	# Change homeland identity to match colony to be released ****
+		 	}
+			add_radicals_in_state = {
+				value = large_radicals
+			}
+			add_modifier = { name = nationalist_agitation months = 60 is_decaying = yes }
+		}
+		
+		# Fire only once
+		set_variable = french_comoros_sgc						# Change variable ****
+		
+		ai_chance = { 
+			base = 10 modifier = { trigger = { has_global_variable = historical_railroading_active } add = -100 } 
+		}
+		
+    }
+
+}
+
+#Algeria (INDEPENDENCE)
+french_decolonisation.6 = {
+    type = country_event
+	placement = scope:colonial_state
+
+    title = french_algeria.indy.t 					# Title of the event; ADD LOCALISATION
+    desc = french_algeria.indy.d 					# Description of the event; ADD LOCALISATION
+    #flavor = french_algeria.indy.f 				# Flavor for event; ADD LOCALISATION, IF REQUIRED
+
+    event_image = { video = "gfx/event_pictures/unspecific_signed_contract.bk2" }
+
+    icon = "gfx/interface/icons/event_icons/waving_flag.dds" 	# Icon that shows on the map or the outliner
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear" 	# Sound effect if needed
+
+    duration = 1 # Duration to fire if triggers are met
+	
+	trigger = {													# What triggers the event, if using other events or journal entries leave empty
+		
+		#Overlord conditions
+		exists = c:FRA this = c:FRA											# Change TAG of the overlord ****
+		game_date >= 1962.7.1									# START DATE: Date colony became self governing ****
+		game_date < 1972.1.1									# END DATE: All historical events must not fire 10 years after the START DATE ****
+		
+		is_a_republican_democracy = yes							# Correct gov types
+		is_sufficiently_independent = yes						# is_vassal = no		
+		is_at_war = no											# war = no
+		
+		#Colony conditions
+		NOT = { 												# Colony to be released must not already exist on the map
+			exists = c:ALG										# Change TAG of the colony ****
+		}
+		any_scope_state = { 									# Overlord owns the states of the colony to be released
+			state_region = { is_homeland = cu:algerian }		# Change homeland identity to match colony to be released ****
+			##is_incorporated = no								# State is a colony
+			#owner = THIS										# Overlord must own the state to be released
+		}
+		
+		# Event has not been fired before
+		NOT = { has_variable = french_algeria_indy }			# CHANGE ****
+		
+    }
+	
+	immediate = {
+	
+		# Generate list of provinces to be released				# DO NOT TOUCH THIS SECTION
+		every_scope_state = {
+			limit = {
+				state_region = { is_homeland = cu:algerian }	# Change homeland identity to match colony to be released ****
+				##is_incorporated = no							# State is a colony
+				#contains_capital_of = c:ALG					# State is the capital of colony ****
+			}
+			save_scope_as = colonial_state
+		}
+		
+	}
+    
+    option = {
+        name = french_decolonisation.option.1				#Grant them self-government
+        default_option = yes highlighted_option = yes
+		
+		#Release country
+		create_country = {
+			tag = ALG										# Change TAG of country being released ****
+			origin = THIS									# TAG where the created country takes tech from
+			state = scope:colonial_state
+			
+			on_created = {									# Set government laws & rulers here
+				
+				# SET laws for colony ****
+				effect_starting_politics_presidential_republic = yes
+				effect_starting_politics_democratic = yes
+				effect_starting_politics_constitutional_unitary_state = yes
+				effect_starting_politics_war_policy_anti_military = yes
+				effect_starting_politics_economic_policy_interventionism = yes
+				effect_starting_politics_trade_policy_protectionism = yes
+				effect_starting_politics_anti_nuclear_policy = yes
+				
+				# CREATE leader for colony ****
+				create_character = {
+					first_name = "guy_incognito_first_name"		# CHANGE
+					last_name = "guy_incognito_last_name"		# CHANGE
+					ruler = yes
+					#birth_date = 1910.1.1						# CHANGE
+					interest_group = ig_rural_folk				# CHANGE
+					ideology = ideology_democratic				# CHANGE
+					traits = {
+						charismatic								# CHANGE
+						persistent								# CHANGE
+						meticulous								# CHANGE
+					}
+				}
+				
+				# Set diplomatic recognition
+				set_country_type = unrecognized
+			}
+		}
+		every_scope_state = {
+			limit = {
+		 		state_region = { is_homeland = cu:algerian }	# Change homeland identity to match colony to be released ****
+				##is_incorporated = no							# State is a colony
+		 	}
+			set_state_owner = c:ALG								# Change TAG to colony ****
+		}
+		
+		# Overlord create client state pact with colony
+		if = {
+			limit = { exists = c:ALG }
+			create_diplomatic_pact = {
+				country = c:ALG										# Change TAG ****
+				type = protectorate
+			}
+		}
+		
+		# Fire only once
+		set_variable = french_algeria_indy						# Change variable ****
+		
+		ai_chance = { 
+			base = 90 
+		}
+		
+    }
+	
+	option = {
+        name = french_decolonisation.option.2					# REFUSE
+		
+		# Natives are angry!
+		every_scope_state = {
+			limit = {
+		 		state_region = { is_homeland = cu:algerian }	# Change homeland identity to match colony to be released ****
+		 	}
+			add_radicals_in_state = {
+				culture = cu:algerian							# Change culture ****
+				value = large_radicals
+			}
+			add_modifier = { name = nationalist_agitation months = 60 is_decaying = yes } 
+		}
+		
+		# Fire only once
+		set_variable = french_algeria_indy						# Change variable ****
+		
+		ai_chance = { 
+			base = 10 modifier = { trigger = { has_global_variable = historical_railroading_active } add = -100 } 
+		}
+		
+    }
+
+}
+
+### Oceania ###
+
+#New Caledonia
+french_decolonisation.7 = {
+    type = country_event
+	placement = scope:colonial_state
+
+    title = french_new_caledonia.sgc.t 					# Title of the event; ADD LOCALISATION
+    desc = french_new_caledonia.sgc.d 					# Description of the event; ADD LOCALISATION
+    #flavor = french_new_caledonia.sgc.f 				# Flavor for event; ADD LOCALISATION, IF REQUIRED
+
+    event_image = { video = "gfx/event_pictures/unspecific_signed_contract.bk2" }
+
+    icon = "gfx/interface/icons/event_icons/waving_flag.dds" 	# Icon that shows on the map or the outliner
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear" 	# Sound effect if needed
+
+    duration = 1 # Duration to fire if triggers are met
+	
+	trigger = {													# What triggers the event, if using other events or journal entries leave empty
+		
+		#Overlord conditions
+		exists = c:FRA this = c:FRA											# Change TAG of the overlord ****
+		game_date >= 1998.11.8									# START DATE: Date colony became self governing ****
+		game_date < 2008.11.8									# END DATE: All historical events must not fire 10 years after the START DATE ****
+		
+		is_a_republican_democracy = yes							# Correct gov types
+		is_sufficiently_independent = yes						# is_vassal = no		
+		is_at_war = no											# war = no
+		
+		#Colony conditions
+		NOT = { 												# Colony to be released must not already exist on the map
+			exists = c:NCD										# Change TAG of the colony ****
+		}
+		any_scope_state = { 									# Overlord owns the states of the colony to be released
+			state_region = { is_homeland = cu:new_caledonian }		# Change homeland identity to match colony to be released ****
+			#is_incorporated = no								# State is a colony
+			#owner = THIS										# Overlord must own the state to be released
+		}
+		
+		# Event has not been fired before
+		NOT = { has_variable = french_new_caledonia_sgc }			# CHANGE ****
+		
+    }
+	
+	immediate = {
+	
+		# Generate list of provinces to be released				# DO NOT TOUCH THIS SECTION
+		every_scope_state = {
+			limit = {
+				state_region = { is_homeland = cu:new_caledonian }	# Change homeland identity to match colony to be released ****
+				#is_incorporated = no								# State is a colony
+				#contains_capital_of = c:NCD						# State is the capital of colony ****
+			}
+			save_scope_as = colonial_state
+		}
+		
+	}
+    
+    option = {
+        name = french_decolonisation.option.1				#Grant them self-government
+        default_option = yes highlighted_option = yes
+		
+		#Release country
+		create_country = {
+			tag = NCD										# Change TAG of country being released ****
+			origin = THIS									# TAG where the created country takes tech from
+			state = scope:colonial_state
+			
+			on_created = {									# Set government laws & rulers here
+				
+				# SET laws for colony ****
+				effect_starting_politics_presidential_republic = yes
+				effect_starting_politics_democratic = yes
+				effect_starting_politics_constitutional_unitary_state = yes
+				effect_starting_politics_war_policy_anti_military = yes
+				effect_starting_politics_economic_policy_interventionism = yes
+				effect_starting_politics_trade_policy_protectionism = yes
+				effect_starting_politics_anti_nuclear_policy = yes
+				
+				# CREATE leader for colony ****
+				create_character = {
+					first_name = "guy_incognito_first_name"		# CHANGE
+					last_name = "guy_incognito_last_name"		# CHANGE
+					ruler = yes
+					#birth_date = 1910.1.1						# CHANGE
+					interest_group = ig_rural_folk				# CHANGE
+					ideology = ideology_democratic				# CHANGE
+					traits = {
+						charismatic								# CHANGE
+						persistent								# CHANGE
+						meticulous								# CHANGE
+					}
+				}
+				
+				# Set diplomatic recognition
+				set_country_type = unrecognized
+			}
+		}
+		every_scope_state = {
+			limit = {
+		 		state_region = { is_homeland = cu:new_caledonian }	# Change homeland identity to match colony to be released ****
+				#is_incorporated = no								# State is a colony
+		 	}
+			set_state_owner = c:NCD									# Change TAG to colony ****
+		}
+		
+		# Overlord create self governing colony pact with colony
+		if = {
+			limit = { exists = c:NCD }
+			create_diplomatic_pact = {
+				country = c:NCD											# Change TAG ****
+				type = semi_autonomous_colony
+			}
+			create_decolonisation_pacts = yes
+		}
+		
+		# Fire only once
+		set_variable = french_new_caledonia_sgc						# Change variable ****
+		
+		ai_chance = { 
+			base = 90 
+		}
+		
+    }
+	
+	option = {
+        name = french_decolonisation.option.2						# REFUSE
+		
+		# Natives are angry!
+		every_scope_state = {
+			limit = {
+		 		state_region = { is_homeland = cu:new_caledonian }	# Change homeland identity to match colony to be released ****
+		 	}
+			add_radicals_in_state = {
+				culture = cu:new_caledonian							# Change culture ****
+				value = large_radicals
+			}
+			add_modifier = { name = nationalist_agitation months = 60 is_decaying = yes } 
+		}
+		
+		# Fire only once
+		set_variable = french_new_caledonia_sgc						# Change variable ****
+		
+		ai_chance = { 
+			base = 10 modifier = { trigger = { has_global_variable = historical_railroading_active } add = -100 } 
+		}
+		
+    }
+
+}
+
+#Polynesia
+french_decolonisation.8 = {
+    type = country_event
+	placement = scope:colonial_state
+
+    title = french_polynesia.sgc.t 				# Title of the event; ADD LOCALISATION
+    desc = french_polynesia.sgc.d 				# Description of the event; ADD LOCALISATION
+    #flavor = french_polynesia.sgc.f 			# Flavor for event; ADD LOCALISATION, IF REQUIRED
+
+    event_image = { video = "gfx/event_pictures/unspecific_signed_contract.bk2" }
+
+    icon = "gfx/interface/icons/event_icons/waving_flag.dds" 	# Icon that shows on the map or the outliner
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear" 	# Sound effect if needed
+
+    duration = 1 # Duration to fire if triggers are met
+	
+	trigger = {													# What triggers the event, if using other events or journal entries leave empty
+		
+		#Overlord conditions
+		exists = c:FRA this = c:FRA											# Change TAG of the overlord ****
+		game_date >= 1984.9.14									# START DATE: Date colony became self governing ****
+		game_date < 1994.9.14									# END DATE: All historical events must not fire 10 years after the START DATE ****
+		
+		is_a_republican_democracy = yes							# Correct gov types
+		is_sufficiently_independent = yes						# is_vassal = no		
+		is_at_war = no											# war = no
+		
+		#Colony conditions
+		NOT = { 												# Colony to be released must not already exist on the map
+			exists = c:PYI										# Change TAG of the colony ****
+		}
+		any_scope_state = { 									# Overlord owns the states of the colony to be released
+			state_region = { is_homeland = cu:polynesian }		# Change homeland identity to match colony to be released ****
+			#is_incorporated = no								# State is a colony
+			#owner = THIS										# Overlord must own the state to be released
+		}
+		
+		# Event has not been fired before
+		NOT = { has_variable = french_polynesia_sgc }			# CHANGE ****
+		
+    }
+	
+	immediate = {
+	
+		# Generate list of provinces to be released					# DO NOT TOUCH THIS SECTION
+		every_scope_state = {
+			limit = {
+				state_region = { is_homeland = cu:polynesian }		# Change homeland identity to match colony to be released ****
+				#is_incorporated = no								# State is a colony
+				#contains_capital_of = c:PYI						# State is the capital of colony ****
+			}
+			save_scope_as = colonial_state
+		}
+		
+	}
+    
+    option = {
+        name = french_decolonisation.option.1				#Grant them self-government
+        default_option = yes highlighted_option = yes
+		
+		#Release country
+		create_country = {
+			tag = PYI										# Change TAG of country being released ****
+			origin = THIS									# TAG where the created country takes tech from
+			state = scope:colonial_state
+			
+			on_created = {									# Set government laws & rulers here
+				
+				# SET laws for colony ****
+				effect_starting_politics_presidential_republic = yes
+				effect_starting_politics_democratic = yes
+				effect_starting_politics_constitutional_unitary_state = yes
+				effect_starting_politics_war_policy_anti_military = yes
+				effect_starting_politics_economic_policy_interventionism = yes
+				effect_starting_politics_trade_policy_protectionism = yes
+				effect_starting_politics_anti_nuclear_policy = yes
+				
+				# CREATE leader for colony ****
+				create_character = {
+					first_name = "guy_incognito_first_name"		# CHANGE
+					last_name = "guy_incognito_last_name"		# CHANGE
+					ruler = yes
+					#birth_date = 1910.1.1						# CHANGE
+					interest_group = ig_rural_folk				# CHANGE
+					ideology = ideology_democratic				# CHANGE
+					traits = {
+						charismatic								# CHANGE
+						persistent								# CHANGE
+						meticulous								# CHANGE
+					}
+				}
+				
+				# Set diplomatic recognition
+				set_country_type = unrecognized
+			}
+		}
+		every_scope_state = {
+			limit = {
+		 		state_region = { is_homeland = cu:polynesian }		# Change homeland identity to match colony to be released ****
+				#is_incorporated = no								# State is a colony
+		 	}
+			set_state_owner = c:PYI									# Change TAG to colony ****
+		}
+		
+		# Overlord create self governing colony pact with colony
+		if = {
+			limit = { exists = c:PYI }
+			create_diplomatic_pact = {
+				country = c:PYI											# Change TAG ****
+				type = semi_autonomous_colony
+			}
+			create_decolonisation_pacts = yes
+		}
+		
+		# Fire only once
+		set_variable = french_polynesia_sgc							# Change variable ****
+		
+		ai_chance = { 
+			base = 90 
+		}
+		
+    }
+	
+	option = {
+        name = french_decolonisation.option.2						# REFUSE
+		
+		# Natives are angry!
+		every_scope_state = {
+			limit = {
+		 		state_region = { is_homeland = cu:polynesian }		# Change homeland identity to match colony to be released ****
+		 	}
+			add_radicals_in_state = {
+				culture = cu:polynesian								# Change culture ****
+				value = large_radicals
+			}
+			add_modifier = { name = nationalist_agitation months = 60 is_decaying = yes } 
+		}
+		
+		# Fire only once
+		set_variable = french_polynesia_sgc							# Change variable ****
+		
+		ai_chance = { 
+			base = 10 modifier = { trigger = { has_global_variable = historical_railroading_active } add = -100 } 
+		}
+		
+    }
+
+}

@@ -1,0 +1,257 @@
+﻿l_english:
+# TUs
+ ig_trade_unions:0 "Trade Unionists"
+ ig_trade_unions_only_icon:0 "@trade_unions_bpm!"
+ ig_trade_unions_desc:0 "Trade Unionists center their activity on trade unions rather than parties or the government, coordinating strikes and collective bargaining to maintain workers' power against employers. Typically eschewing political goals for economic ones, they will participate in general politics only in specific circumstances. Organized examples include the American CIO and the British TUC."
+
+ ig_syndicalists:0 "Syndicalists"
+ ig_syndicalists_desc:0 "Syndicalists believe that the workers should seize the means of production through economic action, rather than through the state. They organize themselves into industrial unions, which they believe will eventually replace the state as the primary organizational unit of society. Examples include the French CGT and the Spanish CNT."
+
+# Agpops
+ ig_agrarian_populists:0 "Agrarian Populists"
+ ig_agrarian_populists_only_icon:0 "@ig_agrarian_populists!"
+ ig_agrarian_populists_desc:0 "Agrarian Populists do not come from a single tradition, and can vary greatly even within one country. Generally, they oppose established landowners in favor of egalitarian land use; moderate populists seek local autonomy and tax reform, whereas more radical ones advocate for social revolution. Examples include the Russian Narodniks and the American Populist Party."
+
+ ig_agrarian_socialists:0 "Agrarian Socialists"
+ ig_agrarian_socialists_desc:0 "$ig_agrarian_populists_desc$"
+
+ ig_radical_abolitionists:0 "Radical Abolitionists"
+ ig_radical_abolitionists_desc:0 "$ig_agrarian_populists_desc$"
+
+ ig_NEPmen:0 "NEPmen"
+ ig_NEPmen_desc:0 "Functionally defunct as an active political force in the Soviet Union after the 1930s, this IG represents wealthy farmers (kulaks) as well as the businessmen that emerged with the Soviet Union's New Economic Policy (NEP), this represents a populist somewhat reactionary impulse among the working class and an emergent bourgeoisie."
+
+# Socialists
+ ig_socialists:0 "Market Socialists"
+ ig_socialists_only_icon:0 "@ig_socialists!"
+ ig_socialists_desc:0 "Market Socialists advocate for the implementation of market mechanisms within a socialist system, usually representing a right-ward tendency within a communist party."
+
+ ig_reform_faction:0 "Reform Faction"
+ ig_reform_faction_desc:0 "The Reform Faction describes members of the communist party who championed political and economic reforms which both deradicalised the state structure and bowed to the majoritarian demands of the people, usually in the form of breaking the communist party's monopoly on power or market-oriented economics."
+
+ ig_market_socialists:0 "Market Socialists"
+ ig_market_socialists_desc:0 "Market Socialists advocate for the implementation of market mechanisms within a socialist system, usually representing a right-ward tendency within a communist party."
+
+ ig_independent_socialists:0 "Independent Socialists"
+ ig_independent_socialists_desc:0 "Socialism refers to the broad tradition of leftists that oppose the anarchists in the First International. Specific tendencies can vary greatly, for instance, between the mass movement of the British Chartists, the secret societies of the Blanquists, the parliamentary politics of Lassalleans, and the scientific socialism of Marxists."
+
+# Anarchists
+ ig_anarchists:0 "Left Radicals"
+ ig_anarchists_only_icon:0 "@ig_anarchists!"
+ ig_anarchists_desc:0 "Left Radicals or the Counterculture "New Left" is a particular strain of Left-wing thought that emerges as an opposition to both the suppression of left-wing groups in Capitalist societies at the same time as a rejection of the policies of actually existing socialist countries. In Marxist-Leninist countries, Left Radicals represent the Left Opposition. In all other cases, this group is a representation of groups like the Red Army Faction or Trotskyists."
+
+ ig_anarcho_syndicalists:0 "Anarcho-Syndicalists"
+ ig_anarcho_syndicalists_desc:0 "$ig_anarchists_desc$"
+
+ ig_maoists:0 "Maoists"
+ ig_maoists_desc:0 "Broadly speaking, there are two kinds of people who claim to adhere to Mao ZeDong's additions to the Marxist-Leninist Corpus: Maoists and adherents of Mao ZeDong Thought. This interest group is meant to uncomfortably represent both, but the Maoist side is more prominent as the legacy of Mao ZeDong thought in the People's Republic of China is claimed by nearly all factions of the CPC regardless of actual factional differences. Maoism, thus represents the strain of ML theory that posits revolutionary action through an alliance between workers and peasants who aim to achieve class liberation by encircling the urban areas."
+
+ ig_left_opposition:0 "Left Opposition"
+ ig_left_opposition_desc:0 "The Left Opposition represents the strains of thought within the CPSU that aligns with those of Leon Trotsky, functionally defunct after 1930. The Left Opposition historically advocated for rapid industrialisation, voluntary collectivisation of agriculture, the expansion of worker's democracy, and an aggressive foreign policy."
+
+# Revolutionist Socialists
+ ig_revolutionist_socialists:0 "Marxist-Leninists"
+ ig_revolutionist_socialists_only_icon:0 "@ig_revolutionist_socialists!"
+ ig_revolutionist_socialists_desc:0 "Marxist-Leninists believe that an international dictatorship of the proletariat is the only way to achieve socialism. To them, the struggle for reforms is one component of class struggle, as a means of building the revolutionary consciousness necessary to win political power. Usually, revolutionists also cohere around a mass party as a repository for political experience. Examples include the German Spartacists and the Russian Bolsheviks."
+
+ ig_revolutionist_social_democrats:0 "Left Social Democrats"
+ ig_revolutionist_social_democrats_desc:0 "Revolutionist Social Democrats, the progenitors to later Communists, believe that an international dictatorship of the proletariat is the only way to achieve socialism. To them, the struggle for reforms is one component of class struggle, as a means of building the revolutionary consciousness necessary to win political power. Usually, revolutionists also cohere around a mass party as a repository for political experience. Examples include the early German SPD, the German Spartacists, and the Russian Bolsheviks."
+
+ ig_communists:0 "Marxist-Leninists"
+ ig_communists_desc:0 "Marxist-Leninists believe that an international dictatorship of the proletariat is the only way to achieve socialism. To them, the struggle for reforms is one component of class struggle, as a means of building the revolutionary consciousness necessary to win political power. Usually, revolutionists also cohere around a mass party as a repository for political experience. Examples include the German Spartacists and the Russian Bolsheviks."
+
+# Reformist Socialists
+ ig_reformist_socialists:0 "Social Democrats"
+ ig_reformist_socialists_only_icon:0 "@ig_reformist_socialists!"
+ ig_reformist_socialists_desc:0 "Once revolutionary, social democrats are now mostly committed to reformism. On the left are those who believe that socialism can be attained by reforms alone, such as Eduard Bernstein's faction in the SPD. On the right wing are those who want to strike a compromise betwen capitalism and socialism, eventually becoming what we know as social democracy today."
+
+ ig_possibilists:0 "Possibilists"
+ ig_possibilists_desc:0 "$ig_reformist_socialists_desc$"
+
+ ig_fabian_socialists:0 "Fabian Socialists"
+ ig_fabian_socialists_desc:0 "$ig_reformist_socialists_desc$"
+
+ ig_reformist_social_democrats:0 "Right Social Democrats"
+ ig_reformist_social_democrats_desc:0 "$ig_reformist_socialists_desc$"
+
+ ig_revisionist_faction:0 "Revisionist Faction"
+ ig_revisionist_faction_desc:0 "Representing groups like the Mensheviks, the Revisionist Faction is the interest group that represents the tendency within actually existing socialists countries to roll back the advances of the Marxist-Leninists and completely capitulate to global capital in the name of restoring the country to the "orthodox" "Marxist" path of feudalism to capitalism to socialism. These people view the implementation of the dictatorship of the proletariat as premature and a mistake."
+
+ ig_left_kmt:0 "Revolutionary Kumintang"
+ ig_left_kmt_desc: "After the Chiang Kai Shek's party coup in 1927, remnants of the left-KMT organized in the PRC as the Revolutionary Committee of the Kuomintang."
+
+ ig_social_democrats:0 "Social Democrats"
+ ig_social_democrats_desc:0 "Once revolutionary, social democrats are now mostly committed to reformism. On the left are those who believe that socialism can be attained by reforms alone, such as Eduard Bernstein's faction in the SPD. On the right wing are those who want to strike a compromise betwen capitalism and socialism, eventually becoming what we know as social democracy today."
+
+# Radlibs
+ ig_radicals:0 "Progressives"
+ ig_radicals_only_icon:0 "@ig_radicals!"
+ ig_radicals_desc:0 "Progressives represent a political tendency towards procedural reformation of a (usually non-socialist) political system in a socially or environmentally progressive direction."
+
+ ig_progressive_liberals:0 "Progressive Liberals"
+ ig_progressive_liberals_desc:0 "Progressive liberals are the moderated descendants of radical liberals, who still retain their preference for expanded sufferage and social egalitarianism, but no longer engage in revolutionary activity. If their home country becomes too reactionary, however, the progressives may recover their radical character! Examples include the Radical-Socialists of the French Third Republic and Teddy Roosevelt's Bull-Moose Party."
+
+ ig_social_liberals:0 "Social Liberals"
+ ig_social_liberals_desc:0 "Social liberals are the moderated descendants of radical liberals, who still retain their preference for expanded sufferage and social egalitarianism, but no longer engage in revolutionary activity. If their home country becomes too reactionary, however, the progressives may recover their radical character! Examples include the Radical-Socialists of the French Third Republic and Teddy Roosevelt's Bull-Moose Party."
+
+ ig_left_liberals:0 "Left Liberals"
+ ig_left_liberals_desc:0 "$ig_social_liberals_desc$"
+
+ ig_conscience_whigs:0 "Progressives"
+ ig_conscience_whigs_desc:0 "$ig_radicals_desc$"
+
+ ig_anti_masonic_whigs:0 "Anti-Masonic Whigs"
+ ig_anti_masonic_whigs_desc:0 "$ig_radicals_desc$"
+
+ ig_radical_republicans:0 "Progressives"
+ ig_radical_republicans_desc:0 "$ig_radicals_desc$"
+
+ ig_zapadniks:0 "Progressives"
+ ig_zapadniks_desc:0 "Zapadniks believe that Russia must modernize using the example of the western countries (hence the name) in philosophy and culture. They almost always support liberal reforms, promote republican ideals, civil rights, private property and other elements of liberal thought."
+
+# Liberals
+ ig_liberals:0 "Welfare Liberals"
+ ig_liberals_only_icon:0 "@ig_liberals!"
+ ig_liberals_desc:0 "Welfare Liberals represent the political thought that emerged from the devastation of the Great Depression, usually with an intent to save Capitalism from itself without radically altering the liberal political system."
+
+ ig_liberal_reformers:0 "Liberal Reformers"
+ ig_liberal_reformers_desc:0 "$ig_liberals_desc$"
+
+ ig_orleanists_left:0 "Orleanists (Left)"
+ ig_orleanists_left_desc:0 "$ig_liberals_desc$"
+
+ ig_moderate_republicans:0 "Moderate Republicans"
+ ig_moderate_republicans_desc:0 "$ig_liberals_desc$"
+
+ ig_moderate_liberals:0 "Moderate Liberals"
+ ig_moderate_liberals_desc:0 "$ig_liberals_desc$"
+
+ ig_jacksonians:0 "Jacksonian Democrats"
+ ig_jacksonians_desc:0 "$ig_liberals_desc$"
+
+ ig_jacksonian_liberals:0 "Jacksonian Populists"
+ ig_jacksonian_liberals_desc:0 "$ig_liberals_desc$"
+
+ ig_zapadniks_moderate:0 "Zapadniks (Moderate)"
+ ig_zapadniks_moderate_desc:0 "Zapadniks believe that Russia must modernize using the example of the western countries (hence the name) in philosophy and culture. They are in favor of liberal and republican reforms, although the more moderate among them favor non-revolutionary, reformist methods of achieving those."
+
+# Marlibs
+ ig_market_liberals:0 "Market Liberals"
+ ig_market_liberals_only_icon:0 "@ig_market_liberals!"
+ ig_market_liberals_desc:0 "Market liberals are conservative liberals that prioritize laissez-faire economics over liberalization in other spheres of society. Examples include the British Peelites and American Bourbon Democrats."
+
+ ig_bourbon_liberals:0 "Bourbon Liberals"
+ ig_bourbon_liberals_desc:0 "$ig_market_liberals_desc$"
+ ig_bourbon_democrats:0 "Bourbon Democrats"
+ ig_bourbon_democrats_desc:0 "$ig_market_liberals_desc$"
+
+# Natlibs
+ ig_national_liberals:0 "Neoliberals"
+ ig_national_liberals_only_icon:0 "@ig_national_liberals!"
+ ig_national_liberals_desc:0 "Neoliberals advocate for the privatisation of as many publicly owned assets and institutions. Neoliberals also seek to curtail government intervention within the economy."
+
+ ig_bonapartists:0 "Bonapartists"
+ ig_bonapartists_desc:0 "$ig_national_liberals_desc$"
+
+ ig_positivists:0 "Positivists"
+ ig_positivists_desc:0 "$ig_national_liberals_desc$"
+
+ ig_war_democrats:0 "War Democrats"
+ ig_war_democrats_desc:0 "$ig_national_liberals_desc$"
+
+# Conservatives
+ ig_conservatives:0 "Conservatives"
+ ig_conservatives_only_icon:0 "@ig_conservatives!"
+ ig_conservatives_desc:0 "Conservatives refer to the broad set of people who want to preserve the status quo, while situationally advancing or rolling back reforms in response to social crises. Since this is not a unified ideology, conservatives can be rife with internal conflicts, for instance, between those who support libertarianism vs. social paternalism, particularism vs. nationalism, or secularism vs. religious moralism."
+
+ ig_conservative_reformers:0 "Conservative Reformers"
+ ig_conservative_reformers_desc:0 "$ig_conservatives_desc$"
+
+ ig_orleanists:0 "Orleanists"
+ ig_orleanists_desc:0 "$ig_conservatives_desc$"
+ ig_orleanists_right:0 "Orleanists (Right)"
+ ig_orleanists_right_desc:0 "$ig_conservatives_desc$"
+
+ ig_cotton_whigs:0 "Cotton Whigs"
+ ig_cotton_whigs_desc:0 "ig_conservatives_desc"
+
+ ig_paternal_conservatives:0 "Neoconservatives"
+ ig_paternal_conservatives_desc:0 "Neoconservativism is a strain of conservatism that advocates for hawkish and aggressive foreign policy. Neocons also tend to draw from a religious fundamentalist base and appeal to reactionary and traditionalist talking points."
+
+ ig_slavophiles_moderate:0 "Slavophiles (Moderate)"
+ ig_slavophiles_moderate_desc:0 "Slavophiles believe that Russia must not be tainted by the western thought - they are skeptical of liberal reforms and socialist revolution, thinking that only some things need to change to let Russia remain powerful, one and indivisible. The more moderate among them agree to some more necessary reforms - only insofar as to let the country stay stable, but no more."
+
+ ig_catholic_democrats:0 "Catholic Democrats"
+ ig_catholic_democrats_desc:0 "$ig_paternal_conservatives_desc$"
+
+# Reactionaries
+ ig_reactionaries:0 "Reactionaries"
+ ig_reactionaries_only_icon:0 "@ig_reactionaries!"
+ ig_reactionaries_desc:0 "Reactionaries are a broad tent of those who want to go back to the good old days, who unlike niche interest groups elevate their nostalgia to a general politics. The specifics of what they want depends on what the good old days were like (or seemed to be) in each particular country. Subsections of this group include monarchic absolutists, religious moralists, or even wealthy peasants."
+
+ ig_absolutists:0 "Absolutists"
+ ig_absolutists_desc:0 "Absolutists believe that the monarch should hold absolute power over a centralized, modernizing state. They are opposed both by liberal reformers as well as local aristocrats, who see absolutism as an infringement on their ancestral power. Examples include the Russian Tsarists and certain Meiji restorationists."
+
+ ig_slavophiles:0 "Slavophiles"
+ ig_slavophiles_desc:0 "Slavophiles believe that Russia must not be tainted by the western thought - they are skeptical of liberal reforms and socialist revolution, thinking that only some things need to change to let Russia remain powerful, one and indivisible. They are adamant in rejecting majority of reforms, only by divine providence recognizing serfdom as an ill that Russia must eradicate to avoid falling behind the rest of the world, believing that only technical innovations should be imported from the west, and even those should be scrutinized."
+
+ ig_legitimists:0 "Legitimists"
+ ig_legitimists_desc:0 "$ig_reactionaries_desc$"
+ ig_carlists:0 "Carlists"
+ ig_carlists_desc:0 "$ig_reactionaries_desc$"
+
+ ig_southern_democrats:0 "Southern Democrats"
+ ig_southern_democrats_desc:0 "The Southern Democrats are the most fervently pro-slavery, anti-federal faction active in American politics. Unlike most other Antebellum conservatives, who see slavery as a necessary evil, the Southern Democrats see it as a positive good, and are willing to go to great lengths to protect it. They are also the most likely to support secession, and will support the Confederacy in the event of a Civil War."
+
+ ig_southern_conservatives:0 "Southern Conservatives"
+ ig_southern_conservatives_desc:0 "The Southern Conservatives are the most fervently pro-slavery, anti-federal faction active in American politics. Unlike most other Antebellum conservatives, who may see slavery as a necessary evil, the Southern Conservatives see it as a positive good, and are willing to go to great lengths to protect it. They are also the most likely to support secession, and will support the Confederacy in the event of a Civil War."
+ 
+ ig_calhounites:0 "Calhounites"
+ ig_calhounites_desc:0 "$ig_southern_democrats_desc$"
+
+ ig_monarchists:0 "Monarchists"
+ ig_monarchists_desc:0 "$ig_reactionaries_desc$"
+
+ ig_theocrats:0 "Theocrats"
+ ig_theocrats_desc:0 "$ig_reactionaries_desc$"
+
+ ig_national_conservatives:0 "National Conservatives"
+ ig_national_conservatives_desc:0 "National Conservatives are a subset of conservatives devoted to the upholding of a strong national identity and the preservation of moralism as a guiding tenet of the state. In a modernizing world they contrast themselves from their more liberal counterparts with hardline right-wing social policy and a willingness to dismantle liberal institutions to achieve their aims. Examples include the DNVP and the Norwegian Fatherland League"
+
+# Fascists
+ ig_fascists:0 "Fascists"
+ ig_fascists_only_icon:0 "@ig_fascists!"
+ ig_fascists_desc:0 "An extreme-right ideology, fascism is difficult to define in specific terms. Generally characterized by national chauvinism, a reverence of the state, and a rabid hostility to any Left-wing or perceived foreign elements, it is just as much inundated with contradictions -- while fascists often espouse deeply traditional values, they also glorify the efficiency of modern industry and war. This strange coupling of traditionalism with modernity is part of what sets e.g. clerical fascism apart from traditional moralism, and Italian Futurism apart from socialism."
+ ig_integralists:0 "Integralists"
+ ig_integralists_desc:0 "$ig_fascists_desc$"
+
+
+# Nonideological
+ ig_rural_folk:0 "Village Interests"
+ ig_rural_folk_only_icon:0 "@rural_folk_bpm!"
+ ig_rural_folk_desc:0 "A non-ideological power bloc representing the diverse interests of rural folk and local powerbrokers. While often incoherent, such village interests are generally aligned towards local autonomy and traditional values."
+ ig_industrialists:0 "Business Interests"
+ ig_industrialists_only_icon:0 "@industrialists_bpm!"
+ ig_industrialists_desc:0 "A non-ideological power bloc representing the interests of big businesses. Generally committed to limiting government oversight, on all other issues they side with whatever benefits monopoly capital at any moment."
+
+ ig_landowners:0 "Landed Interests"
+ ig_landowners_only_icon:0 "@landowners_bpm!"
+ ig_landowners_desc:0 "A non-ideological power bloc representing the interests of traditionally powerful families. Generally committed to preserving their power, they are plagued by squabbles over ancient grudges."
+ ig_slaver_interests:0 "Slaver Interests"
+ ig_slaver_interests_desc:0 "A non-ideological power bloc representing the interests of slaveholders. Generally committed to defending the right to their 'property', they are otherwise divided over most other issues."
+
+ ig_intelligentsia:0 "Professional Interests"
+ ig_intelligentsia_only_icon:0 "@intelligentsia_bpm!"
+ ig_intelligentsia_desc:0 "A non-ideological power bloc representing the interests of professionals and merchants. Typically organized into professional associations, craft unions, traditional guilds, and informal cartels, these groups fear encroachment from big businesses as well as the unwashed masses. Examples range from Dutch and Italian merchant guilds to the American Federation of Labor."
+ ig_bureaucrats:0 "Bureaucratic Interests"
+ ig_bureaucrats_only_icon:0 "@petty_bourgeoisie_bpm!"
+ ig_bureaucrats_desc:0 "A non-ideological power bloc representing entrenched bureaucrats. These corrupt officials are experts at manipulating political machines to stay in power, despite intended political processes."
+ ig_armed_forces:0 "Military Interests"
+ ig_armed_forces_only_icon:0 "@armed_forces_bpm!"
+ ig_armed_forces_desc:0 "A non-ideological power bloc representing powerful military leaders. Generally committed to expanding military power over civil society, they seek personal prestige and enrichment through military office."
+ ig_devout:0 "Religious Interests"
+ ig_devout_only_icon:0 "@devout_bpm!"
+ ig_devout_desc:0 "A non-ideological power bloc representing organized religion as an entrenched institution. Its members differ from religious moralists as they seek to preserve their privileges within religious structures, rather than injecting religion into broader politics. In countries without a strong organized religion, these are local clerics who hold wealth or secular influence. Examples include state churches, Sunni Muftis, and the ritual masters of China."
+
+# GUI
+ MARGINAL_TITLE_ACCORDION:0 "[concept_marginalized] [Concept('concept_interest_group', '$concept_interest_groups$')]"

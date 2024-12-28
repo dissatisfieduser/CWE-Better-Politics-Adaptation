@@ -1,0 +1,35 @@
+#Environmental
+
+ideology_env_anti_environmental = {
+    icon = "gfx/interface/icons/ideology_icons/wel_ideology/no_welfare.dds"
+
+    lawgroup_environmental_policy = {
+        law_no_environment_law = approve
+		law_weak_environment_law = disapprove
+		law_moderate_environment_law = disapprove
+		law_strong_environment_law = disapprove
+    }
+}
+
+ideology_env_moderate_environmental = {
+    icon = "gfx/interface/icons/ideology_icons/wel_ideology/distributist_welfare.dds"
+
+    lawgroup_environmental_policy = {
+        law_no_environment_law = disapprove
+		law_weak_environment_law = approve
+		law_moderate_environment_law = approve
+		law_strong_environment_law = disapprove
+    }
+}
+
+
+ideology_env_strong_environmental = {
+    icon = "gfx/interface/icons/ideology_icons/wel_ideology/expanded_public_welfare.dds"
+
+    lawgroup_environmental_policy = {
+        law_no_environment_law = disapprove
+		law_weak_environment_law = disapprove
+		law_moderate_environment_law = disapprove
+		law_strong_environment_law = disapprove
+    }
+}

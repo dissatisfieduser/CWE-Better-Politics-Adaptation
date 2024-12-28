@@ -1,0 +1,79 @@
+COUNTRIES = {
+	c:FRA = {
+		set_next_election_date = 1951.06.17
+		
+		#Ruling Party
+		ig:ig_reformist_socialists = { add_ruling_interest_group = yes }
+		ig:ig_trade_unions = { add_ruling_interest_group = yes }
+		ig:ig_socialists = { add_ruling_interest_group = yes }
+		ig:ig_industrialists = { set_ig_suppression = yes }
+		
+		effect_starting_technology_tier_2_5_tech = yes
+
+		set_tax_level = medium
+		
+		add_taxed_goods = g:wine
+		
+		# Laws
+		effect_starting_politics_parliamentary_republic = yes
+		effect_starting_politics_democratic = yes
+		effect_starting_politics_constitutional_unitary_state = yes
+		effect_starting_politics_war_policy_pro_military = yes
+		effect_starting_politics_economic_policy_state_capitalism = yes
+		effect_starting_politics_trade_policy_free_trade = yes
+		effect_starting_politics_pro_nuclear_policy = yes
+		
+		effect_starting_politics_specialisation_manufacturing = yes
+		
+		effect_starting_politics_semi_gold_system = yes
+		
+		activate_law = law_type:law_secret_police
+		
+		activate_law = law_type:law_colonial_exploitation
+		
+		activate_law = law_type:law_total_separation
+
+		set_institution_investment_level = {
+			institution = institution_colonial_affairs
+			level = 3
+		}
+
+		set_institution_investment_level = {
+			institution = institution_social_security
+			level = 2
+		}
+
+		set_institution_investment_level = {
+			institution = institution_workplace_safety
+			level = 1
+		}
+		set_institution_investment_level = {
+			institution = institution_schools
+			level = 2
+		}
+		
+		set_institution_investment_level = {
+			institution = institution_health_system
+			level = 1
+		}
+
+		set_variable = {
+			name = fra_republic_counter
+			value = 4
+		}
+		
+		#International Memberships
+		add_modifier = { name = unga_member }
+		add_modifier = { name = unsc_permanent_member }
+		add_modifier = { name = nato_member }
+		
+		#Extra prestige for winning WW2
+		add_modifier = { name = ww2_victor months = 60 is_decaying = yes }
+		
+		#Chemical capability
+		add_modifier = { name = chemical_capability }
+		set_variable = chemical_program_started
+		
+	}
+	
+}

@@ -1,0 +1,412 @@
+﻿#
+# Note: the triggers are checked at certain key points in the code, not all the time
+# color_key = {
+#    color = "black"      # the map color
+#    possible = { ... }   # the trigger to enable this color
+# }
+#
+
+# Example
+#dynamic_map_color_swedish_junta = {
+#    color = "black"
+#	
+#	possible = {
+#		exists = c:SWE # you /must/ check that a tag exists before doing anything else
+#		this = c:SWE
+#
+#        exists = ig:ig_armed_forces
+#        ig:ig_armed_forces = {
+#            is_in_government = yes
+#        }
+#	}
+#}
+
+peru_bolivia = {
+	color = "peru_bolivia"
+
+	possible = {
+		OR = {
+			AND = {
+				exists = c:PEU
+				THIS = c:PEU
+			}
+			AND = {
+				exists = c:BOL
+				THIS = c:BOL
+			}
+		}
+		owns_entire_state_region = STATE_LA_PAZ
+		owns_entire_state_region = STATE_LIMA
+	}
+}
+
+kalmar_union = {
+	color = "kalmar_orange"
+
+	possible = {
+		exists = c:SCA
+		THIS = c:SCA
+		has_law = law_type:law_monarchy
+		ruler = {
+			has_culture = cu:danish
+		}
+	}
+}
+
+fennoscandia = {
+	color = "finnish_brown"
+
+	possible = {
+		exists = c:SCA
+		THIS = c:SCA
+		has_law = law_type:law_monarchy
+		ruler = {
+			has_culture = cu:finnish
+		}
+	}
+}
+
+korea_monarchy_blue = {
+	color = "joseon_blue"
+	possible = {
+		exists = c:KOR
+		THIS = c:KOR
+		has_law = law_type:law_monarchy
+	}
+}
+
+communist_korea_red = {
+	color = "communist_KOR"
+	possible = {
+		exists = c:KOR
+		THIS = c:KOR
+		has_law = law_type:law_council_republic
+	}
+}
+
+vietnam_communist_red = {
+	color = "communist_DAI"
+
+	possible = {
+		OR = { 
+			c:DAI ?= this
+			c:NVM ?= this
+		}
+		has_law = law_type:law_council_republic
+	}
+}
+
+usa_technate = {
+	color = "communist_USA"
+
+	possible = {
+		c:USA ?= this
+		has_law = law_type:law_council_republic
+	}
+}
+
+usa_monarchy = {
+	color = "usa_monarchy_blue"
+
+	possible = {
+		c:USA ?= this
+		has_law = law_type:law_monarchy
+	}
+}
+
+turkish_republic = {
+	color = "turkish_republic_red"
+
+	possible = {
+		exists = c:TUR
+		THIS = c:TUR
+		OR = { 
+			has_law = law_type:law_presidential_republic
+			 
+			has_law = law_type:law_council_republic
+		}
+	}
+}
+
+united_netherlands = {
+	color = "united_netherlands_orange"
+	possible = {
+		exists = c:NET
+		THIS = c:NET
+		owns_entire_state_region = STATE_FLANDERS
+		owns_entire_state_region = STATE_WALLONIA
+	}
+}
+
+southern_rhodesia_colony = {
+	color = "southern_rhodesian_orange"
+	possible = {
+		exists = c:RHO
+		THIS = c:RHO
+		has_law = law_type:law_monarchy
+	}
+}
+
+austria_hungary = {
+	color = "austria_hungary_color"
+
+	possible = {
+		exists = c:AUS
+		THIS = c:AUS
+		country_has_primary_culture = cu:hungarian
+	}
+}
+
+communist_austria = {
+	color = "communist_austria_red"
+
+	possible = {
+		exists = c:AUS
+		THIS = c:AUS
+		is_a_communist_government = yes
+	}
+}
+
+spain_communist = {
+	color = "communist_spain_pink"
+
+	possible = {
+		exists = c:SPA
+		THIS = c:SPA
+		is_a_communist_government = yes
+	}
+}
+
+imperial_germany = {
+	color = "imperial_germany"
+
+	possible = {
+		OR = { c:GER ?= this c:WGR ?= this }
+		OR = {
+			is_a_regime_monarchy = yes
+			is_a_nationalist_government = yes
+			is_a_theocratic_government = yes
+		}
+	}
+}
+
+imperial_japan = {
+	color = "dictatorship_JAP"
+
+	possible = {
+		exists = c:JAP
+		THIS = c:JAP
+		OR = {
+			is_a_nationalist_government = yes
+			is_a_theocratic_government = yes
+		}
+	}
+}
+
+communist_japan = {
+	color = "communist_JAP"
+
+	possible = {
+		exists = c:JAP
+		THIS = c:JAP
+		is_a_communist_government = yes
+	}
+}
+
+communist_cuba = {
+	color = "communist_CUB"
+
+	possible = {
+		exists = c:CUB
+		THIS = c:CUB
+		is_a_communist_government = yes
+	}
+}
+
+soviet_red = {
+	color = "red_dark"
+
+	possible = {
+		OR = {
+			AND = {
+				exists = c:RUS
+				THIS = c:RUS
+			}
+			AND = {
+				exists = c:SOV
+				THIS = c:SOV
+			}
+		}
+		has_law = law_type:law_council_republic
+	}
+}
+
+communist_china = {
+	color = "communist_china_red"
+	possible = {
+		OR = {
+			AND = { 
+				exists = c:CHI
+				THIS = c:CHI
+			}
+			AND = { 
+				exists = c:PRC
+				THIS = c:PRC
+			}
+		}
+		has_law = law_type:law_council_republic
+	}
+}
+
+communist_EGR = {
+	color = "communist_EGR"
+	possible = {
+		c:EGR ?= THIS
+		has_law = law_type:law_council_republic
+	}
+}
+
+communist_EAU = {
+	color = "communist_EAU"
+	possible = {
+		c:EAU ?= THIS
+		has_law = law_type:law_council_republic
+	}
+}
+
+communist_POL = {
+	color = "communist_POL"
+	possible = {
+		c:POL ?= THIS
+		has_law = law_type:law_council_republic
+	}
+}
+
+communist_CZH = {
+	color = "communist_CZH"
+	possible = {
+		c:CZH ?= THIS
+		has_law = law_type:law_council_republic
+	}
+}
+
+communist_HUN = {
+	color = "communist_HUN"
+	possible = {
+		c:HUN ?= THIS
+		has_law = law_type:law_council_republic
+	}
+}
+
+communist_ROM = {
+	color = "communist_ROM"
+	possible = {
+		c:ROM ?= THIS
+		has_law = law_type:law_council_republic
+	}
+}
+
+communist_YUG = {
+	color = "communist_YUG"
+	possible = {
+		c:YUG ?= THIS
+		has_law = law_type:law_council_republic
+	}
+}
+
+communist_MGL = {
+	color = "communist_MGL"
+	possible = {
+		c:MGL ?= THIS
+		has_law = law_type:law_council_republic
+	}
+}
+
+communist_CAM = {
+	color = "communist_CAM"
+	possible = {
+		c:CAM ?= THIS
+		has_law = law_type:law_council_republic
+	}
+}
+
+communist_LAO = {
+	color = "communist_LAO"
+	possible = {
+		c:LAO ?= THIS
+		has_law = law_type:law_council_republic
+	}
+}
+
+communist_ETH = {
+	color = "communist_ETH"
+	possible = {
+		c:ETH ?= THIS
+		has_law = law_type:law_council_republic
+	}
+}
+
+communist_SOM = {
+	color = "communist_SOM"
+	possible = {
+		c:SOM ?= THIS
+		has_law = law_type:law_council_republic
+	}
+}
+
+communist_AFG = {
+	color = "communist_AFG"
+	possible = {
+		c:AFG ?= THIS
+		has_law = law_type:law_council_republic
+	}
+}
+
+generic_black_anarchist = {
+	color = "black"
+
+	possible = {
+		coa_def_anarchy_flag_trigger = yes
+	}
+}
+
+generic_red_communist = {
+	color = "red"
+
+	possible = {
+		coa_def_communist_flag_trigger = yes
+	}
+}
+
+communist_ICU_DAI = {
+	color = "vietnam_communist_red"
+
+	possible = {
+		c:ICU ?= THIS
+		has_law = law_type:law_council_republic
+		OR = { was_formed_from = DAI was_formed_from = NVM was_formed_from = SVM }
+	}
+	
+}
+
+communist_ICU_CAM = {
+	color = "communist_CAM"
+
+	possible = {
+		c:ICU ?= THIS
+		has_law = law_type:law_council_republic
+		was_formed_from = CAM
+	}
+	
+}
+
+communist_ICU_LAO = {
+	color = "communist_LAO"
+
+	possible = {
+		c:ICU ?= THIS
+		has_law = law_type:law_council_republic
+		was_formed_from = LAO
+	}
+	
+}

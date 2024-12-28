@@ -1,0 +1,1823 @@
+CHARACTERS = {
+
+	### North America ###
+	c:USA = {
+		create_character = {
+			first_name = "Harry_S"
+			last_name = "Truman"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1884.5.8
+			interest_group = ig_conservatives
+			ideology = ideology_welfare_liberal
+            culture = cu:anglo_american
+			religion = rel:protestant
+			traits = {
+				charismatic
+				direct
+				persistent
+			}
+			dna = dna_harry_truman
+		}
+    }
+	
+	c:CAN = {
+		create_character = {
+			first_name = "louis_st_laurent_first_name"
+			last_name = "louis_st_laurent_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1882.2.1
+			interest_group = ig_conservatives
+			ideology = ideology_moderate
+            culture = cu:franco_canadian
+			traits = {
+				charismatic
+                demagogue
+                arrogant
+			}
+		}
+        create_character = {
+            first_name = "george_drew_first_name"
+            last_name = "george_drew_last_name"
+            ig_leader = yes historical = yes
+            birth_date = 1894.5.7
+            interest_group = ig_petty_bourgeoisie
+            ideology = ideology_democratic
+            culture = cu:anglo_canadian
+            traits = {
+                brave
+                bigoted # Anti-semitic
+            }
+        }
+    }
+	
+	c:MEX = {
+		create_character = {
+			first_name = "miguel_aleman_valdes_first_name"
+			last_name = "miguel_aleman_valdes_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1900.9.29
+			interest_group = ig_agrarian_populists
+			ideology = ideology_moderate
+			traits = {
+				charismatic
+				meticulous
+				expensive_tastes
+			}
+		}
+	}
+	
+	### Europe ###
+	
+	c:GBR = {
+		create_character = {
+			first_name = "george_windsor_first_name"
+			last_name = "george_windsor_last_name"
+			ruler = yes ig_leader = no historical = yes
+			birth_date = 1895.12.14
+			death_date = 1952.2.6
+			interest_group = ig_landowners
+			ideology = ideology_humanitarian_royalist
+			culture = cu:british
+			religion = rel:protestant
+			traits = {
+				cautious
+			}
+		}
+		create_character = {
+			first_name = "elizabeth_windsor_first_name"
+			last_name = "elizabeth_windsor_last_name"
+			ruler = no ig_leader = no historical = yes
+			female = yes
+			heir = yes
+			birth_date = 1926.4.21
+			death_date = 2022.9.8
+			interest_group = ig_landowners
+			ideology = ideology_humanitarian_royalist
+			culture = cu:british
+			religion = rel:protestant
+			traits = {
+				tactful
+			}
+		}
+		create_character = {
+			first_name = "clement_attlee_first_name"
+			last_name = "clement_attlee_last_name"
+			ruler = no ig_leader = yes historical = yes
+			birth_date = 1883.1.3
+			interest_group = ig_reformist_socialists
+			ideology = ideology_moderate
+			culture = cu:british
+			religion = rel:protestant
+			traits = {
+				tactful
+				cautious
+				reserved
+			}
+			dna = dna_clement_attlee
+		}
+	}
+	c:FRA = {
+		create_character = {
+			first_name = "vincent_auriol_first_name"
+			last_name = "vincent_auriol_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1884.8.27
+			interest_group = ig_reformist_socialists
+			ideology = ideology_moderate
+			culture = cu:french
+			traits = {
+				bigoted
+				arrogant
+			}
+			dna = dna_vincent_jules_auriol
+		}
+	}
+	c:WGR = {
+		create_character = {
+			first_name = "konrad_adenauer_first_name"
+			last_name = "konrad_adenauer_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1876.1.5
+			interest_group = ig_conservatives
+			ideology = ideology_moderate
+			culture = cu:german
+			religion = rel:protestant
+			traits = {
+				charismatic
+				tactful
+				meticulous
+			}
+		}
+	}
+	c:ITA = {
+		create_character = {
+			first_name = "alcide_de_gasperi_first_name"
+			last_name = "alcide_de_gasperi_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1881.4.3
+			interest_group = ig_conservatives
+			ideology = ideology_moderate
+			traits = {
+				charismatic
+				persistent
+				meticulous
+			}
+		}
+	}
+	c:NET = {
+		create_character = {
+			first_name = "juliana_orangenassau_first_name"
+			last_name = "juliana_orangenassau_last_name"
+			ruler = yes ig_leader = no historical = yes
+			female = yes
+			birth_date = 1909.4.30
+			interest_group = ig_landowners
+			ideology = ideology_moderate
+			traits = {
+				charismatic
+				persistent
+				meticulous
+			}
+		}
+		create_character = {
+			first_name = "beatrix_orangenassau_first_name"
+			last_name = "beatrix_orangenassau_last_name"
+			ruler = no ig_leader = no historical = yes
+			female = yes
+			heir = yes
+			birth_date = 1938.1.31
+			interest_group = ig_landowners
+			ideology = ideology_moderate
+			traits = {
+				charismatic
+				persistent
+				meticulous
+			}
+		}
+	}
+	c:BEL = {
+		create_character = {
+			first_name = "baudouin_belgium_first_name"
+			last_name = "baudouin_belgium_last_name"
+			ruler = yes ig_leader = no historical = yes
+			birth_date = 1930.9.7
+			interest_group = ig_landowners
+			ideology = ideology_moderate
+			traits = {
+				bigoted
+				persistent
+				meticulous
+			}
+		}
+	}
+	c:LUX = {
+		create_character = {
+			first_name = "charlotte_nassauweilburg_first_name"
+			last_name = "charlotte_nassauweilburg_last_name"
+			ruler = yes ig_leader = no historical = yes
+			female = yes
+			birth_date = 1896.1.23
+			interest_group = ig_conservatives
+			ideology = ideology_moderate
+			traits = {
+				cautious
+				persistent
+				meticulous
+			}
+		}
+	}
+	c:SIR = {
+		create_character = {
+			first_name = "john_costello_first_name"
+			last_name = "john_costello_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1891.6.20
+			interest_group = ig_conservatives
+			ideology = ideology_moderate
+			traits = {
+				tactful
+				persistent
+				ambitious
+			}
+		}
+	}
+	c:DEN = {
+		create_character = {
+			first_name = "frederik_glucksburg_first_name"
+			last_name = "frederik_glucksburg_last_name"
+			ruler = yes ig_leader = no historical = yes
+			birth_date = 1899.3.11
+			interest_group = ig_conservatives
+			ideology = ideology_moderate
+			traits = {
+
+			}
+		}
+		create_character = {
+			first_name = "margrethe_glucksburg_first_name"
+			last_name = "margrethe_glucksburg_last_name"
+			ruler = no ig_leader = no historical = yes
+			heir = yes
+			female = yes
+			birth_date = 1899.3.11
+			interest_group = ig_conservatives
+			ideology = ideology_moderate
+			traits = {
+			}
+		}
+	}
+	c:SWE = {
+		create_character = {
+			first_name = "gustaf_bernadotte_first_name"
+			last_name = "gustaf_bernadotte_last_name"
+			ruler = yes ig_leader = no historical = yes
+			birth_date = 1858.6.16
+			interest_group = ig_landowners
+			ideology = ideology_moderate
+			traits = {
+				tactful
+				persistent
+				charismatic
+			}
+		}
+		create_character = {
+			first_name = "gustaf_adolf_bernadotte_first_name"
+			last_name = "gustaf_adolf_bernadotte_last_name"
+			ruler = no ig_leader = no historical = yes
+			heir = yes
+			birth_date = 1882.11.11
+			interest_group = ig_landowners
+			ideology = ideology_moderate
+			traits = {
+				tactful
+				persistent
+				charismatic
+			}
+		}
+	}
+	c:NOR = {
+		create_character = {
+			first_name = "haakon_glucksburg_first_name"
+			last_name = "haakon_glucksburg_last_name"
+			ruler = yes ig_leader = no historical = yes
+			birth_date = 1872.8.3
+			interest_group = ig_landowners
+			ideology = ideology_moderate
+			traits = {
+			}
+		}
+		create_character = {
+			first_name = "olav_glucksburg_first_name"
+			last_name = "olav_glucksburg_last_name"
+			ruler = no ig_leader = no historical = yes
+			heir = yes
+			birth_date = 1903.7.2
+			interest_group = ig_landowners
+			ideology = ideology_moderate
+			traits = {
+			}
+		}
+	}
+	c:FIN = {
+		create_character = {
+			first_name = "karl_august_fagerholm_first_name"
+			last_name = "karl_august_fagerholm_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1901.12.31
+			interest_group = ig_reformist_socialists
+			ideology = ideology_moderate
+			traits = {
+				tactful
+				persistent
+				cautious
+			}
+		}
+	}
+	c:ICL = {
+		create_character = {
+			first_name = "olafur_thors_first_name"
+			last_name = "olafur_thors_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1892.1.19
+			interest_group = ig_reformist_socialists
+			ideology = ideology_moderate
+			traits = {
+				tactful
+				persistent
+				cautious
+			}
+		}
+	}
+	c:SWI = {
+		create_character = {
+			first_name = "max_petitpierre_first_name"
+			last_name = "max_petitpierre_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1899.2.26
+			interest_group = ig_conservatives
+			ideology = ideology_moderate
+			traits = {
+				tactful
+				persistent
+				cautious
+			}
+		}
+	}
+	c:WAU = {
+		create_character = {
+			first_name = "Leopold_Figl_first_name"
+			last_name = "Leopold_Figl_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1902.10.2
+			interest_group = ig_conservatives
+			ideology = ideology_moderate
+			traits = {
+				tactful
+				pious
+				cautious
+			}
+		}
+	}
+	
+	c:SPA = {
+		create_character = {
+			first_name = "Francisco"
+			last_name = "Franco_Bahamonde"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1892.12.4
+			interest_group = ig_armed_forces
+			ideology = ideology_jingoist_leader
+			culture = cu:spanish
+			traits = {
+				charismatic
+				demagogue
+				pious
+			}
+		}
+	}
+	c:POR = {
+		create_character = {
+			first_name = "Antonio_de_Oliveira_Salazar_first_name"
+			last_name = "Antonio_de_Oliveira_Salazar_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1889.4.28
+			interest_group = ig_fascists
+			ideology = ideology_fascist
+			culture = cu:portuguese
+			religion = rel:catholic
+			traits = {
+				reserved
+				imperious
+				innovative
+			}
+		}
+	}
+	c:GRE = {
+		create_character = {
+			first_name = "paul_glucksburg_first_name"
+			last_name = "paul_glucksburg_last_name"
+			ruler = yes ig_leader = no historical = yes
+			birth_date = 1901.12.14
+			interest_group = ig_conservatives
+			ideology = ideology_moderate
+			traits = {
+				persistent
+				brave
+				experienced_diplomat
+			}
+		}
+		create_character = {
+			first_name = "constantine_glucksburg_first_name"
+			last_name = "constantine_glucksburg_last_name"
+			ruler = no ig_leader = no historical = yes
+			heir = yes
+			birth_date = 1940.6.2
+			interest_group = ig_conservatives
+			ideology = ideology_moderate
+			traits = {
+				persistent
+				brave
+				experienced_diplomat
+			}
+		}
+	}
+	
+	c:SOV = {
+		create_character = {
+			first_name = "joseph_stalin_first_name"
+			last_name = "joseph_stalin_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1878.12.18
+			interest_group = ig_revolutionist_socialists
+			ideology = ideology_vanguardist
+			culture = cu:georgian
+			religion = rel:atheist
+			traits = {
+				tactful
+				demagogue
+				wrathful
+			}
+			dna = dna_joseph_stalin
+		}
+	}
+	c:YUG = {
+		create_character = {
+			first_name = "Josip"
+			last_name = "Broz_Tito"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1892.5.7
+			interest_group = ig_socialists
+			ideology = ideology_reform_communist
+			culture = cu:yugoslavian
+			religion = rel:atheist
+			traits = {
+				charismatic
+				imperious
+				direct
+			}
+			dna = dna_josip_broz_tito
+		}
+	}
+	c:ALB = {
+		create_character = {
+			first_name = "enver_hoxha_first_name"
+			last_name = "enver_hoxha_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1908.10.16
+			interest_group = ig_revolutionist_socialists
+			ideology = ideology_maoist
+			religion = rel:atheist
+			traits = {
+				ambitious
+				wrathful
+				brave
+			}
+		}
+	}
+	c:BUL = {
+		create_character = {
+			first_name = "valko_chervenkov_first_name"
+			last_name = "valko_chervenkov_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1900.9.6
+			interest_group = ig_revolutionist_socialists
+			ideology = ideology_vanguardist
+			religion = rel:atheist
+			traits = {
+				tactful
+				meticulous
+				demagogue
+			}
+		}
+	}
+	c:HUN = {
+		create_character = {
+			first_name = "Matyas_Rakosi_first_name"
+			last_name = "Matyas_Rakosi_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1892.3.9
+			interest_group = ig_revolutionist_socialists
+			ideology = ideology_vanguardist
+			religion = rel:atheist
+			traits = {
+				tactful
+				cruel
+				demagogue
+			}
+		}
+	}
+	c:ROM = {
+		create_character = {
+			first_name = "gheorghe_gheorghiu_dej_first_name"
+			last_name = "gheorghe_gheorghiu_dej_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1901.11.8
+			interest_group = ig_revolutionist_socialists
+			ideology = ideology_vanguardist
+			religion = rel:atheist
+			traits = {
+				ambitious
+				charismatic
+				demagogue
+			}
+		}
+	}
+	c:POL = {
+		create_character = {
+			first_name = "boleslaw_bierut_first_name"
+			last_name = "boleslaw_bierut_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1892.4.18
+			interest_group = ig_revolutionist_socialists
+			ideology = ideology_vanguardist
+			religion = rel:atheist
+			traits = {
+				cruel
+				wrathful
+				demagogue
+			}
+		}
+	}
+	c:CZH = {
+		create_character = {
+			first_name = "klement_gottwald_first_name"
+			last_name = "klement_gottwald_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1896.11.23
+			interest_group = ig_revolutionist_socialists
+			ideology = ideology_vanguardist
+			religion = rel:atheist
+			traits = {
+				ambitious
+				wrathful
+				demagogue
+			}
+		}
+	}
+	c:EGR = {
+		create_character = {
+			first_name = "wilhelm_pieck_first_name"
+			last_name = "wilhelm_pieck_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1876.1.3
+			interest_group = ig_revolutionist_socialists
+			ideology = ideology_vanguardist
+			religion = rel:atheist
+			traits = {
+				tactful
+				reserved
+				meticulous
+			}
+		}
+	}
+	
+	### Asia ###
+	
+	c:PRC = {
+		create_character = {
+			first_name = "mao_zedong_first_name"
+			last_name = "mao_zedong_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1893.12.26
+			interest_group = ig_anarchists
+			ideology = ideology_maoist
+			culture = cu:han
+			religion = rel:atheist
+			traits = {
+				charismatic
+				demagogue
+				reckless
+			}
+			dna = dna_mao_zedong
+		}
+	}
+	c:NKO = {
+		create_character = {
+			first_name = "Kim"
+			last_name = "Il_Sung"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1912.4.15
+			interest_group = ig_revolutionist_socialists
+			ideology = ideology_vanguardist
+			religion = rel:atheist
+			traits = {
+				charismatic
+				demagogue
+				ambitious
+			}
+			dna = dna_kim_il_sung
+		}
+	}
+	c:NVM = {
+		create_character = {
+			first_name = "ho_chi_minh_first_name"
+			last_name = "ho_chi_minh_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1890.5.19
+			interest_group = ig_revolutionist_socialists
+			ideology = ideology_vanguardist
+			religion = rel:atheist
+			traits = {
+				charismatic
+				brave
+				reserved
+			}
+			dna = dna_ho_chin_minh
+		}
+	}
+	
+	c:ROC = {
+		create_character = {
+			first_name = "chiang_kai_shek_first_name"
+			last_name = "chiang_kai_shek_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1887.10.31
+			interest_group = ig_conseratives
+			ideology = ideology_jingoist_leader
+			culture = cu:han
+			religion = rel:protestant
+			traits = {
+				brave
+				demagogue
+				persistent
+			}
+			on_created = { set_variable = chiang_kai_shek }
+		}
+	}
+	c:SKO = {
+		create_character = {
+			first_name = "syngman_rhee_first_name"
+			last_name = "syngman_rhee_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1912.4.15
+			interest_group = ig_reactionaries
+			ideology = ideology_republican_leader
+			religion = rel:protestant
+			traits = {
+				charismatic
+				demagogue
+				cruel
+			}
+			dna = dna_syngman_rhee
+		}
+	}
+	c:JAP = {
+		create_character = {
+			first_name = "Hirohito_Yamato_first_name"		# CHANGE
+			last_name = "Hirohito_Yamato_last_name"		# CHANGE
+			ruler = yes historical = yes
+			birth_date = 1901.4.29						# CHANGE
+			interest_group = ig_landowners				# CHANGE
+			ideology = ideology_royalist				# CHANGE
+			traits = {
+				cautious								# CHANGE
+			}
+		}
+
+		create_character = {
+			first_name = "Akihito_Yamato_first_name"		# CHANGE
+			last_name = "Akihito_Yamato_last_name"		# CHANGE
+			heir = yes historical = yes
+			birth_date = 1933.12.24						# CHANGE
+			interest_group = ig_landowners				# CHANGE
+			ideology = ideology_royalist				# CHANGE
+			traits = {
+				tactful								# CHANGE
+			}
+		}
+	}
+	c:IDO = {
+		create_character = {
+			first_name = "sukarno_first_name"
+			last_name = "sukarno_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1901.6.6
+			interest_group = ig_agrarian_populists
+			ideology = ideology_left_nationalist
+			culture = cu:indonesian
+			religion = rel:sunni
+			traits = {
+				charismatic
+				demagogue
+				ambitious
+			}
+			on_created = { set_variable = sukarno }
+		}
+	}
+	c:HND = {
+		create_character = {
+			first_name = "jawaharlal_nehru_first_name"
+			last_name = "jawaharlal_nehru_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1889.11.14
+			interest_group = ig_agrarian_populist
+			ideology = ideology_left_nationalist
+			culture = cu:indian
+			religion = rel:hindu
+			traits = {
+				charismatic
+				tactful
+				brave
+			}
+		}
+	}
+	c:MLD = {
+		create_character = {
+			first_name = "Abdul_Majeed_Didi_first_name"
+			last_name = "Abdul_Majeed_Didi_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1873.8.29
+			interest_group = ig_landowners
+			ideology = ideology_moderate
+			culture = cu:maldivian
+			religion = rel:sunni
+			traits = {
+				pious
+				innovative
+				reserved
+			}
+		}
+	}
+	c:PAK = {
+		create_character = {
+			first_name = "liaquat_ali_khan_first_name"
+			last_name = "liaquat_ali_khan_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1895.10.1
+			interest_group = ig_agrarian_populist
+			ideology = ideology_moderate
+			culture = cu:panjabi
+			religion = rel:sunni
+			traits = {
+				charismatic
+				direct
+				brave
+			}
+		}
+	}
+	c:THI = {
+		create_character = {
+			first_name = "Bhumibol_Adulyadej_first_name"
+			last_name = "Bhumibol_Adulyadej_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1897.7.14
+			interest_group = ig_landowners
+			ideology = ideology_moderate
+			traits = {
+				innovative
+				bigoted
+				persistent
+			}
+		}
+	}
+	c:BUR = {
+		create_character = {
+			first_name = "u_nu_first_name"
+			last_name = "u_nu_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1907.5.25
+			interest_group = ig_agrarian_populists
+			ideology = ideology_left_nationalist
+			traits = {
+				charismatic
+				innovative
+				persistent
+			}
+		}
+	}
+	c:MGL = {
+		create_character = {
+			first_name = "yumjaagin_tsedenbal_first_name"
+			last_name = "yumjaagin_tsedenbal_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1916.9.17
+			interest_group = ig_revolutionist_socialists
+			ideology = ideology_vanguardist
+			culture = cu:mongol
+			traits = {
+				ambitious
+				tactful
+				meticulous
+			}
+		}
+	}
+	c:SRL = {
+		create_character = {
+			first_name = "don_stephen_senanayake_first_name"
+			last_name = "don_stephen_senanayake_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1884.10.21
+			interest_group = ig_rural_folk
+			ideology = ideology_moderate
+			traits = {
+				charismatic
+				bigoted
+				tactful
+			}
+		}
+	}	
+	c:PHI = {
+		create_character = {
+			first_name = "elpidio_quirino_first_name"
+			last_name = "elpidio_quirino_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1890.11.16
+			interest_group = ig_conservatives
+			ideology = ideology_moderate
+			culture = cu:filipino
+			traits = {
+				ambitious
+				charismatic
+			}
+		}
+	}	
+	c:TON = {
+		create_character = {
+			first_name = "salote_tupou_first_name"
+			last_name = "salote_tupou_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1900.3.13
+			interest_group = ig_landowners
+			ideology = ideology_moderate
+			culture = cu:tonga
+			traits = {
+				tactful
+				imperious
+			}
+		}
+	}	
+	c:AST = {
+		create_character = {
+			first_name = "william_mckell_first_name"
+			last_name = "william_mckell_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1891.9.26
+			interest_group = ig_reformist_socialists
+			ideology = ideology_moderate
+			culture = cu:australian
+			traits = {
+				ambitious
+				reckless
+			}
+		}
+	}
+	c:NZL = {
+		create_character = {
+			first_name = "bernard_cyril_freyberg_first_name"
+			last_name = "bernard_cyril_freyberg_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1889.3.21
+			interest_group = ig_armed_forces
+			ideology = ideology_moderate
+			culture = cu:new_zealander
+			traits = {
+				brave
+				meticulous
+				reckless
+			}
+		}
+	}
+	c:LAO = {
+		create_character = {
+			first_name = "sisavang_vong_first_name"
+			last_name = "sisavang_vong_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1885.7.14
+			interest_group = ig_landowners
+			ideology = ideology_moderate
+			culture = cu:lao
+			traits = {
+				reserved
+				wounded
+			}
+		}
+	}	
+	c:SVM = {
+		create_character = {
+			first_name = "bao_dai_first_name"
+			last_name = "bao_dai_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1913.10.22
+			interest_group = ig_landowners
+			ideology = ideology_royalist
+			culture = cu:vietnamese
+			traits = {
+				imperious
+				reserved
+				expensive_tastes
+			}
+		}
+	}	
+	c:CAM = {
+		create_character = {
+			first_name = "norodom_sihanouk_first_name"
+			last_name = "norodom_sihanouk_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1922.10.31
+			interest_group = ig_landowners
+			ideology = ideology_moderate
+			culture = cu:khmer
+			traits = {
+				ambitious
+				brave
+				tactful
+			}
+		}
+	}
+	c:AFG = {
+		create_character = {
+			first_name = "mohammad_zahir_shah_first_name"
+			last_name = "mohammad_zahir_shah_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1914.10.15
+			interest_group = ig_landowners
+			ideology = ideology_moderate
+			traits = {
+				innovative
+				charismatic
+				tactful
+			}
+		}
+	}
+	c:TIB = {
+		create_character = {
+			first_name = "tenzin_gyatso_first_name"
+			last_name = "tenzin_gyatso_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1935.7.6
+			interest_group = ig_devout
+			ideology = ideology_theocrat
+			religion = rel:gelugpa
+			traits = {
+				innovative
+				charismatic
+				tactful
+			}
+		}
+	}
+	c:MLY = {
+		create_character = {
+			first_name = "Henry_Gurney_first_name"
+			last_name = "Henry_Gurney_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1898.6.27
+			culture = cu:english
+			interest_group = ig_landowners
+			ideology = ideology_moderate
+			traits = {
+				pious
+				innovative
+				romantic
+			}
+		}
+	}
+	c:BRU = {
+		create_character = {
+			first_name = "Omar_Ali_Saifuddien_III_first_name"
+			last_name = "Omar_Ali_Saifuddien_III_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1914.9.23
+			interest_group = ig_landowners
+			ideology = ideology_moderate
+			traits = {
+				pious
+				innovative
+				romantic
+			}
+		}
+	}
+	c:NEP = {
+		create_character = {
+			first_name = "Tribhuvan_Bir_Bikram_Shah_first_name"
+			last_name = "Tribhuvan_Bir_Bikram_Shah_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1906.6.30
+			interest_group = ig_landowners
+			ideology = ideology_moderate
+			traits = {
+				pious
+				romantic
+				reserved
+			}
+		}
+	}
+	c:BHU = {
+		create_character = {
+			first_name = "Jigme_Wangchuck_first_name"
+			last_name = "Jigme_Wangchuck_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1905.1.1
+			interest_group = ig_landowners
+			ideology = ideology_moderate
+			traits = {
+				pious
+				romantic
+				reserved
+			}
+		}
+	}
+	c:SIK = {
+		create_character = {
+			first_name = "Tashi_Namgyal_first_name"
+			last_name = "Tashi_Namgyal_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1914.12.5
+			interest_group = ig_landowners
+			ideology = ideology_moderate
+			traits = {
+				pious
+				romantic
+				reserved
+			}
+		}
+	}
+	
+	#Middle East
+	
+	c:PER = {
+		create_character = {
+			first_name = "mohammad_reza_pahlavi_first_name"
+			last_name = "mohammad_reza_pahlavi_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1919.10.26
+			interest_group = ig_landowners
+			ideology = ideology_feminist
+			culture = cu:persian
+			traits = {
+				imperious
+				reserved
+				demagogue
+			}
+			dna = dna_reza_pahlavi
+		}
+	}
+	c:IRQ = {
+		create_character = {
+			first_name = "Faisal_II_first_name"
+			last_name = "Faisal_II_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1935.5.2
+			interest_group = ig_landowners
+			ideology = ideology_moderate
+			religion = rel:sunni
+			traits = {
+				ambitious
+				innovative
+				reserved
+			}
+		}
+	}
+	c:JOR = {
+		create_character = {
+			first_name = "Abdullah_I_first_name"
+			last_name = "Abdullah_I_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1882.2.2
+			interest_group = ig_landowners
+			ideology = ideology_royalist
+			religion = rel:sunni
+			traits = {
+				brave
+				demagogue
+				reserved
+			}
+		}
+	}
+	c:NEJ = {
+		create_character = {
+			first_name = "Abdulaziz_al_Saud_first_name"
+			last_name = "Abdulaziz_al_Saud_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			is_general = yes
+			birth_date = 1875.1.15
+			interest_group = ig_landowners
+			ideology = ideology_royalist
+			religion = rel:sunni
+			traits = {
+				brave
+				innovative
+				romantic
+			}
+		}
+	}
+	c:OMA = {
+		create_character = {
+			first_name = "Said_bin_Taimur_first_name"
+			last_name = "Said_bin_Taimur_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1910.8.13
+			interest_group = ig_landowners
+			ideology = ideology_royalist
+			traits = {
+				pious
+				reserved
+				expensive_tastes
+			}
+		}
+	}
+	c:NYE = {
+		create_character = {
+			first_name = "Ahmad_bin_Yahya_Hamidaddin_first_name"
+			last_name = "Ahmad_bin_Yahya_Hamidaddin_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1891.6.18
+			interest_group = ig_landowners
+			ideology = ideology_moderate
+			religion = rel:shiite
+			traits = {
+				wrathful
+				cruel
+				expensive_tastes
+			}
+		}
+	}
+	c:ISR = {
+		create_character = {
+			first_name = "David_Ben_Gurion_first_name"
+			last_name = "David_Ben_Gurion_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1886.10.16
+			interest_group = ig_reformist_socialists
+			ideology = ideology_labour_ethnostatist
+			culture = cu:polish
+			traits = {
+				brave
+				charismatic
+				imposing
+			}
+		}
+	}
+	c:TUR = {
+		create_character = {
+			first_name = "Mustafa_Ismet_Inonu_first_name"
+			last_name = "Mustafa_Ismet_Inonu_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1884.9.24
+			interest_group = ig_armed_forces
+			ideology = ideology_moderate
+			culture = cu:turkish
+			traits = {
+				experienced_diplomat
+				imperious
+				brave
+			}
+			dna = dna_ismet_inonu
+		}
+	}
+	c:SYR = {
+		create_character = {
+			first_name = "Hashim_al_Atassi_first_name"
+			last_name = "Hashim_al_Atassi_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1875.1.11
+			interest_group = ig_landowners
+			ideology = ideology_moderate
+			traits = {
+				reckless
+				brave
+				direct
+			}
+		}
+	}
+	c:LEB = {
+		create_character = {
+			first_name = "Bechara_El_Khoury_first_name"
+			last_name = "Bechara_El_Khoury_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1890.8.10
+			interest_group = ig_petty_bourgeoisie
+			ideology = ideology_moderate
+			culture = cu:mashriqi
+			religion = rel:catholic
+			traits = {
+				tactful
+				innovative
+				grifter
+			}
+		}
+	}
+
+	c:KUW = {
+		create_character = {
+			first_name = "Ahmad_I_first_name"
+			last_name = "Ahmad_I_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			is_general = yes
+			birth_date = 1885.1.1
+			interest_group = ig_landowners
+			ideology = ideology_moderate
+			religion = rel:sunni
+			traits = {
+				traditionalist_commander
+				cancer
+				cautious
+			}
+		}
+	}
+
+	c:BHR = {
+		create_character = {
+			first_name = "Salman_of_Bahrain_first_name"
+			last_name = "Salman_of_Bahrain_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1894.10.10
+			interest_group = ig_landowners
+			ideology = ideology_royalist
+			religion = rel:sunni
+			traits = {
+				pious
+				sickly
+				expensive_tastes
+			}
+		}
+	}
+
+	c:QAT = {
+		create_character = {
+			first_name = "Ali_of_Qatar_first_name"
+			last_name = "Ali_of_Qatar_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1895.6.5
+			interest_group = ig_landowners
+			ideology = ideology_royalist
+			religion = rel:sunni
+			traits = {
+				pious
+				erudite
+				expensive_tastes
+			}
+		}
+	}
+
+	c:UAE = {
+		create_character = {
+			first_name = "Shakhbut_of_Abu_Dhabi_first_name"
+			last_name = "Shakhbut_of_Abu_Dhabi_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1905.6.1
+			interest_group = ig_industrialists
+			ideology = ideology_royalist
+			religion = rel:sunni
+			traits = {
+				pious
+				reserved
+				expensive_tastes
+			}
+		}
+	}
+	
+	#Africa
+	
+	c:EGY = {
+		create_character = {
+			first_name = "farouk_i_first_name"
+			last_name = "farouk_i_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1920.2.11
+			interest_group = ig_landowners
+			ideology = ideology_royalist
+			traits = {
+				imperious
+				expensive_tastes
+				grifter
+			}
+		}
+	}
+	
+	c:ETH = {
+		create_character = {
+			first_name = "haile_selassie_i_first_name"
+			last_name = "haile_selassie_i_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1892.7.23
+			interest_group = ig_landowners
+			ideology = ideology_roylist
+			traits = {
+				imperious
+				demagogue
+				pious
+			}
+		}
+	}
+	
+	c:LIB = {
+		create_character = {
+			first_name = "william_tubman_first_name"
+			last_name = "william_tubman_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1895.11.29
+			interest_group = ig_rural_folk 
+			ideology = ideology_moderate
+			culture = cu:liberian
+			religion = rel:protestant
+			traits = {
+				ambitious
+				pious
+				charismatic
+			}
+			on_created = { set_variable = william_tubman }
+		}
+	}
+	
+	c:MOR = {
+		create_character = {
+			first_name = "muhammad_bin_yusef_first_name"
+			last_name = "muhammad_bin_yusef_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1909.8.10
+			interest_group = ig_landowners 
+			ideology = ideology_royalist
+			culture = cu:moroccan
+			traits = {
+				ambitious
+				direct
+			}
+		}
+	}
+	
+	c:RHO = {
+		create_character = {
+			first_name = "john_kennedy_first_name"
+			last_name = "john_kennedy_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1893.8.31
+			interest_group = ig_landowners 
+			ideology = ideology_ethno_nationalist
+			culture = cu:british
+			traits = {
+				brave
+				reserved
+			}
+		}
+	}
+	
+	c:SAF = {
+		create_character = {
+			first_name = "D_F_Malan_first_name"
+			last_name = "D_F_Malan_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1874.5.22
+			interest_group = ig_industrialists
+			ideology = ideology_ethno_nationalist
+			culture = cu:boer
+			traits = {
+				reserved
+				bigoted
+				pious
+			}
+		}
+	}
+	
+	c:SOM = { #For British
+		create_character = {
+			first_name = "gerald_reece_first_name"
+			last_name = "gerald_reece_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1897.1.10
+			interest_group = ig_landowners 
+			ideology = ideology_moderate
+			culture = cu:british
+			traits = {
+				basic_colonial_administrator
+				reserved
+			}
+		}
+	}
+	
+	c:TGZ = {
+		create_character = {
+			first_name = "hendrik_van_vredenburch_first_name"
+			last_name = "hendrik_van_vredenburch_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1905.10.31
+			interest_group = ig_landowners 
+			ideology = ideology_moderate
+			culture = cu:dutch
+			traits = {
+				masterful_diplomat
+				meticulous
+				basic_colonial_administrator
+			}
+		}
+	}
+	
+	c:TUN = {
+		create_character = {
+			first_name = "muhammad_al_amin_first_name"
+			last_name = "muhammad_al_amin_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1881.9.4
+			interest_group = ig_landowners 
+			ideology = ideology_royalist
+			culture = cu:tunisian
+			traits = {
+				cautious
+				imperious
+			}
+		}
+	}
+	
+	c:ZAN = {
+		create_character = {
+			first_name = "khalifa_bin_harub_first_name"
+			last_name = "khalifa_bin_harub_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1879.8.26
+			interest_group = ig_landowners 
+			ideology = ideology_royalist
+			culture = cu:zanzibari
+			traits = {
+				reserved
+			}
+		}
+	}
+	
+	c:ESW = {
+		create_character = {
+			first_name = "Ingwenyama_Sobhuza_first_name"
+			last_name = "Ingwenyama_Sobhuza_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1899.12.10
+			interest_group = ig_landowners 
+			ideology = ideology_royalist
+			culture = cu:liswati
+			traits = {
+				expensive_tastes
+				ambitious
+				demagogue
+			}
+		}
+	}
+	
+	c:LES = {
+		create_character = {
+			first_name = "Constantine_Bereng_Seeiso_first_name"
+			last_name = "Constantine_Bereng_Seeiso_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1938.5.2
+			interest_group = ig_landowners 
+			ideology = ideology_royalist
+			culture = cu:sotho
+			traits = {
+				expensive_tastes
+				reserved
+				persistent
+			}
+		}
+	}
+
+	c:CYR = {
+		create_character = {
+			first_name = "idris_of_libya_first_name"
+			last_name = "idris_of_libya_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1890.3.13
+			interest_group = ig_landowners 
+			ideology = ideology_moderate
+			religion = rel:sunni
+			traits = {
+				expensive_tastes
+				imperious
+			}
+		}
+	}
+	
+	### Caribbean ###
+	c:CUB = {
+		create_character = {
+			first_name = "fulgencio_batista_first_name"
+			last_name = "fulgencio_batista_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1901.1.16
+			interest_group = ig_armed_forces 
+			ideology = ideology_jingoist_leader
+			#culture = cu:cuban
+			traits = {
+				expensive_tastes
+				experienced_diplomat
+				cruel
+			}
+		}
+	}
+	
+	c:DOM = {
+		create_character = {
+			first_name = "rafael_trujillo_first_name"
+			last_name = "rafael_trujillo_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1891.10.26
+			interest_group = ig_armed_forces
+			ideology = ideology_jingoist_leader
+			#culture = cu:dominiquais 
+			traits = {
+				cruel
+				traditionalist_commander
+				meticulous
+			}
+		}
+	}
+	
+	c:HAI = {
+		create_character = {
+			first_name = "dumarsais_estime_first_name"
+			last_name = "dumarsais_estime_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1900.4.21
+			interest_group = ig_landowners
+			ideology = ideology_left_nationalist
+			culture = cu:haitian
+			religion = rel:catholic
+			traits = {
+				direct
+				inspirational_orator
+				innovative
+			}
+			on_created = { set_variable = dumarsais_estime }
+		}
+	}
+	
+	### South America ###
+	
+	c:ARG = {
+		create_character = {
+			first_name = "juan_peron_first_name"
+			last_name = "juan_peron_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1895.10.8
+			interest_group = ig_rural_folk
+			ideology = ideology_moderate
+			#culture = cu:argentinian
+			traits = {
+				charismatic
+				demagogue
+				imperious
+			}
+		}
+	}
+	
+	c:BOL = {
+		create_character = {
+			first_name = "mamerto_urriolagoitia_first_name"
+			last_name = "mamerto_urriolagoitia_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1895.12.5
+			interest_group = ig_industrialists
+			ideology = ideology_moderate
+			#culture = cu:bolivian
+			traits = {
+				bigoted
+				experienced_diplomat
+			}
+		}
+	}
+	
+	c:BRZ = {
+		create_character = {
+			first_name = "eurico_gaspar_dutra_first_name"
+			last_name = "eurico_gaspar_dutra_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1883.5.18
+			interest_group = ig_armed_forces
+			ideology = ideology_moderate
+			#culture = cu:brazilian
+			traits = {
+				meticulous
+				popular_commander
+				tactful
+			}
+		}
+	}
+	
+	c:CHL = {
+		create_character = {
+			first_name = "gabriel_gonzalez_videla_first_name"
+			last_name = "gabriel_gonzalez_videla_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1898.11.22
+			interest_group = ig_petty_bourgeoisie
+			ideology = ideology_moderate
+			#culture = cu:chilean
+			traits = {
+				bigoted
+				ambitious
+			}
+		}
+	}
+	
+	c:CLM = {
+		create_character = {
+			first_name = "mariano_ospina_perez_first_name"
+			last_name = "mariano_ospina_perez_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1891.11.24
+			interest_group = ig_petty_bourgeoisie
+			ideology = ideology_moderate
+			#culture = cu:colombian
+			traits = {
+				meticulous
+				persistent
+			}
+		}
+	}
+	
+	c:COS = {
+		create_character = {
+			first_name = "otilio_ulate_blanco_first_name"
+			last_name = "otilio_ulate_blanco_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1891.8.25
+			interest_group = ig_petty_bourgeoisie
+			ideology = ideology_moderate
+			#culture = cu:costa_rican
+			traits = {
+				reckless
+				reserved
+				innovative
+			}
+		}
+	}
+	
+	c:ECU = {
+		create_character = {
+			first_name = "galo_plaza_first_name"
+			last_name = "galo_plaza_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1906.2.17
+			interest_group = ig_landowners
+			ideology = ideology_moderate
+			#culture = cu:ecuadorian
+			traits = {
+				persistent
+				basic_diplomat
+				innovative
+			}
+		}
+	}
+	
+	c:ELS = {
+		create_character = {
+			first_name = "oscar_osorio_first_name"
+			last_name = "oscar_osorio_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1910.12.14
+			interest_group = ig_armed_forces
+			ideology = ideology_moderate
+			#culture = cu:salvadoran
+			traits = {
+				direct
+				traditionalist_commander
+				tactful
+			}
+		}
+	}
+	
+	c:GUA = {
+		create_character = {
+			first_name = "juan_jose_arevalo_first_name"
+			last_name = "juan_jose_arevalo_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1904.9.10
+			interest_group = ig_rural_folk
+			ideology = ideology_moderate
+			#culture = cu:guatemalan
+			traits = {
+				meticulous
+				pious
+			}
+		}
+	}
+	
+	c:HON = {
+		create_character = {
+			first_name = "juan_manuel_galvez_first_name"
+			last_name = "juan_manuel_galvez_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1887.6.10
+			interest_group = ig_petty_bourgeoisie
+			ideology = ideology_moderate
+			#culture = cu:honduran
+			traits = {
+				wrathful
+				reserved
+			}
+		}
+	}
+	
+	c:NIC = {
+		create_character = {
+			first_name = "anastasio_somoza_garcia_first_name"
+			last_name = "anastasio_somoza_garcia_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1896.2.1
+			interest_group = ig_landowners
+			ideology = ideology_moderate
+			#culture = cu:nicaraguan
+			traits = {
+				imperious
+				meticulous
+			}
+		}
+	}
+	
+	c:PEU = {
+		create_character = {
+			first_name = "manuel_arturo_odria_first_name"
+			last_name = "manuel_arturo_odria_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1896.11.26
+			interest_group = ig_armed_forces
+			ideology = ideology_moderate
+			#culture = cu:peruvian
+			traits = {
+				direct
+				experienced_offensive_planner
+				ambitious
+			}
+		}
+	}
+	
+	c:PNM = {
+		create_character = {
+			first_name = "arnulfo_arias_first_name"
+			last_name = "arnulfo_arias_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1901.8.15
+			interest_group = ig_petty_bourgeoisie
+			ideology = ideology_moderate
+			#culture = cu:panamanian
+			traits = {
+				charismatic
+				persistent
+			}
+		}
+	}
+	
+	c:PRG = {
+		create_character = {
+			first_name = "federico_chaves_first_name"
+			last_name = "federico_chaves_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1882.2.15
+			interest_group = ig_petty_bourgeoisie
+			ideology = ideology_moderate
+			#culture = cu:paraguayan
+			traits = {
+				persistent
+				reserved
+			}
+		}
+	}
+	
+	c:URU = {
+		create_character = {
+			first_name = "luis_batlle_berres_first_name"
+			last_name = "luis_batlle_berres_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1897.11.26
+			interest_group = ig_rural_folk
+			ideology = ideology_moderate
+			#culture = cu:uruguayan
+			traits = {
+				charismatic
+				tactful
+			}
+		}
+	}
+	
+	c:VNZ = {
+		create_character = {
+			first_name = "carlos_delgado_chalbaud_first_name"
+			last_name = "carlos_delgado_chalbaud_last_name"
+			ruler = yes ig_leader = yes historical = yes
+			birth_date = 1922.10.31
+			interest_group = ig_armed_forces
+			ideology = ideology_moderate
+			#culture = cu:venezuelan
+			traits = {
+				ambitious
+				innovative
+			}
+		}
+	}
+	
+}

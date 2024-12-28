@@ -1,0 +1,1206 @@
+﻿
+### GENERIC ###
+
+### Government Type ###
+
+effect_starting_politics_presidential_republic = {
+	activate_law = law_type:law_presidential_republic
+	activate_law = law_type:law_no_separate_hog
+	activate_law = law_type:law_women_in_the_workplace
+	activate_law = law_type:law_freedom_of_conscience
+	activate_law = law_type:law_professional_officers
+	activate_law = law_type:law_commercialized_agriculture
+	
+	if = {
+		limit = { c:HND ?= this }
+		activate_law = law_type:law_tenant_farmers
+	}
+
+	if = {
+		limit = {
+			NOR = { 
+				has_law = law_type:law_pro_pop_growth_policy
+				has_law = law_type:law_no_pop_growth_policy
+				has_law = law_type:law_anti_pop_growth_policy
+			}
+		}
+		activate_law = law_type:law_no_pop_growth_policy
+	}
+
+	
+	
+	if = { 
+		limit = { THIS_country_is_unicameral = yes }
+		activate_law = law_type:law_unicameralism
+	}
+	else = {
+		activate_law = law_type:law_bicameralism
+	}
+	
+	
+	effect_set_electoral_system = yes
+}
+
+effect_starting_politics_semi_presidential_republic = {
+	activate_law = law_type:law_presidential_republic
+	activate_law = law_type:law_answers_to_legislature
+	activate_law = law_type:law_women_in_the_workplace
+	activate_law = law_type:law_freedom_of_conscience
+	activate_law = law_type:law_professional_officers
+	activate_law = law_type:law_commercialized_agriculture
+	
+	if = {
+		limit = { c:HND ?= this }
+		activate_law = law_type:law_tenant_farmers
+	}
+	if = {
+		limit = {
+			NOR = { 
+				has_law = law_type:law_pro_pop_growth_policy
+				has_law = law_type:law_no_pop_growth_policy
+				has_law = law_type:law_anti_pop_growth_policy
+			}
+		}
+		activate_law = law_type:law_no_pop_growth_policy
+	}
+	
+	if = { 
+		limit = { THIS_country_is_unicameral = yes }
+		activate_law = law_type:law_unicameralism
+	}
+	else = {
+		activate_law = law_type:law_bicameralism
+	}
+	
+	
+	effect_set_electoral_system = yes
+}
+
+effect_starting_politics_parliamentary_republic = {
+	activate_law = law_type:law_parliamentary_republic
+	activate_law = law_type:law_answers_to_legislature
+	activate_law = law_type:law_women_in_the_workplace
+	activate_law = law_type:law_freedom_of_conscience
+	activate_law = law_type:law_professional_officers
+	activate_law = law_type:law_commercialized_agriculture
+
+	if = {
+		limit = {
+			OR = {
+				is_subject_type = subject_type_dominion
+				is_subject_type = subject_type_personal_union
+			}
+			is_subject_of = c:GBR
+		}
+		activate_law = law_type:law_no_separate_hog
+	}
+	
+	if = {
+		limit = { c:HND ?= this }
+		activate_law = law_type:law_tenant_farmers
+	}
+	if = {
+		limit = {
+			NOR = { 
+				has_law = law_type:law_pro_pop_growth_policy
+				has_law = law_type:law_no_pop_growth_policy
+				has_law = law_type:law_anti_pop_growth_policy
+			}
+		}
+		activate_law = law_type:law_no_pop_growth_policy
+	}
+	
+	if = { 
+		limit = { THIS_country_is_unicameral = yes }
+		activate_law = law_type:law_unicameralism
+	}
+	else = {
+		activate_law = law_type:law_bicameralism
+	}
+	
+	activate_law = law_type:law_full_private_land_ownership
+	
+	effect_set_electoral_system = yes
+}
+
+effect_starting_politics_absolute_monarchy = {
+	activate_law = law_type:law_monarchy
+	activate_law = law_type:law_no_separate_hog
+	activate_law = law_type:law_no_womens_rights
+	activate_law = law_type:law_state_religion
+	activate_law = law_type:law_professional_officers
+	activate_law = law_type:law_commercialized_agriculture
+	
+	if = {
+		limit = {
+			NOR = { 
+				has_law = law_type:law_pro_pop_growth_policy
+				has_law = law_type:law_no_pop_growth_policy
+				has_law = law_type:law_anti_pop_growth_policy
+			}
+		}
+		activate_law = law_type:law_pro_pop_growth_policy
+	}
+	
+	activate_law = law_type:law_natural_resource_focus
+	
+	activate_law = law_type:law_hybrid_chamber
+	
+	activate_law = law_type:law_full_private_land_ownership
+	
+	effect_set_electoral_system = yes
+}
+
+effect_starting_politics_semi_constitutional_monarchy = {
+	activate_law = law_type:law_monarchy
+	activate_law = law_type:law_appointed_by_hos
+	activate_law = law_type:law_women_in_the_workplace
+	activate_law = law_type:law_state_religion
+	activate_law = law_type:law_professional_officers
+	activate_law = law_type:law_commercialized_agriculture
+	
+	if = {
+		limit = {
+			NOR = { 
+				has_law = law_type:law_pro_pop_growth_policy
+				has_law = law_type:law_no_pop_growth_policy
+				has_law = law_type:law_anti_pop_growth_policy
+			}
+		}
+		activate_law = law_type:law_no_pop_growth_policy
+	}
+	
+	if = { 
+		limit = { THIS_country_is_unicameral = yes }
+		activate_law = law_type:law_unicameralism
+	}
+	else = {
+		activate_law = law_type:law_bicameralism
+	}
+	
+	activate_law = law_type:law_full_private_land_ownership
+	
+	effect_set_electoral_system = yes
+}
+
+effect_starting_politics_constitutional_monarchy = {
+	activate_law = law_type:law_monarchy
+	activate_law = law_type:law_appointed_on_advice
+	activate_law = law_type:law_women_in_the_workplace
+	activate_law = law_type:law_state_religion
+	activate_law = law_type:law_professional_officers
+	activate_law = law_type:law_commercialized_agriculture
+	
+	if = {
+		limit = {
+			NOR = { 
+				has_law = law_type:law_pro_pop_growth_policy
+				has_law = law_type:law_no_pop_growth_policy
+				has_law = law_type:law_anti_pop_growth_policy
+			}
+		}
+		activate_law = law_type:law_no_pop_growth_policy
+	}
+	
+	if = { 
+		limit = { THIS_country_is_unicameral = yes }
+		activate_law = law_type:law_unicameralism
+	}
+	else = {
+		activate_law = law_type:law_bicameralism
+	}
+	
+	
+	effect_set_electoral_system = yes
+}
+
+effect_starting_politics_nationalist_republic = {
+	activate_law = law_type:law_presidential_republic
+	activate_law = law_type:law_no_separate_hog
+	activate_law = law_type:law_autocracy
+	activate_law = law_type:law_women_in_the_workplace
+	activate_law = law_type:law_freedom_of_conscience
+	activate_law = law_type:law_political_officers
+	activate_law = law_type:law_commercialized_agriculture
+	
+	if = {
+		limit = {
+			NOR = { 
+				has_law = law_type:law_pro_pop_growth_policy
+				has_law = law_type:law_no_pop_growth_policy
+				has_law = law_type:law_anti_pop_growth_policy
+			}
+		}
+		activate_law = law_type:law_pro_pop_growth_policy
+	}
+	
+	activate_law = law_type:law_manufacturing_focus
+	
+	activate_law = law_type:law_hybrid_chamber
+	
+	
+	effect_set_electoral_system = yes
+}
+
+effect_starting_politics_theocratic_republic = {
+	activate_law = law_type:law_theocracy
+	activate_law = law_type:law_appointed_on_advice
+	activate_law = law_type:law_women_in_the_workplace
+	activate_law = law_type:law_state_religion
+	activate_law = law_type:law_political_officers
+	activate_law = law_type:law_commercialized_agriculture
+	
+	if = {
+		limit = {
+			NOR = { 
+				has_law = law_type:law_pro_pop_growth_policy
+				has_law = law_type:law_no_pop_growth_policy
+				has_law = law_type:law_anti_pop_growth_policy
+			}
+		}
+		activate_law = law_type:law_pro_pop_growth_policy
+	}
+	
+	activate_law = law_type:law_natural_resource_focus
+	
+	activate_law = law_type:law_hybrid_chamber
+	
+	
+	effect_set_electoral_system = yes
+}
+
+effect_starting_politics_communist_republic = {
+	activate_law = law_type:law_council_republic
+	activate_law = law_type:law_appointed_on_advice
+	activate_law = law_type:law_womens_suffrage
+	activate_law = law_type:law_state_atheism
+	activate_law = law_type:law_political_officers
+	activate_law = law_type:law_collectivized_agriculture
+	set_state_religion = rel:atheist
+	
+	if = {
+		limit = {
+			NOR = { 
+				has_law = law_type:law_pro_pop_growth_policy
+				has_law = law_type:law_no_pop_growth_policy
+				has_law = law_type:law_anti_pop_growth_policy
+			}
+		}
+		activate_law = law_type:law_no_pop_growth_policy
+	}
+
+	if = {
+		limit = { OR = { c:PRC ?= this c:NVM ?= this }}
+		activate_law = law_type:law_total_separation
+		activate_law = law_type:law_tenant_farmers
+	}
+	
+	activate_law = law_type:law_manufacturing_focus
+	
+	activate_law = law_type:law_hybrid_chamber
+		
+	effect_set_electoral_system = yes
+}
+
+### Level of democracy ###
+
+effect_starting_politics_very_democratic = {
+	activate_law = law_type:law_universal_suffrage
+	activate_law = law_type:law_common_law
+	activate_law = law_type:law_independent_judiciary
+	activate_law = law_type:law_elected_bureaucrats
+	activate_law = law_type:law_separated_powers
+	activate_law = law_type:law_local_police
+	activate_law = law_type:law_no_home_affairs
+	activate_law = law_type:law_protected_speech
+	activate_law = law_type:law_multicultural
+	activate_law = law_type:law_slavery_banned
+	
+	effect_reduce_corruption = yes
+	
+	activate_law = law_type:law_no_colonial_affairs
+	
+	activate_law = law_type:law_all_labor_unions_allowed
+	
+	activate_law = law_type:law_freedom_of_conscience
+	
+	if = {
+		limit = { has_law = law_type:law_appointed_on_advice }
+		activate_law = law_type:law_no_term_limit
+	}
+	else = {
+		activate_law = law_type:law_yes_term_limit
+	}
+}
+
+effect_starting_politics_democratic = {
+	activate_law = law_type:law_universal_suffrage
+	activate_law = law_type:law_common_law
+	activate_law = law_type:law_independent_judiciary
+	activate_law = law_type:law_elected_bureaucrats
+	activate_law = law_type:law_separated_powers
+	activate_law = law_type:law_dedicted_police
+	activate_law = law_type:law_national_guard
+	activate_law = law_type:law_right_of_assembly
+	if = {
+		limit = { has_law = law_type:law_council_republic }
+		activate_law = law_type:law_multicultural
+	}
+	else = { 
+		activate_law = law_type:law_cultural_exclusion
+	}
+	activate_law = law_type:law_slavery_banned
+	
+	effect_reduce_corruption = yes
+	
+	activate_law = law_type:law_no_colonial_affairs
+	
+	activate_law = law_type:law_limited_labor_unions
+	
+	activate_law = law_type:law_freedom_of_conscience
+	
+	if = {
+		limit = { has_law = law_type:law_appointed_on_advice }
+		activate_law = law_type:law_no_term_limit
+	}
+	else = {
+		activate_law = law_type:law_yes_term_limit
+	}
+}
+
+effect_starting_politics_regime = {
+	activate_law = law_type:law_wealth_voting
+	activate_law = law_type:law_civil_law
+	activate_law = law_type:law_partially_politicised_judiciary
+	activate_law = law_type:law_appointed_bureaucrats
+	activate_law = law_type:law_separated_powers
+	activate_law = law_type:law_dedicated_police
+	activate_law = law_type:law_secret_police
+	activate_law = law_type:law_censorship
+	if = {
+		limit = { has_law = law_type:law_council_republic }
+		activate_law = law_type:law_multicultural
+	}
+	else = { 
+		activate_law = law_type:law_racial_segregation
+	}
+	activate_law = law_type:law_slavery_banned
+	
+	effect_increase_corruption = yes
+	
+	activate_law = law_type:law_no_colonial_affairs
+	
+	activate_law = law_type:law_state_controlled_labor_unions
+	
+	activate_law = law_type:law_no_term_limit
+}
+
+effect_starting_politics_dictatorship = {
+	activate_law = law_type:law_kangaroo_law
+	activate_law = law_type:law_politicised_judiciary
+	activate_law = law_type:law_appointed_bureaucrats
+	activate_law = law_type:law_militarized_police
+	activate_law = law_type:law_secret_police
+	
+	if = {
+		limit = { NOT = { has_law = law_type:law_council_republic } }
+		activate_law = law_type:law_autocracy
+		activate_law = law_type:law_advisory_body
+		activate_law = law_type:law_state_controlled_labor_unions
+		activate_law = law_type:law_national_supremacy
+		activate_law = law_type:law_outlawed_dissent
+	}
+	if = {
+		limit = { has_law = law_type:law_council_republic }
+		activate_law = law_type:law_multicultural
+		activate_law = law_type:law_universal_suffrage
+		activate_law = law_type:law_supreme_legislature
+		activate_law = law_type:law_socialist_labor_unions
+		activate_law = law_type:law_right_of_assembly
+	}
+	if = {
+		limit = { c:PRC ?= this } 
+		activate_law = law_type:law_party_anti_reactionary
+	}
+	if = {
+		limit = { 
+			has_law = law_type:law_council_republic
+			NOT = { c:PRC ?= this }
+		}
+		activate_law = law_type:law_party_single
+	}
+	if = { 
+		limit = { THIS_country_had_gulag_historical = yes }
+		activate_law = law_type:law_slavery_political
+	}
+	else = {
+		activate_law = law_type:law_slavery_banned
+	}
+	
+	effect_increase_corruption = yes
+	
+	activate_law = law_type:law_no_colonial_affairs
+	
+	
+	
+	activate_law = law_type:law_no_term_limit
+}
+
+### Constitutional System ###
+
+effect_starting_politics_constitutional_federal_state = {
+	activate_law = law_type:law_federated
+}
+
+effect_starting_politics_constitutional_unitary_state = {
+	activate_law = law_type:law_unitary
+}
+
+effect_starting_politics_parliamentary_unitary_state = {
+	activate_law = law_type:law_unitary
+}
+
+### War Policy ###
+
+effect_starting_politics_war_policy_pacifism = {
+	activate_law = law_type:law_national_militia
+	activate_law = law_type:law_dove_politics
+	activate_law = law_type:law_no_espionage
+}
+
+effect_starting_politics_war_policy_anti_military = {
+	activate_law = law_type:law_national_militia
+	activate_law = law_type:law_armed_neutrality
+	activate_law = law_type:law_defensive_espionage
+}
+
+effect_starting_politics_war_policy_pro_military = {
+	activate_law = law_type:law_mass_conscription
+	activate_law = law_type:law_flexible_foreign_policy
+	activate_law = law_type:law_offensive_espionage
+}
+
+effect_starting_politics_war_policy_jingoism = {
+	activate_law = law_type:law_mass_conscription
+	activate_law = law_type:law_jingoism
+	activate_law = law_type:law_offensive_espionage
+}
+
+### Economic Policy ###
+
+effect_starting_politics_economic_policy_planned_economy = {
+	activate_law = law_type:law_command_economy
+	
+	if = { 
+		limit = { 
+			game_date < 1951.1.1
+			NOT = { is_a_developed_country_1950 = yes }
+		}
+		activate_law = law_type:law_child_labor_allowed			#Compulsory Primary School
+	}
+	else_if = { 
+		limit = { 
+			game_date > 1951.1.1
+			root.average_sol < 20
+		}
+		activate_law = law_type:law_restricted_child_labor		#Compulsory Secondary School
+	}
+	else = {
+		activate_law = law_type:law_compulsory_primary_school	#Compulsory Tertiary School
+	}
+	
+	activate_law = law_type:law_public_schools
+	activate_law = law_type:law_public_health_insurance
+	
+	activate_law = law_type:law_high_social_security
+	activate_law = law_type:law_taxation_5
+	activate_law = law_type:law_deflationary_monetary_policy
+	activate_law = law_type:law_limited_work_hours
+	activate_law = law_type:law_pro_consumer_regulations
+	activate_law = law_type:law_strong_financial_regulations
+	
+	activate_law = law_type:law_no_environment_law
+}
+
+effect_starting_politics_economic_policy_semi_planned_economy = {
+	activate_law = law_type:law_semi_command_economy
+	
+	if = { 
+		limit = { 
+			game_date < 1951.1.1
+			NOT = { is_a_developed_country_1950 = yes }
+		}
+		activate_law = law_type:law_child_labor_allowed			#Compulsory Primary School
+	}
+	else_if = { 
+		limit = { 
+			game_date > 1951.1.1
+			root.average_sol < 20
+		}
+		activate_law = law_type:law_restricted_child_labor		#Compulsory Secondary School
+	}
+	else = {
+		activate_law = law_type:law_compulsory_primary_school	#Compulsory Tertiary School
+	}
+	
+	activate_law = law_type:law_public_schools
+	activate_law = law_type:law_public_health_insurance
+	activate_law = law_type:law_limited_work_hours
+	activate_law = law_type:law_high_social_security
+	activate_law = law_type:law_taxation_5
+	activate_law = law_type:law_deflationary_monetary_policy
+	
+	activate_law = law_type:law_pro_consumer_regulations
+	activate_law = law_type:law_strong_financial_regulations
+	
+	activate_law = law_type:law_no_environment_law
+}
+
+effect_starting_politics_economic_policy_cooperative_ownership_economy = {
+	activate_law = law_type:law_cooperative_ownership
+	
+	if = { 
+		limit = { 
+			game_date < 1951.1.1
+			NOT = { is_a_developed_country_1950 = yes }
+		}
+		activate_law = law_type:law_child_labor_allowed			#Compulsory Primary School
+	}
+	else_if = { 
+		limit = { 
+			game_date > 1951.1.1
+			root.average_sol < 20
+		}
+		activate_law = law_type:law_restricted_child_labor		#Compulsory Secondary School
+	}
+	else = {
+		activate_law = law_type:law_compulsory_primary_school	#Compulsory Tertiary School
+	}
+	
+	activate_law = law_type:law_public_schools
+	activate_law = law_type:law_public_health_insurance
+	activate_law = law_type:law_protected_leisure
+	activate_law = law_type:law_high_social_security
+	activate_law = law_type:law_taxation_5
+	activate_law = law_type:law_deflationary_monetary_policy
+	
+	activate_law = law_type:law_pro_consumer_regulations
+	activate_law = law_type:law_strong_financial_regulations
+	
+	activate_law = law_type:law_no_environment_law
+}
+
+effect_starting_politics_economic_policy_state_capitalism = {
+	activate_law = law_type:law_state_capitalism
+	
+	if = { 
+		limit = { 
+			game_date < 1951.1.1
+			NOT = { is_a_developed_country_1950 = yes }
+		}
+		activate_law = law_type:law_child_labor_allowed			#Compulsory Primary School
+	}
+	else_if = { 
+		limit = { 
+			game_date > 1951.1.1
+			root.average_sol < 20
+		}
+		activate_law = law_type:law_restricted_child_labor		#Compulsory Secondary School
+	}
+	else = {
+		activate_law = law_type:law_compulsory_primary_school	#Compulsory Tertiary School
+	}
+	
+	activate_law = law_type:law_public_schools
+	activate_law = law_type:law_public_health_insurance
+	activate_law = law_type:law_token_time_regulations
+	activate_law = law_type:law_medium_social_security
+	activate_law = law_type:law_taxation_4
+	activate_law = law_type:law_deflationary_monetary_policy
+	
+	activate_law = law_type:law_pro_consumer_regulations
+	activate_law = law_type:law_strong_financial_regulations
+	
+	activate_law = law_type:law_no_environment_law
+}
+
+effect_starting_politics_economic_policy_social_capitalism = {
+	activate_law = law_type:law_social_capitalism
+	
+	if = { 
+		limit = { 
+			game_date < 1951.1.1
+			NOT = { is_a_developed_country_1950 = yes }
+		}
+		activate_law = law_type:law_child_labor_allowed			#Compulsory Primary School
+	}
+	else_if = { 
+		limit = { 
+			game_date > 1951.1.1
+			root.average_sol < 20
+		}
+		activate_law = law_type:law_restricted_child_labor		#Compulsory Secondary School
+	}
+	else = {
+		activate_law = law_type:law_compulsory_primary_school	#Compulsory Tertiary School
+	}
+	
+	activate_law = law_type:law_public_schools
+	activate_law = law_type:law_public_health_insurance
+	activate_law = law_type:law_token_time_regulations
+	activate_law = law_type:law_medium_social_security
+	activate_law = law_type:law_taxation_4
+	activate_law = law_type:law_deflationary_monetary_policy
+	
+	activate_law = law_type:law_pro_consumer_regulations
+	activate_law = law_type:law_strong_financial_regulations
+	
+	activate_law = law_type:law_no_environment_law
+}
+
+effect_starting_politics_economic_policy_interventionism = {
+	activate_law = law_type:law_interventionism
+	
+	if = { 
+		limit = { 
+			game_date < 1951.1.1
+			is_a_developed_country_1950 = yes
+		}
+		activate_law = law_type:law_restricted_child_labor		#Compulsory Secondary School
+	}
+	else_if = { 
+		limit = { 
+			game_date > 1951.1.1
+			root.average_sol >= 10
+			root.average_sol < 20
+		}
+		activate_law = law_type:law_restricted_child_labor		#Compulsory Secondary School
+	}
+	else_if = { 
+		limit = { 
+			game_date > 1951.1.1
+			root.average_sol >= 20
+		}
+		activate_law = law_type:law_compulsory_primary_school	#Compulsory Tertiary School
+	}
+	else = {
+		activate_law = law_type:law_child_labor_allowed			#Compulsory Primary School
+	}
+	
+	activate_law = law_type:law_public_schools
+	activate_law = law_type:law_private_health_insurance
+	activate_law = law_type:law_token_time_regulations
+	activate_law = law_type:law_low_social_security
+	activate_law = law_type:law_taxation_3
+	activate_law = law_type:law_expansionary_monetary_policy
+	
+	activate_law = law_type:law_balanced_regulations
+	activate_law = law_type:law_moderate_financial_regulations
+	
+	activate_law = law_type:law_no_environment_law
+}
+
+effect_starting_politics_economic_policy_laissez_faire = {
+	activate_law = law_type:law_laissez_faire
+	
+	if = { 
+		limit = { 
+			game_date < 1951.1.1
+			is_a_developed_country_1950 = yes
+		}
+		activate_law = law_type:law_restricted_child_labor		#Compulsory Secondary School
+	}
+	else_if = { 
+		limit = { 
+			game_date > 1951.1.1
+			root.average_sol >= 10
+			root.average_sol < 20
+		}
+		activate_law = law_type:law_restricted_child_labor		#Compulsory Secondary School
+	}
+	else_if = { 
+		limit = { 
+			game_date > 1951.1.1
+			root.average_sol >= 20
+		}
+		activate_law = law_type:law_compulsory_primary_school	#Compulsory Tertiary School
+	}
+	else = {
+		activate_law = law_type:law_child_labor_allowed			#Compulsory Primary School
+	}
+	
+	activate_law = law_type:law_private_schools
+	activate_law = law_type:law_private_health_insurance
+	activate_law = law_type:law_unregulated_work_time
+	activate_law = law_type:law_no_social_security
+	activate_law = law_type:law_taxation_2
+	activate_law = law_type:law_expansionary_monetary_policy
+	
+	activate_law = law_type:law_pro_industry_regulations
+	activate_law = law_type:law_weak_financial_regulations
+	
+	activate_law = law_type:law_no_environment_law
+}
+
+### Trade Policy ###
+
+effect_starting_politics_trade_policy_free_trade = {
+	activate_law = law_type:law_no_migration_controls
+	activate_law = law_type:law_free_trade
+}
+
+effect_starting_politics_trade_policy_protectionism = {
+	activate_law = law_type:law_migration_controls
+	activate_law = law_type:law_protectionism
+}
+
+effect_starting_politics_trade_policy_autarky = {
+	activate_law = law_type:law_closed_borders
+	activate_law = law_type:law_isolationism
+}
+
+### Nuclear Policy ###
+
+effect_starting_politics_anti_nuclear_policy = {
+	activate_law = law_type:law_wmd_banned
+}
+
+effect_starting_politics_pro_nuclear_policy = {
+	activate_law = law_type:law_wmd_allowed
+}
+
+### Economic Specialisation ###
+
+effect_starting_politics_specialisation_natural_resource = {
+	activate_law = law_type:law_natural_resource_focus
+}
+
+effect_starting_politics_specialisation_manufacturing = {
+	activate_law = law_type:law_manufacturing_focus
+}
+
+effect_starting_politics_specialisation_services = {
+	activate_law = law_type:law_services_focus
+}
+
+### Currency System ###
+
+effect_starting_politics_gold_system = {
+	activate_law = law_type:law_gold_standard
+}
+
+effect_starting_politics_semi_gold_system = {
+	activate_law = law_type:law_semi_gold_standard
+}
+
+effect_starting_politics_fiat_standard = {
+	activate_law = law_type:law_fiat_standard
+}
+
+### SPECIAL ###
+
+effect_french_community_colony_laws = {
+	effect_starting_politics_presidential_republic = yes
+	effect_starting_politics_democratic = yes
+	effect_starting_politics_constitutional_unitary_state = yes
+	effect_starting_politics_war_policy_anti_military = yes
+	effect_starting_politics_economic_policy_interventionism = yes
+	effect_starting_politics_trade_policy_protectionism = yes
+	effect_starting_politics_anti_nuclear_policy = yes
+}
+
+### Ruling Coalition ###
+
+remove_all_government_ig = {
+	hidden_effect = {
+		every_interest_group = {
+			limit = { is_in_government = yes }
+			remove_ruling_interest_group = yes
+		}
+	}
+}
+
+effect_socialist_ruling_coalition = {
+	every_interest_group = {
+		limit = { is_in_government = yes }
+		remove_ruling_interest_group = yes
+	}
+	every_interest_group = {
+		limit = {
+			OR = {
+				has_ideology = ideology:ideology_eco_socialist_mixed_economy
+				has_ideology = ideology:ideology_eco_agrarian_socialist
+			}
+		}
+		add_ruling_interest_group = yes
+	}
+}
+
+effect_communist_ruling_coalition = {
+	every_interest_group = {
+		limit = { is_in_government = yes }
+		remove_ruling_interest_group = yes
+	}
+	every_interest_group = {
+		limit = {
+			OR = { 
+				has_ideology = ideology:ideology_eco_socialist_autarky
+				has_ideology = ideology:ideology_eco_proletarian_economy
+			}
+		}
+		add_ruling_interest_group = yes
+	}
+}
+
+effect_conservative_ruling_coalition = {
+	every_interest_group = {
+		limit = { is_in_government = yes }
+		remove_ruling_interest_group = yes
+	}
+	every_interest_group = {
+		limit = {
+			OR = { 
+				has_ideology = ideology:ideology_eco_laissez_faire
+				has_ideology = ideology:ideology_eco_interventionist
+				has_ideology = ideology:ideology_eco_modern_agrarian
+			}
+		}
+		add_ruling_interest_group = yes
+	}
+}
+
+effect_traditionalist_ruling_coalition = {
+	every_interest_group = {
+		limit = { is_in_government = yes }
+		remove_ruling_interest_group = yes
+	}
+	every_interest_group = {
+		limit = {
+			OR = { 
+				has_ideology = ideology:ideology_eco_autarky
+				has_ideology = ideology:ideology_eco_agrarian_autarky
+				has_ideology = ideology:ideology_eco_serf_economy
+				has_ideology = ideology:ideology_eco_trad_isolationist
+				has_ideology = ideology:ideology_eco_slave_economy
+			}
+		}
+		add_ruling_interest_group = yes
+	}
+}
+
+effect_liberal_ruling_coalition = {
+	every_interest_group = {
+		limit = { is_in_government = yes }
+		remove_ruling_interest_group = yes
+	}
+	every_interest_group = {
+		limit = {
+			leader = { 
+				OR = { 
+					has_ideology = ideology:ideology_eco_laissez_faire
+					has_ideology = ideology:ideology_eco_interventionist
+				}
+			}
+		}
+		add_ruling_interest_group = yes
+	}
+}
+
+### Military Junta ###
+
+effect_military_ruling_coalition = {
+	every_interest_group = {
+		limit = { is_in_government = yes }
+		remove_ruling_interest_group = yes
+	}
+	ig:ig_armed_forces = {
+		add_ruling_interest_group = yes
+	}
+}
+
+effect_rightwing_military_ruling_coalition = {
+	every_interest_group = {
+		limit = { is_in_government = yes }
+		remove_ruling_interest_group = yes
+	}
+	ig:ig_industrialists = {
+		add_ruling_interest_group = yes
+	}
+	ig:ig_armed_forces = {
+		add_ruling_interest_group = yes
+	}
+}
+
+### Decolonisation ###
+
+set_release_vassal_effects = { 
+	set_country_type = unrecognized 
+}
+
+### Soviet Dissolution ###
+
+soviet_SSR_dissolution_laws = {
+
+	#UN status
+	set_country_type = unrecognized 
+	
+	# Laws
+	if = {
+		limit = { 
+			OR = {
+				c:UKR ?= this
+				c:LIT ?= this
+				c:KAZ ?= this
+				c:AZB ?= this
+			}
+		}
+		effect_starting_politics_semi_presidential_republic = yes
+	}
+	else_if = {
+		limit = { 
+			OR = {
+				c:EST ?= this
+				c:LAT ?= this
+				c:POL ?= this
+				c:CZH ?= this
+				c:HUN ?= this
+				c:BUL ?= this
+				c:MOL ?= this
+				c:ARM ?= this
+				c:GEO ?= this
+			}
+		}
+		effect_starting_politics_parliamentary_republic = yes
+	}
+	else = {
+		effect_starting_politics_presidential_republic = yes
+	}
+	
+	if = {
+		limit = { OR = { c:YUG ?= this c:SER ?= this } }
+		effect_starting_politics_regime = yes
+	}
+	else = {
+		effect_starting_politics_democratic = yes
+	}
+	effect_starting_politics_constitutional_unitary_state = yes
+	effect_starting_politics_war_policy_anti_military = yes
+	effect_starting_politics_economic_policy_interventionism = yes
+	effect_starting_politics_trade_policy_protectionism = yes
+	effect_starting_politics_anti_nuclear_policy = yes
+	
+	effect_starting_politics_specialisation_natural_resource = yes
+	
+	effect_starting_politics_fiat_standard = yes
+	
+	activate_law = law_type:law_very_low_anti_corruption
+	
+	#Set Relations
+	if = {
+		limit = {
+			NOR = {
+				c:LIT ?= this
+				c:LAT ?= this
+				c:EST ?= this
+				c:MOL ?= this
+			}
+			exists = c:RUS
+		}
+		set_relations = { country = c:RUS value = 100 }
+	}
+	if = {
+		limit = {
+			NOR = {
+				c:LIT ?= this
+				c:LAT ?= this
+				c:EST ?= this
+				c:MOL ?= this
+			}
+			exists = c:SOV
+		}
+		set_relations = { country = c:SOV value = 100 }
+	}
+
+}
+
+### Enact Regime Change ###
+
+set_regime_change_gov_type = { 
+
+	#Enact regime change
+	if = {
+		limit = { 
+			OR = { 
+				AND = { 
+					OR = { 
+						has_variable = recently_lost_war
+						has_variable = has_lost_a_war
+					}
+					any_overlord_or_above = { 
+						has_variable = has_won_a_war 
+					}
+				}
+				NOT = { has_variable = has_won_a_war }
+			}
+			is_a_colonial_subject_gov = yes
+		}
+		if = {
+			limit = {
+				any_overlord_or_above = { 
+					has_law = law_type:law_monarchy
+				}
+				NOT = { has_law = law_type:law_monarchy }
+			}
+			activate_law = law_type:law_monarchy
+		}
+		if = {
+			limit = {
+				any_overlord_or_above = { 
+					has_law = law_type:law_presidential_republic
+				}
+				NOT = { has_law = law_type:law_presidential_republic }
+			}
+			activate_law = law_type:law_presidential_republic
+		}
+		if = {
+			limit = {
+				any_overlord_or_above = { 
+					has_law = law_type:law_theocracy
+				}
+				NOT = { has_law = law_type:law_theocracy }
+			}
+			activate_law = law_type:law_theocracy
+		}
+		if = {
+			limit = {
+				any_overlord_or_above = { 
+					has_law = law_type:law_parliamentary_republic
+				}
+				NOT = { has_law = law_type:law_parliamentary_republic }
+			}
+			activate_law = law_type:law_parliamentary_republic
+		}
+		if = {
+			limit = {
+				any_overlord_or_above = { 
+					has_law = law_type:law_council_republic
+				}
+				NOT = { has_law = law_type:law_council_republic }
+			}
+			activate_law = law_type:law_council_republic
+		}
+	}
+	
+}
+
+effect_set_electoral_system = {
+
+	if = {
+		limit = { 
+			NOR = {
+				has_law = law_type:law_propotional_representation
+				has_law = law_type:law_jefferson_system
+				has_law = law_type:law_first_past_the_post
+			}
+		}
+		if = {
+			limit = { THIS_uses_proportional_representation = yes }
+			activate_law = law_type:law_propotional_representation
+		}
+		else_if = {
+			limit = { THIS_uses_jefferson_system = yes }
+			activate_law = law_type:law_jefferson_system
+		}
+		else = {
+			activate_law = law_type:law_first_past_the_post
+		}
+	}
+
+}
+
+effect_increase_corruption = {
+	
+	if = {
+		limit = { 
+			has_law = law_type:law_very_low_anti_corruption
+		}
+		activate_law = law_type:law_low_anti_corruption
+	}
+	else_if = {
+		limit = { 
+			has_law = law_type:law_low_anti_corruption
+		}
+		activate_law = law_type:law_medium_anti_corruption
+	}
+	else_if = {
+		limit = { 
+			has_law = law_type:law_medium_anti_corruption
+		}
+		activate_law = law_type:law_high_anti_corruption
+	}
+	else_if = {
+		limit = { 
+			has_law = law_type:law_high_anti_corruption
+		}
+		activate_law = law_type:law_very_high_anti_corruption
+	}
+
+}
+
+effect_reduce_corruption = {
+	
+	if = {
+		limit = { 
+			has_law = law_type:law_very_high_anti_corruption
+		}
+		activate_law = law_type:law_high_anti_corruption
+	}
+	else_if = {
+		limit = { 
+			has_law = law_type:law_high_anti_corruption
+		}
+		activate_law = law_type:law_medium_anti_corruption
+	}
+	else_if = {
+		limit = { 
+			has_law = law_type:law_medium_anti_corruption
+		}
+		activate_law = law_type:law_low_anti_corruption
+	}
+	else_if = {
+		limit = { 
+			has_law = law_type:law_low_anti_corruption
+		}
+		activate_law = law_type:law_very_low_anti_corruption
+	}
+
+}
+
+effect_reduce_multiculturalism = {
+	
+	if = {
+		limit = { 
+			has_law = law_type:law_multicultural
+		}
+		activate_law = law_type:law_cultural_exclusion
+	}
+	else_if = {
+		limit = { 
+			has_law = law_type:law_cultural_exclusion
+		}
+		activate_law = law_type:law_racial_segregation
+	}
+	else_if = {
+		limit = { 
+			has_law = law_type:law_racial_segregation
+		}
+		activate_law = law_type:law_national_supremacy
+	}
+	else_if = {
+		limit = { 
+			has_law = law_type:law_national_supremacy
+		}
+		activate_law = law_type:law_ethnostate
+	}
+
+}

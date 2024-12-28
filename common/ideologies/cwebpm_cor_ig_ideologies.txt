@@ -1,0 +1,62 @@
+#Corruption Category
+
+ideology_cor_very_high_corruption = {
+    icon = "gfx/interface/icons/ideology_icons/eco_ideology/traditional_agrarian.dds"
+
+    lawgroup_corruption_policy = {
+        law_very_low_anti_corruption = approve
+		law_low_anti_corruption = disapprove
+		law_medium_anti_corruption = disapprove
+		law_high_anti_corruption = disapprove
+		law_very_high_anti_corruption = disapprove
+    }
+
+}
+
+ideology_cor_high_corruption = {
+    icon = "gfx/interface/icons/ideology_icons/eco_ideology/slave_economy.dds"
+
+    lawgroup_corruption_policy = {
+        law_very_low_anti_corruption = disapprove
+		law_low_anti_corruption = approve
+		law_medium_anti_corruption = disapprove
+		law_high_anti_corruption = disapprove
+		law_very_high_anti_corruption = disapprove
+    }
+}
+
+ideology_cor_medium_corruption = {
+    icon = "gfx/interface/icons/ideology_icons/eco_ideology/autarky.dds"
+
+    lawgroup_corruption_policy = {
+        law_very_low_anti_corruption = disapprove
+		law_low_anti_corruption = disapprove
+		law_medium_anti_corruption = approve
+		law_high_anti_corruption = disapprove
+		law_very_high_anti_corruption = disapprove
+    }
+}
+
+ideology_cor_low_corruption = {
+    icon = "gfx/interface/icons/ideology_icons/eco_ideology/agrarian_autarky.dds"
+
+    lawgroup_corruption_policy = {
+        law_very_low_anti_corruption = disapprove
+		law_low_anti_corruption = disapprove
+		law_medium_anti_corruption = disapprove
+		law_high_anti_corruption = approve
+		law_very_high_anti_corruption = disapprove
+    }
+}
+
+ideology_cor_very_low_corruption = {
+    icon = "gfx/interface/icons/ideology_icons/eco_ideology/modern_agrarian.dds"
+
+    lawgroup_corruption_policy = {
+        law_very_low_anti_corruption = disapprove
+		law_low_anti_corruption = disapprove
+		law_medium_anti_corruption = disapprove
+		law_high_anti_corruption = disapprove
+		law_very_high_anti_corruption = approve
+    }
+}

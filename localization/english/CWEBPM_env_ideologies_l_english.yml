@@ -1,0 +1,16 @@
+﻿l_english:
+ ideology_env_anti_environmental:0 "Anti-Environmental Protections"
+ ideology_env_anti_environmental_desc:0 "#lore This group does not believe in environmental controls. #!"
+
+ ideology_env_moderate_environmentalr:0 "Moderate Environmental Protections"
+ ideology_env_moderate_environmental_desc:0 "#lore This group believes in some environmental controls. #!"
+
+ ideology_env_strong_environmental:0 "Strong Environmental Protections"
+ ideology_env_strong_environmental_desc:0 "#lore This group believes in strong environmental controls. #!"
+
+ ideology_nat_anti_natal:0 "Anti Natal"
+ ideology_nat_anti_natal_desc:0 "#lore This group seeks to implement policies that decrease the overall amount of births. #!"
+ ideology_nat_moderate:0 "Natal Agnostic"
+ ideology_nat_moderate_desc:0 "#lore This group does not have a position regarding birthrate in our society. #!"
+ ideology_nat_pro_natal:0 "Pro Natal"
+ ideology_nat_pro_natal_desc:0 "#lore This group seeks to implement policies that increase the overall amount of births. #!"
